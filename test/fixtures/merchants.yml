@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: Mulder
+  username: thetruthisoutthere
+  email: foxmulder@gmail.com
+
+two:
+  user: Scully
+  username: iwantobelieve
+  email: danascully@gmail.com
