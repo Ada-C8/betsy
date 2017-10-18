@@ -13,7 +13,9 @@ class MerchantsController < ApplicationController
 
   def show
     @merchant = Merchant.find_by(id: params[:id])
-    render_404 unless @merchant
+    unless @merchant
+      head :not_found
+    end
   end
 
   def edit
