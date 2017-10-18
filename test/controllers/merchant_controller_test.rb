@@ -6,5 +6,10 @@ describe MerchantController do
       get merchants_path
       must_respond_with :success
     end
-  end
+
+    it "makes new merchant" do
+      get new_merchant_path
+      must_respond_with :success
+    end
+  end #end index
 end
