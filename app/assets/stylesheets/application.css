@@ -46,3 +46,28 @@ body {
   margin: 1rem 0rem 1rem 0rem;
   width: 100%;
 }
+
+.all-products {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+}
+
+.info-card {
+  clear: both;
+  margin-left: -15px;
+  margin-right: -15px;
+  overflow: hidden;
+}
+
+.product {
+  display: flex;
+  flex-flow: column;
+  padding: 1em;
+  text-align: left;
+  color: #0F5364;
+  font-family: 'Slabo 13px', serif;
+  width: 20rem;
+  background-color: grey;
+  margin: 1rem;
+}
