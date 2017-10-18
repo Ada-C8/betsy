@@ -59,6 +59,22 @@ describe Product do
       test = Product.new(name: "Caldroun", quantity_avail: -1, price: 68.50, merchant: Merchant.first)
       test.valid?.must_equal false
     end
+  end
+
+  describe "relations" do
+    it "has a merchant" do
+      test = Product.create(name: "Caldroun", quantity_avail: 5, price: 68.50, merchant: Merchant.first)
+      test.merchant.must_equal Merchant.first
+
+      test.merchant.id.must_equal Merchant.first.id
+    end
+
+    it "has reviews" do
+      test = Product.create(name: "Caldroun", quantity_avail: 5, price: 68.50, merchant: Merchant.first)
+      review = Review.create(rating: 5, text_review: "This was better than my cast iron pan!", product_id: test.id)
+      test.reviews.must_include review
+      test.reviews[0].must_be_kind_of Review
+    end
 
   end
 end
