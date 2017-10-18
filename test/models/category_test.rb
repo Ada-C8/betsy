@@ -22,8 +22,8 @@ describe Category do
     category2.errors.messages.must_include :name
   end
 
-
-
-
-
+  it "must not have a category name of more than 20 characters" do
+    category = Category.new(name: "various colored sheets for ghosts")
+    category.valid?.must_equal false
+  end
 end
