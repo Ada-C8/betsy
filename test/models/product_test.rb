@@ -17,6 +17,10 @@ describe Product do
       products(:missing_name).valid?.must_equal true
     end
 
+    it "needs a name that is a string" do
+
+    end
+
     it "requires a price" do
       test = Product.new(name: "Caldroun", quantity_avail: 1, merchant: Merchant.first)
       test.valid?.must_equal false
@@ -25,12 +29,17 @@ describe Product do
       test.valid?.must_equal true
     end
 
-    it "requires a quantity_avail" do
-      test = Product.new(name: "Caldroun", price: 68.50, merchant: Merchant.first)
+    it "requires a price that is a number" do
+      test = Product.new(name: "Caldroun", quantity_avail: 1, price: "cats", merchant: Merchant.first)
+      test.valid?.must_equal false
+    end
+
+    it "requires a price that is greater than 0" do
+      test = Product.new(name: "Caldroun", quantity_avail: 1, price: -2.50, merchant: Merchant.first)
       test.valid?.must_equal false
 
-      test.quantity_avail = 1
-      test.valid?.must_equal true
+      another = Product.new(name: "Caldroun", quantity_avail: 1, price: 0, merchant: Merchant.first)
+      another.valid?.must_equal false
     end
 
     it "requires a quantity_avail" do
@@ -39,6 +48,16 @@ describe Product do
 
       test.quantity_avail = 1
       test.valid?.must_equal true
+    end
+
+    it "can have a quantity_avail of 0" do
+      test = Product.new(name: "Caldroun", quantity_avail: 0, price: 68.50, merchant: Merchant.first)
+      test.valid?.must_equal true
+    end
+
+    it "cannot have a quantity_avail less than 0" do
+      test = Product.new(name: "Caldroun", quantity_avail: -1, price: 68.50, merchant: Merchant.first)
+      test.valid?.must_equal false
     end
 
   end
