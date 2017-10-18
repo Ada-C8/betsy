@@ -39,7 +39,7 @@ describe Product do
     it "requires an associated merchant" do
       b = Product.new(name: "name", price: "10", category_id: 1)
       b.wont_be :valid?
-      b.errors.messages.must_include :price
+      b.errors.messages.must_include :merchant_id
     end
 
 

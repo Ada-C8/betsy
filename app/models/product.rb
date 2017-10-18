@@ -10,6 +10,6 @@ class Product < ApplicationRecord
 
   validates :category_id, presence: true
 
-  validates_associated :merchant, :category
+  # validates_associated :merchant, :category
 
 end
