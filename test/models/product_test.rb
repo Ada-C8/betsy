@@ -1,5 +1,6 @@
 require "test_helper"
 
+<<<<<<< HEAD
 describe Product do
   describe "validations" do
     it "requires a name" do
@@ -78,3 +79,22 @@ describe Product do
 
   end
 end
+=======
+# describe Product do
+#   describe "validations" do
+#     it "requires a name" do
+#       products(:pointy_hat).merchant = Merchant.first
+#       products(:pointy_hat).save
+#       products(:pointy_hat).valid?.must_equal true
+#
+#
+#       products(:missing_name).valid?.must_equal false
+#
+#       products(:missing_name).name = "Another pointy hat"
+#       products(:missing_name).save
+#       products(:missing_name).valid?.must_equal true
+#     end
+#
+#   end
+# end
+>>>>>>> 3f4fd4d742b658965db7e14655d5c2ec436d641b

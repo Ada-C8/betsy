@@ -1,5 +1,4 @@
 require "test_helper"
-
 describe Review do
   describe "validations" do
     it "requires a rating" do
