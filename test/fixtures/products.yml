@@ -8,7 +8,7 @@ pointy_hat:
   name: "Pointy Hat"
   price: 9.99
   quantity_avail: 5
-  
+
 missing_name:
   name:
   price: 9.99
