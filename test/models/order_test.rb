@@ -5,16 +5,6 @@ describe Order do
     it "has a list of products" do
       pending_order = orders(:pending_order)
       pending_order.must_respond_to :products
-      pending_order.products.each do |product|
-        product.must_be_kind_of Product
-      end
-    end
-    it "has a list of merchants through products" do
-      pending_order = orders(:pending_order)
-      pending_order.must_respond_to :products
-      pending_order.products.each do |product|
-        product.merchant.must_be_kind_of Merchant
-      end
     end
   end
   describe "validations" do
@@ -31,6 +21,47 @@ describe Order do
       order_with_bogus_stat.status = "almost a status"
       order_with_bogus_stat.valid?.must_equal false
     end
-    
+    it "must have all user information if status is complete" do
+      complete_order = orders(:complete_order)
+      complete_order.valid?.must_equal true
+
+      complete_order.email = nil
+      complete_order.valid?.must_equal false
+      complete_order.email = "present"
+      complete_order.valid?.must_equal true
+
+      complete_order.address = nil
+      complete_order.valid?.must_equal false
+      complete_order.address = "present"
+      complete_order.valid?.must_equal true
+
+      complete_order.name = nil
+      complete_order.valid?.must_equal false
+      complete_order.name = "present"
+      complete_order.valid?.must_equal true
+
+      complete_order.card_number = nil
+      complete_order.valid?.must_equal false
+      complete_order.card_number = "present"
+      complete_order.valid?.must_equal true
+
+      complete_order.card_exp = nil
+      complete_order.valid?.must_equal false
+      complete_order.card_exp = "present"
+      complete_order.valid?.must_equal true
+
+      complete_order.card_cvv = nil
+      complete_order.valid?.must_equal false
+      complete_order.card_cvv = "present"
+      complete_order.valid?.must_equal true
+
+      complete_order.zip_code = nil
+      complete_order.valid?.must_equal false
+      complete_order.zip_code = "present"
+      complete_order.valid?.must_equal true
+
+      pending_order = orders(:pending_order)
+      pending_order.valid?.must_equal true
+    end
   end
 end
