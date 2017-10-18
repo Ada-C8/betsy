@@ -20,24 +20,25 @@ puts "#{merchant_failures.length} merchants failed to save"
 
 
 
-# PRODUCT_FILE = Rails.root.join('db', 'seed_data', 'products.csv')
-# puts "Loading raw product data from #{PRODUCT_FILE}"
-#
-# product_failures = []
-# CSV.foreach(PRODUCT_FILE, :headers => true) do |row|
-#   product = Product.new
-#   product.name = row['name']
-#   product.price = row['price']
-#   product.quantity_avail = row['quantity_avail']
-#   puts "Created product: #{product.inspect}"
-#   successful = product.save
-#   if !successful
-#     product_failures << product
-#   end
-# end
-#
-# puts "Added #{Product.count} product records"
-# puts "#{product_failures.length} products failed to save"
+PRODUCT_FILE = Rails.root.join('db', 'seed_data', 'products.csv')
+puts "Loading raw product data from #{PRODUCT_FILE}"
+
+product_failures = []
+CSV.foreach(PRODUCT_FILE, :headers => true) do |row|
+  product = Product.new
+  product.merchant_id = row['merchant_id']
+  product.name = row['name']
+  product.price = row['price']
+  product.quantity_avail = row['quantity_avail']
+  puts "Created product: #{product.inspect}"
+  successful = product.save
+  if !successful
+    product_failures << product
+  end
+end
+
+puts "Added #{Product.count} product records"
+puts "#{product_failures.length} products failed to save"
 
 
 # Since we set the primary key (the ID) manually on each of the
