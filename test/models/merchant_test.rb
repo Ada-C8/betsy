@@ -5,13 +5,13 @@ describe Merchant do
   let(:spooky) {merchants(:spooky)}
   let(:ghosty) {merchants(:ghosty)}
 
-  it "must have a merchant name to be vaild" do
+  it "must have a merchant name to be valid" do
     spooky.valid?.must_equal true
     spooky.username = nil
     spooky.valid?.must_equal false
   end
 
-  it "must have a merchant email to be vaild" do
+  it "must have a merchant email to be valid" do
     spooky.valid?.must_equal true
     spooky.email = nil
     spooky.valid?.must_equal false
@@ -42,7 +42,4 @@ describe Merchant do
     result.must_equal false
     merchant2.errors.messages.must_include :email
   end
-
-
-
 end
