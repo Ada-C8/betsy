@@ -6,5 +6,5 @@ class Merchant < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness:true
-  validates_format_of :email, :with =>  /\A\S+@.+\.\S+\z/
+  validates_format_of :email, :with =>  /\A\w+@\w+\.\w+\z/
 end
