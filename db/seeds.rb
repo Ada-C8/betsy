@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'csv'
 
+#product data
 PRODUCT_FILE = Rails.root.join('db', 'seed_data', 'products.csv')
 puts "Loading raw product data from #{PRODUCT_FILE}"
 
@@ -32,9 +33,7 @@ end
 puts "Added #{Product.count} product records"
 puts "#{product_failures.length} products failed to save"
 
-
-
-
+#merchant data
 MERCHANT_FILE = Rails.root.join('db', 'seed_data', 'merchants.csv')
 puts "Loading raw merchant data from #{MERCHANT_FILE}"
 
@@ -54,3 +53,24 @@ end
 
 puts "Added #{Merchant.count} merchant records"
 puts "#{merchant_failures.length} merchants failed to save"
+
+#category data
+
+CATEGORY_FILE = Rails.root.join('db', 'seed_data', 'categories.csv')
+puts "Loading raw category data from #{CATEGORY_FILE}"
+
+category_failures = []
+CSV.foreach(CATEGORY_FILE, :headers => true) do |row|
+  category = Category.new
+  category.category_name= row['category_name']
+
+
+  puts "Created category: #{category.inspect}"
+  successful = category.save
+  if !successful
+    category_failures << category
+  end
+end
+
+puts "Added #{Category.count} category records"
+puts "#{category_failures.length} categories failed to save"
