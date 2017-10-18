@@ -1,0 +1,24 @@
+<h2>Add new product</h2>
+
+<%#= render partial: 'layouts/error_messages',
+    locals: { model: @work } %>
+
+<%= form_for @product do |f| %>
+  <%= f.label "Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label "Description" %>
+  <%= f.text_field :description %>
+
+  <%= f.label "Price" %>
+  <%= f.text_field :price %>
+
+  <%= f.label "Publication_year" %>
+  <%= f.text_field :stock %>
+
+  <%= f.label "Category_id" %>
+  <%= f.text_field :category_id %>
+
+  <%= f.submit "Create product", :class=>"button"  %>
+
+<% end %>

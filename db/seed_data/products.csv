@@ -1,0 +1,14 @@
+name,description,price,stock,category_id
+
+Ginger Beer,Bubbly Bits of Ginger,10,10,1
+Cheesy Crackers,Like Crackers and Cheese,5,5,2
+Tacos,Good Even on Wednesdays,12,12,3
+Fried Chicken,Like Mom used to Make,10,10,2
+Bubble Tea,Tea but with Bubbles,3,100,1
+Baked Ziti,Hometown Favorite,15,10,4
+Pancakes,Flat and Syrupy,12,5
+Pad Thai,Noodle Delight,12,23,6
+Apple Pie,Flaky Crust,15,12,5
+Borscht,Good if you like Beets,17,10,2
+Bagels,Round with a Hole in them,2,12,2
+Lumpia,Not just Lumps,5,15,6
