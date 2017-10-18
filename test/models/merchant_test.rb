@@ -7,9 +7,11 @@ describe Merchant do
   #   value(merchant).must_be :valid?
   # end
 
-  describe 'oAuth login' do
-    it 'logs in existing user' do
-      
-    end
+  describe 'validations' do
+
+  end
+
+  describe 'relationships' do
+    
   end
 end

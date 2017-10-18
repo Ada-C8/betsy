@@ -8,14 +8,14 @@
 
 # Merchants: 21, 22
 merchants = Merchant.create([
-  { username: 'Eagle', email: 'watchingyou@gmail.com', id: 11, created_at: Time.now, updated_at: Time.now },
-  { username: 'Glimpie', email: 'mememe@hotmail.com', id: 12, created_at: Time.now, updated_at: Time.now },
-  { username: 'Earthborn King', email: 'eking@something.com', id: 13, created_at: Time.now, updated_at: Time.now },
-  { username: 'MagicBrian', email: 'brian@spider.com', id: 21, created_at: Time.now, updated_at: Time.now },
-  { username: 'Taako', email: 'abra@cafu.com', id: 22, created_at: Time.now, updated_at: Time.now },
-  { username: 'Forest Nymph', email: 'inatree@treepeople.com', id: 31, created_at: Time.now, updated_at: Time.now },
-  { username: 'Bridge Troll', email: 'trolltoll@bridge.com', id: 32, created_at: Time.now, updated_at: Time.now },
-  { username: 'Puck', email: 'sneakyelf@shakespeare.com', id: 40, created_at: Time.now, updated_at: Time.now }
+  { username: 'Eagle', email: 'watchingyou@gmail.com', id: 11, oauth_provider: 'github', oauth_uid: '123456', created_at: Time.now, updated_at: Time.now },
+  { username: 'Glimpie', email: 'mememe@hotmail.com', id: 12, oauth_provider: 'github', oauth_uid: '123457', created_at: Time.now, updated_at: Time.now },
+  { username: 'Earthborn King', email: 'eking@something.com', id: 13, oauth_provider: 'github', oauth_uid: '123458', created_at: Time.now, updated_at: Time.now },
+  { username: 'MagicBrian', email: 'brian@spider.com', id: 21, oauth_provider: 'github', oauth_uid: '123459', created_at: Time.now, updated_at: Time.now },
+  { username: 'Taako', email: 'abra@cafu.com', id: 22, oauth_provider: 'github', oauth_uid: '123460', created_at: Time.now, updated_at: Time.now },
+  { username: 'Forest Nymph', email: 'inatree@treepeople.com', id: 31, oauth_provider: 'github', oauth_uid: '123461', created_at: Time.now, updated_at: Time.now },
+  { username: 'Bridge Troll', email: 'trolltoll@bridge.com', id: 32, oauth_provider: 'github', oauth_uid: '123462', created_at: Time.now, updated_at: Time.now },
+  { username: 'Puck', email: 'sneakyelf@shakespeare.com', id: 40, oauth_provider: 'github', oauth_uid: '123463', created_at: Time.now, updated_at: Time.now }
   ])
 
 # Orders: 21, 22, 23, 24
