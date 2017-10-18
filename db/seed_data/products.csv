@@ -1,5 +1,5 @@
 name,description,price,stock,category_id,photo_URL,merchant_id
-
+abc,def,10,100,200,xurl
 Ginger Beer,Bubbly Bits of Ginger,10,10,1,GingerBeer_URL,1
 Cheesy Crackers,Like Crackers and Cheese,5,5,2,CheesyCrackersURL,2
 Tacos,Good Even on Wednesdays,12,12,3,Tacos_URL,3

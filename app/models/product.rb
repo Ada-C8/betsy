@@ -5,6 +5,6 @@ class Product < ApplicationRecord
 
   validates :price, presence: true, numericality: { greater_than: 0 }
 
-  validates_associated :merchants
+  # validates_associated :merchants
 
 end
