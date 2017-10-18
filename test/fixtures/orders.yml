@@ -13,3 +13,13 @@ pending_order:
   card_exp: nil
   card_cvv: nil
   zip_code: nil
+
+complete_order:
+  status: complete
+  email: buyer@email.com
+  address: 100 Witchy Way, Seattle, WA
+  name: Gale
+  card_number: 1234 1234 1234 1234
+  card_exp: 01/21
+  card_cvv: "546"
+  zip_code: "98122"
