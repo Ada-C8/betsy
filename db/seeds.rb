@@ -20,6 +20,7 @@ CSV.foreach(PRODUCT_FILE, :headers => true) do |row|
   product.stock = row["stock"]
   product.category_id = row["category_id"]
   product.photo_URL = row["photo_URL"]
+  product.merchant_id = row["merchant_id"]
 
   puts "Created product: #{product.inspect}"
   successful = product.save
@@ -30,3 +31,26 @@ end
 
 puts "Added #{Product.count} product records"
 puts "#{product_failures.length} products failed to save"
+
+
+
+
+MERCHANT_FILE = Rails.root.join('db', 'seed_data', 'merchants.csv')
+puts "Loading raw merchant data from #{MERCHANT_FILE}"
+
+merchant_failures = []
+CSV.foreach(MERCHANT_FILE, :headers => true) do |row|
+  merchant = Merchant.new
+  merchant.username = row['username']
+  merchant.email = row['email']
+
+
+  puts "Created merchant: #{merchant.inspect}"
+  successful = merchant.save
+  if !successful
+    merchant_failures << merchant
+  end
+end
+
+puts "Added #{Merchant.count} merchant records"
+puts "#{merchant_failures.length} merchants failed to save"
