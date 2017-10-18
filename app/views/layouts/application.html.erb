@@ -9,9 +9,24 @@
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+
+    <link href="https://fonts.googleapis.com/css?family=Meddon" rel="stylesheet">
   </head>
 
   <body>
+
+  <section class="header row">
+    <div class="small-12 columns">
+      <span class="row logo"><span class="small-4 columns">Sourceress</span></span>
+      <span class="row nav-links">
+        <span class="small-12 columns">
+      <%= link_to "Browse Products", products_path %>
+      <%= link_to "Browse Categories", categories_path %>
+      <%= link_to "Home", root_path %>
+    </span>
+    </span>
+    </div>
+  </section>
 
     <%= yield %>
 
