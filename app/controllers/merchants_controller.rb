@@ -1,10 +1,10 @@
 class MerchantsController < ApplicationController
   def index
-    @merchants = Merchant.all
+    # @merchants = Merchant.all
   end
 
   def new
-    @merchant = Merchant.new
+    # @merchant = Merchant.new
   end
 
   def create
