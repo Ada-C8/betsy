@@ -15,3 +15,34 @@
  *= require foundation_and_overrides
 
  */
+
+ #myCanvas{
+   background-color: black;
+   color: white;
+ }
+
+body {
+  width: 100%;
+}
+
+.logo {
+  font-family: 'Meddon', cursive;
+  font-weight: bold;
+  font-size: 4rem;
+  float: left;
+
+}
+
+.nav-links {
+  font-size: 2rem;
+  float: right;
+}
+
+.nav-links a {
+  padding: .5rem;
+}
+
+.header {
+  margin: 1rem 0rem 1rem 0rem;
+  width: 100%;
+}
