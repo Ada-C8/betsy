@@ -33,7 +33,6 @@ describe Merchant do
       end
     end
 
-    #
     describe "username email validations" do
       describe "tests for format of email" do
 
@@ -43,6 +42,7 @@ describe Merchant do
           merchant.errors.messages.must_include :email
         end
       end
+
       describe "tests for presence of email" do
         it "will reject missing email" do
           merchant.email = nil
@@ -51,6 +51,7 @@ describe Merchant do
         end
       end
     end
+
     describe "oauth validations" do
       it "will reject not unique oauth_uid" do
         merchant.oauth_uid = "12345"
