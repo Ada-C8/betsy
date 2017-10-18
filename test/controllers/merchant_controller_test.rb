@@ -1,7 +1,9 @@
 require "test_helper"
 
 describe MerchantController do
-  # it "must be a real test" do
-  #   flunk "Need real tests"
-  # end
+  describe "index" do
+    it "renders page with all merchants" do
+      get 
+    end
+  end
 end
