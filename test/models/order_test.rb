@@ -26,5 +26,11 @@ describe Order do
       no_stat_order.status = nil
       no_stat_order.valid?.must_equal false
     end
+    it "must have a status equal to pending or complete" do
+      order_with_bogus_stat = orders(:pending_order)
+      order_with_bogus_stat.status = "almost a status"
+      order_with_bogus_stat.valid?.must_equal false
+    end
+    
   end
 end

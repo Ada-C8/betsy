@@ -1,5 +1,8 @@
 require "test_helper"
 describe Review do
+<<<<<<< HEAD
+
+=======
   describe "validations" do
     it "requires a rating" do
       test = Product.create(name: "Caldroun", quantity_avail: 5, price: 68.50, merchant: Merchant.first)
@@ -28,4 +31,5 @@ describe Review do
       review.valid?.must_equal false
     end
 end
+>>>>>>> 6bde75a5cfe2062bb24ad0ef6d2fa99a3fc242e4
 end
