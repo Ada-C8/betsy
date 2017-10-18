@@ -1,0 +1,12 @@
+<section class="all-products">
+  <% @products.each do |product| %>
+  <section class="row">
+    <section class="product">
+      <p>Product: </p><%= product.name %>
+      <p>Price: </p><%= product.price %>
+      <p>Quantity: </p><%= product.quantity_avail %>
+      <p>Sold by: </p><%= product.merchant.username %>
+    </section>
+    </section>
+  <% end %>
+</section>
