@@ -73,7 +73,10 @@ describe ProductsController do
     end
 
     it 'CANNOT access new product' do
-      skip
+      get new_product_path(p.id)
+
+      flash[:status].must_equal :failure
+      must_respond_with :bad_request
     end
 
     it 'CANNOT successfully create valid product' do
@@ -81,7 +84,10 @@ describe ProductsController do
     end
 
     it 'CANNOT access edit for product' do
-      skip
+      get new_product_path(p.id)
+
+      flash[:status].must_equal :failure
+      must_respond_with :bad_request
     end
 
     it 'CANNOT update product' do
