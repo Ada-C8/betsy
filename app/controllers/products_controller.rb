@@ -23,6 +23,9 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find_by(id: params[:id])
+    unless @product
+      redirect_to root_path, status: :not_found
+    end
   end
 
   def destroy
