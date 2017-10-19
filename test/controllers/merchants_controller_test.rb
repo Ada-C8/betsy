@@ -8,7 +8,7 @@ describe MerchantsController do
       must_respond_with :success
     end
 
-    it "should succeed with no users" do
+    it "should succeed with no merchants" do
       Product.destroy_all
       Merchant.destroy_all
 
@@ -17,14 +17,10 @@ describe MerchantsController do
     end
   end
 
-  describe "#new" do
-    it "merchants" do
-      get new_merchant_path
+  describe "#show" do
+    it "should succeed with an existing merchant" do
+      get merchant_path(Merchant.first)
       must_respond_with :success
     end
-  end
-
-  describe "#create" do
-    it "creates a merchant with "
   end
 end
