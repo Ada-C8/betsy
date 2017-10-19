@@ -36,4 +36,18 @@ describe MerchantsController do
 
     end
   end # end show
+
+  describe "edit" do
+    it "success for vaild merchant ID" do
+      get merchant_path(Merchant.first)
+      must_respond_with :success
+    end
+
+    it "gives 404 erroe page for bogus merchant ID" do
+      bogus_merchant = Merchant.last.id + 1
+
+      get merchant_path(bogus_merchant)
+      must_respond_with :not_found
+    end
+  end
 end
