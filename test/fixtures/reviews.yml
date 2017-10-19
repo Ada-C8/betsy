@@ -11,5 +11,5 @@
 # # column: value
 review:
   rating: 4
-  merchant_id: :ada
-  product_id: :mermaid_fin
+  merchant: ada
+  product: mermaid_fin

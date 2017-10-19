@@ -7,5 +7,5 @@
 
 order_products:
   quantity: 6
-  product_id: :mermaid_fin
-  order_id: :order
+  product: mermaid_fin
+  order: order
