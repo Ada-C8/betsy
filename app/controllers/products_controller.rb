@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
     else
       flash.now[:status] = :failure
       flash.now[:message] = "Failed to create product"
-      flash.now[:details] = @product.errors..messages
+      flash.now[:details] = @product.errors.messages
       render :new, status: :bad_request
     end
   end
