@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(product_id: params[:review][:product_id], text_review: params[:review][:text_review], rating: [:review][:rating])
+    @review = Review.new(params[:review][:product_id], text_review: params[:review][:text_review], rating: [:review][:rating])
     if @review.save
       flash[:status] = :success
       flash[:result_text] = "Successfully reviewed!"
