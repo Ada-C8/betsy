@@ -23,5 +23,4 @@ class OrdersProductsController < ApplicationController
     #change status to cancelled in orders_controller
   end
 
-
 end

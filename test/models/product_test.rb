@@ -6,6 +6,7 @@ describe Product do
 
   describe "validations" do
     it "can be created with required fields" do
+      #failed when added merchant association
       b = Product.new(name: "product", description: "a product", price: 10, stock: 10, category_id: 1, photo_URL: "photo.com", merchant_id: 1)
       b.must_be :valid?
     end #can be created
