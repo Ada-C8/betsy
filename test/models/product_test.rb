@@ -43,10 +43,5 @@ describe Product do
       b.errors.messages.must_include :merchant_id
     end
 
-
-
-
-
-
   end #validation tests
 end #all product tests
