@@ -60,39 +60,41 @@ describe ProductsController do
 
   describe "#add_product_to_cart" do
     setup { session_setup }
-    it "should add the product to the pending" do
-      #  Order.create
-      # controller.session[:order_id] = order.id
 
+    it "should add in-stock products to the pending order" do
       patch add_product_path(products(:pointy_hat).id)
       must_respond_with :redirect
     end
 
-    # describe "update" do
-    #   #This wasn't in the controller actions.  Do we want an edit method?
-    # end
+    it "should not add out-of-stock products to pending order" do
+      patch add_product_path(products(:out_of_stock).id)
+      must_respond_with :bad_request
+    end
+  end
+  # describe "update" do
+  #   #This wasn't in the controller actions.  Do we want an edit method?
+  # end
 
-    describe "delete" do
-      it "should successfully delete product" do
-        delete product_path(products(:pointy_hat).id)
-        must_respond_with :redirect
-        must_redirect_to products_path
+  describe "delete" do
+    it "should successfully delete product" do
+      delete product_path(products(:pointy_hat).id)
+      must_respond_with :redirect
+      must_redirect_to products_path
 
-        proc   {
-          delete product_path(products(:out_of_stock).id)
-        }.must_change 'Product.count', -1
-      end
+      proc   {
+        delete product_path(products(:out_of_stock).id)
+      }.must_change 'Product.count', -1
+    end
 
-      it "renders 404 not_found and does not update the DB for a bogus product ID" do
-        start_count = Product.count
+    it "renders 404 not_found and does not update the DB for a bogus product ID" do
+      start_count = Product.count
 
-        bad = Product.last.id + 1
-        delete product_path(bad)
-        must_respond_with :not_found
+      bad = Product.last.id + 1
+      delete product_path(bad)
+      must_respond_with :not_found
 
-        Product.count.must_equal start_count
+      Product.count.must_equal start_count
 
-      end
     end
   end
 end

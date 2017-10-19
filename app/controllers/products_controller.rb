@@ -59,7 +59,7 @@ class ProductsController < ApplicationController
       redirect_to root_path
     else
       flash[:error] = "product not available"
-      status :bad_request
+      redirect_to products_path, status: :bad_request
     end
   end
 
