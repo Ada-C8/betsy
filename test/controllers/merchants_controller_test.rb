@@ -88,7 +88,7 @@ describe MerchantsController do
         }
       }
       merchant.update_attributes(merchant_data[:merchant])
-      
+
       merchant.must_be :valid?, "Test is invalid because the provided data will produce an invalid merchant"
 
       patch merchant_path(merchant), params: merchant_data

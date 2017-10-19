@@ -21,3 +21,8 @@
  .flash.failure {
    color: red;
  }
+
+nav li {
+  list-style: none;
+  display: inline;
+}

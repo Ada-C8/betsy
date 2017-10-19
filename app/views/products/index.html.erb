@@ -1,4 +1,4 @@
-<h1>Products#index</h1>
+<h2>Products</h2>
 
 <table>
 
@@ -24,7 +24,7 @@
   <% @products.each do |product| %>
   <tr>
     <td>
-      <%= product.name %>
+      <%= link_to product.name, product_path(product.id) %>
     </td>
     <td>
       <%= product.description %>

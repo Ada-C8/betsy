@@ -2,11 +2,11 @@ class MerchantsController < ApplicationController
   before_action :find_merchant_by_params_id, only: [:show, :edit, :update, :destroy]
 
   def index
-    @merchants = Merchant.all
+    # @merchants = Merchant.all
   end
 
   def new
-    @merchant = Merchant.new
+    # @merchant = Merchant.new
   end
 
   def create
