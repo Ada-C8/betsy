@@ -4,14 +4,8 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 
-witch_tears:
-  status: complete
-  quantity: 2
-  order_id:
-  product_id:
 
-broomstick:
-  status: pending
-  quantity: 1
-  order_id:
-  product_id:
+order_products:
+  quantity: 6
+  product_id: :mermaid_fin
+  order_id: :order

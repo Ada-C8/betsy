@@ -33,7 +33,6 @@ describe Merchant do
       end
     end
 
-    #
     describe "username email validations" do
       describe "tests for format of email" do
 
@@ -43,6 +42,7 @@ describe Merchant do
           merchant.errors.messages.must_include :email
         end
       end
+
       describe "tests for presence of email" do
         it "will reject missing email" do
           merchant.email = nil
@@ -51,6 +51,7 @@ describe Merchant do
         end
       end
     end
+
     describe "oauth validations" do
       it "will reject not unique oauth_uid" do
         merchant.oauth_uid = "12345"
@@ -69,6 +70,33 @@ describe Merchant do
   end
 
   describe 'relationships' do
+    it "has a list of products" do
+      mermaid_fin = merchants(:ada)
+      mermaid_fin .must_respond_to :products
+      mermaid_fin.products.each do |product|
+        product.must_be_kind_of Product
+      end
+    end
 
+    it "has a list of reviews" do
+      review = merchants(:ada)
+      review.must_respond_to :reviews
+      review.reviews.each do |review|
+        review.must_be_kind_of Review
+      end
+    end
+
+    it "has a list of orders" do
+      order = merchants(:ada)
+      order.must_respond_to :orders
+      order.orders.each do |order|
+        order.must_be_kind_of Order
+      end
+    end
+
+    it "has a list of order products" do
+      order_product = merchants(:ada)
+      order_product.must_respond_to :order_products
+    end
   end
 end
