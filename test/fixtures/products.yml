@@ -8,8 +8,10 @@ pointy_hat:
   name: "Pointy Hat"
   price: 9.99
   quantity_avail: 5
+  merchant: spooky
 
 missing_name:
   name:
   price: 9.99
   quantity_avail: 5
+  merchant: ghosty
