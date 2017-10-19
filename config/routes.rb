@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
 
   resources :categories
-  resources :merchants
+  resources :merchants do
+    get '/products', to: 'products#index'
+  end
   resources :orders
   resources :products
   resources :reviews
