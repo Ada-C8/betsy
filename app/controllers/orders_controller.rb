@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 #TODO: clean up with controller filters
-#TODO: discuss rules around destroy action. what happens to products/inventory when an order is destroyed?
+#TODO: discuss rules around destroy action.
   def index
     @orders = Order.all
   end
@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find_by(id: params[:id])
-    
+
     if !@order
       redirect_to root_path, status: :not_found
     elsif @order
@@ -64,18 +64,6 @@ class OrdersController < ApplicationController
           render :edit, status: :bad_request
         end
       end
-    end
-  end
-
-  def destroy
-    @order = Order.find_by(id: params[:id])
-    if !@order
-      redirect_to root_path, status: :not_found
-    else
-      @order.destroy
-      flash[:status] = :success
-      flash[:result_text] = "Successfully destroyed order number #{@order.id}"
-      redirect_to root_path
     end
   end
 
