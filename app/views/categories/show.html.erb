@@ -1,0 +1,51 @@
+<h1><%= @category.category_name %></h1>
+
+
+<table>
+  <tr>
+    <th>
+      Name
+    </th>
+    <th>
+      Description
+    </th>
+    <th>
+      Price
+    </th>
+    <th>
+      Number in Stock
+    </th>
+    <th>
+      Merchant
+    </th>
+    <th>
+      Add to Cart
+    </th>
+  </tr>
+
+
+  <% category_products = @category.products %>
+
+  <% category_products.each do |product| %>
+  <tr>
+    <td>
+      <%= link_to product.name, product_path(product.id) %>
+    </td>
+    <td>
+      <%= product.description %>
+    </td>
+    <td>
+      <%= product.price %>
+    </td>
+    <td>
+      <%= product.stock %>
+    </td>
+    <td>
+      <%= link_to "Merchant", "#" %>
+    </td>
+    <td>
+      <%= link_to "Direct Link to Purchase?", "#" %>
+    </td>
+    <% end %>
+  </tr>
+</table>

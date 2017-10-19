@@ -9,3 +9,10 @@
 # #
 # two: {}
 # # column: value
+# cat_one:
+#   username: Joe
+#   email: joe@joe.com
+#
+#   cat_two:
+#     username: fred
+#     email: fred@fred.com
