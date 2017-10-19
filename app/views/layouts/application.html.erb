@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Satiety" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
@@ -12,6 +12,51 @@
   </head>
 
   <body>
+
+    <header>
+      <h1><%= link_to "Satiety || Serving home-cooked meals on demand", root_path %>  </h1>
+
+      <div class="float-right">
+        <button type="button" name="button" class="button">Sell on Satiety</button>
+        <button type="button" name="button" class="button">Sign-in</button>
+        <button type="button" name="button" class="button float-right">Cart</button>
+      </div>
+
+      <nav>
+        <ul>
+          <li><%=link_to "Appetizers", "#"%></li>
+          <li><%=link_to "Breakfast", "#"%></li>
+          <li><%=link_to "Lunch", "#"%></li>
+          <li><%=link_to "Dinner", "#"%></li>
+          <li><%=link_to "Desserts", "#"%></li>
+          <li><%=link_to "Drinks", "#"%></li>
+        </ul>
+      </nav>
+
+
+
+    </header>
+    <main>
+      <section class="flash <%= flash[:status] %>">
+        <p>
+          <%= flash[:message] %>
+        </p>
+        <% if flash[:details] %>
+          <ul>
+            <% flash[:details].each do |field, problems| %>
+              <% problems.each do |problem| %>
+                <li>
+                  <strong>
+                    <%= field %>:
+                  </strong>
+                  <%= problem %>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        <% end %>
+      </section>
+    </main>
 
     <%= yield %>
 
