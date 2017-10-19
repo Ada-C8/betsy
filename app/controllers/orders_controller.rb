@@ -13,16 +13,21 @@ class OrdersController < ApplicationController
 
   def create
     #set session[:order_id] == order.id
-    @order = Order.new order_params
+    @order = Order.new
+    @order.status = "pending"
 
     if @order.save
-      session[:order_id] = order.id
+      session[:order_id] = @order.id
       flash[:success] = "Order added successfully"
       redirect_to root_path
     else
       flash[:error] = "Order couldn't be processed."
       render :new
     end
+  end
+
+  def complete
+
   end
 
   def edit
@@ -48,8 +53,8 @@ class OrdersController < ApplicationController
   end
 
   private
-  def order_params
-    return params.require(:order).permit(:status, :email, :address, :name, :card_number, :card_exp, :card_cvv, :zip_code)
-  end
+  # def order_params
+  #   return params.require(:order).permit(:status, :email, :address, :name, :card_number, :card_exp, :card_cvv, :zip_code)
+  # end
 
 end
