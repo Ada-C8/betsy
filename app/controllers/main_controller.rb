@@ -4,5 +4,5 @@ class MainController < ApplicationController
     @products = Product.all
     @merchants = Merchant.all
   end
-  
+
 end
