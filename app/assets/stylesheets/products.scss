@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 ////////////////////
 // PRODUCTS LIST: //
 ////////////////////
@@ -31,11 +32,61 @@
 }
 
 .product-list .product-img {
+  height: 15rem;
+  margin: auto auto .25rem auto;
+  width: 15rem;
+}
+
+.product-img {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 15rem;
-  margin: auto auto .25rem auto;
+  margin: auto;
   overflow: hidden;
-  width: 15rem;
+}
+
+////////////////////
+// PRODUCTS PAGE: //
+////////////////////
+
+section.product-info {
+  margin: auto;
+  float: none;
+}
+
+.product-info .row {
+  margin: 1rem auto;
+}
+
+.product-info .product-img {
+  height: 20rem;
+  width: 20rem;
+}
+
+.product-details {
+  padding: 2rem;
+}
+
+.product-details p, .product-details label {
+  font-size: 1.25rem;
+}
+
+.product-details label {
+  display: inline;
+  padding-left: 0;
+}
+
+.product-details select {
+  display: inline;
+  // width: 30%;
+}
+
+.product-details [type="submit"] {
+  display: block;
+  margin: auto;
+}
+
+.product-details .button {
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
 }
