@@ -30,15 +30,15 @@ describe ReviewsController do
   }.must_change 'Review.count', 1
 
   must_respond_with :redirect
-  must_redirect_to product_path
+  must_redirect_to product_path(Review.last.product_id)
 end
 
  it "should rerender the form if it can't create the review" do
     proc   {
-    post reviews_path, params: { review: {rating: 3, text_review: "Smokin.", product_id: products(:pointy_hat).id}  }
+    post reviews_path, params: { review: {rating: -1, text_review: "Smokin.", product_id: products(:pointy_hat).id}  }
   }.must_change 'Review.count', 0
 
-      must_respond_with :success
+      must_respond_with :bad_request
     end
 
   end
@@ -49,7 +49,7 @@ end
       must_respond_with :success
     end
     it "should respond with 404 if it's not found" do
-     review = Review.last.id +1
+     review = Review.last.id + 1
 
      get review_path(review)
 
