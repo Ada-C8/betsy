@@ -1,0 +1,11 @@
+<section class="product-list row">
+  <% products.each do |product| %>
+    <div class="product small-12 medium-6 large-4 columns">
+      <div class="product-img"
+     style="background-image: url('<%= product.image_url %>');"></div>
+      <p>
+        <%= link_to product.name, product_path(product.id) %>
+      </p>
+    </div>
+  <% end %>
+</section>
