@@ -24,6 +24,9 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find_by(id: params[:id])
+    unless @product
+      head :not_found
+    end
   end
 
   def edit
