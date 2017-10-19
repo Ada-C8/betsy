@@ -1,41 +1,36 @@
 class SessionsController < ApplicationController
-  def login_form
-    # empty
-  end
+  # skip_before_action :require_login, only: [:login]
 
   def login
-    @merchant = Merchant.new
-  end
+    auth_hash = request.env['omniauth.auth']
 
-  def create
-    username = params[:username]
-    if username && merchant = Merchant.find_by(username: params[:username])
-      # log em in
-      session[:merchant_id] = merchant.id
-      flash[:status] = :success
-      flash[:result_text] = "Successfully logged in"
-    else
-      # no user, try to save
-      merchant = Merchant.new(username: params[:username])
-      if merchant.save
-        # successful save
-        flash[:status] = :success
-        flash[:result_text] = "Successfully created new user!"
-        session[:merchant_id] = merchant.id
+    if auth_hash['uid']
+      fake_user = Merchant.find_by(provider: params[:provider], uid: auth_hash['uid'])
+      if fake_user.nil?
+        # Merchant has not logged in before
+        # Create a new record in the DB
+        fake_user = Merchant.from_auth_hash(params[:provider], auth_hash)
+        save_and_flash(fake_user)
+
       else
-        flash[:status] = :error
-        flash[:result_text] = "Something went wrong!"
-        render "login", status: :bad_request
+        flash[:status] = :success
+        flash[:message] = "Successfully logged in as returning user #{merchant.username}"
+
       end
+      session[:merchant_id] = merchant.id
+
+    else
+      flash[:status] = :failure
+      flash[:message] = "Could not create user from OAuth data"
     end
+
     redirect_to root_path
   end
 
   def logout
     session[:merchant_id] = nil
     flash[:status] = :success
-    flash[:result_text] = "Successfully logged out"
-    
+    flash[:message] = "You have been logged out"
     redirect_to root_path
   end
 end

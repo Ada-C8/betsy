@@ -22,13 +22,40 @@ describe MerchantsController do
     end
   end # end new
 
+  describe "create" do
+    it "adds the merchant to the DB and redirects when the merchant data is valid" do
+      # Arrange
+      merchant_data = {
+        merchant: {
+          username: "Test merchant",
+          email: "fake@email.com"
+        }
+      }
+      # Test data should result in a valid merchant, otherwise
+      # the test is broken
+      Merchant.new(merchant_data[:merchant]).must_be :valid?
+
+      start_merchant_count = Merchant.count
+
+      # Act
+      post merchants_path, params: merchant_data
+
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to merchants_path
+
+      Merchant.count.must_equal start_merchant_count + 1
+    end
+  end
+
+
   describe "show" do
     it "success for vaild merchant ID" do
-      get merchant_path(Merchant.first)
+      get merchant_path(Merchant.first.id)
       must_respond_with :success
     end
 
-    it "gives 404 erroe page for bogus merchant ID" do
+    it "gives not_found for bogus merchant ID" do
       bogus_merchant = Merchant.last.id + 1
 
       get merchant_path(bogus_merchant)
@@ -38,14 +65,46 @@ describe MerchantsController do
   end # end show
 
   describe "edit" do
-    it "successfully edits a valid merchant" do
+    it "success for vaild merchant ID" do
+      get edit_merchant_path(Merchant.first.id)
+      must_respond_with :success
+    end
+
+    it "gives not_found for bogus merchant ID" do
+      bogus_merchant = Merchant.last.id + 1
+
 
       # merchant = Merchant.first
       #what is the context (can be variable)
       #what are we testing (methods,etc.)
 
-      # what is result we expect
+      get edit_merchant_path(bogus_merchant)
+      must_respond_with :not_found
+    end
+  end
 
+  describe "update" do
+    it "returns success if the merchant ID is valid and the change is valid" do
+      merchant = Merchant.first
+      merchant_data = {
+        merchant: {
+          username: "test-user",
+          email: "fake@fake.com"
+        }
+      }
+      merchant.update_attributes(merchant_data[:merchant])
+
+      merchant.must_be :valid?, "Test is invalid because the provided data will produce an invalid merchant"
+
+      patch merchant_path(merchant), params: merchant_data
+
+
+      must_respond_with :redirect
+      must_redirect_to merchant_path(merchant)
+
+      # Check that the change went through
+      merchant.reload
+      merchant.username.must_equal merchant_data[:merchant][:username]
 
 
     end
