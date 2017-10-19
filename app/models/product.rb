@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
-  has_many :orderproducts
+  has_many :order_products
   has_many :reviews
-  has_many :orders, through: :orderproducts
+  has_many :orders, through: :order_products
   belongs_to :merchant
 
   validates :name, presence: true, uniqueness: true
