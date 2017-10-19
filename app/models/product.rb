@@ -6,9 +6,9 @@ class Product < ApplicationRecord
 
   validates :price, presence: true, numericality: { greater_than: 0 }
 
-  validates :merchant_id, presence: true
-
-  validates :category_id, presence: true
+  # validates :merchant_id, presence: true
+  #
+  # validates :category_id, presence: true
 
   # validates_associated :merchant, :category
 
