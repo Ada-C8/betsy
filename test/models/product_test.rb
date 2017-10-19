@@ -71,20 +71,30 @@ describe Product do
   end
 
   describe 'relationships' do
-    describe 'order_products' do
-
+    it 'has order_products' do
+      product.must_respond_to :order_products
+      product.order_products.each do |op|
+        op.must_be_kind_of OrderProduct
+      end
     end
 
-    describe 'reviews' do
-
+    it 'has reviews' do
+      product.must_respond_to :reviews
+      product.reviews.each do |review|
+        review.must_be_kind_of Review
+      end
     end
 
-    describe 'orders' do
-
+    it 'has orders' do
+      product.must_respond_to :orders
+      product.orders do |order|
+        order.must_be_kind_of Order
+      end
     end
 
-    describe 'merchant' do
-
+    it 'has merchant' do
+      product.must_respond_to :merchant
+      product.merchant.must_be_kind_of Merchant
     end
   end
 end
