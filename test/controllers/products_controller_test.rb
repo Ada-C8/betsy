@@ -25,7 +25,9 @@ describe ProductsController do
     end
 
     it 'can successfully access new product' do
-      skip
+      get new_product_path
+
+      must_respond_with :success
     end
 
     it 'can successfully create valid product' do
