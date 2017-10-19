@@ -6,6 +6,9 @@
     </div>
     <div class="small-12 medium-5 columns product-details">
       <h3><%= @product.name %></h3>
+      <p> From seller
+        <%= link_to @product.merchant.username, product_path(@product.id) %>
+      </p>
       <p>$<%= '%.2f' % @product.price %></p>
       <%= form_tag do %>
       <%= label_tag :quantity, "Quantity:", class: 'small-6 columns' %>
