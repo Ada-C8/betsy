@@ -5,7 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 mermaid_fin:
-  name: mermaid_fin
+  name: Mermaid Fin
   price: 3.45
   quantity: 3
   merchant: ada
