@@ -30,12 +30,28 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @product = Product.find_by(id: params[:id])
+    unless @product
+      head :not_found
+    end
   end
 
   def update
+    @product = Product.find_by(id: params[:id])
+    @product.update_attributes(product_params)
+
+    if @product.save
+      redirect_to product_path(@product)
+    else
+      render :edit, status: :bad_request
+    end
   end
 
   def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+
+    redirect_to products_path
   end
 
   private
