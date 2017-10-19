@@ -57,6 +57,21 @@
           </ul>
         <% end %>
       </section>
+
+      <%# ////// %>
+      <%# LOG IN %>
+      <%# ////// %>
+      <nav>
+        <% if @login_user %>
+          <%= link_to "Log Out", logout_path, method: :post %>
+        <% else %>
+          <%= link_to "Log In", '/auth/github' %>
+        <% end %>
+      </nav>
+      <%# ////// %>
+      <%# LOG IN %>
+      <%# ////// %>
+
     </main>
 
     <%= yield %>

@@ -1,8 +1,5 @@
 class SessionsController < ApplicationController
-  def login_form
-    # keep empty
-    ##### ask why! #####
-  end
+  skip_before_action :require_login, only: [:login]
 
   def login
     @merchant = Merchant.new
@@ -23,14 +20,16 @@ class SessionsController < ApplicationController
         # successful save
         flash[:status] = :success
         flash[:result_text] = "Successfully created new user!"
-      #   session[:merchant_id] = merchant.id
-      # else
-      #   flash[:status] = :error
-      #   flash[:result_text] = "Something went wrong!"
-      #   render "login", status: :bad_request
+        session[:merchant_id] = merchant.id
+      else
+        flash[:status] = :error
+        flash[:result_text] = "Something went wrong!"
+        render "login", status: :bad_request
+        return
       end
     end
     redirect_to root_path
+    return
   end
 
   def logout
