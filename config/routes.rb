@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :products
   resources :reviews
 
+  patch 'products/:id/add_product_to_cart', to: 'products#add_product_to_cart', as: 'add_product'
+
 end

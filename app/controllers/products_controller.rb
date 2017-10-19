@@ -37,4 +37,18 @@ class ProductsController < ApplicationController
     end
   end
 
+  def add_product_to_cart
+    @product = Product.find_by(id: params[:id])
+    if @product.remove_one_from_stock
+      ap session[:order_id]
+      order = Order.find_by(id: session[:order_id])
+      order.products << @product
+      flash[:success] = "product added to cart"
+      redirect_to root_path
+    else
+      flash[:error] = "product not available"
+      status :bad_request
+    end
+  end
+
 end

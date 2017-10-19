@@ -16,7 +16,15 @@ describe ProductsController do
     end
   end
 
-  describe 'create' do
+  describe "#add_product_to_cart" do
+    setup { session_setup }
+    it "should add the product to the pending" do
+      #  Order.create
+      # controller.session[:order_id] = order.id
 
+      patch add_product_path(products(:pointy_hat).id)
+      must_respond_with :redirect
+    end
   end
+
 end
