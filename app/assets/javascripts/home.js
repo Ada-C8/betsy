@@ -121,7 +121,9 @@ var context;
 
 // Initialise the scene and set the context if possible
 function init() {
+    console.log("in init")
     var canvas = document.getElementById('myCanvas');
+    console.log("canvas: " + canvas)
     if (canvas.getContext) {
 
         // Set the context variable so it can be re-used
@@ -164,7 +166,11 @@ function update() {
 }
 
 // Initialize the scene
-init();
+
+document.addEventListener("DOMContentLoaded", function(event){
+  console.log("gets to init")
+  init();
+});
 
 // If the context is set then we can draw the scene (if not then the browser does not support canvas)
 if (context) {

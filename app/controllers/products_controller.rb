@@ -27,13 +27,17 @@ class ProductsController < ApplicationController
 
   def destroy
     @product = Product.find_by(id: params[:id])
-    if @product.destroy
+    if !@product
+      redirect_to root_path, status: :not_found
+    elsif @product.destroy
       flash[:status] = :success
       flash[:result_text] = "Product deleted"
-      redirect_to categories_path
+      redirect_to products_path
     else
       flash[:status] = :failure
       flash[:result_text] = "That product is unable to be deleted."
+      redirect_to products_path, status: :not_found
+
     end
   end
 
