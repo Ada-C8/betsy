@@ -6,6 +6,7 @@
 4. New ORDER/PRODUCT entry is created
   OPID: Quantity and Product_ID from initial click (based on item chosen by user)
         Order Id from Step 3.
+
 5. On Cart Page/User page etc.
   Can now see product and quantity and can click to edit or delete
     If changes are made: Update product/quantity on Order/product page .
