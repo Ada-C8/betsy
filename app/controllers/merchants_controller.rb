@@ -17,6 +17,7 @@ class MerchantsController < ApplicationController
     unless @merchant
       head :not_found
     end
+
     
   end
 

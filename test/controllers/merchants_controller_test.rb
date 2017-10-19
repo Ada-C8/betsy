@@ -36,4 +36,18 @@ describe MerchantsController do
 
     end
   end # end show
+
+  describe "edit" do
+    it "successfully edits a valid merchant" do
+
+      merchant = Merchant.first
+      #what is the context (can be variable)
+      #what are we testing (methods,etc.)
+
+      # what is result we expect
+
+
+
+    end
+  end
 end
