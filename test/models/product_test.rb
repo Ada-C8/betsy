@@ -87,4 +87,22 @@ describe Product do
     end
 
   end
+
+  describe "#remove_one_from_stock" do
+    it "should add an available product to the cart" do
+      product = products(:pointy_hat)
+
+      proc {
+        product.remove_one_from_stock
+      }.must_change "product.quantity_avail", - 1
+    end
+
+    it "should not change product quantity if product isn't available" do
+      product = products(:out_of_stock)
+
+      proc {
+        product.remove_one_from_stock
+      }.wont_change "product.quantity_avail"
+    end
+  end
 end

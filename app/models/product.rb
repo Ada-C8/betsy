@@ -8,4 +8,11 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :categories
   has_and_belongs_to_many :orders
 
+  def remove_one_from_stock
+    if self.quantity_avail > 0
+        self.quantity_avail -= 1
+        self.save
+    end
+  end
+
 end
