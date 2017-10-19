@@ -10,12 +10,8 @@ class Product < ApplicationRecord
 
   def remove_one_from_stock
     if self.quantity_avail > 0
-    #   order = Order.find_by(id: session[:order_id])
-    #     order.products << self
         self.quantity_avail -= 1
         self.save
-    else
-      flash[:error] = "product is not available"
     end
   end
 

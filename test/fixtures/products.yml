@@ -15,3 +15,9 @@ missing_name:
   price: 9.99
   quantity_avail: 5
   merchant: ghosty
+
+out_of_stock:
+  name: "Nopes"
+  price: 4.99
+  quantity_avail: 0
+  merchant: ghosty
