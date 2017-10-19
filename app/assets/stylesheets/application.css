@@ -34,7 +34,7 @@ body {
 }
 
 .nav-links {
-  font-size: 2rem;
+  font-size: 1.5rem;
   float: right;
 }
 
@@ -47,7 +47,7 @@ body {
   width: 100%;
 }
 
-.all-products {
+.all-products, .all-merchants, .all-categories {
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
@@ -60,7 +60,7 @@ body {
   overflow: hidden;
 }
 
-.product {
+.product, .merchant, .category {
   display: flex;
   flex-flow: column;
   padding: 1em;

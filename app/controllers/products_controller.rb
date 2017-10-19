@@ -1,6 +1,11 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    if params[:merchant_id]
+      merchant = Merchant.find_by(id: params[:merchant_id])
+      @products = merchant.products
+    else
+      @products = Product.all
+    end
   end
 
   def new
@@ -23,17 +28,24 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find_by(id: params[:id])
+    unless @product
+      redirect_to root_path, status: :not_found
+    end
   end
 
   def destroy
     @product = Product.find_by(id: params[:id])
-    if @product.destroy
+    if !@product
+      redirect_to root_path, status: :not_found
+    elsif @product.destroy
       flash[:status] = :success
       flash[:result_text] = "Product deleted"
-      redirect_to categories_path
+      redirect_to products_path
     else
       flash[:status] = :failure
       flash[:result_text] = "That product is unable to be deleted."
+      redirect_to products_path, status: :not_found
+
     end
   end
 

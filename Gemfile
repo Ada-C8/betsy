@@ -67,4 +67,4 @@ group :test do
   gem 'minitest-reporters'
 end
 
-# gem 'jquery-rails'
+gem 'jquery-rails'
