@@ -4,3 +4,9 @@
 order:
   cust_name: Mermaid
   merchant_id: :ada
+  cust_cc: 12345
+  cust_cc_exp: 11/22
+  cust_addr: Sea World
+  cust_email: forkhair@mermaid.com
+  status: complete
+  
