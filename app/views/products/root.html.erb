@@ -8,7 +8,9 @@ src="/Users/kimberley/ada/week-ten/betsy/app/assets/javascripts/home.js"</script
  -->
 
  <!-- <%= javascript_include_tag "home" %> -->
-
+ <% content_for :head do %>
+   <%= javascript_include_tag "home.js" %>
+ <% end %>
 
 <body>
   <canvas id="myCanvas" width="400" height="400">
