@@ -64,11 +64,13 @@ describe ProductsController do
     it "should add in-stock products to the pending order" do
       patch add_product_path(products(:pointy_hat).id)
       must_respond_with :redirect
+      flash.keys.must_include "success"
     end
 
     it "should not add out-of-stock products to pending order" do
       patch add_product_path(products(:out_of_stock).id)
       must_respond_with :bad_request
+      flash.keys.must_include "error"
     end
   end
   # describe "update" do
