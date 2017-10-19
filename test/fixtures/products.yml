@@ -8,4 +8,4 @@ mermaid_fin:
   name: mermaid_fin
   price: 3.45
   quantity: 3
-  merchant_id: :ada
+  merchant: ada

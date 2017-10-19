@@ -1,9 +1,37 @@
 require "test_helper"
 
 describe Product do
-  let(:product) { Product.new }
+  let(:product) { products(:mermaid_fin) }
 
-  # it "must be valid" do
-  #   value(product).must_be :valid?
-  # end
+  describe 'validations' do
+    decribe 'name' do
+
+    end
+
+    describe 'price' do
+
+    end
+
+    describe 'quantity' do
+
+    end
+  end
+
+  describe 'relationships' do
+    describe 'order_products' do
+
+    end
+
+    describe 'reviews' do
+
+    end
+
+    describe 'orders' do
+
+    end
+
+    describe 'merchant' do
+
+    end
+  end
 end
