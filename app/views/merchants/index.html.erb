@@ -3,7 +3,7 @@
   <% @merchants.each do |merchant| %>
   <section class="info-card">
     <section class="merchant">
-      <span><%= merchant.name %></span>
+      <span><%= merchant.username %></span>
       <span><%= merchant.email %></span>
       <span><%= link_to "Check out their Products", merchant_products_path(merchant.id), alt: "Link to merchant's products"%></span>
     </section>
