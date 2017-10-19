@@ -3,10 +3,10 @@ require "test_helper"
 describe Product do
   let(:product) { Product.new }
 
+
   describe "validations" do
     it "can be created with required fields" do
-      b = Product.new(name: "product", price: 10, category_id: 1, merchant_id: 1)
-
+      b = Product.new(name: "product", description: "a product", price: 10, stock: 10, category_id: 1, photo_URL: "photo.com", merchant_id: 1)
       b.must_be :valid?
     end #can be created
 
@@ -39,7 +39,7 @@ describe Product do
     it "requires an associated merchant" do
       b = Product.new(name: "name", price: "10", category_id: 1)
       b.wont_be :valid?
-      b.errors.messages.must_include :price
+      b.errors.messages.must_include :merchant_id
     end
 
 

@@ -7,31 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'csv'
 
-#product data
-PRODUCT_FILE = Rails.root.join('db', 'seed_data', 'products.csv')
-puts "Loading raw product data from #{PRODUCT_FILE}"
-
-product_failures = []
-CSV.foreach(PRODUCT_FILE, :headers => true) do |row|
-  product = Product.new
-  product.id = row['id']
-  product.name = row['name']
-  product.description = row['description']
-  product.price = row["price"]
-  product.stock = row["stock"]
-  product.category_id = row["category_id"]
-  product.photo_URL = row["photo_URL"]
-  product.merchant_id = row["merchant_id"]
-
-  puts "Created product: #{product.inspect}"
-  successful = product.save
-  if !successful
-    product_failures << product
-  end
-end
-
-puts "Added #{Product.count} product records"
-puts "#{product_failures.length} products failed to save"
 
 #merchant data
 MERCHANT_FILE = Rails.root.join('db', 'seed_data', 'merchants.csv')
@@ -62,7 +37,7 @@ puts "Loading raw category data from #{CATEGORY_FILE}"
 category_failures = []
 CSV.foreach(CATEGORY_FILE, :headers => true) do |row|
   category = Category.new
-  category.category_name= row['category_name']
+  category.category_name = row['category_name']
 
 
   puts "Created category: #{category.inspect}"
@@ -74,3 +49,28 @@ end
 
 puts "Added #{Category.count} category records"
 puts "#{category_failures.length} categories failed to save"
+#product data
+
+PRODUCT_FILE = Rails.root.join('db', 'seed_data', 'products.csv')
+puts "Loading raw product data from #{PRODUCT_FILE}"
+product_failures = []
+CSV.foreach(PRODUCT_FILE, :headers => true) do |row|
+  product = Product.new
+  product.id = row['id']
+  product.name = row['name']
+  product.description = row['description']
+  product.price = row["price"]
+  product.stock = row["stock"]
+  product.category_id = row["category_id"]
+  product.photo_URL = row["photo_URL"]
+  product.merchant_id = row["merchant_id"]
+
+  puts "Created product: #{product.inspect}"
+  successful = product.save
+  if !successful
+    product_failures << product
+  end
+end
+
+puts "Added #{Product.count} product records"
+puts "#{product_failures.length} products failed to save"
