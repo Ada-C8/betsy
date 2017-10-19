@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
     if @category.save
       flash[:status] = :success
       flash[:result_text] = "Successfully created #{@category.name} category"
-      redirect_to category_path
+      redirect_to category_path(@category.id)
     else
       flash[:status] = :failure
       flash[:result_text] = "Could not create #{@category.name} category."
@@ -24,6 +24,11 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find_by(id: params[:id])
+    if @category == nil
+      flash[:status] = :failure
+      flash[:result_text] = "That category does not exist."
+      redirect_to categories_path, status: :not_found
+    end
   end
 
   def destroy

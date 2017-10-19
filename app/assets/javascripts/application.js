@@ -10,10 +10,10 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require home.js
 //= require rails-ujs
 //= require foundation
 //= require turbolinks
-//= require home
 
 //= require_tree .
 

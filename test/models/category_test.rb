@@ -26,4 +26,15 @@ describe Category do
     category = Category.new(name: "various colored sheets for ghosts")
     category.valid?.must_equal false
   end
+
+  it "has a list of products in it" do
+    category = categories(:brooms)
+    product = products(:pointy_hat)
+
+    category.must_respond_to :products
+
+    category.products.count.must_equal 0
+    category.products << product
+    category.products.count.must_equal 1
+  end
 end
