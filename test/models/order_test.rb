@@ -4,7 +4,12 @@ describe Order do
   describe "relations" do
     it "has a list of products" do
       pending_order = orders(:pending_order)
+      product = products(:pointy_hat)
+
       pending_order.must_respond_to :products
+
+      pending_order.products << product
+      pending_order.products.count.must_equal 1
     end
   end
   describe "validations" do

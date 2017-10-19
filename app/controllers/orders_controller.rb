@@ -46,6 +46,7 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find_by(id: params[:id])
+    
     if !@order
       redirect_to root_path, status: :not_found
     elsif @order

@@ -77,5 +77,14 @@ describe Product do
       test.reviews[0].must_be_kind_of Review
     end
 
+    it "has a list of orders it is in" do
+      order = orders(:pending_order)
+      product = products(:pointy_hat)
+
+      product.must_respond_to :orders
+      product.orders << order
+      product.orders.count.must_equal 1
+    end
+
   end
 end
