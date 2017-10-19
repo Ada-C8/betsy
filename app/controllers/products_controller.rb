@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :fakey_login # take this out later pleeeasseee
+
   before_action :find_product_by_params, only: [:show, :edit, :update, :destroy]
 
   before_action :confirm_login, only: [:new, :create, :edit, :update, :destroy]
@@ -29,6 +31,10 @@ class ProductsController < ApplicationController
   end
 
   private
+  def fakey_login
+    session[:user_id] = 21
+  end
+
   def find_product_by_params
     @product = Product.find(params[:id])
 
