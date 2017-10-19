@@ -4,7 +4,7 @@ describe Product do
   let(:product) { products(:mermaid_fin) }
 
   describe 'validations' do
-    decribe 'name' do
+    describe 'name' do
 
     end
 
