@@ -6,7 +6,7 @@ describe MainController do
     it "should respond with success" do
       get root_path
       must_respond_with :success
-    end
+    end 
   end
   # it "must be a real test" do
   #   flunk "Need real tests"
