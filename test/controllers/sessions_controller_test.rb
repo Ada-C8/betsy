@@ -7,13 +7,13 @@ describe SessionsController do
 
   describe "login" do
     it "allows a new merchant to log in" do
-      new_test_user = "new_test_user"
+      username = "username"
 
-      Merchant.find_by(username: new_test_user).must_be_nil
+      Merchant.find_by(username: username).must_be_nil
       # should find no merchant with this username
 
-      post login_path, params: { username: new_test_user }
-      # do the actions defined in sessions#create (as defined in routes for login_path) using the information defined in username: username (in this case, username: new_test_user)
+      post login_path, params: { username: username }
+      # do the actions defined in sessions#create (as defined in routes for login_path) using the information defined in username: username (in this case, username: username)
 
       must_redirect_to root_path
     end
@@ -23,10 +23,11 @@ describe SessionsController do
     end
 
     it "allows a returning user to log in" do
-      returning_user = Merchant.first.username
+      Merchant.create(username: 'booboo', email: 'puppies@kittens.com')
+      username = Merchant.first.username
       # this sets the username as the first existing merchant (that already exists)
 
-      post login_path, params: { username: returning_user }
+      post login_path, params: { username: username }
       # (same as test one)
       # do the actions defined in sessions#create (as defined in routes for login_path) using the information defined in username: username (in this case, a returning user)
 
