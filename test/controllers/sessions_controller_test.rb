@@ -6,12 +6,15 @@ describe SessionsController do
   # end
 
   describe "login" do
-    it "allows a new use to log in" do
+    it "allows a new merchant to log in" do
       username = "new_test_user"
-      # Precondition: no user with this username exists
+
       Merchant.find_by(username: username).must_be_nil
+      # should find no merchant with this username
 
       post login_path, params: { username: username }
+      # do the actions defined in sessions#create using the information defined in username: username (in this case, username: new_test_user)
+
       must_redirect_to root_path
     end
 
