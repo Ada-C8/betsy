@@ -40,7 +40,7 @@ describe MerchantsController do
   describe "edit" do
     it "successfully edits a valid merchant" do
 
-      merchant = Merchant.first
+      # merchant = Merchant.first
       #what is the context (can be variable)
       #what are we testing (methods,etc.)
 
