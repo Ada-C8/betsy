@@ -146,32 +146,10 @@ describe OrdersController do
       must_respond_with :not_found
     end
 
-    # it "does not allow changes to a complete order" do
-    #   order = orders(:complete_order)
-    #   get order_path(order.id)
-    #   must_redirect_to root_path
-    # end
-  end
-
-  describe "destroy" do
-    it "succeeds for an existing order" do
-      order = Order.first.id
-
-      delete order_path(order)
+    it "does not allow changes to a complete order" do
+      order = orders(:complete_order)
+      patch order_path(order.id)
       must_redirect_to root_path
-
-      # The work should really be gone
-      Order.find_by(id: order).must_be_nil
-    end
-
-    it "renders 404 not_found and does not update the DB for a bogus order ID" do
-      start_count = Order.count
-
-      bogus_order_id = Order.last.id + 1
-      delete order_path(bogus_order_id)
-      must_respond_with :not_found
-
-      Order.count.must_equal start_count
     end
   end
 
