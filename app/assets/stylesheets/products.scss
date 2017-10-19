@@ -2,15 +2,40 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.product-img {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 15rem;
-  overflow: hidden;
-  width: 15rem;
+////////////////////
+// PRODUCTS LIST: //
+////////////////////
+
+.product {
+  height: 19rem;
+  margin: 1rem;
+  padding-top: 1.25rem;
+  text-align: center;
+  width: 19rem;
+}
+
+.product:hover {
+  color: #3C7A89;
+}
+
+.product a {
+  color: inherit;
 }
 
 .product:last-of-type {
   float: left !important;
+}
+
+.product p {
+  margin-bottom: 0;
+}
+
+.product-list .product-img {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 15rem;
+  margin: auto auto .25rem auto;
+  overflow: hidden;
+  width: 15rem;
 }
