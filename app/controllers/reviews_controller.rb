@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(params[:review][:product_id], text_review: params[:review][:text_review], rating: [:review][:rating])
+    @review = Review.new(product_id: params[:review][:product_id], text_review: params[:review][:text_review],rating: params[:review][:rating])
     if @review.save
       flash[:status] = :success
       flash[:result_text] = "Successfully reviewed!"
@@ -23,6 +23,9 @@ class ReviewsController < ApplicationController
 
   def show
     @review = Review.find_by(id: params[:id])
+    unless @review
+      redirect_to root_path, status: :not_found
+    end
   end
 
   def destroy
