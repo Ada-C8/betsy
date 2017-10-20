@@ -9,3 +9,9 @@ mermaid_fin:
   price: 3.45
   quantity: 3
   merchant: ada
+
+wand:
+  name: Magic Wand
+  price: 10.14
+  quantity: 1
+  merchant: grace
