@@ -24,10 +24,6 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
-  def index
-    @user = User.find(session[:user_id])
-  end
-
   def logout
     session[:merchant_id] = nil
     flash[:status] = :success
