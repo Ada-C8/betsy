@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :orders
+  get '/orders/:id/confirm', to: 'orders#confirm', as: 'confirm_order'
+
 
   resources :products do
     # resources :reviews

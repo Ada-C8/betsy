@@ -6,8 +6,11 @@
 
 <ul>
   <% product_array.uniq.each do |product| %>
-    <li><%= product.name %> : <%= product.price %> Quantity: <%= product_array.count(product) %> Subtotal: <%= product_array.count(product) *  product.price %> </li>
+    <li><%= link_to product.name, product_path(product.id) %> : <%= product.price %> Quantity: <%= product_array.count(product) %> Subtotal: <%= product_array.count(product) *  product.price %> </li>
   <% end %>
 
   <li>Order Subtotal: <%= @order.order_total %> </li>
 </ul>
+
+  <%= button_to "Keep Shopping!", products_path, method: :get %>
+  <%= button_to "Checkout", edit_order_path(@order.id), method: :get %>

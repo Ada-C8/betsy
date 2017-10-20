@@ -61,8 +61,8 @@ class OrdersController < ApplicationController
         @order.status = "complete"
         if @order.update_attributes order_params
           flash[:success] = "You successfully submitted your order!"
-          redirect_to root_path
           session[:order_id] = nil
+          redirect_to confirm_order_path(@order.id)
         else
           flash[:error] = "All fields are required to complete your order."
           render :edit, status: :bad_request

@@ -1,0 +1,24 @@
+<%= form_for @order do |f| %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.label :address %>
+  <%= f.text_field :address %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :card_number %>
+  <%= f.text_field :card_number %>
+
+  <%= f.label :card_exp %>
+  <%= f.text_field :card_exp %>
+
+  <%= f.label :card_cvv %>
+  <%= f.text_field :card_cvv %>
+
+  <%= f.label :zip_code %>
+  <%= f.text_field :zip_code %>
+
+  <%= f.submit %>
+<% end %>
