@@ -47,7 +47,7 @@ class ProductsController < ApplicationController
 
   private
   def fakey_login
-    session[:user_id] = 4
+    session[:user_id] = Merchant.first.id
   end
 
   def find_product_by_params
