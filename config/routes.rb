@@ -4,5 +4,13 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "merchants#login"
 
   # temporary! Replace this with actual, thought out routes
-  resources :merchants, :orders, :order_products, :products, :reviews
+  resources :merchants, except: [:index, :new] do
+    resources :orders, only: [:index]
+    resources :order_products, only:[:index], as: 'sold'
+  end
+
+  resources :orders, except: [:edit]
+  resources :order_products, only: [:update, :destroy]
+  resources :products
+  resources :reviews, except: [:index, :show]
 end
