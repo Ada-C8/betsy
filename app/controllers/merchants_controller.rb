@@ -10,10 +10,10 @@ class MerchantsController < ApplicationController
       merchant = Merchant.by_auth_hash(auth_hash)
       if merchant.save
         flash[:status] = :success
-        flash[:result_text] = "Successfully created new merchant_params "
+        flash[:result_text] = "Successfully created new merchant "
       else
         flash.now[:status] = :failure
-        flash.now[:result_text] = " Could not logged in"
+        flash.now[:result_text] = "Not logged in"
         flash.now[:messages] = merchant.errors.messages
         return redirect_to root_path
       end
