@@ -1,5 +1,5 @@
-1. User clicks "Add to Cart" on product detail page, or browsing page.
-2. User chooses quantity and item and clicks to order.
+1. Merchant clicks "Add to Cart" on product detail page, or browsing page.
+2. Merchant chooses quantity and item and clicks to order.
 3. A new ORDER is created.
   Order ID is assigned automatically in ORDER Table.
   Status is set to Pending
@@ -7,7 +7,7 @@
   OPID: Quantity and Product_ID from initial click (based on item chosen by user)
         Order Id from Step 3.
 
-5. On Cart Page/User page etc.
+5. On Cart Page/Merchant page etc.
   Can now see product and quantity and can click to edit or delete
     If changes are made: Update product/quantity on Order/product page .
   Can Cancel order (change status)

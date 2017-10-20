@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :order_products
 
 
-  get '/auth/:provider/callback', to: 'sessions#login'
+  get '/auth/:provider/callback', to: 'sessions#login', as: 'auth_callback'
   post   '/login',   to: 'sessions#create'
   post   '/logout',  to: 'sessions#logout'
 end

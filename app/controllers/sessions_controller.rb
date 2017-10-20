@@ -3,14 +3,11 @@ class SessionsController < ApplicationController
 
   def login
     auth_hash = request.env['omniauth.auth']
-
     if auth_hash['uid']
-      fake_user = Merchant.find_by(provider: params[:provider], uid: auth_hash['uid'])
-      if fake_user.nil?
-        # Merchant has not logged in before
-        # Create a new record in the DB
-        fake_user = Merchant.from_auth_hash(params[:provider], auth_hash)
-        save_and_flash(fake_user)
+      merchant = Merchant.find_by(provider: params[:provider], uid: auth_hash['uid'])
+      if merchant.nil?
+        merchant = Merchant.from_auth_hash(params[:provider], auth_hash)
+        save_and_flash(merchant)
 
       else
         flash[:status] = :success

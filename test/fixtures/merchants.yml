@@ -16,7 +16,8 @@
 #   cat_two:
 #     username: fred
 #     email: fred@fred.com
-merchant_1:
+
+fake_user:
   username: blah
   email: blah@123.com
   uid: a_uid
