@@ -15,23 +15,42 @@
  *= require foundation_and_overrides
 
  */
-
+/*home page design*/
  #myCanvas{
    background-color: black;
    color: white;
  }
 
-body {
-  width: 100%;
+/*general element styling*/
+ul, ol {
+ list-style: none;
 }
 
-.logo {
-  font-family: 'Meddon', cursive;
+body {
+  width: 100%;
+  font-family: 'Josefin Slab', serif;
+}
+
+/*application wide header & dropdown menus*/
+.header {
+  margin: 1rem 0rem 1rem 0rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo, .logo a {
+  /*font-family: 'Berkshire Swash', cursive;*/
+  font-family: 'Cinzel', serif;
+  color: black;
+  text-shadow: 10px;
   font-weight: bold;
   font-size: 4rem;
   float: left;
 
 }
+
 
 .nav-links {
   font-size: 1.5rem;
@@ -40,13 +59,65 @@ body {
 
 .nav-links a {
   padding: .5rem;
+
 }
 
-.header {
-  margin: 1rem 0rem 1rem 0rem;
-  width: 100%;
+.navigation .dropdown a{
+  font-family: 'Josefin Slab', serif;
+  font-size: 2em;
+  color: #0F5364;
+  text-shadow: 1;
+  text-decoration: none;
 }
 
+.dropdown a:hover {
+  color: blue;
+}
+
+.dropdown-button-view, .dropdown-button-create  {
+  color: black;
+  padding: 0;
+  font-size: 3em;
+  border: none;
+  cursor: pointer;
+  font-family: 'Josefin Slab', serif;
+  font-weight: bolder;
+  margin: 0;
+}
+
+.dropdown {
+  position: relative;
+  display: flex;
+  text-align: right;
+  margin-left: 10em;
+}
+
+.dropdown-content-view, .dropdown-content-create {
+  display: none;
+  position: absolute;
+  width: 20em;
+  min-width: 160px;
+  text-align: left;
+  overflow: visible;
+  margin: 0;
+  z-index: 1;
+}
+
+.dropdown-content-view a, .dropdown-content-create a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content-view {
+  display: block;
+}
+
+.dropdown:hover .dropdown-content-create {
+  display: block;
+}
+
+/*index views for all models*/
 .all-products, .all-merchants, .all-categories {
   display: flex;
   flex-flow: row;
@@ -58,6 +129,12 @@ body {
   margin-left: -15px;
   margin-right: -15px;
   overflow: hidden;
+
+}
+
+.info-card img {
+  padding-bottom: 1rem;
+  border-radius: 15px 50px;
 }
 
 .product, .merchant, .category {
@@ -65,9 +142,9 @@ body {
   flex-flow: column;
   padding: 1em;
   text-align: left;
-  color: #0F5364;
-  font-family: 'Slabo 13px', serif;
-  width: 20rem;
-  background-color: grey;
+  color: black;
+  font-family: 'Josefin Slab', serif;
+  width: 25rem;
+  height: 30rem;
   margin: 1rem;
 }

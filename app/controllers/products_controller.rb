@@ -3,6 +3,9 @@ class ProductsController < ApplicationController
     if params[:merchant_id]
       merchant = Merchant.find_by(id: params[:merchant_id])
       @products = merchant.products
+    elsif
+      params[:category_id]
+      @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
     else
       @products = Product.all
     end
@@ -13,14 +16,14 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(name: params[:product][:name], price: params[:product][:price], quantity_avail: params[:product][:quantity_avail], merchant: params[:product][:merchant] )
+    @product = Product.new product_params
     if @product.save
       flash[:status] = :success
       flash[:result_text] = "Successfully created your product!"
-      redirect_to product_path
+      redirect_to product_path(@product.id)
     else
       flash[:status] = :failure
-      flash[:result_text] = "Could not create #{@category.name} category."
+      flash[:result_text] = "Could not create #{@product.name}."
       flash[:messages] = @product.errors.messages
       render :new, status: :bad_request
     end
@@ -67,6 +70,7 @@ class ProductsController < ApplicationController
     end
   end
 
+
   def remove_product_from_cart
 
     @product = Product.find_by(id: params[:id])
@@ -76,6 +80,5 @@ class ProductsController < ApplicationController
     obj_to_destroy = order.products[index_of_first_found].object_id
     order.products.destroy(obj_to_destroy)
 
-    @product.add_one_to_stock
-  end
+    @product.add_one_to_stock  end
 end

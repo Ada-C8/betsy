@@ -34,10 +34,9 @@ describe ProductsController do
       # post products_path, params: {product: {name: "creepy things", quantity_avail: 4, price: 9.99, merchant_id: merchants(:spooky)}}
       # must_respond_with :redirect
       # must_redirect_to product_path(Product.last.id)
-
-      # proc   {
-      #   post products_path, params: {product: {name: "creepy things", quantity_avail: 4, price: 9.99, merchant: merchants(:witch)}}
-      # }.must_change 'Category.count', 1
+      proc   {
+        post products_path, params: { product: { name: "creepy things", quantity_avail: 4, price: 9.99, merchant_id: Merchant.first.id}}
+      }.must_change 'Product.count', 1
     end
   end
 
@@ -137,6 +136,13 @@ describe ProductsController do
 
       Product.count.must_equal start_count
 
+    end
+  end
+
+  describe "product by category" do
+    it "Should get products by category" do
+      get category_products_path(categories(:brooms).id)
+      must_respond_with :success
     end
   end
 end
