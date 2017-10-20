@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
   def index
     @orders = Order.all
+    if session[:merchant]
+      @orders = Merchant.find(params[:merchant]).orders
+    end
   end
 
   def new
@@ -25,9 +28,9 @@ class OrdersController < ApplicationController
     find_order_by_params_id
   end
 
-  def edit
-    find_order_by_params_id
-  end
+  # def edit
+  #   find_order_by_params_id
+  # end
 
   def update
     if find_order_by_params_id
