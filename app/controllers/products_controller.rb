@@ -4,6 +4,9 @@ class ProductsController < ApplicationController
       merchant = Merchant.find_by(id: params[:merchant_id])
       @products = merchant.products
     elsif
+      params[:review_id]
+      @products = Review.where(product_id: params[:category_id])
+    elsif
       params[:category_id]
       category = Category.find_by(id: params[:category_id])
       @products = category.products
@@ -79,10 +82,20 @@ class ProductsController < ApplicationController
     order = Order.find_by(id: session[:order_id])
 
     index_of_first_found = order.products.index {|element| element.id == @product.id}
-    obj_to_destroy = order.products[index_of_first_found].object_id
-    order.products.destroy(obj_to_destroy)
 
-    @product.add_one_to_stock  end
+    orders_products_array = order.products.to_a
+
+    orders_products_array.delete_at(index_of_first_found)
+
+    order.products.replace([])
+    order.products.replace(orders_products_array)
+
+    @product.add_one_to_stock
+  end
+
+  def product_params
+    params.require(:product).permit(:name, :quantity_avail, )
+  end
 end
 
 private

@@ -19,7 +19,7 @@ class ReviewsController < ApplicationController
     if @review.save
       flash[:status] = :success
       flash[:result_text] = "Successfully reviewed!"
-      redirect_to product_reviews_path(id: @review.id, product_id: params[:review][:product_id])
+      redirect_to product_review_path(id: @review.id, product_id: params[:review][:product_id])
     else
       # flash[:status] = :failure
       # flash[:result_text] = "Could not review this product."

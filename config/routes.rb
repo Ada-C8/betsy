@@ -6,13 +6,18 @@ Rails.application.routes.draw do
   resources :orders
 
   resources :products do
-    resources :reviews
+    # resources :reviews
+    get '/reviews', to: 'reviews#index'
+    get '/new_review', to: 'reviews#new'
+
    end
+
+   resources :reviews, except: [:new, :index]
 
   resources :merchants do
     get '/products', to: 'products#index'
   end
-  
+
   resources :categories do
     resources :products, only: [:index]
   end

@@ -1,5 +1,5 @@
 <section>
-  <%= form_for @rating do |f| %>
+  <%= form_for(product_reviews_path(id: @product.id), method: :post) do |f| %>
     <%= f.label :rating %>
     <%= f.select :rating, options_for_select((1..5)) %>
 
