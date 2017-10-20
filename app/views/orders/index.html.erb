@@ -1,3 +1,4 @@
+<% if @order %>
 <%= form_for @order do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
@@ -12,4 +13,5 @@
   <%= f.text_field :merchant %>
 
   <%= f.submit %>
+<% end %>
 <% end %>
