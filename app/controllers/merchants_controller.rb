@@ -23,7 +23,7 @@ class MerchantsController < ApplicationController
   end
 
   def logout
-    session[:merchant_id] = nil
+    session[:merchant] = nil
     redirect_to root_path
   end
   #CRUD
