@@ -13,6 +13,4 @@ Rails.application.routes.draw do
   resources :order_products, only: [:update, :destroy]
   resources :products
   resources :reviews, except: [:index, :show]
-
-
 end
