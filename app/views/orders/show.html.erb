@@ -2,7 +2,12 @@
   <p>There's nothing in your cart!</p>
 <% end %>
 
-<% @order.products.each do |product| %>
-  <%= product.name %>
-  <%= product.price %>
-<% end %>
+<% product_array = @order.products.to_a %>
+
+<ul>
+  <% product_array.uniq.each do |product| %>
+    <li><%= product.name %> : <%= product.price %> Quantity: <%= product_array.count(product) %> Subtotal: <%= product_array.count(product) *  product.price %> </li>
+  <% end %>
+
+  <li>Order Subtotal: <%= @order.order_total %> </li>
+</ul>

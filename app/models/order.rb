@@ -14,4 +14,15 @@ class Order < ApplicationRecord
     self.status == "complete"
   end
 
+  def order_total
+    total = 0
+    self.products.each do |product|
+      total += product.price
+    end
+    return total
+
+  end
+
+
+
 end
