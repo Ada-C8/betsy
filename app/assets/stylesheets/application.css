@@ -19,3 +19,7 @@
 * {
   /*border: 1px solid lawngreen;*/
 }
+
+.row {
+  max-width: 100%;
+}

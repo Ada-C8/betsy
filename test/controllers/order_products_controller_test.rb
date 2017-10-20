@@ -2,8 +2,9 @@ require "test_helper"
 
 describe OrderProductsController do
   describe "index" do
-    it "returns success for all order products" do
-      get order_products_path
+    it "returns success for the order products of a specific merchant if given a merchant" do
+      merchant = :ada
+      get merchant_sold_index_path(merchant)
       must_respond_with :success
     end
   end
