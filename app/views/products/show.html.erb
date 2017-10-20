@@ -1,0 +1,37 @@
+
+<%= (render partial: 'temp-errors') if (flash[:message]) || (flash.now[:message])  %>
+
+
+<section class="small-10 columns product-info">
+  <div class="row">
+    <div class="small-12 medium-5 columns">
+      <div class="product-img" style="background-image: url('<%= @product.image_url %>');">
+      </div>
+    </div>
+    <div class="small-12 medium-5 columns product-details">
+      <h3><%= @product.name %></h3>
+      <p> From seller
+        <%= link_to @product.merchant.username, merchant_path(@product.merchant_id) %>
+      </p>
+      <p>$<%= '%.2f' % @product.price %></p>
+      <%= form_tag do %>
+      <%= label_tag :quantity, "Quantity:", class: 'small-6 columns' %>
+      <%= select_tag :quantity, options_for_select((1..@product.quantity)), class: 'small-6 columns' %>
+      <%= submit_tag "Add to Cart", class: 'button' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row description">
+    <h4>Description:</h4>
+    <p>
+      <%= @product.description %>
+    </p>
+  </div>
+
+  <div class="row reviews">
+    <h4>Average Review: <%= @product.reviews.average(:rating) %></h4>
+    <% @product.reviews.each do |review| %>
+      <%= render partial: 'review', locals: {review: review} %>
+    <% end %>
+  </div>
+</section>
