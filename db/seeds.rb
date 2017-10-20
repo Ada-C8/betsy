@@ -18,7 +18,6 @@ merchants = Merchant.create([
   { username: 'Puck', email: 'sneakyelf@shakespeare.com', id: 40, oauth_provider: 'github', oauth_uid: '123463', created_at: Time.now, updated_at: Time.now }
   ])
 
-# Orders: 21, 22, 23, 24
 orders = Order.create([
   { cust_name: 'Elvy', status: 'paid', cust_email: 'elvii@gmail.com', cust_cc: '11111000000', cust_cc_exp: '02/18', cust_addr: 'Elves Land', id: 11, created_at: Time.now, updated_at: Time.now },
   { cust_name: 'Earthborn King', status: 'paid', cust_email: 'eking@something.com', cust_cc: '22222220000000', cust_cc_exp: '10/19', cust_addr: 'Magestic Castle VI', id: 12, created_at: Time.now, updated_at: Time.now },
