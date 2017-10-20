@@ -18,9 +18,11 @@
     <% else %>
     <h4>Out of Stock</h4>
     <% end %>
-    <% if session[:order_id] == nil %>
+    <% if @product.quantity_avail == 0 %>
+      <%= button_to "Not available: Keep Shopping!", products_path, method: :get %>
+    <% elsif session[:order_id] == nil && @product.quantity_avail > 0 %>
       <%= button_to "Add to cart", add_product_path(@product), method: :patch %>
-    <% else %>
+    <% elsif @product.quantity_avail > 0 %>
     <%= button_to "Add to cart", add_product_path(@product), method: :patch %>
     <% end %>
     <%= button_to "Remove from cart", remove_product_path(@product), method: :patch %>
