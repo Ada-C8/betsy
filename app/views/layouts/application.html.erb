@@ -16,19 +16,32 @@
 
   <body>
 
-  <section class="header row">
-    <div class="small-12 columns">
-      <span class="row logo"><span class="small-4 columns">Sourceress</span></span>
-      <span class="row nav-links">
-        <span class="small-12 columns">
-      <%= link_to "Browse Products", products_path %>
-      <%= link_to "Browse Merchants", merchants_path %>
-      <%= link_to "Browse Categories", categories_path %>
-      <%= link_to "Home", root_path %>
-    </span>
-    </span>
-    </div>
-  </section>
+    <header class="header navigation">
+      <span class="logo"><%= link_to "Sourceress", root_path %></span>
+      <section class="dropdown">
+        <ul class "view-menu">
+          <button class="dropdown-button-view">Browse</button>
+            <div class="dropdown-content-view">
+              <li><%= link_to "Browse Products", products_path %></li>
+              <li><%= link_to "Browse Merchants", merchants_path %></li>
+              <li><%= link_to "Browse Categories", categories_path %></li>
+            </div>
+        </ul>
+      </section>
+      <section class="dropdown">
+        <ul class="create-menu">
+          <button class="dropdown-button-create">Something Else!</button>
+            <div class="dropdown-content-create">
+              <li></li>
+              <li></li>
+            </div>
+        </ul>
+      </section>
+      </span>
+    </header>
+
+
+
 
     <%= yield %>
 
