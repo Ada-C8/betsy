@@ -1,5 +1,17 @@
-<h2>Popular Products</h2>
+<nav class='small-2 columns'>
+  <h4>Categories</h4>
+  <ul>
+    <% @categories.each do |category| %>
+      <li>
+        <%= link_to category.capitalize, products_path %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
 
-<%= (render partial: 'temp-errors') if (flash[:message]) || (flash.now[:message])  %>
+<main class='small-10 columns'>
+  <h2>Popular Now</h2>
+  <%= (render partial: 'temp-errors') if (flash[:message]) || (flash.now[:message])  %>
 
-<%= render partial: "product-list", locals: {products: @products} %>
+  <%= render partial: "product-list", locals: {products: @products} %>
+</main>

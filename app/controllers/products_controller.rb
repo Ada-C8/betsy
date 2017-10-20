@@ -9,6 +9,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    @categories = ['Magic', 'Witchcraft', 'Mythical Beasts', 'Food', 'Legendary Items']
   end
 
   def show
