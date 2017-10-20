@@ -59,7 +59,7 @@ class ProductsController < ApplicationController
       order = Order.find_by(id: session[:order_id])
       order.products << @product
       flash[:success] = "product added to cart"
-      redirect_to root_path
+      redirect_to products_path
     else
       flash[:error] = "product not available"
       redirect_to products_path, status: :bad_request
