@@ -49,25 +49,32 @@ class MerchantsController < ApplicationController
   end
 
   def edit
-     @merchant = Merchant.find(params[:id])
-     render_404 unless @merchant
+    @merchant = Merchant.find_by(id: params[:id])
+    return head :not_found unless @merchant
   end
 
   def update
-    @merchant = Merchant.find(params[:id])
-    if @merchant.save
+    @merchant = Merchant.find_by(id: params[:id])
+    return head :not_found unless @merchant
+    if @merchant.valid?
+      @merchant.save
+      flash[:status] = :success
+      flash[:message] = "Successfully updated #{@merchant.username}"
       redirect_to merchant_path(@merchant)
+      return
       #success message
     else
-      render :edit, status: :bad_request
-      return
-      #fail message flash
+      flash.now[:status] = :failure
+      flash.now[:result_text] = "Could not update #{@merchant.username}"
+      flash.now[:messages] = @merchant.errors.messages
+      render :edit, status: :not_found
+      # return
     end
   end
 
   def show
     @merchant = Merchant.find_by(id: params[:id])
-    render_404 unless @merchant
+    return head :not_found unless @merchant
   end
 
   def destroy

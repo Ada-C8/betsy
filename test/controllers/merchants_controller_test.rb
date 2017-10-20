@@ -27,7 +27,6 @@ describe MerchantsController do
 
     it "renders 404 not_found for a bogus merchant" do
       bogus_merchant_id = Merchant.last.id + 1
-      # binding.pry
       get merchant_path(bogus_merchant_id)
       must_respond_with :not_found
     end
@@ -53,6 +52,7 @@ describe MerchantsController do
 
     it "renders 404 not_found for a bogus merchant ID" do
       bogus_merchant_id = Merchant.last.id + 1
+      # binding.pry
       get edit_merchant_path(bogus_merchant_id)
       must_respond_with :not_found
     end
@@ -105,7 +105,6 @@ describe MerchantsController do
       # Check that the update is actually invalid
       merchant.update_attributes(invalid_merchant_data[:merchant])
       merchant.wont_be :valid?
-
       patch merchant_path(merchant), params: invalid_merchant_data
 
       must_respond_with :bad_request
