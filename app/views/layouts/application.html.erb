@@ -11,9 +11,32 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body>
+  <body class="row">
+    <header class="small-12 columns header">
+      <section class="row">
+        <h1 class="small-12 medium-4 columns">
+          <%= link_to "LoreStore", root_path %>
+        </h1>
+        <nav class="small-12 medium-8 columns top-nav">
+          <%= link_to "View Products", products_path, class: "button" %>
+          <%= link_to "Shopping Cart", root_path, class: "button" %>
+          <% if session[:user] %>
+            <%= link_to "Sell", new_product_path, class: "button" %>
+            <%= link_to "Sign Out", root_path, class: "button" %>
+          <% else %>
+            <%= link_to "Sign Up", root_path, class: "button" %>
+            <%= link_to "Sign In", root_path, class: "button" %>
+          <% end %>
+        </nav>
+      </section>
 
-    <%= yield %>
+    </header>
+    <main class="small-12 columns main">
+      <%= yield %>
+    </main>
+    <footer class="small-12 columns footer">
+      <p>Copyright &copy; 2017 LoreStore</p>
+    </footer>
 
   </body>
 </html>
