@@ -1,7 +1,7 @@
 require "test_helper"
 
 describe ProductsController do
-  let(:prod) { Product.first }
+  let(:prod) { products(:mermaid_fin) }
   let(:good_params) { { product: { "name"=>"New Test Item", "price"=>"11.00", "quantity"=>"1", "description"=>"This is a test" } } }
   let(:bad_params) { { product: { "name"=>"" } } }
   let(:tmi_params) { { product: { "name"=>"New Test Item", "price"=>"11.00", "quantity"=>"1", "description"=>"This is a test", "tmi"=>"uh oh", "id"=>1 } } }
@@ -13,7 +13,11 @@ describe ProductsController do
 
   describe 'for logged in users' do
     before do
-      # log in
+      user = merchants(:ada)
+
+      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
+
+      get login_path(:github)
     end
 
     it 'can successfully access index of products' do
@@ -37,6 +41,8 @@ describe ProductsController do
     describe 'create' do
       it 'can successfully create valid product' do
         post products_path, params: good_params
+
+        binding.pry
 
         must_respond_with :found
         flash[:status].must_equal :success

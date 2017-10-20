@@ -1,6 +1,4 @@
 class ProductsController < ApplicationController
-  # before_action :fakey_login # take this out later pleeeasseee
-
   before_action :find_product_by_params, only: [:show, :edit, :update, :destroy]
 
   before_action :confirm_login, only: [:new, :create, :edit, :update, :destroy]
@@ -72,10 +70,6 @@ class ProductsController < ApplicationController
 
   private
 
-  def fakey_login
-    session[:user_id] = Merchant.first.id
-  end
-
   def find_product_by_params
     @product = Product.find(params[:id])
 
@@ -85,7 +79,7 @@ class ProductsController < ApplicationController
   end
 
   def confirm_login
-    if session[:user_id].nil?
+    if session[:merchant].nil?
       flash[:status] = :failure
       flash[:message] = "You must be logged in to do that."
       return redirect_back(fallback_location: products_path)
@@ -93,7 +87,7 @@ class ProductsController < ApplicationController
   end
 
   def confirm_ownership
-    unless session[:user_id] == @product.merchant_id
+    unless session[:merchant][:id] == @product.merchant_id
       flash[:status] = :failure
       flash[:message] = "Only a product's merchant can modify a product."
       return redirect_back(fallback_location: products_path)
