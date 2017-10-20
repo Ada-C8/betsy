@@ -92,7 +92,7 @@ describe ProductsController do
       patch add_product_path(product.id)
       patch add_product_path(product.id)
 
-      #do not re-load the fixture: it's fixed!
+      #do not re-load the fixture: it's fixed, so it will never chaaaaange!
       Product.find(products(:pointy_hat).id).quantity_avail.must_equal 3
     end
   end
