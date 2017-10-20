@@ -1,8 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 
-# cat_one:
-#   category_name: Dinner
-#
-# cat_two:
-#   category_name: Breakfast
+cat_one:
+  category_name: Dinner
+
+cat_two:
+  category_name: Breakfast

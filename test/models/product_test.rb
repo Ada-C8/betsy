@@ -7,7 +7,7 @@ describe Product do
   describe "validations" do
     it "can be created with required fields" do
       #failed when added merchant association
-      b = Product.new(name: "product", description: "a product", price: 10, stock: 10, category_id: 1, photo_URL: "photo.com", merchant_id: 1)
+      b = Product.new(name: "product", description: "a product", price: 10, stock: 10, category_id: Category.first.id, photo_URL: "photo.com", merchant_id: Merchant.first.id)
       b.must_be :valid?
     end #can be created
 
@@ -19,14 +19,14 @@ describe Product do
 
     it "requires a unique name" do
       name = "test name"
-      b1 = Product.create!(name: name, price: 10, category_id: 1, merchant_id: 1)
-      b2 = Product.new(name: name, price: 10, category_id: 1, merchant_id: 1)
+      b1 = Product.create!(name: name, price: 10, category_id: Category.first.id, merchant_id: Merchant.first.id)
+      b2 = Product.new(name: name, price: 10, category_id: Category.first.id, merchant_id: Merchant.first.id)
 
       b2.wont_be :valid?
     end #unique name
 
     it "requires a price" do
-      b = Product.new(name: "name", category_id: 1, merchant_id: 1)
+      b = Product.new(name: "name", category_id: Category.first.id, merchant_id: Merchant.first.id)
       b.wont_be :valid?
       b.errors.messages.must_include :price
     end
