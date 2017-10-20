@@ -30,11 +30,20 @@ class MerchantsController < ApplicationController
   end
 
   def edit
-    @merchant = Merchant.find(params[:id])
+     @merchant = Merchant.find(params[:id])
+     render_404 unless @merchant
   end
 
   def update
     @merchant = Merchant.find(params[:id])
+    if @merchant.save
+      redirect_to merchant_path(@merchant)
+      #success message
+    else
+      render :edit, status: :bad_request
+      return
+      #fail message flash
+    end
   end
 
   def show
@@ -43,6 +52,8 @@ class MerchantsController < ApplicationController
   end
 
   def destroy
+    @merchant.destroy
+    redirect_to root_path
   end
 
 
