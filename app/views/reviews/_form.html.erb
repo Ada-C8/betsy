@@ -1,0 +1,11 @@
+<section>
+  <%= form_for @review do |f| %>
+    <%= f.label :rating %>
+    <%= f.select :rating, options_for_select((1..5)) %>
+
+    <%= f.label :Review %>
+     <%= f.text_field :text_review %>
+
+    <%= f.submit class: "button" %>
+  <% end %>
+</section>
