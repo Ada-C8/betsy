@@ -36,8 +36,8 @@ class ReviewsController < ApplicationController
     #     flash[:message] = "Failed to create review"
     #     flash[:details] = @review.errors.messages
     #     render :new, status: :bad_request
-    #   end
-    # # end
+      end
+    # end
   end
   #
   def show ; end # don't need
