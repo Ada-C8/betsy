@@ -42,8 +42,6 @@ describe ProductsController do
       it 'can successfully create valid product' do
         post products_path, params: good_params
 
-        binding.pry
-
         must_respond_with :found
         flash[:status].must_equal :success
         Product.count.must_equal (@before_count + 1)
