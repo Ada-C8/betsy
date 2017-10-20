@@ -1,13 +1,11 @@
 class SessionsController < ApplicationController
-  def create
+  def login
     auth_hash = request.env['omniauth.auth']
-
     if auth_hash['uid']
-      merchant = Merchant.find_by(uid: auth_hash[:uid], provider: 'github')
+      merchant = Merchant.find_by(provider: params[:provider], uid: auth_hash['uid'])
       if merchant.nil?
-        # Merchant doesn't match anything in the DB
-        # Attempt to create a new merchant
-        merchant = Merchant.build_from_github(auth_hash)
+        merchant = Merchant.from_auth_hash(params[:provider], auth_hash)
+        save_and_flash(merchant)
       else
         flash[:success] = "Logged in successfully"
         redirect_to root_path

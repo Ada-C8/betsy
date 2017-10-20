@@ -9,8 +9,8 @@ This is a [Stage 3](https://github.com/Ada-Developers-Academy/pedagogy/blob/mast
   - Controllers
   - Models
   - Views
-- User based application logic
-- User authentication
+- Merchant based application logic
+- Merchant authentication
 - Agile practices
 - Feature branch management with Git
 - Group project ownership
@@ -32,7 +32,7 @@ This is a [Stage 3](https://github.com/Ada-Developers-Academy/pedagogy/blob/mast
   1. Do you want to use git branches? Pull requests?
   1. Determine who will be the Stand Up Leader and Task Leader for the first week
 1. Create a Trello board and ensure that all team members and instructors have access
-1. Review the User Stories below and create Trello tasks to represent them
+1. Review the Merchant Stories below and create Trello tasks to represent them
 1. Slack your team name, app name, and link to your trello board to your Project Manager
 
 ## Expectations
@@ -45,8 +45,8 @@ Build an online system for listing, selling, reviewing, and buying a wide variet
 - Test code coverage (using SimpleCov - remember me!)
   - 90% for all controller and model classes
 
-### User Stories
-#### Guest User (Unauthenticated)
+### Merchant Stories
+#### Guest Merchant (Unauthenticated)
 As a guest to the website (not signed in) I **can**:
 
 - Browse all products
@@ -87,7 +87,7 @@ As a guest I **cannot**:
 - View any link or page to manage any products
 - View any of the account pages
 
-#### Authenticated Users
+#### Authenticated Merchants
 As a signed-in user, I **can**:
 
 - Do everything a guest user can do except for sign up and sign in
@@ -132,8 +132,8 @@ As a signed-in user, I **cannot**:
 Many of our models will have attributes that are required for our application to use and display data consistently. Each model will have attributes with requirements for a valid record. The requirements are summarized below:
 
 #### Merchant
-- Username must be present
-- Username must be unique
+- Merchantname must be present
+- Merchantname must be unique
 - Email Address must be present
 - Email Address must be unique
 
@@ -143,7 +143,7 @@ Many of our models will have attributes that are required for our application to
 - Price must be present
 - Price must be a number
 - Price must be greater than 0
-- Product must belong to a User
+- Product must belong to a Merchant
 
 #### Order
 - An Order must have one or more Order Items

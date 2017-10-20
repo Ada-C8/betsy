@@ -6,9 +6,9 @@ class MerchantsController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id])
+    @merchant = Merchant.find_by(id: params[:id])
     # make sure syntax is ok
-    # unless @user
+    # unless @merchant
     #   render: not_found
     # end
   end
