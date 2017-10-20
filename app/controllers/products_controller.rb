@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :fakey_login # take this out later pleeeasseee
+  # before_action :fakey_login # take this out later pleeeasseee
 
   before_action :find_product_by_params, only: [:show, :edit, :update, :destroy]
 
@@ -41,12 +41,37 @@ class ProductsController < ApplicationController
   end
 
   def update
+    result = @product.update(prod_params)
+
+    if result
+      flash.now[:status] = :success
+      flash.now[:message] = "Successfully updated #{@product.name}"
+      return redirect_to product_path(@product.id)
+    else
+      flash.now[:status] = :failure
+      flash.now[:message] = "Could not update product"
+      flash.now[:details] = @product.errors.messages
+      return render :edit, status: :bad_request
+    end
   end
 
   def destroy
+    result = @product.destroy
+
+    if result
+      flash.now[:status] = :success
+      flash.now[:message] = "Successfully deleted #{@product.name}"
+      return redirect_to products_path
+    else
+      flash.now[:status] = :failure
+      flash.now[:message] = "Could not delete product"
+      flash.now[:details] = @product.errors.messages
+      return redirect_back(fallback_location: products_path)
+    end
   end
 
   private
+
   def fakey_login
     session[:user_id] = Merchant.first.id
   end
