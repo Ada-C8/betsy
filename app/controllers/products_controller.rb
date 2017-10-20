@@ -56,17 +56,22 @@ class ProductsController < ApplicationController
   end
 
   def add_product_to_cart
-    if Order.find_by(id: session[:order_id]) == nil
-      create_order
-    end
-
     @product = Product.find_by(id: params[:id])
     if @product.remove_one_from_stock
-      order = Order.find_by(id: session[:order_id])
-      order.products << @product
-      order.save
-      flash[:success] = "product added to cart"
-      redirect_to products_path
+      if Order.find_by(id: session[:order_id]) == nil
+        create_order
+        order = Order.find_by(id: session[:order_id])
+        order.products << @product
+        order.save
+        flash[:success] = "product added to cart"
+        #this redirects, which causes double redirect error
+      else
+        order = Order.find_by(id: session[:order_id])
+        order.products << @product
+        order.save
+        flash[:success] = "product added to cart"
+        redirect_to products_path
+      end
     else
       flash[:error] = "product not available"
       redirect_to products_path, status: :bad_request
