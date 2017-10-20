@@ -3,7 +3,7 @@
   <% @products.each do |product| %>
   <section class="info-card">
     <section class="product">
-      <span>Product: <%= product.name %></span>
+      <span>Product: <%= link_to product.name, product_path(product.id) %></span>
       <span>Price: <%= product.price %></span>
       <span>Quantity: <%= product.quantity_avail %></span>
       <span>Sold By: <%= product.merchant.username %></span>
