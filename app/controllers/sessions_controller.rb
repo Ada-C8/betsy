@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  # skip_before_action :require_login, only: [:login]
+
   def login
     auth_hash = request.env['omniauth.auth']
     if auth_hash['uid']
@@ -6,20 +8,26 @@ class SessionsController < ApplicationController
       if merchant.nil?
         merchant = Merchant.from_auth_hash(params[:provider], auth_hash)
         save_and_flash(merchant)
-      else
-        flash[:success] = "Logged in successfully"
-        redirect_to root_path
-      end
 
-      # If we get here, we have the merchant instance
+      else
+        flash[:status] = :success
+        flash[:message] = "Successfully logged in as returning user #{merchant.username}"
+
+      end
       session[:merchant_id] = merchant.id
+
     else
-      flash[:error] = "Could not log in"
-      redirect_to root_path
+      flash[:status] = :failure
+      flash[:message] = "Could not create user from OAuth data"
     end
+
+    redirect_to root_path
   end
 
-  def index
-    @merchant = Merchant.find(session[:merchant_id]) # < recalls the value set in a previous request
+  def logout
+    session[:merchant_id] = nil
+    flash[:status] = :success
+    flash[:message] = "You have been logged out"
+    redirect_to root_path
   end
 end
