@@ -2,9 +2,12 @@ require "test_helper"
 
 describe ProductsController do
   let(:p) { Product.first }
+  let(:good_params) { { product: {
+    "name"=>"New Test Item", "price"=>"11.00", "quantity"=>"1", "description"=>"This is a test"}
+  } }
 
   before do
-    before_count = Product.count
+    @before_count = Product.count
   end
 
   describe 'for logged in users' do
@@ -25,14 +28,23 @@ describe ProductsController do
     end
 
     it 'can successfully access new product' do
-      skip
+      # skip
       get new_product_path
 
       must_respond_with :success
     end
 
-    it 'can successfully create valid product' do
-      skip
+    describe 'create' do
+      it 'can successfully create valid product' do
+        post products_path, params: good_params
+
+        must_respond_with :success
+        Product.count.must_equal (@before_count + 1)
+      end
+
+      it 'will not create new product with invalid data' do
+
+      end
     end
 
     it 'can successfully access edit for own product' do
@@ -74,6 +86,7 @@ describe ProductsController do
     end
 
     it 'CANNOT access new product' do
+      skip
       get new_product_path(p.id)
 
       flash[:status].must_equal :failure
@@ -85,6 +98,7 @@ describe ProductsController do
     end
 
     it 'CANNOT access edit for product' do
+      skip
       get new_product_path(p.id)
 
       flash[:status].must_equal :failure

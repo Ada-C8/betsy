@@ -19,6 +19,21 @@ class ProductsController < ApplicationController
   end
 
   def create
+    @product = Product.new(prod_params)
+    @product.merchant_id = session[:user_id]
+
+    result = @product.save
+
+    if result
+      flash.now[:status] = :success
+      flash.now[:message] = "Successfully created #{@product.name}"
+      return redirect_to product_path(@product.id)
+    else
+      flash.now[:status] = :failure
+      flash.now[:message] = "Could not create new product"
+      flash.now[:details] = @product.errors.messages
+      return render :new, status: :bad_request
+    end
   end
 
   def edit
@@ -57,5 +72,9 @@ class ProductsController < ApplicationController
       flash[:message] = "Only a product's merchant can modify a product."
       return redirect_back(fallback_location: products_path)
     end
+  end
+
+  def prod_params
+    params.require(:product).permit(:name, :image_url, :price, :quantity, :description)
   end
 end
