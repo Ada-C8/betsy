@@ -16,10 +16,16 @@ describe OrdersController do
   end
 
   describe "create" do
-    xit "adds order to the database and redirects when the data is valid" do
+    it "adds order to the database and redirects when the data is valid" do
       order = {
         order: {
-          cust_name: "Wienerschnitzel"
+          cust_name: "Mermaid",
+          merchant_id: 21,
+          cust_cc: 12345,
+          cust_cc_exp: "11/22",
+          cust_addr: "Sea World",
+          cust_email: "forkhair@mermaid.com",
+          status: "complete"
         }
       }
       Order.new(order[:order]).must_be :valid?
@@ -32,10 +38,16 @@ describe OrdersController do
       Order.count.must_equal start_count + 1
     end
 
-    xit "re-renders form when the order data is invalid" do
+    it "re-renders form when the order data is invalid" do
       order = {
         order: {
-          cust_name: "Wienerschnitzel"
+          cust_name: "Mermaid",
+          merchant_id: 21,
+          cust_cc: 12345,
+          cust_cc_exp: "11/22",
+          cust_addr: "Sea World",
+          cust_email: "forkhair@mermaid.com",
+          status: ""
         }
       }
       Order.new(order[:order]).wont_be :valid?
