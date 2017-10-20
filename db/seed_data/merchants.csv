@@ -1,8 +1,8 @@
-id,username,email
-1,john_smith,john_smith@fakemail.com
-2,liza_lee,liza_lee@fakemail.com
-3,linda_loop,linda_loop@fakemail.com
-4,jenny_jones,jenny_jones@mailing.com
-5,henny_penny,henny_penny@skyisfalling.com
-6,dixie_pixie,dixie_pixie@pixiedust.com
-7,sally_racket,sally_racket@seashanty.edu
+id,username,email,provider,uid
+1,john_smith,john_smith@fakemail.com,github,1234
+2,liza_lee,liza_lee@fakemail.com,github,12345
+3,linda_loop,linda_loop@fakemail.com,github,789
+4,jenny_jones,jenny_jones@mailing.com,github,900
+5,henny_penny,henny_penny@skyisfalling.com,github,1000
+6,dixie_pixie,dixie_pixie@pixiedust.com,github,42
+7,sally_racket,sally_racket@seashanty.edu,github,423
