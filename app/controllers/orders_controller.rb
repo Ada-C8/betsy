@@ -20,6 +20,8 @@ class OrdersController < ApplicationController
 
   def create
     create_order
+    #see application controller
+
     # @order = Order.new
     # @order.status = "pending"
     #
