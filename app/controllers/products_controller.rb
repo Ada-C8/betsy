@@ -5,7 +5,9 @@ class ProductsController < ApplicationController
       @products = merchant.products
     elsif
       params[:category_id]
-      @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
+      category = Category.find_by(id: params[:category_id])
+      @products = category.products
+      # @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
     else
       @products = Product.all
     end
@@ -82,3 +84,8 @@ class ProductsController < ApplicationController
 
     @product.add_one_to_stock  end
 end
+
+private
+  def product_params
+    params.require(:product).permit(:name, :price, :quantity_avail, :merchant_id)
+  end

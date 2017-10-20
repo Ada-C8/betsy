@@ -2,21 +2,22 @@ require "test_helper"
 #test for create and destroy are commented out and not working
 #might need edge cases
 #test for 404 missing failing
-# describe ReviewsController do
-#   describe "index" do
-#     it "succeeds with many reviews" do
-#       Review.count.must_be :>, 0
-#
-#       get reviews_path
-#       must_respond_with :success
-#     end
-#     it "succeeds with no reviews" do
-#       Review.destroy_all
-#
-#       get reviews_path
-#       must_respond_with :success
-#     end
-#   end
+describe ReviewsController do
+  describe "index" do
+    it "succeeds with many reviews" do
+      Review.count.must_be :>, 0
+
+      get reviews_path
+      must_respond_with :success
+    end
+    it "succeeds with no reviews" do
+      Review.destroy_all
+
+      get reviews_path
+      must_respond_with :success
+    end
+  end
+  
 #   describe "new" do
 #     it "reviews" do
 #       get new_review_path
@@ -68,4 +69,4 @@ require "test_helper"
 #         Review.find_by(id: review.id).must_be_nil
 #       end
 #     end
-# end
+end

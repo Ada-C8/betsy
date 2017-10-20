@@ -21,10 +21,11 @@ class ReviewsController < ApplicationController
       flash[:result_text] = "Successfully reviewed!"
       redirect_to product_reviews_path(id: @review.id, product_id: params[:review][:product_id])
     else
-      flash[:status] = :failure
-      flash[:result_text] = "Could not review this product."
-      flash[:messages] = @review.errors.messages
-      render :new, status: :bad_request
+      # flash[:status] = :failure
+      # flash[:result_text] = "Could not review this product."
+      # flash[:messages] = @review.errors.messages
+      # render :new, status: :bad_request
+      redirect_to new_product_review_path
     end
   end
 

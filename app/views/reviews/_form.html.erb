@@ -1,11 +1,11 @@
 <section>
-  <%= form_tag(product_reviews_path(id: @product.id), method: :post, class: ‘rating’) do %>
+  <%= form_for @rating do |f| %>
     <%= f.label :rating %>
     <%= f.select :rating, options_for_select((1..5)) %>
 
     <%= f.label :Review %>
      <%= f.text_field :text_review %>
 
-    <%= f.submit class: "button" %>
+    <%= f.submit submit_name %>
   <% end %>
 </section>
