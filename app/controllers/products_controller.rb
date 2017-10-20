@@ -1,9 +1,11 @@
 class ProductsController < ApplicationController
+  
   before_action :find_product_by_params, only: [:show, :edit, :update, :destroy]
+
+  before_action :confirm_login, except: [:index, :show]
 
   before_action :confirm_ownership, only: [:edit, :update, :destroy]
 
-  skip_before_action :confirm_login, only: [:index, :show]
 
   def index
     @products = Product.all
