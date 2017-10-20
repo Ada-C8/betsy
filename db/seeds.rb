@@ -54,22 +54,22 @@ order_products = OrderProduct.create([
   { status: 'shipped', quantity: '3', order_id: 2, product_id: 12, created_at: Time.now, updated_at: Time.now, id: 2 },
   { status: 'shipped', quantity: '1', order_id: 3, product_id: 11, created_at: Time.now, updated_at: Time.now, id: 3 },
   { status: 'shipped', quantity: '3', order_id: 4, product_id: 10, created_at: Time.now, updated_at: Time.now, id: 4 },
-  { status: 'shipped', quantity: '1', order_id: 5, product_id: 8, created_at: Time.now, updated_at: Time.now, id: 1 },
-  { status: 'shipped', quantity: '3', order_id: 6, product_id: 7, created_at: Time.now, updated_at: Time.now, id: 2 },
-  { status: 'shipped', quantity: '1', order_id: 7, product_id: 9, created_at: Time.now, updated_at: Time.now, id: 3 },
-  { status: 'shipped', quantity: '3', order_id: 8, product_id: 1, created_at: Time.now, updated_at: Time.now, id: 4 },
-  { status: 'shipped', quantity: '1', order_id: 9, product_id: 2, created_at: Time.now, updated_at: Time.now, id: 1 },
-  { status: 'shipped', quantity: '3', order_id: 10, product_id: 3, created_at: Time.now, updated_at: Time.now, id: 2 },
-  { status: 'shipped', quantity: '1', order_id: 11, product_id: 4, created_at: Time.now, updated_at: Time.now, id: 3 },
-  { status: 'shipped', quantity: '3', order_id: 12, product_id: 5, created_at: Time.now, updated_at: Time.now, id: 4 },
-  { status: 'shipped', quantity: '1', order_id: 11, product_id: 6, created_at: Time.now, updated_at: Time.now, id: 1 },
-  { status: 'shipped', quantity: '3', order_id: 10, product_id: 7, created_at: Time.now, updated_at: Time.now, id: 2 },
-  { status: 'shipped', quantity: '1', order_id: 9, product_id: 8, created_at: Time.now, updated_at: Time.now, id: 3 },
-  { status: 'shipped', quantity: '3', order_id: 8, product_id: 9, created_at: Time.now, updated_at: Time.now, id: 4 },
-  { status: 'shipped', quantity: '1', order_id: 7, product_id: 14, created_at: Time.now, updated_at: Time.now, id: 5 }
+  { status: 'shipped', quantity: '1', order_id: 5, product_id: 8, created_at: Time.now, updated_at: Time.now, id: 5 },
+  { status: 'shipped', quantity: '3', order_id: 6, product_id: 7, created_at: Time.now, updated_at: Time.now, id: 6 },
+  { status: 'shipped', quantity: '1', order_id: 7, product_id: 9, created_at: Time.now, updated_at: Time.now, id: 7 },
+  { status: 'shipped', quantity: '3', order_id: 8, product_id: 1, created_at: Time.now, updated_at: Time.now, id: 8 },
+  { status: 'shipped', quantity: '1', order_id: 9, product_id: 2, created_at: Time.now, updated_at: Time.now, id: 9 },
+  { status: 'shipped', quantity: '3', order_id: 10, product_id: 3, created_at: Time.now, updated_at: Time.now, id: 10 },
+  { status: 'shipped', quantity: '1', order_id: 11, product_id: 4, created_at: Time.now, updated_at: Time.now, id: 11 },
+  { status: 'shipped', quantity: '3', order_id: 12, product_id: 5, created_at: Time.now, updated_at: Time.now, id: 12 },
+  { status: 'shipped', quantity: '1', order_id: 11, product_id: 6, created_at: Time.now, updated_at: Time.now, id: 13 },
+  { status: 'shipped', quantity: '3', order_id: 10, product_id: 7, created_at: Time.now, updated_at: Time.now, id: 14 },
+  { status: 'shipped', quantity: '1', order_id: 9, product_id: 8, created_at: Time.now, updated_at: Time.now, id: 15 },
+  { status: 'shipped', quantity: '3', order_id: 8, product_id: 9, created_at: Time.now, updated_at: Time.now, id: 16 },
+  { status: 'shipped', quantity: '1', order_id: 7, product_id: 14, created_at: Time.now, updated_at: Time.now, id: 17 }
   ])
 
 reviews = Review.create([
   { rating: 5, description: 'very nice and magic', product_id: 6, created_at: Time.now, updated_at: Time.now, id: 1 },
-  { rating: 1, description: 'these are wizards tears, NOT witch\'s tears. seller should be ashamed', product_id: 7, created_at: Time.now, updated_at: Time.now, id: 22 }
+  { rating: 1, description: 'these are wizards tears, NOT witch\'s tears. seller should be ashamed', product_id: 7, created_at: Time.now, updated_at: Time.now, id: 2 }
   ])
