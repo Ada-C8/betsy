@@ -18,7 +18,7 @@ describe ReviewsController do
 
   # describe "new" do
   #   it " should work without a merchant id" do
-  #     get new_book_path
+  #     get new_review_path
   #     must_respond_with :success
   #   end
   #
@@ -36,7 +36,7 @@ describe ReviewsController do
   #     must_respond_with :bad_request
   #   end
   # end
-
+  #
   # describe "create" do
   #   it "adds the review to the product and redirects when the review data is valid" do
   #     # Arrange
@@ -82,7 +82,7 @@ describe ReviewsController do
   #     Review.count.must_equal start_review_count
   #   end
   # end
-
+  #
   # describe "show" do
   #   it "succeeds for a review that exists" do
   #     get review_path(reviews(:review))
@@ -94,6 +94,31 @@ describe ReviewsController do
   #     must_respond_with :not_found
   #   end
   # end
-
-
+  #
+  # describe "edit" do
+  #   it "will give error message if merchant owns the product" do
+  #     arrange: login 'ada' user
+  #     login(users(:ada))
+  #     # act: review (Mermaid Fin)
+  #     review_data = {
+  #       review: {
+  #         rating: 5,
+  #         product: (products(:mermaid_fin))
+  #       }
+  #     }
+  #     # assert: expect failure.
+  #     must_respond_with :unauthorized
+  #   end
+  #
+  #   it "succeeds for an exact review ID" do
+  #     get edit_review_path(reviews(:review))
+  #     must_respond_with :success
+  #   end
+  #
+  #   it "renders 404 not_found for a bogus review ID" do
+  #     bogus_review_id = Review.last.id + 1
+  #     get edit_review_path(bogus_review_id)
+  #     must_respond_with :not_found
+  #   end
+  # end
 end
