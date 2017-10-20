@@ -72,6 +72,20 @@ describe ProductsController do
       must_respond_with :bad_request
       flash.keys.must_include "error"
     end
+
+    it "can add the same product multiple times when in stock" do
+      patch add_product_path(products(:pointy_hat).id)
+      patch add_product_path(products(:pointy_hat).id)
+
+      order = Order.find_by(id: session[:order_id])
+      order.products.size.must_equal 2
+
+      order.products.each do |prod|
+        prod.name.must_equal "Pointy Hat"
+      end
+      product = products(:pointy_hat)
+      product.quantity_avail.must_equal 3
+    end
   end
   # describe "update" do
   #   #This wasn't in the controller actions.  Do we want an edit method?

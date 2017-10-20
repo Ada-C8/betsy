@@ -12,6 +12,9 @@ class Product < ApplicationRecord
     if self.quantity_avail > 0
         self.quantity_avail -= 1
         self.save
+        return true
+    else
+        return false
     end
   end
 

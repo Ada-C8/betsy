@@ -63,4 +63,8 @@ class ProductsController < ApplicationController
     end
   end
 
+  # def increment_in_cart
+  #   @product = Product.find_by(id: params[:id])
+  #
+  # end
 end

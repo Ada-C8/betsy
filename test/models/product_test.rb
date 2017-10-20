@@ -97,12 +97,21 @@ describe Product do
       }.must_change "product.quantity_avail", - 1
     end
 
+    it "returns true if successful" do
+      product = products(:pointy_hat)
+      product.remove_one_from_stock.must_equal true
+    end
+
     it "should not change product quantity if product isn't available" do
       product = products(:out_of_stock)
 
       proc {
         product.remove_one_from_stock
       }.wont_change "product.quantity_avail"
+    end
+    it "returns false if unsuccessful" do
+      product = products(:out_of_stock)
+      product.remove_one_from_stock.must_equal false
     end
   end
 end
