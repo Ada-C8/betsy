@@ -1,7 +1,7 @@
 require "test_helper"
 
 describe ProductsController do
-  let(:prod) { Product.first }
+  let(:prod) { products(:mermaid_fin) }
   let(:good_params) { { product: { "name"=>"New Test Item", "price"=>"11.00", "quantity"=>"1", "description"=>"This is a test" } } }
   let(:bad_params) { { product: { "name"=>"" } } }
   let(:tmi_params) { { product: { "name"=>"New Test Item", "price"=>"11.00", "quantity"=>"1", "description"=>"This is a test", "tmi"=>"uh oh", "id"=>1 } } }
@@ -13,7 +13,11 @@ describe ProductsController do
 
   describe 'for logged in users' do
     before do
-      # log in
+      user = merchants(:ada)
+
+      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
+
+      get login_path(:github)
     end
 
     it 'can successfully access index of products' do
@@ -29,7 +33,6 @@ describe ProductsController do
     end
 
     it 'can successfully access new product' do
-      skip
       get new_product_path
 
       must_respond_with :success
@@ -37,7 +40,6 @@ describe ProductsController do
 
     describe 'create' do
       it 'can successfully create valid product' do
-        skip
         post products_path, params: good_params
 
         must_respond_with :found
@@ -46,7 +48,6 @@ describe ProductsController do
       end
 
       it 'will not create new product with invalid data' do
-        skip
         post products_path, params: bad_params
 
         must_respond_with :bad_request
@@ -55,7 +56,6 @@ describe ProductsController do
       end
 
       it 'uses strong params' do
-        skip
         post products_path, params: tmi_params
 
         must_respond_with :found
@@ -68,7 +68,6 @@ describe ProductsController do
     describe 'edit' do
       # these tests will have to change when logging in actually works (dependent on fakey_login)
       it 'can successfully access edit for own product' do
-        skip
         owned_product = Product.find_by(merchant_id: Merchant.first.id)
         get edit_product_path(owned_product.id)
 
@@ -86,7 +85,6 @@ describe ProductsController do
 
     describe 'update' do
       it 'can successfully update own product with valid data' do
-        skip
         owned_product = Product.find_by(merchant_id: Merchant.first.id)
         patch product_path(owned_product.id), params: new_params
 
@@ -97,7 +95,6 @@ describe ProductsController do
       end
 
       it 'CANNOT successfully update own product with invalid data' do
-        skip
         owned_product = Product.find_by(merchant_id: Merchant.first.id)
         patch product_path(owned_product.id), params: bad_params
 
@@ -116,7 +113,6 @@ describe ProductsController do
 
     describe 'destroy' do
       it 'can successfully destroy own product' do
-        skip
         owned_product = Product.find_by(merchant_id: Merchant.first.id)
         delete product_path(owned_product.id)
 
@@ -179,7 +175,7 @@ describe ProductsController do
 
     it 'CANNOT destroy other users products' do
       delete product_path(prod.id)
-      
+
       flash[:status].must_equal :failure
       must_respond_with :found
     end
