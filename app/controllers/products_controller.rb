@@ -72,7 +72,7 @@ class ProductsController < ApplicationController
         order.products << @product
         order.save
         flash[:success] = "product added to cart"
-        redirect_to products_path
+        redirect_to order_path(session[:order_id])
       end
     else
       flash[:error] = "product not available"
