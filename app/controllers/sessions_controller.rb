@@ -1,36 +1,27 @@
 class SessionsController < ApplicationController
-  # skip_before_action :require_login, only: [:login]
-
-  def login
+  def create
     auth_hash = request.env['omniauth.auth']
 
     if auth_hash['uid']
-      fake_user = Merchant.find_by(provider: params[:provider], uid: auth_hash['uid'])
-      if fake_user.nil?
-        # Merchant has not logged in before
-        # Create a new record in the DB
-        fake_user = Merchant.from_auth_hash(params[:provider], auth_hash)
-        save_and_flash(fake_user)
-
+      merchant = Merchant.find_by(uid: auth_hash[:uid], provider: 'github')
+      if merchant.nil?
+        # Merchant doesn't match anything in the DB
+        # Attempt to create a new merchant
+        merchant = Merchant.build_from_github(auth_hash)
       else
-        flash[:status] = :success
-        flash[:message] = "Successfully logged in as returning user #{merchant.username}"
-
+        flash[:success] = "Logged in successfully"
+        redirect_to root_path
       end
+
+      # If we get here, we have the merchant instance
       session[:merchant_id] = merchant.id
-
     else
-      flash[:status] = :failure
-      flash[:message] = "Could not create user from OAuth data"
+      flash[:error] = "Could not log in"
+      redirect_to root_path
     end
-
-    redirect_to root_path
   end
 
-  def logout
-    session[:merchant_id] = nil
-    flash[:status] = :success
-    flash[:message] = "You have been logged out"
-    redirect_to root_path
+  def index
+    @merchant = Merchant.find(session[:merchant_id]) # < recalls the value set in a previous request
   end
 end
