@@ -1,32 +1,8 @@
 class OrderProductsController < ApplicationController
   def index
-    @order_products = OrderProduct.all
-  end
-
-  def new
-    @order_product = OrderProduct.new
-  end
-
-  def create
-    @order_product = OrderProduct.new(order_product_params)
-    if @order_product.save
-      flash[:status] = :success
-      flash[:message] = "Successfully created order product #{@order_product.id}"
-      redirect_to order_product_path
-    else
-      flash.now[:status] = :failure
-      flash.now[:message] = "Failed to create order product"
-      flash.now[:details] = @order_product.errors.messages
-      render :new, status: :bad_request
+    if session[:merchant]
+      @order_products = Merchant.find(params[:merchant]).order_products
     end
-  end
-
-  def show
-    find_order_product_by_params_id
-  end
-
-  def edit
-    find_order_product_by_params_id
   end
 
   def update
