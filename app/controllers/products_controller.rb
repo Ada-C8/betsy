@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(prod_params)
-    @product.merchant_id = session[:user_id]
+    @product.merchant_id = session[:merchant]['id']
 
     result = @product.save
 
@@ -87,7 +87,7 @@ class ProductsController < ApplicationController
   end
 
   def confirm_ownership
-    unless session[:merchant][:id] == @product.merchant_id
+    unless session[:merchant]['id'] == @product.merchant_id
       flash[:status] = :failure
       flash[:message] = "Only a product's merchant can modify a product."
       return redirect_back(fallback_location: products_path)
