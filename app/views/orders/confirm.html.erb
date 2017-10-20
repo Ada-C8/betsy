@@ -1,1 +1,16 @@
-<p>CONFIRMED.</p>
+<h1>Order #<%= @order.id %></h1>
+
+
+<% product_array = @order.products.to_a %>
+
+<ul>
+  <% product_array.uniq.each do |product| %>
+    <li><%= link_to product.name, product_path(product.id) %> : <%= product.price %> Quantity: <%= product_array.count(product) %> Subtotal: <%= product_array.count(product) *  product.price %> </li>
+  <% end %>
+
+  <li>Order Subtotal: <%= @order.order_total %> </li>
+  <li>Order Placed: <%= @order.updated_at %> </li>
+  <li>Order Status: <%= @order.status %> </li>
+
+
+</ul>

@@ -17,7 +17,11 @@
     <% else %>
     <h4>Out of Stock</h4>
     <% end %>
+    <% if session[:order_id] == nil %>
+      <%= button_to "Add to cart", add_product_path(@product), method: :patch %>
+    <% else %>
     <%= button_to "Add to cart", add_product_path(@product), method: :patch %>
+    <% end %>
     <%= button_to "Remove from cart", remove_product_path(@product), method: :patch %>
   </div>
 
