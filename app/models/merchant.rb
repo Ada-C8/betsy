@@ -9,4 +9,15 @@ class Merchant < ApplicationRecord
   validates_format_of :email, :with =>  /\A\w+@\w+\.\w+\z/
   validates :oauth_provider, presence: true
   validates :oauth_uid, presence: true, uniqueness: true
+
+  def self.by_auth_hash(auth_hash)
+    merchant = Merchant.new
+
+   merchant.oauth_provider = auth_hash['provider']
+    merchant.oauth_uid = auth_hash['uid']
+    merchant.email = auth_hash['info']['email']
+    merchant.username = auth_hash['info']['nickname']
+
+   merchant
+  end
 end

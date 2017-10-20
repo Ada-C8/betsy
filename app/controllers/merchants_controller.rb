@@ -1,6 +1,25 @@
 class MerchantsController < ApplicationController
   def login
     auth_hash = request.env['omniauth.auth']
+    merchant = Merchant.find_by(oauth_uid: auth_hash['uid'], oauth_provider: auth_hash['provider'])
+
+    if merchant
+      flash[:status] = :success
+      flash[:result_text] = "Successfully logged in "
+    else
+      merchant = Merchant.by_auth_hash(auth_hash)
+      if merchant.save
+        flash[:status] = :success
+        flash[:result_text] = "Successfully created new merchant_params "
+      else
+        flash.now[:status] = :failure
+        flash.now[:result_text] = " Could not logged in"
+        flash.now[:messages] = merchant.errors.messages
+        return redirect_to root_path
+      end
+    end
+    session[:merchant] = merchant
+    redirect_to root_path
   end
 
   def logout

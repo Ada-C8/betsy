@@ -20,12 +20,12 @@
         <nav class="small-12 medium-8 columns top-nav">
           <%= link_to "View Products", products_path, class: "button" %>
           <%= link_to "Shopping Cart", root_path, class: "button" %>
-          <% if session[:user] %>
+          <% if session[:merchant] %>
             <%= link_to "Sell", new_product_path, class: "button" %>
             <%= link_to "Sign Out", root_path, class: "button" %>
           <% else %>
-            <%= link_to "Sign Up", root_path, class: "button" %>
-            <%= link_to "Sign In", root_path, class: "button" %>
+            <%= link_to "Sign Up", '/auth/github', class: "button" %>
+            <%= link_to "Sign In", '/auth/github', class: "button" %>
           <% end %>
         </nav>
       </section>
