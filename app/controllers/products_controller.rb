@@ -4,6 +4,9 @@ class ProductsController < ApplicationController
       merchant = Merchant.find_by(id: params[:merchant_id])
       @products = merchant.products
     elsif
+      params[:review_id]
+      @products = Review.where(product_id: params[:category_id])
+    elsif
       params[:category_id]
       @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
     else
