@@ -128,4 +128,5 @@ describe Product do
       product.add_one_to_stock.must_equal true
     end
   end
+
 end

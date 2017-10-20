@@ -140,7 +140,7 @@ describe ProductsController do
   end
 
   describe "product by category" do
-    it "Should get products by category" do
+    it "should get products by category" do
       get category_products_path(categories(:brooms).id)
       must_respond_with :success
     end

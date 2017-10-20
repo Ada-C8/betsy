@@ -8,7 +8,9 @@ class ProductsController < ApplicationController
       @products = Review.where(product_id: params[:category_id])
     elsif
       params[:category_id]
-      @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
+      category = Category.find_by(id: params[:category_id])
+      @products = category.products
+      # @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
     else
       @products = Product.all
     end
@@ -56,17 +58,22 @@ class ProductsController < ApplicationController
   end
 
   def add_product_to_cart
-    if Order.find_by(id: session[:order_id]) == nil
-      create_order
-    end
-
     @product = Product.find_by(id: params[:id])
     if @product.remove_one_from_stock
-      order = Order.find_by(id: session[:order_id])
-      order.products << @product
-      order.save
-      flash[:success] = "product added to cart"
-      redirect_to products_path
+      if Order.find_by(id: session[:order_id]) == nil
+        create_order
+        order = Order.find_by(id: session[:order_id])
+        order.products << @product
+        order.save
+        flash[:success] = "product added to cart"
+        #this redirects, which causes double redirect error
+      else
+        order = Order.find_by(id: session[:order_id])
+        order.products << @product
+        order.save
+        flash[:success] = "product added to cart"
+        redirect_to products_path
+      end
     else
       flash[:error] = "product not available"
       redirect_to products_path, status: :bad_request
@@ -95,3 +102,8 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :quantity_avail, )
   end
 end
+
+private
+  def product_params
+    params.require(:product).permit(:name, :price, :quantity_avail, :merchant_id)
+  end
