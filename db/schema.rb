@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20171020000956) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "provider", null: false
+    t.string "uid", null: false
   end
 
   create_table "order_products", force: :cascade do |t|
