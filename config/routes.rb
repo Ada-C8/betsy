@@ -16,6 +16,5 @@ Rails.application.routes.draw do
 
 
   get '/auth/:provider/callback', to: 'sessions#login', as: 'auth_callback'
-  post   '/login',   to: 'sessions#create'
-  post   '/logout',  to: 'sessions#logout'
+  post '/logout', to: 'sessions#logout', as: 'logout'
 end
