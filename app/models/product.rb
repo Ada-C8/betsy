@@ -18,4 +18,9 @@ class Product < ApplicationRecord
     end
   end
 
+  def add_one_to_stock
+    self.quantity_avail += 1
+    self.save
+  end
+
 end

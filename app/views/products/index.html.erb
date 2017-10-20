@@ -3,7 +3,8 @@
   <% @products.each do |product| %>
   <section class="info-card">
     <section class="product">
-      <span>Product: <%= product.name %></span>
+      <img src="http://www.visitbuffaloniagara.com/content/uploads/sv-event-images/434cfb09-bb34-449b-ac6c-d400b6a53f1d.jpg" />
+      <span>Product: <%= link_to product.name, product_path(product.id) %></span>
       <span>Price: <%= product.price %></span>
       <span>Quantity: <%= product.quantity_avail %></span>
       <span>Sold By: <%= product.merchant.username %></span>
@@ -11,3 +12,7 @@
     </section>
   <% end %>
 </section>
+
+<% Category.all.each do |category| %>
+  <%= link_to category.name, category_products_path(category.id) %>
+<% end %>
