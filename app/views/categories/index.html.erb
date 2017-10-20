@@ -8,3 +8,11 @@
     </section>
   <% end %>
 </section>
+
+<% Category.all.each do |category| %>
+<section class="info-card">
+  <section class="category">
+  <%= link_to category.name, category_products_path(category.id) %>
+</section>
+</section>
+<% end %>
