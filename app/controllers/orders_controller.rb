@@ -4,8 +4,12 @@ class OrdersController < ApplicationController
   end
 
   def new
-    # will create a new Order, with a status assigned to that id
+    # @order = Order.new
   end
+
+  def create
+  end
+
 
   def show
     # will show order with all products listed and their quantity, as well as the status, so this info is also pulled in from the orders_products
@@ -15,6 +19,7 @@ class OrdersController < ApplicationController
       flash[:message] = "There was an error"
       redirect_to root_path, status: not_found
     end
+    redirect_to order_path(@cart.id)
   end
 
   def show_cart
