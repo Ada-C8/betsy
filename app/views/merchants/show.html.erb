@@ -1,1 +1,27 @@
-<h1>Merchants#show</h1>
+<section>
+  <div class="show-details">
+    <h1><%= @merchant.username %></h1>
+    <h3><%= @merchant.email %></h3>
+  </div>
+
+  <div class="show-image">
+
+  </div>
+
+  <section class="all-products">
+
+    <% @merchant.products.each do |product| %>
+    <section class="info-card">
+      <section class="product">
+        <img src="http://www.visitbuffaloniagara.com/content/uploads/sv-event-images/434cfb09-bb34-449b-ac6c-d400b6a53f1d.jpg" />
+        <span>Product: <%= link_to product.name, product_path(product.id) %></span>
+        <span>Average Rating: <%= product.average_rating %></span>
+        <span>Price: <%= product.price %></span>
+        <span>Quantity: <%= product.quantity_avail %></span>
+      </section>
+      </section>
+    <% end %>
+  </section>
+
+
+</section>
