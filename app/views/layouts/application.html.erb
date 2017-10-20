@@ -33,7 +33,26 @@
       </section>
       <section class="dropdown">
         <ul class="create-menu">
-          <button class="dropdown-button-create">Something Else!</button>
+
+          <button class="dropdown-button-create">
+            <% if session[:order_id] == nil %>
+              <%= link_to "Shopping Cart", orders_path, method: :post %>
+            <% else %>
+              <%= link_to "Shopping Cart", order_path(session[:order_id]) %>
+            <% end %>
+
+
+          </button>
+
+            <div class="dropdown-content-create">
+              <li></li>
+              <li></li>
+            </div>
+        </ul>
+      </section>
+      <section class="dropdown">
+        <ul class="create-menu">
+          <button class="dropdown-button-create">Login</button>
             <div class="dropdown-content-create">
               <li></li>
               <li></li>
