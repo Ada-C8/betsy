@@ -10,6 +10,8 @@ class Order < ApplicationRecord
   validates :card_cvv, presence: true, if: :completed?
   validates :zip_code, presence: true, if: :completed?
 
+  attribute :status, :string, default: "pending"
+
   def completed?
     self.status == "complete"
   end
