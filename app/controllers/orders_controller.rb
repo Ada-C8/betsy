@@ -4,7 +4,13 @@ class OrdersController < ApplicationController
   end
 
   def new
-    # will create a new Order, with a status assigned to that id
+    # @order = Order.new
+  end
+
+  def create
+    @order = Order.new(status: "pending")
+    @order.save
+    redirect_to product_path(product.id)
   end
 
   def show

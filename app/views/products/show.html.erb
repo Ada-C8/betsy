@@ -10,3 +10,11 @@
 <p>photo: <%= @product.photo_URL %></p>
 
 <%= link_to "Add to cart", "#", :class=>"button"  %>
+
+<p>
+  <%= form_for Order.new do |f| %>
+  <%#= f.hidden_field :status, value: "pending" %>
+  <%#= f.hidden_field :user_id, value: session[:logged_in_user] %>
+  <%= f.submit class: "button"%>
+  <% end %>
+</p>
