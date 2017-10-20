@@ -1,2 +1,6 @@
 <h2>Merchants</h2>
-<p></p>
+<ul>
+  <%= @merchants.each do |merchant|%>
+  <li><%=merchant.username%></li>
+  <% end %>
+</ul>
