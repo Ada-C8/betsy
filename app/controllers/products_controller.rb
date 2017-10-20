@@ -87,4 +87,10 @@ class ProductsController < ApplicationController
 
     @product.add_one_to_stock
   end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:name, :quantity_avail, :price, :merchant_id)
+  end
 end
