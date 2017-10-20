@@ -14,9 +14,7 @@ describe ProductsController do
   describe 'for logged in users' do
     before do
       user = merchants(:ada)
-
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
-
       get login_path(:github)
     end
 
