@@ -11,3 +11,7 @@
     </section>
   <% end %>
 </section>
+
+<% Category.all.each do |category| %>
+  <%= link_to category.name, category_products_path(category.id) %>
+<% end %>

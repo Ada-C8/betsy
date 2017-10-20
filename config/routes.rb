@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :orders
-  
+
   resources :products do
     resources :reviews
    end
@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   resources :merchants do
     get '/products', to: 'products#index'
   end
-
+  
+  resources :categories do
+    resources :products, only: [:index]
+  end
 
   patch 'products/:id/add_product_to_cart', to: 'products#add_product_to_cart', as: 'add_product'
 
