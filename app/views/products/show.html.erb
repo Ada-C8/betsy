@@ -1,3 +1,7 @@
+
+<%= (render partial: 'temp-errors') if (flash[:message]) || (flash.now[:message])  %>
+
+
 <section class="small-10 columns product-info">
   <div class="row">
     <div class="small-12 medium-5 columns">
