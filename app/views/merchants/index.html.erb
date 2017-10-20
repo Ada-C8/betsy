@@ -3,6 +3,7 @@
   <% @merchants.each do |merchant| %>
   <section class="info-card">
     <section class="merchant">
+      <span><img src="http://www.dailypublic.com/sites/default/files/2015/Oct/buffalo-Niagara-Heritage-Village.jpg"</img></span>
       <span><%= merchant.username %></span>
       <span><%= merchant.email %></span>
       <span><%= link_to "Check out their Products", merchant_products_path(merchant.id), alt: "Link to merchant's products"%></span>
