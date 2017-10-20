@@ -1,5 +1,8 @@
 <section class="all-products">
-
+  <% if @products.count == 0 %>
+  <h1>Yikes! No products meet those parameters.</h1>
+  <% end %>
+  
   <% @products.each do |product| %>
   <section class="info-card">
     <section class="product">

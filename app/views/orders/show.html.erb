@@ -6,7 +6,7 @@
 
 <ul>
   <% product_array.uniq.each do |product| %>
-    <li><%= link_to product.name, product_path(product.id) %> : <%= product.price %> Quantity: <%= product_array.count(product) %> Subtotal: <%= product_array.count(product) *  product.price %> </li>
+    <li><%= link_to product.name, product_path(product.id) %> : <%= product.price %> Quantity: <%= product_array.count(product) %> Subtotal: <%= product_array.count(product) *  product.price %> <%= link_to "+ 1", add_product_path(product), method: :patch %> <%= link_to "- 1", remove_product_path(product), method: :patch %></li>
   <% end %>
 
   <li>Order Subtotal: <%= @order.order_total %> </li>

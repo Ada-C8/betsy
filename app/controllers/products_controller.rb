@@ -82,8 +82,14 @@ class ProductsController < ApplicationController
 
 
   def remove_product_from_cart
-
     @product = Product.find_by(id: params[:id])
+
+  if !@product
+    flash[:status] = :failure
+    flash[:result_text] = "That product isn't even in your cart."
+    redirect_to products_path, status: :bad_request
+  end
+
     order = Order.find_by(id: session[:order_id])
 
     index_of_first_found = order.products.index {|element| element.id == @product.id}
@@ -96,6 +102,11 @@ class ProductsController < ApplicationController
     order.products.replace(orders_products_array)
 
     @product.add_one_to_stock
+    flash[:status] = :success
+    flash[:result_text] = "Product successfully removed from your cart!"
+
+    redirect_to products_path
+
   end
 
   def product_params
