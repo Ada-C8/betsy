@@ -9,18 +9,18 @@ describe ReviewsController do
       must_respond_with :success
     end
 
-    it "returns a failure status when there are no reviews" do
-      Review.destroy_all
-      get reviews_path
-      must_respond_with :failure
-    end
+    # it "returns a failure status when there are no reviews" do
+    #   Review.destroy_all
+    #   get reviews_path
+    #   must_respond_with :failure
+    # end
   end
 
-  # describe "new" do
-  #   it " should work without a merchant id" do
-  #     get new_review_path
-  #     must_respond_with :success
-  #   end
+  describe "new" do
+    it " should work without a merchant id" do
+      get new_review_path
+      must_respond_with :success
+    end
   #
   #   it "should return failure if product belongs to merchant " do
   #     # arrange: login 'ada' user
@@ -35,7 +35,7 @@ describe ReviewsController do
   #     # assert: expect failure.
   #     must_respond_with :bad_request
   #   end
-  # end
+  end
   #
   # describe "create" do
   #   it "adds the review to the product and redirects when the review data is valid" do

@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
     @reviews = Review.all
     # end
   end
-  
+
   def new
     @review = Review.new
   end
@@ -26,18 +26,18 @@ class ReviewsController < ApplicationController
     # #   flash[:result_text] = "You can not review your own product"
     # #   redirect_to product_path
     # # else
-    #   @review = Review.new(review_params)
-    #   if @review.save
+      @review = Review.new(review_params)
+      if @review.save
     #     flash[:status] = :success
     #     flash[:message] = "Successfully created review "
-    #     redirect_to review_path(@review)
+        redirect_to review_path(@review)
     #   else
     #     flash[:status] = :failure
     #     flash[:message] = "Failed to create review"
     #     flash[:details] = @review.errors.messages
     #     render :new, status: :bad_request
-    #   end
-    # # end
+      end
+    # end
   end
   #
   def show ; end
