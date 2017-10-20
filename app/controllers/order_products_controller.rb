@@ -22,8 +22,8 @@ class OrderProductsController < ApplicationController
     if find_order_product_by_params_id
       @order_product.destroy
       flash[:status] = :success
-      flash[:message] = "Deleted order product #{@order_product.title}"
-      redirect_to order_products_path
+      flash[:message] = "Deleted order product #{@order_product.product.name}"
+      redirect_to  merchant_sold_index_path(@order_product.product.merchant)
     end
   end
 
