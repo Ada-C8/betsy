@@ -95,6 +95,23 @@ describe ProductsController do
       Product.find(products(:pointy_hat).id).quantity_avail.must_equal 3
     end
   end
+
+  describe "remove_product_from_cart" do
+    setup { session_setup }
+
+    it "should remove product from the order if product is connected to order" do
+      patch add_product_path(products(:pointy_hat).id)
+      patch add_product_path(products(:pointy_hat).id)
+
+      order = Order.find_by(id: session[:order_id])
+      order.products.size.must_equal 2
+
+      patch remove_product_path(products(:pointy_hat).id)
+      order.products.size.must_equal 1
+    end
+  end
+
+
   # describe "update" do
   #   #This wasn't in the controller actions.  Do we want an edit method?
   # end

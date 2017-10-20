@@ -89,7 +89,7 @@ describe Product do
   end
 
   describe "#remove_one_from_stock" do
-    it "should add an available product to the cart" do
+    it "should change product.quantity_avail" do
       product = products(:pointy_hat)
 
       proc {
@@ -112,6 +112,20 @@ describe Product do
     it "returns false if unsuccessful" do
       product = products(:out_of_stock)
       product.remove_one_from_stock.must_equal false
+    end
+  end
+  describe "#add_one_to_stock" do
+    it "should change product.quantity_avail" do
+      product = products(:out_of_stock)
+
+      proc {
+        product.add_one_to_stock
+      }.must_change "product.quantity_avail", 1
+    end
+    it "should return true if successful" do
+      product = products(:out_of_stock)
+
+      product.add_one_to_stock.must_equal true
     end
   end
 end

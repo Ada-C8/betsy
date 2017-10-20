@@ -1,9 +1,16 @@
 class ReviewsController < ApplicationController
+  #ToDo need destroy? if so, update.
   def index
-    @reviews = Review.all
+    if params[:product_id] != nil
+      @reviews = Review.where(product_id: params[:product_id])
+      @review_show_route = product_reviews_path
+    else
+      @reviews = Review.all
+    end
   end
 
   def new
+    @product = Product.find_by(id: params[:product_id])
     @review = Review.new(product_id: params[:product_id])
   end
 
@@ -12,7 +19,7 @@ class ReviewsController < ApplicationController
     if @review.save
       flash[:status] = :success
       flash[:result_text] = "Successfully reviewed!"
-      redirect_to product_path(@review.product_id)
+      redirect_to product_reviews_path(id: @review.id, product_id: params[:review][:product_id])
     else
       flash[:status] = :failure
       flash[:result_text] = "Could not review this product."
@@ -22,12 +29,18 @@ class ReviewsController < ApplicationController
   end
 
   def show
-    @review = Review.find_by(id: params[:id])
+    if params[:product_id] != nil
+      @review = Review.find_by(product_id: params[:product_id], id: params[:id])
+      @review_path = product_reviews_url
+    else
+      @review = Review.find(params[:id])
+      @review_path = reviews_url
+    end
     unless @review
       redirect_to root_path, status: :not_found
     end
   end
-
+#Do we want to destroy reviews? If so, must update method to include if params [:product_id] != nil redirect_to product_reviews_url
   def destroy
     @review = Review.find_by(id: params[:id])
     if @review.destroy

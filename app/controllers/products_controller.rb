@@ -61,6 +61,7 @@ class ProductsController < ApplicationController
     if @product.remove_one_from_stock
       order = Order.find_by(id: session[:order_id])
       order.products << @product
+      order.save
       flash[:success] = "product added to cart"
       redirect_to products_path
     else
@@ -69,13 +70,15 @@ class ProductsController < ApplicationController
     end
   end
 
-  # def increment_in_cart
-  #   @product = Product.find_by(id: params[:id])
-  #
-  # end
 
-  private
-  def product_params
-    params.require(:product).permit(:name, :price, :quantity_avail, :merchant_id)
-  end
+  def remove_product_from_cart
+
+    @product = Product.find_by(id: params[:id])
+    order = Order.find_by(id: session[:order_id])
+
+    index_of_first_found = order.products.index {|element| element.id == @product.id}
+    obj_to_destroy = order.products[index_of_first_found].object_id
+    order.products.destroy(obj_to_destroy)
+
+    @product.add_one_to_stock  end
 end
