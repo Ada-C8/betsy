@@ -4,6 +4,20 @@ class CategoriesController < ApplicationController
     @categories = Category.all
   end
 
+
+
+  def show
+    @category = Category.find_by(id: params[:id])
+  end
+
+  # def edit
+  # end
+  #
+  # def update
+  # end
+  #
+  # def delete
+  # end
   # def new
   #   @category = Category.new
   # end
@@ -22,20 +36,6 @@ class CategoriesController < ApplicationController
   #     render :new, status: :bad_request
   #   end
   # end
-
-  def show
-    @category = Category.find_by(id: params[:id])
-  end
-
-  # def edit
-  # end
-  #
-  # def update
-  # end
-  #
-  # def delete
-  # end
-
   private
   def category_params
     return params.require(:category).permit(:category_name)
