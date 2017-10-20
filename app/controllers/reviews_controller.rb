@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :find_review_by_params_id, only: [:show, :edit, :update, :destroy]
 
-  def index
+  def index # might not need
     # if params[:product]
     #   product = Product.find_by(id: params[:product_id])
     #   if product
@@ -13,24 +13,24 @@ class ReviewsController < ApplicationController
     @reviews = Review.all
     # end
   end
-  
+
   def new
     @review = Review.new
   end
 
   def create
-    # # if params[:merchant]
-    # # merchant = Merchant.find_by(id:session[:logged_in_merchant])
-    # # if merchant.product
-    # #   flash[:status] = :failure
-    # #   flash[:result_text] = "You can not review your own product"
-    # #   redirect_to product_path
-    # # else
-    #   @review = Review.new(review_params)
-    #   if @review.save
+    # if params[:merchant]
+    # merchant = Merchant.find_by(id:session[:logged_in_merchant])
+    # if merchant.product
+    #   flash[:status] = :failure
+    #   flash[:result_text] = "You can not review your own product"
+    #   redirect_to product_path
+    # else
+      @review = Review.new(review_params)
+      if @review.save
     #     flash[:status] = :success
     #     flash[:message] = "Successfully created review "
-    #     redirect_to review_path(@review)
+        redirect_to review_path(@review)
     #   else
     #     flash[:status] = :failure
     #     flash[:message] = "Failed to create review"
@@ -40,7 +40,7 @@ class ReviewsController < ApplicationController
     # # end
   end
   #
-  def show ; end
+  def show ; end # don't need
   #
   def edit ; end
   #
@@ -55,7 +55,7 @@ class ReviewsController < ApplicationController
     #     end
   end
 
-  def destroy
+  def destroy # only for logged in person who owns it
     # @review.destroy
     # flash[:status] = :success
     # flash[:result_text] = "Successfully destroyed review  by #{@merchant.username}"
