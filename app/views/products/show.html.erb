@@ -1,0 +1,16 @@
+<h1>Product#show</h1>
+
+<h1><%= @product.name %></h1>
+
+<h3>$<%= @product.price %></h2>
+
+<% if @product.quantity_avail > 0 %>
+  <h3>In Stock</h3>
+  <% if @product.quantity_avail <= 5 %>
+    <h4>Only <%= @product.quantity_avail%> left!</h4>
+  <% end %>
+<% else %>
+  <h4>Out of Stock</h4>
+<% end %>
+
+<%= button_to "Add to cart", add_product_path(@product), method: :patch %>

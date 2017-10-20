@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
 #TODO: clean up with controller filters
 #TODO: discuss rules around destroy action.
+#TODO: does it make sense to have flash messages for Order.create???
   def index
     @orders = Order.all
   end
@@ -18,17 +19,18 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new
-    @order.status = "pending"
-
-    if @order.save
-      session[:order_id] = @order.id
-      flash[:success] = "Order added successfully"
-      redirect_to root_path
-    else
-      flash[:error] = "Order couldn't be processed."
-      render :new
-    end
+    create_order
+    # @order = Order.new
+    # @order.status = "pending"
+    #
+    # if @order.save
+    #   session[:order_id] = @order.id
+    #   flash[:success] = "Order added successfully"
+    #   redirect_to root_path
+    # else
+    #   flash[:error] = "Order couldn't be processed."
+    #   render :new
+    # end
   end
 
   def edit

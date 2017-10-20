@@ -35,7 +35,6 @@ describe OrdersController do
       #Act
       post orders_path
       #Assert
-      must_respond_with :redirect
       Order.count.must_equal start_count + 1
     end
     it "sets the session[:order_id] to the id of the created order" do

@@ -50,9 +50,12 @@ class ProductsController < ApplicationController
   end
 
   def add_product_to_cart
+    if Order.find_by(id: session[:order_id]) == nil
+      create_order
+    end
+
     @product = Product.find_by(id: params[:id])
     if @product.remove_one_from_stock
-      ap session[:order_id]
       order = Order.find_by(id: session[:order_id])
       order.products << @product
       flash[:success] = "product added to cart"

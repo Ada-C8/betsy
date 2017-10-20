@@ -83,8 +83,17 @@ describe ProductsController do
       order.products.each do |prod|
         prod.name.must_equal "Pointy Hat"
       end
+    end
+
+    it "changes the product quantity if successful" do
       product = products(:pointy_hat)
-      product.quantity_avail.must_equal 3
+      product.quantity_avail.must_equal 5
+
+      patch add_product_path(product.id)
+      patch add_product_path(product.id)
+
+      #do not re-load the fixture: it's fixed!
+      Product.find(products(:pointy_hat).id).quantity_avail.must_equal 3
     end
   end
   # describe "update" do
