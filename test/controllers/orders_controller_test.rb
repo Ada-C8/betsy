@@ -1,7 +1,131 @@
 require "test_helper"
 
 describe OrdersController do
-  # it "must be a real test" do
-  #   flunk "Need real tests"
-  # end
+  describe "index" do
+    it "returns success for all orders" do
+      get order_path
+      must_respond_with :success
+    end
+  end
+
+  describe "new" do
+    it "returns success for a new orders" do
+      get new_order_path
+      must_respond_with :success
+    end
+  end
+
+  describe "create" do
+    xit "adds order to the database and redirects when the data is valid" do
+      order = {
+        order: {
+          cust_name: "Wienerschnitzel"
+        }
+      }
+      Order.new(order[:order]).must_be :valid?
+      start_count = Order.count
+
+      post orders_path, params: order
+
+      must_respond_with :redirect
+      must_redirect_to orders_path
+      Order.count.must_equal start_count + 1
+    end
+
+    xit "re-renders form when the order data is invalid" do
+      order = {
+        order: {
+          cust_name: "Wienerschnitzel"
+        }
+      }
+      Order.new(order[:order]).wont_be :valid?
+      start_count = Order.count
+
+      post orders_path, params: order
+
+      must_respond_with :bad_request
+      Order.count.must_equal start_count
+    end
+  end
+
+  describe "show" do
+    it "returns success with valid id" do
+      order_id = Order.first.id
+      get order_path(order_id)
+      must_respond_with :success
+    end
+
+    it "returns not_found with invalid id" do
+      invalid_id = Order.last.id + 1
+      get order_path(invalid_id)
+      must_respond_with :not_found
+    end
+  end
+
+  describe "edit" do
+    it "returns success with valid id" do
+      order_id = Order.first.id
+      get edit_order_path(order_id)
+      must_respond_with :success
+    end
+
+    it "returns not_found with invalid id" do
+      invalid_id = Order.last.id + 1
+      get edit_order_path(invalid_id)
+      must_respond_with :not_found
+    end
+  end
+
+  describe "update" do
+    it "returns success if order product exists and changes are valid" do
+      order = Order.first
+      changes = {
+        order: {
+          cust_name: "Wienerschnitzel"
+        }
+      }
+      order.update_attributes(changes[:order])
+      order.must_be :valid?
+
+      patch order_path(order), params: changes
+      must_respond_with :redirect
+      must_redirect_to order_path(order)
+
+      order.reload
+      order.cust_name.must_equal changes[:order][:cust_name]
+    end
+
+    it "returns not_found if work does not exist" do
+      order = Order.first
+      changes = {
+        order: {
+          cust_name: "Wienerschnitzel"
+        }
+      }
+      order.update_attributes(changes[:order])
+      order.must_be :valid?
+      order.destroy
+
+      patch order_path(order), params: changes
+      must_respond_with :not_found
+    end
+  end
+
+  describe "destroy" do
+    it "returns success and destroys if order exists" do
+      order = Order.first
+      order.must_be :valid?
+      delete order_path(order)
+      must_respond_with :redirect
+      must_redirect_to orders_path
+    end
+
+    it "returns not_found if work does not exist" do
+      order = Order.first
+      order.must_be :valid?
+      delete order_path(order)
+      delete order_path(order)
+      must_respond_with :not_found
+    end
+  end
 end
