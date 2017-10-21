@@ -3,8 +3,20 @@ class OrdersController < ApplicationController
   def index
   end
 
-  def new
-    # will create a new Order, with a status assigned to that id
+  def create
+  end
+
+  def add_to_cart
+    if session[:order_id] == nil
+      @order = start_new_order
+    else
+      @order = find_cart
+    end
+    @product = Product.find_by(id: params[:id])
+    @order_product = OrderProduct.new
+
+    @order_product.order = @order
+    @order_product.product = @product
   end
 
   def show
@@ -15,6 +27,7 @@ class OrdersController < ApplicationController
       flash[:message] = "There was an error"
       redirect_to root_path, status: not_found
     end
+    redirect_to order_path(@cart.id)
   end
 
   def show_cart
@@ -26,6 +39,15 @@ class OrdersController < ApplicationController
   end
 
   private
+  def start_new_order
+    order = Order.new
+    order.status = "pending"
+    order.save
+    # set order_id
+    session[:order_id] = order.id
+    return order
+  end
+
   def find_cart
     @cart = Order.find_by(id:session[:order_id], status: "pending")
   end
