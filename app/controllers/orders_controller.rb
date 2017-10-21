@@ -14,28 +14,32 @@ class OrdersController < ApplicationController
     end
     @product = Product.find_by(id: params[:id])
     @order_product = OrderProduct.new
-
     @order_product.order = @order
     @order_product.product = @product
+    @order_product.save
+
+    redirect_to product_path(@product)
   end
 
   def create
   end
 
-
   def show
     # will show order with all products listed and their quantity, as well as the status, so this info is also pulled in from the orders_products
+    @cart = find_cart
+
     unless @cart
       flash[:status] = :error
-      # make error message more detailed
+      # TODO :: make error message more detailed
       flash[:message] = "There was an error"
-      redirect_to root_path, status: not_found
+      redirect_to root_path, status: :not_found
     end
-    redirect_to order_path(@cart.id)
+    # binding.pry
+    @order_products = @cart.order_products
   end
 
   def show_cart
-    find_cart
+    # find_cart
   end
 
   def destroy
