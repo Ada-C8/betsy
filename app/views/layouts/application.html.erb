@@ -27,7 +27,8 @@
           <%= link_to "Log In", '/auth/github', class: "button float-right" %>
         <% end %>
 
-        <button type="button" name="button" class="button float-right">Cart</button>
+
+        <%= link_to "Cart", order_path(session[:order_id]), :class=>"button" %>
       </div>
 
       <nav>
