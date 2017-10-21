@@ -11,5 +11,8 @@ Rails.application.routes.draw do
   resources :orders, except: [:edit]
   resources :order_products, only: [:update, :destroy]
   resources :products
+  resources :categories, only: [:new, :create, :destroy] do
+    resources :products, only: [:index]
+  end
   resources :reviews, except: [:index, :show]
 end

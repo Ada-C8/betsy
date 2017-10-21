@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  
+
   before_action :find_product_by_params, only: [:show, :edit, :update, :destroy]
 
   before_action :confirm_login, except: [:index, :show]
@@ -8,8 +8,14 @@ class ProductsController < ApplicationController
 
 
   def index
-    @products = Product.all
-    @categories = ['Magic', 'Witchcraft', 'Mythical Beasts', 'Food', 'Legendary Items']
+    if params[:category_id]
+      cat = Category.find(params[:category_id])
+      @products = Product.all.find_all { |prod| prod.categories.include? cat }
+      @title = cat.name.capitalize
+    else
+      @products = Product.all
+    end
+    @categories = Category.all
   end
 
   def show
