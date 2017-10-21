@@ -16,22 +16,24 @@
       </p>
       <%= form_tag('/products/:id/categories') do %>
         <% @categories.each do |category| %>
-          <%= check_box_tag category.name, category.id %>
-          <%= label_tag category.name %>
+          <% unless @product.categories.include? category %>
+            <%= check_box_tag category.name, category.id %>
+            <%= label_tag category.name %>
 
-          <%= hidden_field_tag :product_id, @product.id %>
+            <%= hidden_field_tag :product_id, @product.id %>
+          <% end %>
         <% end %>
 
         <%= submit_tag "Add Selected" %>
       <% end %>
 
-    <p>
-      <em>Add a new category:</em>
-    </p>
+      <p>
+        <em>Add a new category:</em>
+      </p>
       <%= form_tag('/products/:id/new_category') do %>
-        <%= text_field_tag :category_name %>
+      <%= text_field_tag :category_name %>
 
-        <%= submit_tag "Add Selected" %>
+      <%= submit_tag "Add Selected" %>
       <% end %>
 
     </div>
