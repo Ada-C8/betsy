@@ -89,22 +89,6 @@ class ProductsController < ApplicationController
     return redirect_to product_path(@product.id)
   end
 
-  def create_category
-    category = Category.new(name: params[:category_name])
-    result = category.save
-
-    if result
-      flash[:status] = :success
-      flash[:message] = "Added category #{category.name}"
-      return redirect_to add_categories_path(params[:product_id])
-    else
-      flash[:status] = :failure
-      flash[:message] = "Could not create new category"
-      flash[:details] = category.errors.messages
-      return redirect_to add_categories_path(params[:product_id])
-    end
-  end
-
   private
 
   def find_product_by_params
