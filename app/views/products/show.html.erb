@@ -9,4 +9,5 @@
 <p>stock: <%= @product.stock %></p>
 <p>photo: <%= @product.photo_URL %></p>
 
-<%= link_to "Add to cart", "#", :class=>"button"  %>
+<%# TODO :: point to proper product id, right now pointing to product/1 %>
+<%= link_to "Add to cart", "/add_to_cart/1", :class=>"button", method: :post  %>
