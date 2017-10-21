@@ -19,6 +19,10 @@ class OrdersController < ApplicationController
     @order_product.product = @product
   end
 
+  def create
+  end
+
+
   def show
     # will show order with all products listed and their quantity, as well as the status, so this info is also pulled in from the orders_products
     unless @cart

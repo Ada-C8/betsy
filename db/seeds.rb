@@ -15,7 +15,6 @@ puts "Loading raw merchant data from #{MERCHANT_FILE}"
 merchant_failures = []
 CSV.foreach(MERCHANT_FILE, :headers => true) do |row|
   merchant = Merchant.new
-  merchant.id = row['id']
   merchant.username = row['username']
   merchant.email = row['email']
   merchant.provider = row['provider']
@@ -31,7 +30,7 @@ end
 puts "Added #{Merchant.count} merchant records"
 puts "#{merchant_failures.length} merchants failed to save"
 
-#category data
+# category data
 
 CATEGORY_FILE = Rails.root.join('db', 'seed_data', 'categories.csv')
 puts "Loading raw category data from #{CATEGORY_FILE}"
@@ -39,7 +38,6 @@ puts "Loading raw category data from #{CATEGORY_FILE}"
 category_failures = []
 CSV.foreach(CATEGORY_FILE, :headers => true) do |row|
   category = Category.new
-  category.id = row['id']
   category.category_name = row['category_name']
 
 
@@ -59,7 +57,6 @@ puts "Loading raw product data from #{PRODUCT_FILE}"
 product_failures = []
 CSV.foreach(PRODUCT_FILE, :headers => true) do |row|
   product = Product.new
-  product.id = row['id']
   product.name = row['name']
   product.description = row['description']
   product.price = row["price"]
