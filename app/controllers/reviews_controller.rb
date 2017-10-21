@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :find_review_by_params_id, only: [:edit, :update, :destroy]
-  before_action :check_for_product_owner, only: [:create]
+  before_action :check_for_product_owner, only: [:create, :new]
 
   def new
     @review = Review.new

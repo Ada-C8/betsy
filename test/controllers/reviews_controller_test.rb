@@ -4,18 +4,36 @@ describe ReviewsController do
   let(:review) { reviews(:review) }
   let(:mermaid_fin) { products(:mermaid_fin) }
 
-  describe "new" do
-    it " should work without a merchant id" do
-      get new_review_path
-      must_respond_with :success
-    end
-  end
-
   def login_test_user
     user = merchants(:ada)
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
     get login_path(:github)
   end
+
+  describe "new" do
+    # it " should work without a merchant id" do
+    #   get new_review_path
+    #   must_respond_with :success
+    # end
+
+    it " should not work if product belongs to merchant " do
+      # Arrange
+      login_test_user
+      review_data = {
+        review: {
+          rating: 5,
+          product_id: mermaid_fin.id
+        }
+      }
+      # Act
+      get reviews_path, params: review_data
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to product_path(mermaid_fin)
+    end
+  end
+
+
 
   describe "create" do
     describe " logged in users" do
