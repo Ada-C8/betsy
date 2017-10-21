@@ -90,13 +90,13 @@ class ProductsController < ApplicationController
   end
 
   def create_category
-    category = Category.new(name: params[:name])
+    category = Category.new(name: params[:category_name])
     result = category.save
 
     if result
-      return render :categories
+      return redirect_to add_categories_path(params[:product_id])
     else
-      return render :categories
+      return redirect_to add_categories_path(params[:product_id])
     end
   end
 

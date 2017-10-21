@@ -32,6 +32,7 @@
       </p>
       <%= form_tag('/products/:id/new_category') do %>
       <%= text_field_tag :category_name %>
+      <%= hidden_field_tag :product_id, @product.id %>
 
       <%= submit_tag "Add Selected" %>
       <% end %>
