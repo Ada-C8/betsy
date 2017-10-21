@@ -20,6 +20,9 @@ class ProductsController < ApplicationController
   end
 
   def show
+    if session[:merchant]
+      @own_product = session[:merchant]['id'] == @product.merchant_id ? true : false
+    end
   end
 
   def new
