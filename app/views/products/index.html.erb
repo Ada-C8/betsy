@@ -10,7 +10,7 @@
 </nav>
 
 <main class='small-10 columns'>
-  <h2>Popular Now</h2>
+  <h2><%= @title %></h2>
   <%= (render partial: 'temp-errors') if (flash[:message]) || (flash.now[:message])  %>
 
   <%= render partial: "product-list", locals: {products: @products} %>

@@ -12,4 +12,11 @@ class Product < ApplicationRecord
   def self.most_popular
     Product.all.sort_by{|p| -p.orders.count}[0...3]
   end
+
+
+  def show_data
+    puts params
+    puts "controller"
+  end
+
 end

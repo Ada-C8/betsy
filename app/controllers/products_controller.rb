@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  before_action :find_product_by_params, only: [:show, :edit, :update, :destroy]
+  before_action :find_product_by_params, only: [:show, :edit, :update, :destroy, :categories]
 
   before_action :confirm_login, except: [:index, :show]
 
@@ -13,7 +13,8 @@ class ProductsController < ApplicationController
       @products = Product.all.find_all { |prod| prod.categories.include? cat }
       @title = cat.name.capitalize
     else
-      @products = Product.all
+      @products = Product.all.sort_by { |prod| -prod.orders.count }[0...6]
+      @title = "Popular Now"
     end
     @categories = Category.all
   end
@@ -73,6 +74,29 @@ class ProductsController < ApplicationController
       flash.now[:message] = "Could not delete product"
       flash.now[:details] = @product.errors.messages
       return redirect_back(fallback_location: products_path)
+    end
+  end
+
+  def categories
+    @categories = Category.all.sort_by{|c| c.name}
+  end
+
+  def add_categories
+    params[:id] = params[:product_id]
+    find_product_by_params
+    puts params
+    puts "controller"
+    return redirect_to product_path(@product.id)
+  end
+
+  def create_category
+    category = Category.new(name: params[:name])
+    result = category.save
+
+    if result
+      return render :categories
+    else
+      return render :categories
     end
   end
 

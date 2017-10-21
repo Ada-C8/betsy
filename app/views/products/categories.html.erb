@@ -1,0 +1,39 @@
+<section class="row">
+  <p>
+    Would you like to add some categories to <%= @product.name %> to help shoppers find it?
+  </p>
+</section>
+<section class="product-info">
+  <div class="row">
+    <div class="small-12 medium-6 columns">
+      <div class="product-img" style="background-image: url('<%= @product.image_url %>');">
+      </div>
+    </div>
+    <div class="small-12 medium-6 columns product-details">
+      <h3>Categories</h3>
+      <p>
+        <em>Select all that apply:</em>
+      </p>
+      <%= form_tag('/products/:id/categories') do %>
+        <% @categories.each do |category| %>
+          <%= check_box_tag category.name, category.id %>
+          <%= label_tag category.name %>
+
+          <%= hidden_field_tag :product_id, @product.id %>
+        <% end %>
+
+        <%= submit_tag "Add Selected" %>
+      <% end %>
+
+    <p>
+      <em>Add a new category:</em>
+    </p>
+      <%= form_tag('/products/:id/new_category') do %>
+        <%= text_field_tag :category_name %>
+
+        <%= submit_tag "Add Selected" %>
+      <% end %>
+
+    </div>
+  </div>
+</section>
