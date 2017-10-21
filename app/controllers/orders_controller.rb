@@ -25,7 +25,10 @@ class OrdersController < ApplicationController
   end
 
   def show
-    # will show order with all products listed and their quantity, as well as the status, so this info is also pulled in from the orders_products
+    # will show order with all products listed and their quantity,
+    # as well as the status,
+    # so this info is also pulled in from the orders_products
+    
     @cart = find_cart
 
     unless @cart
@@ -48,15 +51,17 @@ class OrdersController < ApplicationController
 
   private
   def start_new_order
+    # create new instance of order and set status to "pending"
     order = Order.new
     order.status = "pending"
     order.save
-    # set order_id
+    # set order_id to session[:order_id]
     session[:order_id] = order.id
     return order
   end
 
   def find_cart
+    # finds cart by id
     @cart = Order.find_by(id:session[:order_id], status: "pending")
   end
 end
