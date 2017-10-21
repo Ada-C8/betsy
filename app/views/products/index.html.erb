@@ -1,0 +1,15 @@
+<h2>All Products</h2>
+
+
+<section class="products">
+<% @products.each do |product| %>
+  <article class="product_details">
+    <h3><%= link_to product.name, product_path(product.id) %></h3>
+    <ul>
+      <li>
+        <strong>Price:</strong> $<%= product.price %>
+      </li>
+    </ul>
+  </article>
+  <% end %>
+</section>
