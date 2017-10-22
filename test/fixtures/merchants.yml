@@ -18,6 +18,7 @@
 #     email: fred@fred.com
 
 fake_user:
+  id: 1
   username: blah
   email: blah@123.com
   uid: a_uid

@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 20171020203041) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    # TODO: figure out why order_id is needed here
     t.integer "order_id"
   end
 
