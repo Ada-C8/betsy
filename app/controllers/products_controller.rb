@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   before_action :confirm_login, except: [:index, :show]
 
-  before_action :confirm_ownership, only: [:edit, :update, :destroy]
+  before_action :confirm_ownership, only: [:edit, :update, :destroy, :categories]
 
 
   def index
@@ -82,6 +82,10 @@ class ProductsController < ApplicationController
       flash.now[:details] = @product.errors.messages
       return redirect_back(fallback_location: products_path)
     end
+  end
+
+  def categories
+    @categories = Category.all
   end
 
   def add_categories

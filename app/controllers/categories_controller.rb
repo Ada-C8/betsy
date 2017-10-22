@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  before_action :confirm_login
+
     def create
       category = Category.new(name: params[:category_name])
       result = category.save
