@@ -12,8 +12,16 @@ src="/Users/kimberley/ada/week-ten/betsy/app/assets/javascripts/home.js"</script
    <%= javascript_include_tag "home.js" %>
  <% end %>
 
-<body>
-  <span class="ball"><canvas id="myCanvas" width="400" height="400"></canvas></span>
+
+ <% if current_page?(root_path) %>
+    <body class ="homepage">
+   <% else %>
+    <body>
+  <% end %>
+
+    <section>
+<span class="ball"><canvas id="myCanvas" width="400" height="400"></canvas></span>
+</section>
 
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

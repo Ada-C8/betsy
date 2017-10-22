@@ -156,6 +156,15 @@ header {
   margin: 1rem;
 }
 
+/*homepage background image*/
+.homepage {
+  background-image: radial-gradient(transparent, rgba(0,0,0,.8)),  url("http://1.bp.blogspot.com/-kLbhA08qOUw/Vi5FAnWvs9I/AAAAAAAABBE/vrAlIqU9emk/s1600/seances.jpg%22");
+  min-height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-size: 100% 100%;
+}
 
 /*homepage canvas crystal ball*/
 #myCanvas {
@@ -163,22 +172,23 @@ header {
   width: 100%;
   height: 100%;
   margin: 0;
-  border-radius: 50%;
+  border-radius: 80%;
   position: relative;
   background: transparent;
-  text-align: center;
-
 }
+
 .ball {
   display: inline-block;
-  width: 50%;
-  height: 50%;
-  margin-right: 25%;
-  margin-left: 25%;
+  width: 40%;
+  height: 40%;
+  margin-right: 30%;
+  margin-left: 30%;
   margin-bottom: 10%;
   border-radius: 50%;
   position: relative;
-  background: radial-gradient(circle at 50% 120%, #81e8f6, #76deef 10%, #055194 80%, #062745 100%);
+  /*background: radial-gradient(circle at 50% 120%, #81e8f6, #76deef 10%, #055194 80%, #062745 100%);*/
+  background: radial-gradient(circle at 50% 120%, #4f0e71, #430b5f 10%, #3d0a56 80%, #240633 100%);
+  opacity: .85;
 }
 .ball:before {
   content: "";
