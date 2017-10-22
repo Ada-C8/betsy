@@ -26,6 +26,15 @@
       <%= @product.description %>
     </p>
   </div>
+  <div class="row prod-cats">
+    <ul>
+      <% @product.categories.each do |category| %>
+        <li class="button">
+          <%= link_to category.name.capitalize, category_products_path(category.id) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
   <div class="row reviews">
     <h4>Average Review: <%= @product.reviews.average(:rating) %></h4>

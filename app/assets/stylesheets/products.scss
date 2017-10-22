@@ -103,3 +103,36 @@ section.product-info {
 .show-product {
   height: 20rem;
 }
+
+
+//////////////////////
+// CATEGORIES LIST: //
+//////////////////////
+
+.prod-cats {
+  list-style: none;
+}
+
+.prod-cats ul {
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
+.prod-cats li {
+  background-color: white;
+  border: 2px solid #9FA2B2;
+  border-radius: 2rem;
+}
+
+.prod-cats a {
+  color: #9FA2B2;
+}
+
+.prod-cats li:hover {
+  background-color: white;
+  border-color: #DBC2CF;
+}
+
+.prod-cats li:hover a {
+  color: #DBC2CF;
+}
