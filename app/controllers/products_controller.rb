@@ -84,37 +84,30 @@ class ProductsController < ApplicationController
   def remove_product_from_cart
     @product = Product.find_by(id: params[:id])
 
-  if !@product
-    flash[:status] = :failure
-    flash[:result_text] = "That product isn't even in your cart."
-    redirect_to products_path, status: :bad_request
-  end
-
     order = Order.find_by(id: session[:order_id])
 
-    index_of_first_found = order.products.index {|element| element.id == @product.id}
+    if @product && order
 
-    orders_products_array = order.products.to_a
+      index_of_first_found = order.products.index {|element| element.id == @product.id}
 
-    orders_products_array.delete_at(index_of_first_found)
+      if index_of_first_found
 
-    order.products.replace([])
-    order.products.replace(orders_products_array)
+        orders_products_array = order.products.to_a
+        orders_products_array.delete_at(index_of_first_found)
 
-    @product.add_one_to_stock
-    flash[:status] = :success
-    flash[:result_text] = "Product successfully removed from your cart!"
+        order.products.replace([])
+        order.products.replace(orders_products_array)
 
-    redirect_to products_path
-
+        @product.add_one_to_stock
+        flash[:success] = "Successfully removed product from cart"
+      else
+        flash[:error] = "Error: Product not found in cart"
+      end
+    end
   end
-
-  def product_params
-    params.require(:product).permit(:name, :quantity_avail, )
-  end
-end
 
 private
   def product_params
     params.require(:product).permit(:name, :price, :quantity_avail, :merchant_id)
   end
+end
