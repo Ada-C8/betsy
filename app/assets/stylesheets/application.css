@@ -173,11 +173,12 @@ header {
   display: inline-block;
   width: 50%;
   height: 50%;
-  margin: 0;
+  margin-right: 25%;
+  margin-left: 25%;
+  margin-bottom: 10%;
   border-radius: 50%;
   position: relative;
   background: radial-gradient(circle at 50% 120%, #81e8f6, #76deef 10%, #055194 80%, #062745 100%);
-  text-align: center;
 }
 .ball:before {
   content: "";

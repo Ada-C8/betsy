@@ -1,4 +1,9 @@
 class ProductsController < ApplicationController
+  # layout 'application', :except => [:root]
+  #
+  # def home
+  #   @home = true
+  # end
 
   def index
     if params[:merchant_id]

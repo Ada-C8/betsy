@@ -19,46 +19,51 @@
   </head>
 
   <body>
-    <div class="row">
-      <header class="navigation large-12 columns">
 
-        <button class="logo"><%= link_to "Sourceress", root_path %></button>
+<% if current_page?(root_path) %>
+  <% else %>
+  <div class="row">
+    <header class="navigation large-12 columns">
 
-        <section class="dropdown">
-          <ul class "browse-menu">
-            <button class="dropdown-button-browse">Browse</button>
-            <div class="dropdown-content-browse">
-              <li><%= link_to "Products", products_path %></li>
-              <li><%= link_to "Merchants", merchants_path %></li>
-              <li><%= link_to "Categories", categories_path %></li>
-            </div>
-          </ul>
-        </section>
+      <button class="logo"><%= link_to "Sourceress", root_path %></button>
 
-        <section class="dropdown">
-          <ul class="cart-menu">
-            <button class="dropdown-button-cart">
-              <% if session[:order_id] == nil %>
-              <%= link_to "Shopping Cart", orders_path, method: :post %>
-              <% else %>
-              <%= link_to "Shopping Cart", order_path(session[:order_id]) %>
-              <% end %>
-            </button>
-          </ul>
-        </section>
+      <section class="dropdown">
+        <ul class "browse-menu">
+          <button class="dropdown-button-browse">Browse</button>
+          <div class="dropdown-content-browse">
+            <li><%= link_to "Products", products_path %></li>
+            <li><%= link_to "Merchants", merchants_path %></li>
+            <li><%= link_to "Categories", categories_path %></li>
+          </div>
+        </ul>
+      </section>
 
-        <section class="dropdown">
-          <ul class="login-menu">
-            <button class="dropdown-button-login">Login</button>
-            <div class="dropdown-content-login">
-              <li>Testing</li>
-              <li></li>
-            </div>
-          </ul>
-        </section>
+      <section class="dropdown">
+        <ul class="cart-menu">
+          <button class="dropdown-button-cart">
+            <% if session[:order_id] == nil %>
+            <%= link_to "Shopping Cart", orders_path, method: :post %>
+            <% else %>
+            <%= link_to "Shopping Cart", order_path(session[:order_id]) %>
+            <% end %>
+          </button>
+        </ul>
+      </section>
 
-    </header>
+      <section class="dropdown">
+        <ul class="login-menu">
+          <button class="dropdown-button-login">Login</button>
+          <div class="dropdown-content-login">
+            <li>Testing</li>
+            <li></li>
+          </div>
+        </ul>
+      </section>
+
+  </header>
   </div>
+
+<% end %>
 
 
   <% if flash[:result_text] or flash[:messages] %>
