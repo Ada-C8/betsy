@@ -9,9 +9,13 @@ class ProductsController < ApplicationController
 
   def index
     if params[:category_id]
-      cat = Category.find(params[:category_id])
-      @products = Product.all.find_all { |prod| prod.categories.include? cat }
-      @title = cat.name.capitalize
+      cat = Category.find_by(id: params[:category_id])
+      if cat
+        @products = Product.all.find_all { |prod| prod.categories.include? cat }
+        @title = cat.name.capitalize
+      else
+        return head :not_found
+      end
     else
       @products = Product.most_popular
       @title = "Popular Now"
@@ -80,10 +84,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def categories
-    @categories = Category.all.sort_by{|c| c.name}
-  end
-
   def add_categories
     params[:id] = params[:product_id]
     find_product_by_params
@@ -97,7 +97,7 @@ class ProductsController < ApplicationController
   private
 
   def find_product_by_params
-    @product = Product.find(params[:id])
+    @product = Product.find_by(id: params[:id])
 
     unless @product
       return head :not_found

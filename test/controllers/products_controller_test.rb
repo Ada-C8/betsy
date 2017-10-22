@@ -18,16 +18,38 @@ describe ProductsController do
       get login_path(:github)
     end
 
-    it 'can successfully access index of products' do
-      get products_path
+    describe 'index' do
+      it 'can successfully access index of products' do
+        get products_path
 
-      must_respond_with :success
+        must_respond_with :success
+      end
+
+      it 'can successfully access nested index of products with valid id' do
+        get products_path(Category.first.id)
+
+        must_respond_with :success
+      end
+
+      it 'returns 404 for invalid category ID in nested route' do
+        get products_path, params: { 'category_id' => (Category.last.id + 1) }
+
+        must_respond_with :not_found
+      end
     end
 
-    it 'can successfully access show product' do
-      get product_path(prod.id)
+    describe 'show' do
+      it 'can successfully access show product with valid ID' do
+        get product_path(prod.id)
 
-      must_respond_with :success
+        must_respond_with :success
+      end
+
+      it 'returns 404 with invalid ID' do
+        get product_path( Product.last.id + 1 )
+
+        must_respond_with :not_found
+      end
     end
 
     it 'can successfully access new product' do
@@ -127,6 +149,12 @@ describe ProductsController do
         flash[:status].must_equal :failure
         Product.count.must_equal @before_count
       end
+    end
+
+    it 'can successfully categories' do
+      get product_path(prod.id)
+
+      must_respond_with :success
     end
   end
 
