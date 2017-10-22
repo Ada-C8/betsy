@@ -1,7 +1,13 @@
 class ReviewsController < ApplicationController
-  before_action :find_review_by_params_id, only: [:edit, :update, :destroy]
+  before_action :find_review_by_params_id, only: [:show, :edit, :update, :destroy]
   before_action :check_for_product_owner_nested, only: [:create, :new]
   before_action :check_for_product_owner, only: [:edit, :update, :destroy]
+
+  def index
+    @reviews = Review.where(product_id: params[:product_id])
+  end
+
+  def show ; end
 
   def new
     @review = Review.new

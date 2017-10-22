@@ -10,6 +10,31 @@ describe ReviewsController do
     get login_path(:github)
   end
 
+  describe "index" do
+    it "returns success status for all reviews" do
+      get product_reviews_path(mermaid_fin)
+      must_respond_with :success
+    end
+
+    it "works when there are no reviews" do
+      Review.destroy_all
+      get product_reviews_path(mermaid_fin)
+      must_respond_with :success
+    end
+  end
+
+  describe "show" do
+    it "succeeds for a review that exists" do
+      get review_path(reviews(:review))
+      must_respond_with :success
+    end
+
+    it "returns 404 not_found for a review that does not exist" do
+      get review_path(123)
+      must_respond_with :not_found
+    end
+  end
+
   describe "new" do
     it " should work for anon user" do
       get new_product_review_path(mermaid_fin)

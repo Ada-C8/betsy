@@ -8,3 +8,13 @@ review:
   rating: 4
   merchant: ada
   product: mermaid_fin
+
+review2:
+  rating: 3
+  merchant: ada
+  product: mermaid_fin
+
+review3:
+  rating: 4
+  merchant: grace
+  product: wand
