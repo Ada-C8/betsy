@@ -93,7 +93,7 @@ describe OrdersController do
       }
 
       patch order_path(order.id), params: order_data
-      must_redirect_to root_path
+      must_redirect_to confirm_order_path
 
       # Verify the DB was really modified
       Order.find(order.id).status.must_equal "complete"
