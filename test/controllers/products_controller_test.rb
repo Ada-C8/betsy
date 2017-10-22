@@ -68,7 +68,7 @@ describe ProductsController do
 
     it "should not add out-of-stock products to pending order" do
       patch add_product_path(products(:out_of_stock).id)
-      must_respond_with :bad_request
+      must_respond_with :redirect
       flash.keys.must_include "error"
     end
 
