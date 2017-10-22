@@ -74,14 +74,14 @@ header {
 }
 
 .navigation .dropdown button {
-  font-family: 'Josefin Slab', serif;
+  font-family: 'Cinzel', serif;
   font-size: 2em;
   text-shadow: 1;
   text-decoration: none;
 }
 
 .dropdown a:hover {
-  color: blue;
+  color: grey;
 }
 
 .dropdown-button-browse, .dropdown-button-cart, .dropdown-button-login {
@@ -90,7 +90,6 @@ header {
   font-size: 3em;
   border: none;
   cursor: pointer;
-  font-family: 'Josefin Slab', serif;
   font-weight: bolder;
   margin: 0;
 
@@ -99,6 +98,9 @@ header {
 .dropdown-content-browse, .dropdown-content-cart, .dropdown-content-login {
   display: none;
   position: absolute;
+  font-family: 'Josefin Slab', serif;
+  text-transform: capitalize;
+  font-size: 1.5rem;
   width: 20em;
   min-width: 160px;
   text-align: left;
