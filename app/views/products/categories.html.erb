@@ -20,7 +20,7 @@
       <%= form_tag('/products/:id/categories') do %>
         <% @categories.each do |category| %>
           <% unless @product.categories.include? category %>
-            <%= check_box_tag category.name, category.id %>
+            <%= check_box_tag ("category_#{category.name}"), category.id %>
             <%= label_tag category.name %>
 
             <%= hidden_field_tag :product_id, @product.id %>
