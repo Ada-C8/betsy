@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root to: 'products#home', as: "root"
+  root to: 'products#root', as: "root"
+  get '/home', to: 'products#home', as: "home"
+
 
   resources :orders, except: [:destroy]
   get '/orders/:id/confirm', to: 'orders#confirm', as: 'confirm_order'
