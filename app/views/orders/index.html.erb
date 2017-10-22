@@ -1,18 +1,17 @@
 <% if @order %>
-<%= form_for @order do |f| %>
-<%= f.label :name %>
-<%= f.text_field :name %>
+  <%= form_for @order do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
 
-<%= f.label :price %>
-<%= f.text_field :price %>
+  <%= f.label :price %>
+  <%= f.text_field :price %>
 
-<%= f.label :quantity_avail %>
-<%= f.text_field :quantity_avail %>
+  <%= f.label :quantity_avail %>
+  <%= f.text_field :quantity_avail %>
 
-<%= f.label :merchant %>
-<%= f.text_field :merchant %>
+  <%= f.label :merchant %>
+  <%= f.text_field :merchant %>
 
-<%= f.submit %>
-<% end %>
-<% end %>
+  <%= f.submit %>
+  <% end %>
 <% end %>

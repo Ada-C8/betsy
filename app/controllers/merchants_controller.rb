@@ -9,7 +9,7 @@ class MerchantsController < ApplicationController
   end
 
   def create
-    @merchant = Merchant.new merchant_params
+    @merchant = Merchant.new(username: params[:merchant][:username], email: params[:merchant][:email])
     if @merchant.save
       flash[:status] = :success
       flash[:result_text] = "Successfully created new merchant!"
@@ -22,7 +22,7 @@ class MerchantsController < ApplicationController
   end
 
   def show
-    @merchant = Merchant.find( params[:id].to_i )
+    @merchant = Merchant.find_by(id: params[:id] )
     if @merchant == nil
       flash[:status] = :failure
       flash[:result_text] = "That merchant does not exist."
@@ -40,8 +40,8 @@ class MerchantsController < ApplicationController
   end
 
   def update
-    @merchant = Merchant.find_by(id: params[:id].to_i)
-    redirect_to root_path unless @merchant
+    @merchant = Merchant.find_by(id: params[:id])
+    redirect_to merchants_path unless @merchant
 
     if @merchant.update_attributes merchant_params
       flash[:status] = :success
@@ -52,21 +52,21 @@ class MerchantsController < ApplicationController
     end
   end
 
-  def destroy
-    @merchant = Merchant.find_by(id: params[:id]).destroy
-
-    if !@merchant
-      redirect_to merchants_path, status: :not_found
-    elsif @category.destroy
-      flash[:status] = :success
-      flash[:result_text] = "That merchant has been deleted."
-      redirect_to merchants_path
-    else
-      flash[:status] = :failure
-      flash[:result_text] = "That merchant is unable to be deleted."
-      redirect_to merchants_path
-    end
-  end
+  # def destroy
+  #   @merchant = Merchant.find_by(id: params[:id])
+  #
+  #   if !@merchant
+  #     redirect_to merchants_path, status: :not_found
+  #   elsif @merchant.destroy
+  #     flash[:status] = :success
+  #     flash[:result_text] = "That merchant has been deleted."
+  #     redirect_to merchants_path
+  #   else
+  #     flash[:status] = :failure
+  #     flash[:result_text] = "That merchant is unable to be deleted."
+  #     redirect_to merchants_path
+  #   end
+  # end
 
   private
   def merchant_params

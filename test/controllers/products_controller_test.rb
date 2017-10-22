@@ -31,11 +31,8 @@ describe ProductsController do
 
   describe "create" do
     it "creates a new product" do
-      # post products_path, params: {product: {name: "creepy things", quantity_avail: 4, price: 9.99, merchant_id: merchants(:spooky)}}
-      # must_respond_with :redirect
-      # must_redirect_to product_path(Product.last.id)
       proc   {
-        post products_path, params: { product: { name: "creepy things", quantity_avail: 4, price: 9.99, merchant_id: Merchant.first.id}}
+        post products_path, params: { product: { name: "eyeballs", quantity_avail: 4, price: 9.99, merchant_id: Merchant.first.id}}
       }.must_change 'Product.count', 1
     end
   end
@@ -144,5 +141,25 @@ describe ProductsController do
       get category_products_path(categories(:brooms).id)
       must_respond_with :success
     end
+
+    it "should render 404 if category does not exist" do
+      bad = Category.last.id + 1
+      get category_products_path(bad)
+      must_respond_with :not_found
+    end
   end
+
+  describe "products by merchant" do
+    it "should show products belonging to a specific merchant" do
+      get merchant_products_path(merchants(:witch).id)
+      must_respond_with :success
+    end
+
+    it "should render 404 if merchant does not exist" do
+      bad = Merchant.last.id + 1
+      get merchant_products_path(bad)
+      must_respond_with :not_found
+    end
+  end
+
 end

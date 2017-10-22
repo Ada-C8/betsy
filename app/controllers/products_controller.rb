@@ -2,15 +2,32 @@ class ProductsController < ApplicationController
 
   def index
     if params[:merchant_id]
-      merchant = Merchant.find_by(id: params[:merchant_id])
-      @products = merchant.products
+      @merchant = Merchant.find_by(id: params[:merchant_id])
+      if @merchant == nil
+        flash[:status] = :failure
+        flash[:result_text] = "Products for that merchant ID could not be found"
+        redirect_to products_path, status: :not_found
+      else
+        @products = @merchant.products
+      end
     elsif
       params[:review_id]
       @products = Review.where(product_id: params[:category_id])
+      if @products == nil
+        flash[:status] = :failure
+        flash[:result_text] = "Products for that review ID could not be found"
+        redirect_to products_path, status: :not_found
+      end
     elsif
       params[:category_id]
-      category = Category.find_by(id: params[:category_id])
-      @products = category.products
+      @category = Category.find_by(id: params[:category_id])
+      if @category == nil
+        flash[:status] = :failure
+        flash[:result_text] = "Products for that category could not be found"
+        redirect_to products_path, status: :not_found
+      else
+        @products = @category.products
+      end
     else
       @products = Product.all
     end
