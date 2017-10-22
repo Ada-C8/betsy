@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   resources :orders, except: [:edit]
   resources :order_products, only: [:update, :destroy]
-  resources :products
-  resources :reviews, except: [:index, :show]
+  resources :products do
+    # only: [:index, :new, :create] is nested
+    resources :reviews, shallow: true
+  end
 end
