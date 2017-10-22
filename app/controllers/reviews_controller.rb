@@ -2,16 +2,17 @@ class ReviewsController < ApplicationController
 
 
 def new
+  @product = Product.find(params[:product_id])
   @review = Review.new
 end
 
 def create
   @review = Review.new(review_params)
-
+  @review = Products.reviews.new(review_params)
   if @review.save
     flash[:status] = :success
     flash[:message] = "Your Review has been Created"
-    redirect_to reviews_path
+    redirect_to root_path
   else
     flash.now[:status] = :failure
     flash.now[:message] = "Review failed to save"
@@ -28,7 +29,7 @@ def show
 end
 
 private
-def product_params
+def review_params
   return params.require(:review).permit(:product_id, :rating, :reviewtext)
 end
 

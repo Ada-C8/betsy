@@ -42,7 +42,9 @@
     <td>
       <%= product.category_id %>
     </td>
-    <%= link_to "Review", new_product_review_path(product.id) %>
+    <td>
+      <%= link_to "Review", new_product_review_path(product.id) %>
+    </td>
     <% end %>
   </tr>
 </table>

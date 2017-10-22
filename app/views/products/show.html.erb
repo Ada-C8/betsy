@@ -11,3 +11,5 @@
 
 <%# TODO :: point to proper product id, right now pointing to product/1 %>
 <%= link_to "Add to cart", "/add_to_cart/1", :class=>"button", method: :post  %>
+
+<%= link_to "Review Product", new_product_review_path(@product.id), :class=>"button" %>

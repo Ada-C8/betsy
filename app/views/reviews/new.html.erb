@@ -1,9 +1,9 @@
 <h2>Review Your Product</h2>
 
-<%#= render partial: 'layouts/error_messages',
-    locals: { model: @work } %>
+<% @product = Product.find(params[:product_id]) %>
+<% product_id = @product.id %>
 
-<%= form_for @review do |f| %>
+<%= form_for [@product,@review] do |f| %>
   <%= f.label "Product Name (add from referenced id)" %>
   <%= f.hidden_field :product_id %>
 
@@ -11,7 +11,7 @@
   <%= f.text_field :rating %>
 
   <%= f.label "Review: Limit 500 Characters" %>
-  <%= f.text_field :review_text %>
+  <%= f.text_field :reviewtext %>
 
   <%= f.submit "Submit Review", :class=>"button"  %>
 

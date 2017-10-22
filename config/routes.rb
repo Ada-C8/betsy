@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # resources :review, except: [:index, :new]
 
   resources :products do
-    resources :reviews, only: [:index, :new]
+    resources :reviews, only: [:index, :new, :create]
   end
 
   resources :merchants
