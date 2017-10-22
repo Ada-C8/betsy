@@ -26,6 +26,7 @@ describe Order do
       order_with_bogus_stat.status = "almost a status"
       order_with_bogus_stat.valid?.must_equal false
     end
+
     it "must have all user information if status is complete" do
       complete_order = orders(:complete_order)
       complete_order.valid?.must_equal true
@@ -33,7 +34,7 @@ describe Order do
       complete_order.email = nil
       complete_order.valid?.must_equal false
       complete_order.email = "present"
-      complete_order.valid?.must_equal true
+      complete_order.valid?.must_equal false
 
       complete_order.address = nil
       complete_order.valid?.must_equal false

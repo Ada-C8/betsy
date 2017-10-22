@@ -19,7 +19,7 @@ complete_order:
   email: buyer@email.com
   address: 100 Witchy Way, Seattle, WA
   name: Gale
-  card_number: 1234 1234 1234 1234
-  card_exp: 01/21
-  card_cvv: "546"
-  zip_code: "98122"
+  card_number: 1234123412341234
+  card_exp: Sun, 1 Oct 2017
+  card_cvv: 546
+  zip_code: 98122
