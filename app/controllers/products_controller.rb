@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
     if result
       flash.now[:status] = :success
       flash.now[:message] = "Successfully created #{@product.name}"
-      return redirect_to product_path(@product.id)
+      return redirect_to add_categories_path(@product.id)
     else
       flash.now[:status] = :failure
       flash.now[:message] = "Could not create new product"
