@@ -78,14 +78,20 @@ class ProductsController < ApplicationController
 
     index_of_first_found = order.products.index {|element| element.id == @product.id}
 
-    orders_products_array = order.products.to_a
+    if index_of_first_found
 
-    orders_products_array.delete_at(index_of_first_found)
+      orders_products_array = order.products.to_a
 
-    order.products.replace([])
-    order.products.replace(orders_products_array)
+      orders_products_array.delete_at(index_of_first_found)
 
-    @product.add_one_to_stock
+      order.products.replace([])
+      order.products.replace(orders_products_array)
+
+      @product.add_one_to_stock
+      flash[:success] = "Successfully removed product from cart"
+    else
+      flash[:error] = "Error: Product not found in cart"
+    end
   end
 
   private

@@ -9,7 +9,7 @@ pointy_hat:
   price: 9.99
   quantity_avail: 5
   merchant: spooky
-  
+
 
 missing_name:
   name:
@@ -24,3 +24,9 @@ out_of_stock:
   price: 4.99
   quantity_avail: 0
   merchant: ghosty
+
+not_in_order:
+  name: "not there"
+  price: 9.99
+  quantity_avail: 5
+  merchant: spooky
