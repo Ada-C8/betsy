@@ -25,7 +25,6 @@
     <% elsif @product.quantity_avail > 0 %>
     <%= button_to "Add to cart", add_product_path(@product), method: :patch %>
     <% end %>
-    <%= button_to "Remove from cart", remove_product_path(@product), method: :patch %>
   </div>
 
   <div class="show-reviews">
