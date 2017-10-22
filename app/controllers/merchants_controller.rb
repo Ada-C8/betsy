@@ -1,4 +1,5 @@
 class MerchantsController < ApplicationController
+
   def index
     @merchants = Merchant.all
   end
@@ -10,23 +11,31 @@ class MerchantsController < ApplicationController
   def create
     @merchant = Merchant.new merchant_params
     if @merchant.save
-      flash[:success] = "Successfully created new merchant!"
+      flash[:status] = :success
+      flash[:result_text] = "Successfully created new merchant!"
       redirect_to merchant_path(@merchant.id)
     else
-      flash.now[:error] = "Could not create new merchant."
+      flash.now[:status] = :failure
+      flash[:result_text] = "Could not create new merchant."
       render :new
     end
   end
 
   def show
     @merchant = Merchant.find( params[:id].to_i )
+    if @merchant == nil
+      flash[:status] = :failure
+      flash[:result_text] = "That merchant does not exist."
+      redirect_to merchants_path, status: :not_found
+    end
   end
 
   def edit
     @merchant = Merchant.find_by(id: params[:id].to_i)
 
     unless @merchant
-      redirect_to root_path
+      flash[:status] = :failure
+      flash[:result_text] = "That merchant could not be found."
     end
   end
 
@@ -35,19 +44,31 @@ class MerchantsController < ApplicationController
     redirect_to root_path unless @merchant
 
     if @merchant.update_attributes merchant_params
-      redirect_to root_path
+      flash[:status] = :success
+      flash[:result_text] = "Successfully updated merchant details!"
+      redirect_to merchant_path(@merchant.id)
     else
       render :edit
     end
   end
 
   def destroy
-    Merchant.find_by(id: params[:id]).destroy
-    redirect_to root_path
+    @merchant = Merchant.find_by(id: params[:id]).destroy
+
+    if !@merchant
+      redirect_to merchants_path, status: :not_found
+    elsif @category.destroy
+      flash[:status] = :success
+      flash[:result_text] = "That merchant has been deleted."
+      redirect_to merchants_path
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "That merchant is unable to be deleted."
+      redirect_to merchants_path
+    end
   end
 
   private
-
   def merchant_params
     return params.require(:merchant).permit(:username, :email)
   end

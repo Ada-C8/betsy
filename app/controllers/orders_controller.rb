@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
 #TODO: clean up with controller filters
 #TODO: discuss rules around destroy action.
-#TODO: does it make sense to have flash messages for Order.create???
   def index
     @orders = Order.all
   end
@@ -13,7 +12,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  #Do we actually need a new action?
   def new
     @order = Order.new
   end
@@ -21,18 +19,6 @@ class OrdersController < ApplicationController
   def create
     create_order
     #see application controller
-
-    # @order = Order.new
-    # @order.status = "pending"
-    #
-    # if @order.save
-    #   session[:order_id] = @order.id
-    #   flash[:success] = "Order added successfully"
-    #   redirect_to root_path
-    # else
-    #   flash[:error] = "Order couldn't be processed."
-    #   render :new
-    # end
   end
 
   def edit
@@ -42,7 +28,7 @@ class OrdersController < ApplicationController
       redirect_to root_path, status: :not_found
     elsif @order
       if @order.status == "complete"
-        flash[:error] = "You cannot edit a complete order"
+        flash[:result_text] = "You cannot edit a complete order"
         redirect_to root_path
       end
     end
@@ -55,16 +41,18 @@ class OrdersController < ApplicationController
       redirect_to root_path, status: :not_found
     elsif @order
       if @order.status == "complete"
-        flash[:error] = "You cannot update a complete order"
+        flash[:status] = :failure
+        flash[:result_text] = "You cannot update a complete order"
         redirect_to root_path
-      else
-        @order.status = "complete"
+      else @order.status = "complete"
         if @order.update_attributes order_params
-          flash[:success] = "You successfully submitted your order!"
+          flash[:status] = :success
+          flash[:result_text] = "You have successfully submitted your order!"
           session[:order_id] = nil
           redirect_to confirm_order_path(@order.id)
         else
-          flash[:error] = "All fields are required to complete your order."
+          flash[:status] = :failure
+          flash[:result_text] = "All fields are required to complete your order."
           render :edit, status: :bad_request
         end
       end

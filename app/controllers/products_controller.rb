@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+
   def index
     if params[:merchant_id]
       merchant = Merchant.find_by(id: params[:merchant_id])
@@ -10,7 +11,6 @@ class ProductsController < ApplicationController
       params[:category_id]
       category = Category.find_by(id: params[:category_id])
       @products = category.products
-      # @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
     else
       @products = Product.all
     end
@@ -36,8 +36,32 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find_by(id: params[:id])
+    if @product == nil
+      flash[:status] = :failure
+      flash[:result_text] = "That product does not exist."
+      redirect_to products_path, status: :not_found
+    end
+  end
+
+  def edit
+    @product = Product.find_by(id: params[:id].to_i)
+
     unless @product
-      redirect_to root_path, status: :not_found
+      flash[:status] = :failure
+      flash[:result_text] = "That product could not be found."
+    end
+  end
+
+  def update
+    @product = Product.find_by(id: params[:id].to_i)
+    redirect_to root_path unless @product
+
+    if @product.update_attributes product_params
+      flash[:status] = :success
+      flash[:result_text] = "Successfully updated product details!"
+      redirect_to product_path(@product.id)
+    else
+      render :edit
     end
   end
 
@@ -91,9 +115,7 @@ class ProductsController < ApplicationController
   end
 
     order = Order.find_by(id: session[:order_id])
-
     index_of_first_found = order.products.index {|element| element.id == @product.id}
-
     orders_products_array = order.products.to_a
 
     orders_products_array.delete_at(index_of_first_found)

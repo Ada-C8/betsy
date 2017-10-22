@@ -1,6 +1,5 @@
 console.log("This is a test");
 
-
 // Create an array to store our particles
 var particles = [];
 
