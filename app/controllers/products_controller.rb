@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
       @products = Product.all.find_all { |prod| prod.categories.include? cat }
       @title = cat.name.capitalize
     else
-      @products = Product.all.sort_by { |prod| -prod.orders.count }[0...6]
+      @products = Product.most_popular
       @title = "Popular Now"
     end
     @categories = Category.all

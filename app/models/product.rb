@@ -10,13 +10,7 @@ class Product < ApplicationRecord
   validates :quantity, presence: true, numericality: {greater_than_or_equal_to: 0}
 
   def self.most_popular
-    Product.all.sort_by{|p| -p.orders.count}[0...3]
-  end
-
-
-  def show_data
-    puts params
-    puts "controller"
+    @products = Product.all.sort_by { |prod| -prod.orders.count }[0...6]
   end
 
   def add_categories_by_params(params)
@@ -24,7 +18,7 @@ class Product < ApplicationRecord
 
     new_categories.values.each do |cat|
       category = Category.find(cat)
-      self.categories << category
+      self.categories << category unless self.categories.include? category
     end
 
     return self.save

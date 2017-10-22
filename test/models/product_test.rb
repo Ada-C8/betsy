@@ -97,4 +97,64 @@ describe Product do
       product.merchant.must_be_kind_of Merchant
     end
   end
+
+  describe 'most_popular' do
+    it 'returns an array of 6 products if database contains at least 6 products' do
+      1..6.times do |i|
+        Product.create!(name: i, price: i+1, quantity: i, merchant_id: Merchant.first.id)
+      end
+      prods = Product.most_popular
+
+      prods.length.must_equal 6
+    end
+
+    it 'returns a shorter array of products if database less than 6 products' do
+      if Product.count >= 6
+        i = Product.count
+        until i < 6
+          Product.last.destroy
+        end
+      end
+      prods = Product.most_popular
+
+      prods.length.must_equal Product.count
+    end
+
+    it 'orders array by number of orders for product' do
+      prods = Product.most_popular
+      prods.each_cons(2) do |pair|
+        (pair[0].orders.count >= pair[1].orders.count).must_equal true
+      end
+    end
+
+    it 'returns an empty array if database contains no products' do
+      Product.destroy_all
+
+      Product.most_popular.must_equal []
+    end
+  end
+
+  describe 'add_categories_by_params' do
+    it 'adds provided categories to product' do
+      test_categories = [Category.first, Category.last]
+      test_params = { 'category_test_0' => test_categories[0].id,
+                      'category_test_1' => test_categories[1].id }
+
+      product.add_categories_by_params(test_params)
+
+      product.categories.must_include test_categories[0]
+      product.categories.must_include test_categories[1]
+    end
+
+    it 'wont duplicate categories within product' do
+      test_category = Category.first
+      test_params = { 'category_test' => test_category.id }
+
+      count = product.categories.count
+
+      test_params = { 'category_test' => test_category.id }
+
+      product.categories.count.must_equal count
+    end
+  end
 end
