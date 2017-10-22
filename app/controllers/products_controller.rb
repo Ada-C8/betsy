@@ -88,6 +88,8 @@ class ProductsController < ApplicationController
     params[:id] = params[:product_id]
     find_product_by_params
 
+    result = @product.add_categories_by_params(params)
+
     return redirect_to product_path(@product.id)
   end
 

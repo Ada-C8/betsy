@@ -19,4 +19,15 @@ class Product < ApplicationRecord
     puts "controller"
   end
 
+  def add_categories_by_params(params)
+    new_categories = params.keep_if{|key, value| key.include?'category'}
+
+    new_categories.values.each do |cat|
+      category = Category.find(cat)
+      self.categories << category
+    end
+
+    return self.save
+  end
+
 end
