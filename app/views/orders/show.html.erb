@@ -1,0 +1,40 @@
+<h2>Your Cart</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Cost</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_products.each do |op| %>
+      <tr>
+        <td><%= link_to op.product.name, product_path(op.product) %></td>
+        <td><%= op.quantity %></td>
+        <td><%= op.product.price %></td>
+        <td>
+          <%= form_tag order_product_path(product_id: op.product_id), method: :patch do %>
+
+          <%= text_field_tag "quantity" %>
+
+          <%= submit_tag "Update Quantity", class: "button" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<p>
+  Order <%= @order.id %>
+</p>
+<p>
+  Status: <%= @order.status %>
+</p>
+
+
+<%= link_to "Back to All Orders", orders_path, class:'button'%>

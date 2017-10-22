@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+# one: {}
+# # column: value
+# #
+# two: {}
+# column: value
+
+
+tricycle:
+  name: tricycle
+  description: "A fun toy!"
+  merchant: anders
+  inventory: 3
+  photo_url: https://i-d-images.vice.com/images/2016/09/16/bill-murray-has-a-couple-of-shifts-at-a-brooklyn-bar-this-weekend-body-image-1473999364.jpg
+  price: 2.40
+  # category_ids
+
+tripod:
+  name: tripod
+  description: "Good for cameras"
+  merchant: lauren
+  inventory: 4
+  photo_url: https://i-d-images.vice.com/images/2016/09/16/bill-murray-has-a-couple-of-shifts-at-a-brooklyn-bar-this-weekend-body-image-1473999364.jpg
+  price: 12.56
