@@ -14,21 +14,22 @@
  *= require_self
  *= require foundation_and_overrides
 
- */
-/*home page design*/
- /*#myCanvas{
-   background-color: black;
-   color: white;
- }*/
-
 /*general element styling*/
 ul, ol {
  list-style: none;
 }
 
 body {
-  width: 100%;
+  max-width: 100%;
   font-family: 'Josefin Slab', serif;
+}
+
+html {
+  width: 100%;
+}
+
+a:visited {
+  color: inherit;
 }
 
 /*flash message styling*/
@@ -40,15 +41,19 @@ body {
 }
 
 /*application wide header & dropdown menus*/
-.header {
-  margin: 1rem 0rem 1rem 0rem;
+header {
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 5rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+
   align-items: center;
 }
 
-.logo, .logo a {
+.logo a {
   /*font-family: 'Berkshire Swash', cursive;*/
   font-family: 'Cinzel', serif;
   color: black;
@@ -60,20 +65,16 @@ body {
 }
 
 
-.nav-links {
-  font-size: 1.5rem;
-  float: right;
+.dropdown {
+  position: relative;
+  display: flex;
+  text-align: left;
+  margin-left: 0;
 }
 
-.nav-links a {
-  padding: .5rem;
-
-}
-
-.navigation .dropdown a{
+.navigation .dropdown button {
   font-family: 'Josefin Slab', serif;
   font-size: 2em;
-  color: #0F5364;
   text-shadow: 1;
   text-decoration: none;
 }
@@ -82,7 +83,7 @@ body {
   color: blue;
 }
 
-.dropdown-button-view, .dropdown-button-create  {
+.dropdown-button-browse, .dropdown-button-cart, .dropdown-button-login {
   color: black;
   padding: 0;
   font-size: 3em;
@@ -91,16 +92,10 @@ body {
   font-family: 'Josefin Slab', serif;
   font-weight: bolder;
   margin: 0;
+
 }
 
-.dropdown {
-  position: relative;
-  display: flex;
-  text-align: right;
-  margin-left: 10em;
-}
-
-.dropdown-content-view, .dropdown-content-create {
+.dropdown-content-browse, .dropdown-content-cart, .dropdown-content-login {
   display: none;
   position: absolute;
   width: 20em;
@@ -111,17 +106,21 @@ body {
   z-index: 1;
 }
 
-.dropdown-content-view a, .dropdown-content-create a {
+.dropdown-content-browse a, .dropdown-content-cart, .dropdown-content-login a {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown:hover .dropdown-content-view {
+.dropdown:hover .dropdown-content-browse {
   display: block;
 }
 
-.dropdown:hover .dropdown-content-create {
+.dropdown:hover .dropdown-content-cart {
+  display: block;
+}
+
+.dropdown:hover .dropdown-content-cart {
   display: block;
 }
 
@@ -157,6 +156,8 @@ body {
   margin: 1rem;
 }
 
+
+/*homepage canvas crystal ball*/
 #myCanvas {
   display: inline-block;
   width: 100%;
@@ -165,6 +166,8 @@ body {
   border-radius: 50%;
   position: relative;
   background: transparent;
+  text-align: center;
+
 }
 .ball {
   display: inline-block;
@@ -174,6 +177,7 @@ body {
   border-radius: 50%;
   position: relative;
   background: radial-gradient(circle at 50% 120%, #81e8f6, #76deef 10%, #055194 80%, #062745 100%);
+  text-align: center;
 }
 .ball:before {
   content: "";
