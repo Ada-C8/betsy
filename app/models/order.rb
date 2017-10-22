@@ -5,10 +5,11 @@ class Order < ApplicationRecord
   validates :email, presence: true, if: :completed?
   validates :address, presence: true, if: :completed?
   validates :name, presence: true, if: :completed?
-  validates :card_number, presence: true, if: :completed?
+  validates :card_number, presence: true, if: :completed?, numericality: true, length: {is: 16}
   validates :card_exp, presence: true, if: :completed?
-  validates :card_cvv, presence: true, if: :completed?
+  validates :card_cvv, presence: true, if: :completed?, numericality: true, length: {is: 3}
   validates :zip_code, presence: true, if: :completed?
+  validates_format_of :zip_code, with: /\A\d{5}-\d{4}|\A\d{5}\z/, message: "should be 12345 or 12345-1234", allow_blank: true
 
   attribute :status, :string, default: "pending"
 

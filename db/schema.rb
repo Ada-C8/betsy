@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019164759) do
+ActiveRecord::Schema.define(version: 20171022040645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,11 +41,11 @@ ActiveRecord::Schema.define(version: 20171019164759) do
     t.string "address"
     t.string "name"
     t.string "card_number"
-    t.string "card_exp"
     t.string "card_cvv"
     t.string "zip_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "card_exp"
   end
 
   create_table "orders_products", force: :cascade do |t|
