@@ -3,12 +3,14 @@ class ReviewsController < ApplicationController
 
 def new
   @product = Product.find(params[:product_id])
-  @review = Review.new
+  # @review = Review.new
+  @review = @product.reviews.build
 end
 
 def create
-  @review = Review.new(review_params)
-  @review = Products.reviews.new(review_params)
+  @product = Product.find(params[:product_id])
+  # @review = Review.new(review_params)
+  @review = @product.reviews.build(review_params)
   if @review.save
     flash[:status] = :success
     flash[:message] = "Your Review has been Created"
