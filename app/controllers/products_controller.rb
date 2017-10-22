@@ -87,6 +87,7 @@ class ProductsController < ApplicationController
   def add_categories
     params[:id] = params[:product_id]
     find_product_by_params
+    confirm_ownership
 
     result = @product.add_categories_by_params(params)
 
