@@ -153,5 +153,27 @@ describe Order do
       order_one.valid?.must_equal false
       order_one.errors.messages.must_include :zip_code
     end
+
+    it "must have a city to be valid" do
+      order_one.valid?.must_equal true
+      order_one.city = nil
+      order_one.valid?.must_equal false
+      order_one.errors.messages.must_include :city
+
+      order_one.city = " "
+      order_one.valid?.must_equal false
+      order_one.errors.messages.must_include :city
+    end
+
+    it "must have a state to be valid" do
+      order_one.valid?.must_equal true
+      order_one.state = nil
+      order_one.valid?.must_equal false
+      order_one.errors.messages.must_include :state
+
+      order_one.state = " "
+      order_one.valid?.must_equal false
+      order_one.errors.messages.must_include :state
+    end
   end
 end

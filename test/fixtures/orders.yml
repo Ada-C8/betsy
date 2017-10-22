@@ -23,3 +23,5 @@ order_one:
   card_exp: Sun, 1 Oct 2017
   card_cvv: 546
   zip_code: 98115
+  city: Scranton
+  state: PA
