@@ -33,6 +33,11 @@
           <%= link_to category.name.capitalize, category_products_path(category.id) %>
         </li>
       <% end %>
+      <% if @own_product %>
+        <li class="button add-categories">
+          <%= link_to "Add Categories", add_categories_path(@product.id) %>
+        </li>
+      <% end %>
     </ul>
   </div>
 
