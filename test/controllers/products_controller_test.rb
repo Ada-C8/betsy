@@ -18,16 +18,38 @@ describe ProductsController do
       get login_path(:github)
     end
 
-    it 'can successfully access index of products' do
-      get products_path
+    describe 'index' do
+      it 'can successfully access index of products' do
+        get products_path
 
-      must_respond_with :success
+        must_respond_with :success
+      end
+
+      it 'can successfully access nested index of products with valid id' do
+        get products_path(Category.first.id)
+
+        must_respond_with :success
+      end
+
+      it 'returns 404 for invalid category ID in nested route' do
+        get products_path, params: { 'category_id' => (Category.last.id + 1) }
+
+        must_respond_with :not_found
+      end
     end
 
-    it 'can successfully access show product' do
-      get product_path(prod.id)
+    describe 'show' do
+      it 'can successfully access show product with valid ID' do
+        get product_path(prod.id)
 
-      must_respond_with :success
+        must_respond_with :success
+      end
+
+      it 'returns 404 with invalid ID' do
+        get product_path( Product.last.id + 1 )
+
+        must_respond_with :not_found
+      end
     end
 
     it 'can successfully access new product' do
@@ -66,14 +88,14 @@ describe ProductsController do
     describe 'edit' do
       # these tests will have to change when logging in actually works (dependent on fakey_login)
       it 'can successfully access edit for own product' do
-        owned_product = Product.find_by(merchant_id: Merchant.first.id)
+        owned_product = Product.find_by(merchant_id: merchants(:ada).id)
         get edit_product_path(owned_product.id)
 
         must_respond_with :success
       end
 
       it 'CANNOT successfully edit other users products' do
-        not_owned_product = Product.find_by(merchant_id: Merchant.last.id)
+        not_owned_product = Product.find_by(merchant_id: merchants(:grace).id)
         get edit_product_path(not_owned_product.id)
 
         must_respond_with :found
@@ -128,19 +150,89 @@ describe ProductsController do
         Product.count.must_equal @before_count
       end
     end
+
+    describe 'categories' do
+      it 'can access page for own products' do
+        owned_product = Product.find_by(merchant_id: merchants(:ada).id)
+
+        get add_categories_path(owned_product.id)
+
+        must_respond_with :success
+      end
+
+      it 'CANNOT access page for other users products' do
+        not_owned_product = Product.find_by(merchant_id: merchants(:grace).id)
+
+        get add_categories_path(not_owned_product.id)
+
+        must_respond_with :found
+        flash[:status].must_equal :failure
+      end
+    end
+
+    describe 'add_categories' do
+      it 'can successfully add categories to own products' do
+        skip
+        owned_product = Product.find_by(merchant_id: merchants(:ada).id)
+        test_params = { "product_id"=>"2",
+          "category_Magic Items"=>"5",
+          id: :id
+        }
+
+        post "/products/:id/categories", params: test_params
+
+        must_respond_with :success
+      end
+
+      it 'CANNOT successfully add categories to other users products' do
+        skip
+        not_owned_product = Product.find_by(merchant_id: merchants(:grace).id)
+        test_params = { "product_id"=>"2",
+          "category_Magic Items"=>"5",
+          id: :id
+        }
+
+        post add_categories_path, params: test_params
+
+        must_respond_with :found
+        flash[:status].must_equal :failure
+      end
+    end
   end
 
   describe 'for guest users' do
-    it 'can successfully access index of products' do
-      get products_path
+    describe 'index' do
+      it 'can successfully access index of products' do
+        get products_path
 
-      must_respond_with :success
+        must_respond_with :success
+      end
+
+      it 'can successfully access nested index of products with valid id' do
+        get products_path(Category.first.id)
+
+        must_respond_with :success
+      end
+
+      it 'returns 404 for invalid category ID in nested route' do
+        get products_path, params: { 'category_id' => (Category.last.id + 1) }
+
+        must_respond_with :not_found
+      end
     end
 
-    it 'can successfully access show product' do
-      get product_path(prod.id)
+    describe 'show' do
+      it 'can successfully access show product with valid ID' do
+        get product_path(prod.id)
 
-      must_respond_with :success
+        must_respond_with :success
+      end
+
+      it 'returns 404 with invalid ID' do
+        get product_path( Product.last.id + 1 )
+
+        must_respond_with :not_found
+      end
     end
 
     it 'CANNOT access new product' do
@@ -176,6 +268,12 @@ describe ProductsController do
 
       flash[:status].must_equal :failure
       must_respond_with :found
+    end
+
+    describe 'add_categories' do
+      it 'CANNOT access add categories page' do
+
+      end
     end
   end
 end

@@ -1,18 +1,32 @@
 class ProductsController < ApplicationController
-  
-  before_action :find_product_by_params, only: [:show, :edit, :update, :destroy]
+
+  before_action :find_product_by_params, only: [:show, :edit, :update, :destroy, :categories]
 
   before_action :confirm_login, except: [:index, :show]
 
-  before_action :confirm_ownership, only: [:edit, :update, :destroy]
+  before_action :confirm_ownership, only: [:edit, :update, :destroy, :categories]
 
 
   def index
-    @products = Product.all
-    @categories = ['Magic', 'Witchcraft', 'Mythical Beasts', 'Food', 'Legendary Items']
+    if params[:category_id]
+      cat = Category.find_by(id: params[:category_id])
+      if cat
+        @products = Product.all.find_all { |prod| prod.categories.include? cat }
+        @title = cat.name.capitalize
+      else
+        return head :not_found
+      end
+    else
+      @products = Product.most_popular
+      @title = "Popular Now"
+    end
+    @categories = Category.all
   end
 
   def show
+    if session[:merchant]
+      @own_product = session[:merchant]['id'] == @product.merchant_id ? true : false
+    end
   end
 
   def new
@@ -28,7 +42,7 @@ class ProductsController < ApplicationController
     if result
       flash.now[:status] = :success
       flash.now[:message] = "Successfully created #{@product.name}"
-      return redirect_to product_path(@product.id)
+      return redirect_to add_categories_path(@product.id)
     else
       flash.now[:status] = :failure
       flash.now[:message] = "Could not create new product"
@@ -70,10 +84,24 @@ class ProductsController < ApplicationController
     end
   end
 
+  def categories
+    @categories = Category.all
+  end
+
+  def add_categories
+    params[:id] = params[:product_id]
+    find_product_by_params
+    confirm_ownership
+
+    result = @product.add_categories_by_params(params)
+
+    return redirect_to product_path(@product.id)
+  end
+
   private
 
   def find_product_by_params
-    @product = Product.find(params[:id])
+    @product = Product.find_by(id: params[:id])
 
     unless @product
       return head :not_found

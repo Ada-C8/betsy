@@ -1,14 +1,13 @@
 
 <%= (render partial: 'temp-errors') if (flash[:message]) || (flash.now[:message])  %>
 
-
 <section class="small-10 columns product-info">
   <div class="row">
-    <div class="small-12 medium-5 columns">
-      <div class="product-img" style="background-image: url('<%= @product.image_url %>');">
+    <!-- <div class="small-12 medium-6 columns"> -->
+      <div class="small-12 medium-5 columns product-img" style="background-image: url('<%= @product.image_url %>');">
       </div>
-    </div>
-    <div class="small-12 medium-5 columns product-details">
+    <!-- </div> -->
+    <div class="small-12 medium-5 columns product-details end">
       <h3><%= @product.name %></h3>
       <p> From seller
         <%= link_to @product.merchant.username, merchant_path(@product.merchant_id) %>
@@ -26,6 +25,20 @@
     <p>
       <%= @product.description %>
     </p>
+  </div>
+  <div class="row prod-cats">
+    <ul>
+      <% @product.categories.each do |category| %>
+        <li class="button">
+          <%= link_to category.name.capitalize, category_products_path(category.id) %>
+        </li>
+      <% end %>
+      <% if @own_product %>
+        <li class="button add-categories">
+          <%= link_to "Add Categories", add_categories_path(@product.id) %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 
   <div class="row reviews">
