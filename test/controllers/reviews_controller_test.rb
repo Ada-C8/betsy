@@ -36,6 +36,7 @@ describe ReviewsController do
   end
 
   describe "new" do
+
     it " should work for anon user" do
       get new_product_review_path(mermaid_fin)
       must_respond_with :success
@@ -55,6 +56,22 @@ describe ReviewsController do
   end
 
   describe "create" do
+    it " returns not_found if product doesn't exist" do
+
+      product = Product.first
+      product_review = {
+        product: {
+          name: "Tears"
+        }
+      }
+      product.update_attributes(product_review[:product])
+      product.must_be :valid?
+      product.destroy
+
+      post product_reviews_path(product), params: product_review
+      must_respond_with :not_found
+    end
+
     it "should return failure if product belongs to merchant " do
       # arrange: login 'ada' user
       login_test_user
