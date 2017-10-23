@@ -28,9 +28,9 @@ class MerchantsController < ApplicationController
   end
   #CRUD
 
-  def new
-    @merchant = Merchant.new
-  end
+  # def new
+  #   @merchant = Merchant.new
+  # end
 
   def create
     @merchant = Merchant.new(merchant_params)
