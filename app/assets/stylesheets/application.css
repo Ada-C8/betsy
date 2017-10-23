@@ -291,6 +291,22 @@ transform: rotateX(90deg) translateZ(-150px);
 z-index: -1;
 }
 
+/*order page details*/
+.order {
+  width: 100%;
+  text-align: center;
+}
+
+.order-details {
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+.order-details li{
+  display: inline-block;
+}
+
+
 /*button styling*/
 .button {
   flex: 1 1 auto;
