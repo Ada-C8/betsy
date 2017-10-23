@@ -1,7 +1,5 @@
 <section>
   <h2>Edit Product Info</h2>
 
-  <%= (render partial: 'temp-errors') if (flash[:message]) || (flash.now[:message])  %>
-
   <%= render partial: "product-form", locals: {button: "Update"} %>
 </section>
