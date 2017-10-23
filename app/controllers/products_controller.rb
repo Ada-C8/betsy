@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
 
-  before_action :find_product_by_params, only: [:show, :edit, :update, :destroy, :categories]
+  before_action :find_product_by_params, only: [:show, :edit, :update, :destroy, :categories, :add_categories]
 
   before_action :confirm_login, except: [:index, :show]
 
-  before_action :confirm_ownership, only: [:edit, :update, :destroy, :categories]
+  before_action :confirm_ownership, only: [:edit, :update, :destroy, :categories, :add_categories]
 
 
   def index
@@ -89,12 +89,16 @@ class ProductsController < ApplicationController
   end
 
   def add_categories
-    params[:id] = params[:product_id]
-    find_product_by_params
-    confirm_ownership
-
     result = @product.add_categories_by_params(params)
 
+    if result
+      flash.now[:status] = :success
+      flash.now[:message] = "Added category"
+    else
+      flash.now[:status] = :failure
+      flash.now[:message] = "Could not add category"
+      flash.now[:details] = @product.errors.messages
+    end
     return redirect_to product_path(@product.id)
   end
 
