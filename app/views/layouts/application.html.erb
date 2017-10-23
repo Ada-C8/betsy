@@ -53,7 +53,13 @@
 
       <section class="dropdown">
         <ul class="login-menu">
-          <button class="dropdown-button-login"> <%=link_to "Login", '/auth/github' %></button>
+          <button class="dropdown-button-login">
+          <% if session[:user_id] == nil %>
+           <%=link_to "Login", '/auth/github' %>
+          <% else %>
+           <%=link_to "Logout", logout_path, method: :post %>
+           <% end %>
+            </button>
           <div class="dropdown-content-login">
             <li>Testing</li>
             <li></li>
