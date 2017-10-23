@@ -28,8 +28,9 @@ describe ProductsController do
       end
 
       it 'can successfully access nested index of products with valid id' do
-        get products_path(Category.first.id)
+        get category_products_path(Category.first.id)
 
+        controller.instance_variables.must_include :@cat
         must_respond_with :success
       end
 
@@ -201,10 +202,11 @@ describe ProductsController do
 
         must_respond_with :success
       end
-
+      
       it 'can successfully access nested index of products with valid id' do
-        get products_path(Category.first.id)
+        get category_products_path(Category.first.id)
 
+        controller.instance_variables.must_include :@cat
         must_respond_with :success
       end
 

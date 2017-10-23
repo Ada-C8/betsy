@@ -9,10 +9,10 @@ class ProductsController < ApplicationController
 
   def index
     if params[:category_id]
-      cat = Category.find_by(id: params[:category_id])
-      if cat
-        @products = Product.all.find_all { |prod| prod.categories.include? cat }
-        @title = cat.name.capitalize
+      @cat = Category.find_by(id: params[:category_id])
+      if @cat
+        @products = Product.all.find_all { |prod| prod.categories.include? @cat }
+        @title = @cat.name.capitalize
       else
         return head :not_found
       end
