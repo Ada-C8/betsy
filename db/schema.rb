@@ -10,22 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023040659) do
+ActiveRecord::Schema.define(version: 20171023224545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "billings", force: :cascade do |t|
-    t.string "street", null: false
+    t.string "street"
     t.string "apt"
-    t.string "city", null: false
-    t.string "state", null: false
-    t.integer "ship_zip", null: false
-    t.string "email", null: false
-    t.integer "credit_card", null: false
-    t.integer "exp", null: false
-    t.integer "cvv", null: false
-    t.integer "bill_zip", null: false
+    t.string "city"
+    t.string "state"
+    t.integer "ship_zip"
+    t.string "email"
+    t.integer "credit_card"
+    t.integer "exp"
+    t.integer "cvv"
+    t.integer "bill_zip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

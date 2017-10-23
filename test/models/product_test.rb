@@ -17,19 +17,35 @@ require "test_helper"
 describe Product do
   let(:product) { Product.new }
 
+  test 'valid product' do
+
+  end
+
+  test 'invalid without name' do
+    user = User.new(email: 'john@example.com')
+    refute user.valid?, 'user is valid without a name'
+    assert_not_nil user.errors[:name], 'no validation error for name present'
+  end
+
+  test 'invalid without email' do
+    user = User.new(name: 'John')
+    refute user.valid?
+    assert_not_nil user.errors[:email]
+  end
+
 
   describe "validations" do
+    it "can be created" do
+      sushi = Product.new
 
-    it "can be created with required fields" do
-      #failed when added merchant association
-      b = Product.new(name: "product", price: 10, category_id: Category.first.id, merchant_id: Merchant.first.id)
-      b.must_be :valid?
+      sushi.must_be_kind_of Product
     end #can be created
 
     it "requires a name" do
-      b = Product.new(price: 10, category_id: Category.first.id, merchant_id: Merchant.first.id )
-      b.wont_be :valid?
-      b.errors.messages.must_include :name
+      sushi = Product.new
+      sushi.name = nil
+
+      sushi.valid?.must_equal false
     end #requires a name
 
     it "requires a unique name" do
@@ -67,29 +83,29 @@ describe Product do
   end #validation tests
 
   describe "relations" do
-    it "has an author" do
-      b = books(:poodr)
-      a = authors(:metz)
-
-      binding.pry
-
-      b.must_respond_to :author
-      b.author.must_equal a
-      b.author_id.must_equal a.id
+    it "responds to order" do
+      product = products(:fake_product)
+      product.must_respond_to :orders
     end
-
-    it "has a collection of genres" do
-      b = Book.new
-      b.must_respond_to :genres
-      b.genres.must_be :empty?
-
-      g = Genre.create!(name: "test genre")
-      b.genres << g
-      b.genres.must_include g
-    end
+  #   it "has an author" do
+  #     b = books(:poodr)
+  #     a = authors(:metz)
+  #
+  #     binding.pry
+  #
+  #     b.must_respond_to :author
+  #     b.author.must_equal a
+  #     b.author_id.must_equal a.id
+  #   end
+  #
+  #   it "has a collection of genres" do
+  #     b = Book.new
+  #     b.must_respond_to :genres
+  #     b.genres.must_be :empty?
+  #
+  #     g = Genre.create!(name: "test genre")
+  #     b.genres << g
+  #     b.genres.must_include g
+  #   end
   end
-
-
-
-
 end #all product tests

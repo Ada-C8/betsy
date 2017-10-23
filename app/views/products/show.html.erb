@@ -12,3 +12,30 @@
 <%# TODO :: point to proper product id, right now pointing to product/1 %>
 <%= link_to "Add to cart", add_to_cart_path(@product.id), :class=>"button", method: :post %>
 <%= link_to "Review Product", new_product_review_path(@product.id), :class=>"button" %>
+
+<h3>Reviews:</h3>
+
+<% reviews = @product.reviews.to_a %>
+
+<table>
+  <tr>
+    <th>
+      Ratings
+    </th>
+    <th>
+      Reviews
+    </th>
+
+    <% reviews.each do |review| %>
+
+  </tr>
+  <tr>
+    <td>
+      <%= review.rating %>
+    </td>
+    <td>
+      <%= review.reviewtext %>
+    </td>
+    <% end %>
+  </tr>
+</table>
