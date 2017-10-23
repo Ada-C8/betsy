@@ -45,7 +45,8 @@
       <%= link_to product.category.category_name, category_path(product.category.id) %>
     </td>
     <td>
-      <%= link_to "Direct Link to Purchase?", "#" %>
+      <%#= link_to "Direct Link to Purchase?", "#" %>
+      <%= link_to "Add to cart", add_to_cart_path(product.id), :class=>"button", method: :post %>
     </td>
     <% end %>
   </tr>
