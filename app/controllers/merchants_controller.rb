@@ -1,4 +1,5 @@
 class MerchantsController < ApplicationController
+  before_action :find_merchant, only: [:show, :edit, :update, :destroy]
 
   def index
     @merchants = Merchant.all
@@ -22,7 +23,6 @@ class MerchantsController < ApplicationController
   end
 
   def show
-    @merchant = Merchant.find_by(id: params[:id] )
     if @merchant == nil
       flash[:status] = :failure
       flash[:result_text] = "That merchant does not exist."
@@ -31,8 +31,6 @@ class MerchantsController < ApplicationController
   end
 
   def edit
-    @merchant = Merchant.find_by(id: params[:id].to_i)
-
     unless @merchant
       flash[:status] = :failure
       flash[:result_text] = "That merchant could not be found."
@@ -40,8 +38,8 @@ class MerchantsController < ApplicationController
   end
 
   def update
-    @merchant = Merchant.find_by(id: params[:id])
     redirect_to merchants_path unless @merchant
+    redirect_to root_path unless @merchant
 
     if @merchant.update_attributes merchant_params
       flash[:status] = :success
@@ -52,24 +50,16 @@ class MerchantsController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @merchant = Merchant.find_by(id: params[:id])
-  #
-  #   if !@merchant
-  #     redirect_to merchants_path, status: :not_found
-  #   elsif @merchant.destroy
-  #     flash[:status] = :success
-  #     flash[:result_text] = "That merchant has been deleted."
-  #     redirect_to merchants_path
-  #   else
-  #     flash[:status] = :failure
-  #     flash[:result_text] = "That merchant is unable to be deleted."
-  #     redirect_to merchants_path
-  #   end
-  # end
+  def destroy
+    redirect_to root_path
+  end
 
   private
   def merchant_params
     return params.require(:merchant).permit(:username, :email)
+  end
+
+  def find_merchant
+    @merchant = Merchant.find_by(id: params[:id].to_i)
   end
 end

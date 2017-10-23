@@ -14,15 +14,17 @@ pending_order:
   card_cvv: nil
   zip_code: nil
 
-complete_order:
+order_one:
   status: complete
-  email: buyer@email.com
-  address: 100 Witchy Way, Seattle, WA
-  name: Gale
-  card_number: 1234 1234 1234 1234
-  card_exp: 01/21
-  card_cvv: "546"
-  zip_code: "98122"
+  email: me@mail.com
+  address: 111 Main Street
+  name: Martha Stewart
+  card_number: 1234567890987654
+  card_exp: Sun, 1 Oct 2017
+  card_cvv: 546
+  zip_code: 98115
+  city: Scranton
+  state: PA
 
 almost_there_order:
   status: pending

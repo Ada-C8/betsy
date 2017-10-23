@@ -1,24 +1,31 @@
 <%= form_for @order do |f| %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-
-  <%= f.label :address %>
-  <%= f.text_field :address %>
 
   <%= f.label :name %>
   <%= f.text_field :name %>
 
-  <%= f.label :card_number %>
-  <%= f.text_field :card_number %>
+  <%= f.label :address, "Street Address" %>
+  <%= f.text_field :address %>
 
-  <%= f.label :card_exp %>
-  <%= f.text_field :card_exp %>
+  <%= f.label :city %>
+  <%= f.text_field :city %>
 
-  <%= f.label :card_cvv %>
-  <%= f.text_field :card_cvv %>
+  <%= f.label :state %>
+  <%= f.text_field :state %>
 
   <%= f.label :zip_code %>
   <%= f.text_field :zip_code %>
+
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.label :card_number %>
+  <%= f.text_field :card_number %>
+
+  <%= f.label :card_exp, 'Expiration date' %>
+  <%= f.date_select :card_exp, :use_month_numbers => true, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :order => [:month, :year] %>
+
+  <%= f.label :card_cvv %>
+  <%= f.text_field :card_cvv %>
 
   <%= f.submit "Complete Order"%>
 <% end %>

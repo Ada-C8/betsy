@@ -1,12 +1,11 @@
 class OrdersController < ApplicationController
-#TODO: clean up with controller filters
-#TODO: discuss rules around destroy action.
+  before_action :find_order, only: [:show, :edit, :update]
+
   def index
     @orders = Order.all
   end
 
   def show
-    @order = Order.find_by(id: params[:id])
     unless @order
       redirect_to root_path, status: :not_found
     end
@@ -22,8 +21,6 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @order = Order.find_by(id: params[:id])
-
     if !@order
       redirect_to root_path, status: :not_found
     elsif @order
@@ -35,8 +32,6 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.find_by(id: params[:id])
-
     if !@order
       redirect_to root_path, status: :not_found
     elsif @order
@@ -60,8 +55,13 @@ class OrdersController < ApplicationController
   end
 
   private
+
   def order_params
-    return params.require(:order).permit(:email, :address, :name, :card_number, :card_exp, :card_cvv, :zip_code)
+    return params.require(:order).permit(:name, :address, :city, :state, :zip_code, :email, :card_number, :card_exp, :card_cvv)
+  end
+
+  def find_order
+    @order = Order.find_by(id: params[:id])
   end
 
 end
