@@ -18,8 +18,7 @@ describe Product do
   let(:product) { Product.new }
 
   test 'valid product' do
-    :product(name: 'Sushi', description: 'California Roll', price: 5, stock: 10, )
-    assert user.valid?
+
   end
 
   test 'invalid without name' do
@@ -44,9 +43,9 @@ describe Product do
 
     it "requires a name" do
       sushi = Product.new
-      sushi.name = ""
+      sushi.name = nil
 
-      sushi.must_raise :not_valid
+      sushi.valid?.must_equal false
     end #requires a name
 
     it "requires a unique name" do
@@ -83,7 +82,11 @@ describe Product do
 
   end #validation tests
 
-  # describe "relations" do
+  describe "relations" do
+    it "responds to order" do
+      product = products(:fake_product)
+      product.must_respond_to :orders
+    end
   #   it "has an author" do
   #     b = books(:poodr)
   #     a = authors(:metz)
@@ -104,9 +107,5 @@ describe Product do
   #     b.genres << g
   #     b.genres.must_include g
   #   end
-  # end
-
-
-
-
+  end
 end #all product tests
