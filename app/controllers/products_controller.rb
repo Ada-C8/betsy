@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   before_action :confirm_login, except: [:index, :show]
 
-  before_action :confirm_ownership, only: [:edit, :update, :destroy, :categories, :add_categories]
+  before_action :confirm_product_ownership, only: [:edit, :update, :destroy, :categories, :add_categories]
 
 
   def index
@@ -77,10 +77,6 @@ class ProductsController < ApplicationController
     return redirect_to products_path
   end
 
-  def categories
-    @categories = Category.all
-  end
-
   def add_categories
     result = @product.add_categories_by_params(params)
 
@@ -96,22 +92,6 @@ class ProductsController < ApplicationController
   end
 
   private
-
-  def find_product_by_params
-    @product = Product.find_by(id: params[:id])
-
-    unless @product
-      return head :not_found
-    end
-  end
-
-  def confirm_ownership
-    unless session[:merchant]['id'] == @product.merchant_id
-      flash[:status] = :failure
-      flash[:message] = "Only a product's merchant can modify a product."
-      return redirect_back(fallback_location: products_path)
-    end
-  end
 
   def prod_params
     params.require(:product).permit(:name, :image_url, :price, :quantity, :description)

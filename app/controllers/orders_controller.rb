@@ -1,5 +1,8 @@
 class OrdersController < ApplicationController
+  # check if logged in at first
+
   def index
+    # show only the orders that belong to the merchant
     @orders = Order.all
     if session[:merchant]
       @orders = Merchant.find(params[:merchant]).orders
@@ -7,10 +10,15 @@ class OrdersController < ApplicationController
   end
 
   def new
+    # new order, either with no merchant_id or with the logged-in-user's merchant_id
     @order = Order.new
+    if session[:merchant]
+      @order.merchant_id = Merchant.find(params[:merchant]['id'])
+    end
   end
 
   def create
+    # create new order, either with no merchant_id or with the logged-in-user's merchant_id
     @order = Order.new(order_params)
     if @order.save
       flash[:status] = :success
@@ -25,10 +33,12 @@ class OrdersController < ApplicationController
   end
 
   def show
+    # show the desired order
     find_order_by_params_id
   end
 
   def update
+    # edit the desired order
     if find_order_by_params_id
       @order.update_attributes(order_params)
       if @order.save
@@ -42,6 +52,7 @@ class OrdersController < ApplicationController
   end
 
   def destroy
+    # if the order belongs to the user, can destroy it
     if find_order_by_params_id
       @order.destroy
       flash[:status] = :success

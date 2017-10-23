@@ -5,7 +5,7 @@
       <% flash[:details].each do |category, errors| %>
         <% errors.each do |error| %>
           <li>
-            <%= category %> <%= error %>
+            <%= category %>: <%= error %>
           </li>
         <% end %>
       <% end %>
