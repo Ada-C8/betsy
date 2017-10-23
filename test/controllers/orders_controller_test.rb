@@ -87,7 +87,7 @@ describe OrdersController do
           zip_code: "98122"
         }
       }
-
+      patch order_path(order.id), params: order_data
       must_redirect_to confirm_order_path(order.id)
 
       # Verify the DB was really modified
