@@ -51,6 +51,20 @@
         </ul>
       </section>
 
+    <% if session[:user_id] != nil %>
+      <section class="dropdown">
+        <ul class "browse-menu">
+          <button class="dropdown-button-browse">Merchant</button>
+          <div class="dropdown-content-browse">
+            <li><%= link_to "New Category", new_category_path %></li>
+            <li><%= link_to "List Product", new_product_path %></li>
+            <li><%= link_to "Account Products View", merchant_products_path(session[:user_id]) %></li>
+            <li>Account Orders View</li>
+          </div>
+        </ul>
+      </section>
+      <% end %>
+
       <section class="dropdown">
         <ul class="login-menu">
           <button class="dropdown-button-login">
