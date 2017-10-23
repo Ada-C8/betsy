@@ -25,3 +25,21 @@ order_one:
   zip_code: 98115
   city: Scranton
   state: PA
+
+  email: buyer@email.com
+  address: 100 Witchy Way, Seattle, WA
+  name: Gale
+  card_number: 1234 1234 1234 1234
+  card_exp: 01/21
+  card_cvv: "546"
+  zip_code: "98122"
+
+almost_there_order:
+  status: pending
+  email: buyer@email.com
+  address: 100 Witchy Way, Seattle, WA
+  name: Gale
+  card_number: 1234 1234 1234 1234
+  card_exp: 01/21
+  card_cvv: "546"
+  zip_code: "98122"
