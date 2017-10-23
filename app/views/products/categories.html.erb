@@ -17,7 +17,7 @@
       <p>
         <em>Select all that apply:</em>
       </p>
-      <%= form_tag('/products/:id/categories') do %>
+      <%= form_tag add_categories_path, :method => :post, id: @product.id do %>
         <% @categories.each do |category| %>
           <% unless @product.categories.include? category %>
             <%= check_box_tag ("category_#{category.name}"), category.id %>
