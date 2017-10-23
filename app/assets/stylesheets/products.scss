@@ -42,6 +42,7 @@ nav ul {
 }
 
 .product-img {
+  background-image: url(http://via.placeholder.com/320x320);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -93,4 +94,59 @@ section.product-info {
 .product-details .button {
   font-size: 1.5rem;
   padding: 1rem 2rem;
+}
+
+
+////////////////////
+// PRODUCTS PAGE: //
+////////////////////
+
+.show-product {
+  height: 20rem;
+}
+
+
+//////////////////////
+// CATEGORIES LIST: //
+//////////////////////
+
+.prod-cats {
+  list-style: none;
+}
+
+.prod-cats ul {
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
+.prod-cats li {
+  background-color: white;
+  border: 2px solid #9FA2B2;
+  border-radius: 2rem;
+  color: #9FA2B2;
+}
+
+.prod-cats a {
+  color: inherit;
+}
+
+.prod-cats li:hover {
+  background-color: white;
+  border-color: #DBC2CF;
+  color: #DBC2CF;
+}
+
+.prod-cats li:hover a {
+  color: inherit;
+}
+
+.prod-cats .add-categories {
+  background-color: #DBC2CF;
+  color: white;
+}
+
+.prod-cats .add-categories:hover {
+  background-color: #4F3640;
+  border-color: #9FA2B2;
+  color: white;
 }

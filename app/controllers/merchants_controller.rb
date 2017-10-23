@@ -28,25 +28,30 @@ class MerchantsController < ApplicationController
   end
   #CRUD
 
-  def new
-    @merchant = Merchant.new
-  end
+  # def new
+  #   @merchant = Merchant.new
+  # end
 
   def create
     @merchant = Merchant.new(merchant_params)
 
     if @merchant.save
       #success message
+      flash[:status] = :success
+      flash[:message] = "Successfully created merchant #{@merchant.id}"
       redirect_to root_path
     else
       #I'm not sure how we're deciding to do error messages.  Flash?
-      render :new
+      flash.now[:status] = :failure
+      flash.now[:message] = "Failed to create Merchant"
+      flash.now[:details] = @merchant.errors.messages
+      render :new, status: :bad_request
     end
   end
 
-  def index
-    @merchants = Merchant.all
-  end
+  # def index
+  #   @merchants = Merchant.all
+  # end
 
   def edit
     @merchant = Merchant.find_by(id: params[:id])
@@ -54,21 +59,22 @@ class MerchantsController < ApplicationController
   end
 
   def update
-    @merchant = Merchant.find_by(id: params[:id])
-    return head :not_found unless @merchant
-    if @merchant.valid?
-      @merchant.save
-      flash[:status] = :success
-      flash[:message] = "Successfully updated #{@merchant.username}"
-      redirect_to merchant_path(@merchant)
-      return
-      #success message
-    else
-      flash.now[:status] = :failure
-      flash.now[:result_text] = "Could not update #{@merchant.username}"
-      flash.now[:messages] = @merchant.errors.messages
-      render :edit, status: :not_found
-      # return
+    if find_merchant_by_params_id
+      @merchant.update_attributes(merchant_params)
+
+      if @merchant.save
+        flash[:status] = :success
+        flash[:message] = "Successfully updated #{@merchant.username}"
+        redirect_to merchant_path(@merchant)
+        return
+
+      else
+        flash.now[:status] = :failure
+        flash.now[:message] = "Could not update #{@merchant.username}"
+        # flash.now[:messages] = @merchant.errors.messages
+        render :edit, status: :bad_request
+        # return
+      end
     end
   end
 
@@ -88,4 +94,13 @@ class MerchantsController < ApplicationController
   def merchant_params
     return params.require(:merchant).permit(:username, :email, :oauth_uid, :oauth_provider)
   end
+
+  def find_merchant_by_params_id
+    @merchant = Merchant.find_by(id: params[:id])
+    unless @merchant
+      head :not_found
+    end
+    return @merchant
+  end
+
 end

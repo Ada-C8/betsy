@@ -1,0 +1,43 @@
+<section class="row">
+  <p>
+    Would you like to add some categories to <%= @product.name %> to help shoppers find it?
+  </p>
+
+  <%= (render partial: 'temp-errors') if (flash[:message]) || (flash.now[:message])  %>
+
+</section>
+<section class="product-info">
+  <div class="row">
+    <div class="small-12 medium-6 columns">
+      <div class="product-img" style="background-image: url('<%= @product.image_url %>');">
+      </div>
+    </div>
+    <div class="small-12 medium-6 columns product-details">
+      <h3>Categories</h3>
+      <p>
+        <em>Select all that apply:</em>
+      </p>
+      <%= form_tag add_categories_path, :method => :post, id: @product.id do %>
+        <% @categories.each do |category| %>
+          <% unless @product.categories.include? category %>
+            <%= check_box_tag ("category_#{category.name}"), category.id %>
+            <%= label_tag category.name %>
+          <% end %>
+        <% end %>
+
+        <%= submit_tag "Add Selected" %>
+      <% end %>
+
+      <p>
+        <em>Add a new category:</em>
+      </p>
+      <%= form_tag categories_path, :method => :post do %>
+      <%= text_field_tag :category_name %>
+      <%= hidden_field_tag :product_id, @product.id %>
+
+      <%= submit_tag "Create" %>
+      <% end %>
+
+    </div>
+  </div>
+</section>
