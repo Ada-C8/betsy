@@ -18,4 +18,8 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
   resources :reviews, except: [:index, :show]
+  resources :products do
+    # only: [:index, :new, :create] is nested
+    resources :reviews, shallow: true
+  end
 end

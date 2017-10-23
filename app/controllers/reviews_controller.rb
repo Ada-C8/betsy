@@ -1,6 +1,13 @@
 class ReviewsController < ApplicationController
-  before_action :find_review_by_params_id, only: [:edit, :update, :destroy]
-  before_action :check_for_product_owner, only: [:create, :new]
+  before_action :find_review_by_params_id, only: [:show, :edit, :update, :destroy]
+  before_action :check_for_product_owner_nested, only: [:create, :new]
+  before_action :check_for_product_owner, only: [:edit, :update, :destroy]
+
+  def index
+    @reviews = Review.where(product_id: params[:product_id])
+  end
+
+  def show ; end
 
   def new
     @review = Review.new
@@ -20,31 +27,30 @@ class ReviewsController < ApplicationController
   end
 
   def edit ; end
-  #
+
   def update
-    #   #TODO add owner check
-        @review.update_attributes(review_params)
-        if @review.save
-          flash[:status] = :success
-          flash[:message] = "Successfully created review "
-          redirect_to product_path(@product)
-        else
-          render :edit, status: :bad_request
-          return
-        end
+    @review.update_attributes(review_params)
+    if @review.save
+      flash[:status] = :success
+      flash[:message] = "Successfully created review "
+      redirect_to review_path(@review)
+    else
+      render :edit, status: :bad_request
+      return
+    end
   end
 
-  def destroy # only for logged in person who owns
-    # @review.destroy
-    # flash[:status] = :success
-    # flash[:result_text] = "Successfully destroyed review  by #{@merchant.username}"
-    # redirect_to product_path
+  def destroy
+    @review.destroy
+    flash[:status] = :success
+    flash[:result_text] = "Successfully destroyed review"
+    redirect_to product_path(@review.product_id)
   end
 
   private
 
   def review_params
-    @review =(params.require(:review).permit(:rating, :description, :merchant_id, :product_id))
+    return params.require(:review).permit(:rating, :description, :merchant_id, :product_id)
   end
 
   def find_review_by_params_id
@@ -55,13 +61,23 @@ class ReviewsController < ApplicationController
   end
 
   def check_for_product_owner
-    @product = Product.find_by(id: params[:review][:product_id])
+    if !session[:merchant].nil? && @review.merchant_id == session[:merchant]["id"]
+      flash[:status] = :failure
+      flash[:result_text] = "Owner can not edit the review of the product!"
+      # render :nothing => true, :status => :bad_request
+      redirect_to product_path(@review.product_id)
+    end
+  end
+
+  def check_for_product_owner_nested
+    @product = Product.find_by(id: params[:product_id])
     unless @product
       head :not_found
     end
-    if session[:merchant] && @product.merchant_id == session[:merchant][:id]
+    if !session[:merchant].nil? && @product.merchant_id == session[:merchant]["id"]
       flash[:status] = :failure
       flash[:result_text] = "Owner can not review the product!"
+      # render :nothing => true, :status => :bad_request
       redirect_to product_path(@product)
     end
   end
