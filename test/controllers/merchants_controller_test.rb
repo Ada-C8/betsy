@@ -30,10 +30,9 @@ describe MerchantsController do
       flash[:status].must_equal :success
       flash[:result_text].must_equal "Successfully logged in "
     end
-    
-    it "logs in an existing merchant and redirects to the root route" do
 
-      start_count = Merchant.count
+    it "logs in an existing merchant and redirects to the root route" do
+      start_count = Merchant.all.count
 
       merchant = merchants(:grace)
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
@@ -44,17 +43,22 @@ describe MerchantsController do
 
       session[:merchant][:id].must_equal merchant.id
 
-      Merchant.count.must_equal start_count
+      Merchant.all.count.must_equal start_count
     end
-    # session[:merchant].must_be_nil
-    # flash[:status].must_equal :failure
-    # flash[:result_text].must_equal "Not logged in"
-    # flash[:messages].must_include :email
-    # flash[:messages].must_include :username
-    #   must_respond_with :failure
-    #   must_redirect_to root_path
-    # binding.pry
-    # end
+
+    it "creates new user with new info" do
+
+      start_count = Merchant.all.count
+      new_merchant = Merchant.new(oauth_provider: 'github',oauth_uid: "adlgkcl",email: 'mail@mail.com', username: 'Mr. New')
+      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(new_merchant))
+      get login_path(:github)
+      must_redirect_to root_path
+      Merchant.count.must_equal start_count + 1
+      session[:merchant][:id].must_equal Merchant.last.id
+      flash[:result_text].must_equal "Successfully created new merchant "
+      flash[:status].must_equal :success
+
+    end
 
   end
 
