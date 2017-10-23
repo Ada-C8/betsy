@@ -22,8 +22,6 @@
           <% unless @product.categories.include? category %>
             <%= check_box_tag ("category_#{category.name}"), category.id %>
             <%= label_tag category.name %>
-
-            <%= hidden_field_tag :product_id, @product.id %>
           <% end %>
         <% end %>
 
@@ -33,7 +31,7 @@
       <p>
         <em>Add a new category:</em>
       </p>
-      <%= form_tag('/products/:id/new_category') do %>
+      <%= form_tag categories_path, :method => :post do %>
       <%= text_field_tag :category_name %>
       <%= hidden_field_tag :product_id, @product.id %>
 

@@ -4,7 +4,7 @@
 <section class="small-10 columns product-info">
   <div class="row">
     <!-- <div class="small-12 medium-6 columns"> -->
-      <div class="small-12 medium-5 columns product-img" <%= (raw "style=\"background-image: url('#{@product.image_url}');\"") unless @product.image_url.empty? %>
+      <div class="small-12 medium-5 columns product-img" <%= (raw "style=\"background-image: url('#{@product.image_url}');\"") unless (@product.image_url.nil? || @product.image_url.empty?) %>
       >
       </div>
     <!-- </div> -->

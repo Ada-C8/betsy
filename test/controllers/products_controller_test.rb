@@ -6,6 +6,8 @@ describe ProductsController do
   let(:bad_params) { { product: { "name"=>"" } } }
   let(:tmi_params) { { product: { "name"=>"New Test Item", "price"=>"11.00", "quantity"=>"1", "description"=>"This is a test", "tmi"=>"uh oh", "id"=>1 } } }
   let(:new_params) { { product: { "name"=>"Updated Name" } } }
+  let(:owned_product) { owned_product = Product.find_by(merchant_id: merchants(:ada).id) }
+  let(:not_owned_product) { not_owned_product = Product.find_by(merchant_id: merchants(:grace).id) }
 
   before do
     @before_count = Product.count
@@ -88,14 +90,12 @@ describe ProductsController do
     describe 'edit' do
       # these tests will have to change when logging in actually works (dependent on fakey_login)
       it 'can successfully access edit for own product' do
-        owned_product = Product.find_by(merchant_id: merchants(:ada).id)
         get edit_product_path(owned_product.id)
 
         must_respond_with :success
       end
 
       it 'CANNOT successfully edit other users products' do
-        not_owned_product = Product.find_by(merchant_id: merchants(:grace).id)
         get edit_product_path(not_owned_product.id)
 
         must_respond_with :found
@@ -105,17 +105,15 @@ describe ProductsController do
 
     describe 'update' do
       it 'can successfully update own product with valid data' do
-        owned_product = Product.find_by(merchant_id: Merchant.first.id)
         patch product_path(owned_product.id), params: new_params
 
         # WHY does only this not work?
-        # owned_product.name.must_equal "Updated Name"
+        owned_product.name.must_equal "Updated Name"
         flash[:status].must_equal :success
         must_respond_with :found
       end
 
       it 'CANNOT successfully update own product with invalid data' do
-        owned_product = Product.find_by(merchant_id: Merchant.first.id)
         patch product_path(owned_product.id), params: bad_params
 
         must_respond_with :bad_request
@@ -123,7 +121,6 @@ describe ProductsController do
       end
 
       it 'CANNOT successfully update other users product' do
-        not_owned_product = Product.find_by(merchant_id: Merchant.last.id)
         patch product_path(not_owned_product.id), params: new_params
 
         must_respond_with :found
@@ -133,7 +130,6 @@ describe ProductsController do
 
     describe 'destroy' do
       it 'can successfully destroy own product' do
-        owned_product = Product.find_by(merchant_id: Merchant.first.id)
         delete product_path(owned_product.id)
 
         must_respond_with :found
@@ -142,7 +138,6 @@ describe ProductsController do
       end
 
       it 'CANNOT destroy other users products' do
-        not_owned_product = Product.find_by(merchant_id: Merchant.last.id)
         delete product_path(not_owned_product.id)
 
         must_respond_with :found
@@ -153,16 +148,12 @@ describe ProductsController do
 
     describe 'categories' do
       it 'can access page for own products' do
-        owned_product = Product.find_by(merchant_id: merchants(:ada).id)
-
         get add_categories_path(owned_product.id)
 
         must_respond_with :success
       end
 
       it 'CANNOT access page for other users products' do
-        not_owned_product = Product.find_by(merchant_id: merchants(:grace).id)
-
         get add_categories_path(not_owned_product.id)
 
         must_respond_with :found
@@ -172,27 +163,25 @@ describe ProductsController do
 
     describe 'add_categories' do
       it 'can successfully add categories to own products' do
-        skip
-        owned_product = Product.find_by(merchant_id: merchants(:ada).id)
-        test_params = { "product_id"=>"2",
-          "category_Magic Items"=>"5",
-          id: :id
+        cat_id = categories(:magic).id
+        test_params = {
+          id: owned_product.id,
+          "category_Magic Items" => cat_id,
         }
 
-        post "/products/:id/categories", params: test_params
+        post add_categories_path(owned_product.id), params: test_params
 
-        must_respond_with :success
+        must_respond_with :found
+        flash[:status].must_equal :success
       end
 
       it 'CANNOT successfully add categories to other users products' do
-        skip
-        not_owned_product = Product.find_by(merchant_id: merchants(:grace).id)
         test_params = { "product_id"=>"2",
           "category_Magic Items"=>"5",
           id: :id
         }
 
-        post add_categories_path, params: test_params
+        post add_categories_path(not_owned_product.id), params: test_params
 
         must_respond_with :found
         flash[:status].must_equal :failure
