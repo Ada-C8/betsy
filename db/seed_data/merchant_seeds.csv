@@ -1,0 +1,4 @@
+id,username,email,uid,provider
+3000,Julia,julia@email.com,123,github
+3001,Rebecca,rebecca@email.com,234,github
+3002,Lindsey,lindsey@email.com,345,github
