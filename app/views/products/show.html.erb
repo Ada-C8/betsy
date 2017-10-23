@@ -12,7 +12,7 @@
       <%= form_tag do %>
       <%= label_tag :quantity, "Quantity:", class: 'small-6 columns' %>
       <%= select_tag :quantity, options_for_select((1..@product.quantity)), class: 'small-6 columns' %>
-      <%= submit_tag "Add to Cart", class: 'button' %>
+      <%= submit_tag "Add to Cart", class: 'button cart-btn' %>
       <% end %>
     </div>
   </div>

@@ -1,7 +1,8 @@
 <%= form_for @order, html: {id: "order-form"} do |f| %>
   <% if session[:merchant] %>
-    <%= f.hidden_field :merchant_id, value: session[:merchant] %>
+    <%= f.hidden_field :merchant_id, value: session[:merchant]['id'] %>
   <% end %>
+  <%= f.hidden_field :status, value: "pending" %>
 
   <%= content_tag :div, class: "name-wrapper" do %>
     <%= f.label :cust_name, "Name"%>

@@ -1,3 +1,28 @@
 // Place all the styles related to the categories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+////////////////////
+// ADD CATEGORIES //
+////////////////////
+
+.check-with-label:checked + .label-for-check {
+  font-weight: bold;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.add-category {
+  display: inline-block !important;
+}
+
+.add-category[type="text"], .add-category[type="submit"] {
+  width: 45%;
+  margin: 0;
+}
+
+.center {
+  text-align: center;
+}

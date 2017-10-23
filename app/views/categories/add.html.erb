@@ -10,7 +10,7 @@
       <div class="product-img" style="background-image: url('<%= @product.image_url %>');">
       </div>
     </div>
-    <div class="small-12 medium-6 columns product-details">
+    <div class="small-12 medium-6 columns">
       <h3>Categories</h3>
       <p>
         <em>Select all that apply:</em>
@@ -18,23 +18,32 @@
       <%= form_tag add_categories_path, :method => :post, id: @product.id do %>
         <% @categories.each do |category| %>
           <% unless @product.categories.include? category %>
-            <%= check_box_tag ("category_#{category.name}"), category.id %>
-            <%= label_tag category.name %>
+            <div class="form-item">
+              <% cat_name = "category_#{category.name}" %>
+              <%= check_box_tag cat_name, category.id, false, class: "check-with-label" %>
+              <%= label_tag cat_name, category.name, class: "label-for-check" %>
+            </div>
           <% end %>
         <% end %>
+        <div class="center">
+          <%= submit_tag "Add Selected", class: 'button center' %>
+        </div>
+        <% end %>
 
-        <%= submit_tag "Add Selected" %>
-      <% end %>
+      <div class="row">
+        <%= form_tag categories_path, :method => :post do %>
+        <p class="small-12 medium-3 columns add-category">
+          <em>New category:</em>
+        </p>
+        <div class="small-12 medium-9 columns">
 
-      <p>
-        <em>Add a new category:</em>
-      </p>
-      <%= form_tag categories_path, :method => :post do %>
-      <%= text_field_tag :category_name %>
-      <%= hidden_field_tag :product_id, @product.id %>
+          <%= text_field_tag :category_name, "", class: "add-category" %>
+          <%= hidden_field_tag :product_id, @product.id, class: "add-category" %>
 
-      <%= submit_tag "Create" %>
-      <% end %>
+          <%= submit_tag "Create", class: "add-category button" %>
+        </div>
+        <% end %>
+      </div>
 
     </div>
   </div>

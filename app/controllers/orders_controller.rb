@@ -3,18 +3,15 @@ class OrdersController < ApplicationController
 
   def index
     # show only the orders that belong to the merchant
-    @orders = Order.all
     if session[:merchant]
-      @orders = Merchant.find(params[:merchant]).orders
+      merchant_id = session[:merchant]['id']
+      @orders = Merchant.find(merchant_id).orders
     end
   end
 
   def new
     # new order, either with no merchant_id or with the logged-in-user's merchant_id
     @order = Order.new
-    if session[:merchant]
-      @order.merchant_id = Merchant.find(params[:merchant]['id'])
-    end
   end
 
   def create
