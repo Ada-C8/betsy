@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :find_product, only: [:show, :update, :destroy, :add_product_to_cart, :remove_product_from_cart]
+
   def index
     if params[:merchant_id]
       @merchant = Merchant.find_by(id: params[:merchant_id])
@@ -51,7 +53,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find_by(id: params[:id])
     if @product == nil
       flash[:status] = :failure
       flash[:result_text] = "That product does not exist."
@@ -60,8 +61,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find_by(id: params[:id].to_i)
-
     unless @product
       flash[:status] = :failure
       flash[:result_text] = "That product could not be found."
@@ -69,7 +68,6 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product = Product.find_by(id: params[:id].to_i)
     redirect_to root_path unless @product
 
     if @product.update_attributes product_params
@@ -82,7 +80,6 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find_by(id: params[:id])
     if !@product
       redirect_to root_path, status: :not_found
     elsif @product.destroy
@@ -93,12 +90,10 @@ class ProductsController < ApplicationController
       flash[:status] = :failure
       flash[:result_text] = "That product is unable to be deleted."
       redirect_to products_path, status: :not_found
-
     end
   end
 
   def add_product_to_cart
-    @product = Product.find_by(id: params[:id])
     if @product.remove_one_from_stock
       if Order.find_by(id: session[:order_id]) == nil
         create_order
@@ -123,8 +118,6 @@ class ProductsController < ApplicationController
 
 
   def remove_product_from_cart
-    @product = Product.find_by(id: params[:id])
-
     order = Order.find_by(id: session[:order_id])
     index_of_first_found = order.products.index {|element| element.id == @product.id}
     orders_products_array = order.products.to_a
@@ -147,10 +140,37 @@ class ProductsController < ApplicationController
         flash[:error] = "Error: Product not found in cart"
       end
     end
+
+    if !@product
+      flash[:status] = :failure
+      flash[:result_text] = "That product isn't even in your cart."
+      redirect_to products_path, status: :bad_request
+    end
+
+      order = Order.find_by(id: session[:order_id])
+
+      index_of_first_found = order.products.index {|element| element.id == @product.id}
+
+      orders_products_array = order.products.to_a
+
+      orders_products_array.delete_at(index_of_first_found)
+
+      order.products.replace([])
+      order.products.replace(orders_products_array)
+
+      @product.add_one_to_stock
+      flash[:status] = :success
+      flash[:result_text] = "Product successfully removed from your cart!"
+
+      redirect_to products_path
   end
 
 private
   def product_params
     params.require(:product).permit(:name, :price, :quantity_avail, :merchant_id)
+  end
+
+  def find_product
+    @product = Product.find_by(id: params[:id])
   end
 end

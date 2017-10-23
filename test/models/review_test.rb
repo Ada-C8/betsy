@@ -28,5 +28,5 @@ describe Review do
       review.rating = 9
       review.valid?.must_equal false
     end
-end
+  end
 end
