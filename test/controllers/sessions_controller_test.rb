@@ -32,6 +32,9 @@ describe SessionsController do
     #
     # it "redirects to the login route if given invalid user data" do
     # end
+    it "tells a users that they are already logged in if that is true" do
+
+    end
   end
 
   # describe 'login' do

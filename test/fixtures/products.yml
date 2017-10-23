@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+fake_product1:
   id: 1
   name: MyString
   description: MyString
@@ -8,7 +8,7 @@ one:
   stock: 1
   category_id: 1
 
-two:
+fake_product2:
   id: 2
   name: MyString
   description: MyString
