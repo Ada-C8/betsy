@@ -8,8 +8,10 @@ class ProductsController < ApplicationController
         flash[:status] = :failure
         flash[:result_text] = "Products for that merchant ID could not be found"
         redirect_to products_path, status: :not_found
-      else
+      elsif @merchant.id == session[:user_id]
         @products = @merchant.products
+      else
+        @products = @merchant.products.where(available: "Available")
       end
     elsif
       params[:review_id]
@@ -27,10 +29,10 @@ class ProductsController < ApplicationController
         flash[:result_text] = "Products for that category could not be found"
         redirect_to products_path, status: :not_found
       else
-        @products = @category.products
+        @products = @category.products.where(available: "Available")
       end
     else
-      @products = Product.all
+      @products = Product.all.where(available: "Available")
     end
   end
 
@@ -54,14 +56,16 @@ class ProductsController < ApplicationController
   end
 
   def show
-    if @product == nil
+    find_product
+    if @product == nil || @product.available == "Retired"
       flash[:status] = :failure
-      flash[:result_text] = "That product does not exist."
+      flash[:result_text] = "That product is not available for viewing."
       redirect_to products_path, status: :not_found
     end
   end
 
   def edit
+    @product = Product.find_by(id: params[:id])
     unless @product
       flash[:status] = :failure
       flash[:result_text] = "That product could not be found."
@@ -170,7 +174,7 @@ class ProductsController < ApplicationController
 
 private
   def product_params
-    params.require(:product).permit(:name, :price, :quantity_avail)
+    params.require(:product).permit(:name, :price, :quantity_avail, :available)
   end
 
   def find_product
