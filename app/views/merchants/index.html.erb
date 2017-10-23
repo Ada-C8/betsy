@@ -1,12 +1,18 @@
 <section class="all-merchants">
+  <span class="index-banner">
+  <% if @merchants.count == 0 %>
+    Yikes! No merchants meet those parameters.
+  <% else %>
+    Merchant Gallery
+  <% end %>
+  </span>
 
   <% @merchants.each do |merchant| %>
   <section class="info-card">
     <section class="merchant">
-      <span><img src="http://www.dailypublic.com/sites/default/files/2015/Oct/buffalo-Niagara-Heritage-Village.jpg"</img></span>
-      <span><%= merchant.username %></span>
-      <span><%= merchant.email %></span>
-      <span><%= link_to "Check out their Products", merchant_products_path(merchant.id), alt: "Link to merchant's products"%></span>
+      <span><img class="index-image", src="http://www.dailypublic.com/sites/default/files/2015/Oct/buffalo-Niagara-Heritage-Village.jpg"</img></span>
+      <span><em><%= link_to merchant.username, merchant_path(merchant.id), alt: "Link to merchant's products"%></em></span>
+      <span><em><%= merchant.email %></em></span>
     </section>
     </section>
   <% end %>

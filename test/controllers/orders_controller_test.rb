@@ -3,10 +3,6 @@ require "test_helper"
 
 describe OrdersController do
 
-
-  CATEGORIES = %w(albums books movies)
-  INVALID_CATEGORIES = ["nope", "42", "", "  ", "albumstrailingtext"]
-
   describe "index" do
     it "succeeds when there are orders" do
       Order.count.must_be :>, 0, "No works in the test fixtures"
@@ -91,9 +87,8 @@ describe OrdersController do
           zip_code: "98122"
         }
       }
-
       patch order_path(order.id), params: order_data
-      must_redirect_to root_path
+      must_redirect_to confirm_order_path(order.id)
 
       # Verify the DB was really modified
       Order.find(order.id).status.must_equal "complete"

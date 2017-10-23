@@ -27,6 +27,7 @@ class ReviewsController < ApplicationController
       # redirect_to root_path
       redirect_to product_path(@review.product_id)
     else
+
       puts "the new model"
       puts @review
       puts @review.rating

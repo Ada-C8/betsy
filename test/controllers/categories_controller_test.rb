@@ -13,7 +13,7 @@ describe CategoriesController do
   end
 
   it "should successfully get to category show page" do
-    get category_path(categories(:brooms).id)
+    get category_path(Category.first.id)
     must_respond_with :success
   end
 

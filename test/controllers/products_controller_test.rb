@@ -31,11 +31,8 @@ describe ProductsController do
 
   describe "create" do
     it "creates a new product" do
-      # post products_path, params: {product: {name: "creepy things", quantity_avail: 4, price: 9.99, merchant_id: merchants(:spooky)}}
-      # must_respond_with :redirect
-      # must_redirect_to product_path(Product.last.id)
       proc   {
-        post products_path, params: { product: { name: "creepy things", quantity_avail: 4, price: 9.99, merchant_id: Merchant.first.id}}
+        post products_path, params: { product: { name: "eyeballs", quantity_avail: 4, price: 9.99, merchant_id: Merchant.first.id}}
       }.must_change 'Product.count', 1
     end
   end
@@ -68,7 +65,7 @@ describe ProductsController do
 
     it "should not add out-of-stock products to pending order" do
       patch add_product_path(products(:out_of_stock).id)
-      must_respond_with :bad_request
+      must_respond_with :redirect
       flash.keys.must_include "error"
     end
 
@@ -99,16 +96,43 @@ describe ProductsController do
   describe "remove_product_from_cart" do
     setup { session_setup }
 
-    it "should remove product from the order if product is connected to order" do
+    before do
       patch add_product_path(products(:pointy_hat).id)
       patch add_product_path(products(:pointy_hat).id)
+      @order = Order.find_by(id: session[:order_id])
+    end
 
-      order = Order.find_by(id: session[:order_id])
-      order.products.size.must_equal 2
+    it "should remove exactly one instance of product from the order if at least one instance is in order" do
+      @order.products.size.must_equal 2
 
       patch remove_product_path(products(:pointy_hat).id)
-      order.products.size.must_equal 1
+      @order.products.size.must_equal 1
     end
+
+    it "adds one product back to quantity_avail if successfully removed from order" do
+      Product.find(products(:pointy_hat).id).quantity_avail.must_equal 3
+
+      patch remove_product_path(products(:pointy_hat).id)
+
+      Product.find(products(:pointy_hat).id).quantity_avail.must_equal 4
+
+    end
+
+    it "should not change order.products if product not there" do
+      patch remove_product_path(products(:not_in_order).id)
+      @order.products.size.must_equal 2
+
+    end
+
+    it "should not change quantity of product available if not successful" do
+      Product.find(products(:not_in_order).id).quantity_avail.must_equal 5
+
+      patch remove_product_path(products(:not_in_order).id)
+
+      Product.find(products(:not_in_order).id).quantity_avail.must_equal 5
+    end
+
+
   end
 
 
@@ -140,9 +164,29 @@ describe ProductsController do
   end
 
   describe "product by category" do
-    it "Should get products by category" do
+    it "should get products by category" do
       get category_products_path(categories(:brooms).id)
       must_respond_with :success
     end
+
+    it "should render 404 if category does not exist" do
+      bad = Category.last.id + 1
+      get category_products_path(bad)
+      must_respond_with :not_found
+    end
   end
+
+  describe "products by merchant" do
+    it "should show products belonging to a specific merchant" do
+      get merchant_products_path(merchants(:witch).id)
+      must_respond_with :success
+    end
+
+    it "should render 404 if merchant does not exist" do
+      bad = Merchant.last.id + 1
+      get merchant_products_path(bad)
+      must_respond_with :not_found
+    end
+  end
+
 end

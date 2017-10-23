@@ -3,6 +3,7 @@ require "test_helper"
 #might need edge cases
 #test for 404 missing failing
 describe ReviewsController do
+
   # describe "index" do
   #   it "succeeds with many reviews" do
   #     # Review.count.must_be :>, 0
@@ -69,4 +70,5 @@ describe ReviewsController do
   #       Review.find_by(id: review.id).must_be_nil
   #     end
   #   end
+
 end

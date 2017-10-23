@@ -10,7 +10,6 @@
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
 
     <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
@@ -21,66 +20,71 @@
 
   <body>
 
-    <header class="header navigation">
-      <span class="logo"><%= link_to "Sourceress", root_path %></span>
+<% if current_page?(root_path) %>
+  <% else %>
+  <div class="row">
+    <header class="navigation large-12 columns">
+
+      <button class="logo"><%= link_to "Sourceress", root_path %></button>
+
       <section class="dropdown">
-        <ul class "view-menu">
-          <button class="dropdown-button-view">Browse</button>
-            <div class="dropdown-content-view">
-              <li><%= link_to "Browse Products", products_path %></li>
-              <li><%= link_to "Browse Merchants", merchants_path %></li>
-              <li><%= link_to "Browse Categories", categories_path %></li>
-            </div>
+        <ul class "browse-menu">
+          <button class="dropdown-button-browse">Browse</button>
+          <div class="dropdown-content-browse">
+            <li><%= link_to "Products", products_path %></li>
+            <li><%= link_to "Merchants", merchants_path %></li>
+            <li><%= link_to "Categories", categories_path %></li>
+          </div>
         </ul>
       </section>
-      <section class="dropdown">
-        <ul class="create-menu">
 
-          <button class="dropdown-button-create">
+      <section class="dropdown">
+        <ul class="cart-menu">
+          <button class="dropdown-button-cart">
             <% if session[:order_id] == nil %>
-              <%= link_to "Shopping Cart", orders_path, method: :post %>
+            <%= link_to "Shopping Cart", orders_path, method: :post %>
             <% else %>
-              <%= link_to "Shopping Cart", order_path(session[:order_id]) %>
+            <%= link_to "Shopping Cart", order_path(session[:order_id]) %>
             <% end %>
-
-
           </button>
+        </ul>
+      </section>
 
-            <div class="dropdown-content-create">
-              <li></li>
-              <li></li>
-            </div>
-        </ul>
-      </section>
       <section class="dropdown">
-        <ul class="create-menu">
-          <button class="dropdown-button-create">Login</button>
-            <div class="dropdown-content-create">
-              <li></li>
-              <li></li>
-            </div>
+        <ul class="login-menu">
+          <button class="dropdown-button-login">Login</button>
+          <div class="dropdown-content-login">
+            <li>Testing</li>
+            <li></li>
+          </div>
         </ul>
       </section>
-      </span>
-    </header>
+
+  </header>
+  </div>
+
+<% end %>
 
 
   <% if flash[:result_text] or flash[:messages] %>
-    <section class="row status <%= flash[:status] %>">
-      <h3><%= flash[:status] == :failure ? "A problem occurred: " : "" %><%= flash[:result_text] %></h3>
-      <% if flash[:messages] %>
-        <ul>
-          <% flash[:messages].each do |name, problems| %>
-            <% problems.each do |problem| %>
-              <li><%= name %>: <%= problem %></li>
-            <% end %>
-          <% end %>
-        </ul>
+  <section class="row status <%= flash[:status] %>">
+    <h3><%= flash[:status] == :failure ? "A problem occurred: " : "" %><%= flash[:result_text] %></h3>
+    <% if flash[:messages] %>
+    <ul>
+      <% flash[:messages].each do |name, problems| %>
+      <% problems.each do |problem| %>
+      <li><%= name %>: <%= problem %></li>
       <% end %>
-    </section>
+      <% end %>
+    </ul>
+    <% end %>
+  </section>
   <% end %>
 
-    <%= yield %>
+<section class="content">
+  <%= yield %>
+</section>
 
-  </body>
+
+</body>
 </html>
