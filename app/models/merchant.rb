@@ -13,11 +13,11 @@ class Merchant < ApplicationRecord
   def self.by_auth_hash(auth_hash)
     merchant = Merchant.new
 
-   merchant.oauth_provider = auth_hash['provider']
+    merchant.oauth_provider = auth_hash['provider']
     merchant.oauth_uid = auth_hash['uid']
     merchant.email = auth_hash['info']['email']
     merchant.username = auth_hash['info']['nickname']
 
-   merchant
+    merchant
   end
 end

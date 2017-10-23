@@ -72,7 +72,7 @@ describe Merchant do
   describe 'relationships' do
     it "has a list of products" do
       mermaid_fin = merchants(:ada)
-      mermaid_fin .must_respond_to :products
+      mermaid_fin.must_respond_to :products
       mermaid_fin.products.each do |product|
         product.must_be_kind_of Product
       end
@@ -99,4 +99,48 @@ describe Merchant do
       order_product.must_respond_to :order_products
     end
   end
-end
+  describe "self.by_auth_hash(auth_hash)" do
+    it "has an instance of merchant" do
+      auth_hash = {
+        'provider' => "github",
+        'uid' => "12345",
+        'info' => {'email' => "somebody@somesite.com",
+          'nickname' => "Somebody"}
+        }
+        merchant_auth = Merchant.by_auth_hash auth_hash
+        merchant_auth.must_be_kind_of Merchant
+        # merchant_auth.must_respond_to
+        # binding.pry
+      end
+
+      it "responds to the proper keys" do
+        auth_hash = {
+          'provider' => "github",
+          'uid' => "12345",
+          'info' => {'email' => "somebody@somesite.com",
+            'nickname' => "Somebody"}
+          }
+          merchant_auth = Merchant.by_auth_hash auth_hash
+          merchant_auth.must_respond_to :oauth_provider
+          merchant_auth.must_respond_to :oauth_uid
+          merchant_auth.must_respond_to :email
+          merchant_auth.must_respond_to :username
+          # binding.pry
+        end
+
+        it "has the correct values for merchant from auth_hash" do
+          auth_hash = {
+            'provider' => "github",
+            'uid' => "12345",
+            'info' => {'email' => "somebody@somesite.com",
+              'nickname' => "Somebody"}
+            }
+            merchant_auth = Merchant.by_auth_hash auth_hash
+            merchant_auth.oauth_provider.must_equal "github"
+            merchant_auth.oauth_uid.must_equal "12345"
+            merchant_auth.email.must_equal "somebody@somesite.com"
+            merchant_auth.username.must_equal "Somebody"
+          end
+
+        end
+      end
