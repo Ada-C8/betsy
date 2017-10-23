@@ -20,6 +20,7 @@ describe OrdersController do
     it "adds order to the database and redirects when the data is valid" do
       order = {
         order: {
+          id: 4444,
           cust_name: "Mermaid",
           merchant_id: 21,
           cust_cc: 12345,
@@ -29,7 +30,16 @@ describe OrdersController do
           status: "complete"
         }
       }
-      Order.new(order[:order]).must_be :valid?
+      new_order = Order.new(order[:order])
+      order_product = {
+        order_product: {
+          product_id: :mermaid_fin,
+          quantity: 1,
+          order_id: new_order.id
+        }
+      }
+      order_item = new_order.order_products.new(order_product[:order_product])
+      new_order.must_be :valid?
       start_count = Order.count
 
       post orders_path, params: order
@@ -71,20 +81,6 @@ describe OrdersController do
     it "returns not_found with invalid id" do
       invalid_id = Order.last.id + 1
       get order_path(invalid_id)
-      must_respond_with :not_found
-    end
-  end
-
-  describe "edit" do
-    it "returns success with valid id" do
-      order_id = Order.first.id
-      get edit_order_path(order_id)
-      must_respond_with :success
-    end
-
-    it "returns not_found with invalid id" do
-      invalid_id = Order.last.id + 1
-      get edit_order_path(invalid_id)
       must_respond_with :not_found
     end
   end

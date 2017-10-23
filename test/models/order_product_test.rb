@@ -19,16 +19,6 @@ describe OrderProduct do
   end
 
   describe "relationships" do
-    # it "should return false without a product" do
-    #   order_product.product = nil
-    #   order_product.valid?.must_equal false
-    # end
-
-    # it "should return false without an order" do
-    #   order_product.order = nil
-    #   order_product.valid?.must_equal false
-    # end
-
     it "has a product" do
       b = order_products(:order_products)
       a = products(:mermaid_fin)
@@ -46,7 +36,5 @@ describe OrderProduct do
       b.order.must_equal a
       b.order_id.must_equal a.id
     end
-
-
   end
 end
