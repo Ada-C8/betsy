@@ -1,0 +1,9 @@
+<h1>This is the page to edit categories</h1>
+
+<%= form_for @category do |f| %>
+  <%= f.label "Category Name" %>
+  <%= f.text_field :category_name %>
+
+  <%= f.submit "Create Category", :class=>"button"  %>
+
+<% end %>
