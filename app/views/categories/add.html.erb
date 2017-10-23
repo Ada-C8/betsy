@@ -10,7 +10,7 @@
       <div class="product-img" style="background-image: url('<%= @product.image_url %>');">
       </div>
     </div>
-    <div class="small-12 medium-6 columns product-details">
+    <div class="small-12 medium-6 columns">
       <h3>Categories</h3>
       <p>
         <em>Select all that apply:</em>
@@ -25,20 +25,23 @@
             </div>
           <% end %>
         <% end %>
-
-        <%= submit_tag "Add Selected", class: 'button' %>
-      <% end %>
+        <div class="center">
+          <%= submit_tag "Add Selected", class: 'button center' %>
+        </div>
+        <% end %>
 
       <div class="row">
         <%= form_tag categories_path, :method => :post do %>
-        <p class="small-12 medium-2 columns add-category">
+        <p class="small-12 medium-3 columns add-category">
           <em>New category:</em>
         </p>
+        <div class="small-12 medium-9 columns">
 
-          <%= text_field_tag :category_name, "", class: "small-12 medium-2 columns add-category" %>
+          <%= text_field_tag :category_name, "", class: "add-category" %>
           <%= hidden_field_tag :product_id, @product.id, class: "add-category" %>
 
-          <%= submit_tag "Create", class: "small-12 medium-2 columns add-category button end" %>
+          <%= submit_tag "Create", class: "add-category button" %>
+        </div>
         <% end %>
       </div>
 

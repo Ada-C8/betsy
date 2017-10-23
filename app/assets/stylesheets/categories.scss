@@ -16,9 +16,13 @@ input[type="checkbox"] {
 
 .add-category {
   display: inline-block !important;
-  width: inherit !important;
 }
 
-.button[type="submit"] {
-  margin: .25rem;
+.add-category[type="text"], .add-category[type="submit"] {
+  width: 45%;
+  margin: 0;
+}
+
+.center {
+  text-align: center;
 }
