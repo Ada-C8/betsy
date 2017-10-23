@@ -1,6 +1,9 @@
 class CategoriesController < ApplicationController
   before_action :confirm_login
+
   before_action :find_product_by_params, only: [:add]
+
+  before_action :confirm_product_ownership, only: [:add]
 
 
     def create
