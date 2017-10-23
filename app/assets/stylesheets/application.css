@@ -67,7 +67,6 @@ header {
   font-weight: bold;
   font-size: 4rem;
   float: left;
-
 }
 
 .dropdown {
@@ -84,7 +83,7 @@ header {
   text-decoration: none;
 }
 
-.dropdown a:hover, {
+.dropdown a:hover {
   color: grey;
 }
 
@@ -96,7 +95,10 @@ header {
   cursor: pointer;
   font-weight: bolder;
   margin: 0;
+}
 
+.dropdown-button-browse:hover, .dropdown-button-cart:hover, .dropdown-button-login:hover, .logo:hover {
+  transform: scale(1.15);
 }
 
 .dropdown-content-browse, .dropdown-content-cart, .dropdown-content-login {
@@ -240,6 +242,9 @@ header {
   font-size: 6rem;
   display: inline-block;
   text-align: center;
+  position: relative;
+  margin-bottom: 0;
+  letter-spacing: 7px;
 }
 /*homepage canvas crystal ball*/
 #myCanvas {
@@ -254,10 +259,10 @@ header {
 
 .ball {
   display: inline-block;
-  width: 40%;
-  height: 40%;
-  margin-right: 30%;
-  margin-left: 30%;
+  width: 35%;
+  height: 35%;
+  margin-right: 32.5%;
+  margin-left: 32.5%;
   margin-bottom: 10%;
   border-radius: 50%;
   position: relative;
