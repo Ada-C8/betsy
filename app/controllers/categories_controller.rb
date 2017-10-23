@@ -1,12 +1,12 @@
 class CategoriesController < ApplicationController
-  skip_before_action :require_login, only: [:index, :show]
+  skip_before_action :require_login, only: [:index, :show, :new, :create]
 
   def index
     @categories = Category.all
   end
 
   def new
-    @category = Category.new(category_params)
+    @category = Category.new
   end
 
 
@@ -23,6 +23,7 @@ class CategoriesController < ApplicationController
       flash.now[:details] = @category.errors.messages
       render :new, status: :bad_request
     end
+  end
 
     # def edit
     # end
@@ -33,12 +34,9 @@ class CategoriesController < ApplicationController
     # def delete
     # end
 
-  def show
-    @category = Category.find_by(id: params[:id])
-  end
-  end
-
-
+    def show
+      @category = Category.find_by(id: params[:id])
+    end
 
   private
   def category_params
