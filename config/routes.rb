@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     get '/orders/:id/confirm', to: 'orders#confirm', as: 'confirm_order'
   end
 
+  get "/auth/:provider/callback", to: "sessions#create"
+
   patch 'products/:id/add_product_to_cart', to: 'products#add_product_to_cart', as: 'add_product'
 
   patch 'products/:id/remove_product_from_cart', to: 'products#remove_product_from_cart', as: 'remove_product'
