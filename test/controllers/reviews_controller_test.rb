@@ -10,30 +10,31 @@ describe ReviewsController do
     get login_path(:github)
   end
 
-  describe "index" do
-    it "returns success status for all reviews" do
-      get product_reviews_path(mermaid_fin)
-      must_respond_with :success
-    end
+######### Leaving for future, if we rethink and decide to add later
+  # describe "index" do
+  #   it "returns success status for all reviews" do
+  #     get product_reviews_path(mermaid_fin)
+  #     must_respond_with :success
+  #   end
+  #
+  #   it "works when there are no reviews" do
+  #     Review.destroy_all
+  #     get product_reviews_path(mermaid_fin)
+  #     must_respond_with :success
+  #   end
+  # end
 
-    it "works when there are no reviews" do
-      Review.destroy_all
-      get product_reviews_path(mermaid_fin)
-      must_respond_with :success
-    end
-  end
-
-  describe "show" do
-    it "succeeds for a review that exists" do
-      get review_path(reviews(:review))
-      must_respond_with :success
-    end
-
-    it "returns 404 not_found for a review that does not exist" do
-      get review_path(123)
-      must_respond_with :not_found
-    end
-  end
+  # describe "show" do
+  #   it "succeeds for a review that exists" do
+  #     get review_path(reviews(:review))
+  #     must_respond_with :success
+  #   end
+  #
+  #   it "returns 404 not_found for a review that does not exist" do
+  #     get review_path(123)
+  #     must_respond_with :not_found
+  #   end
+  # end
 
   describe "new" do
 
@@ -164,7 +165,7 @@ describe ReviewsController do
       patch review_path(review.id), params: review_data
 
       must_respond_with :redirect
-      must_redirect_to review_path(review)
+      must_redirect_to product_path(review)
 
       Review.find(review.id).rating.must_equal 3
     end

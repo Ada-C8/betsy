@@ -1,0 +1,9 @@
+<%= form_for @product do |f| %>
+  <%= f.label :rating  %>
+  <%= f.integer :rating %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.submit button, class: 'button' %>
+<% end %>
