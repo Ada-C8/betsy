@@ -27,25 +27,24 @@ describe OrdersController do
           cust_cc_exp: "11/22",
           cust_addr: "Sea World",
           cust_email: "forkhair@mermaid.com",
-          status: "complete"
+          status: "complete",
+          created_at: Time.now,
+          updated_at: Time.now,
+          products: [products(:wand)]
         }
       }
-      new_order = Order.new(order[:order])
-      order_product = {
-        order_product: {
-          product_id: :mermaid_fin,
-          quantity: 1,
-          order_id: new_order.id
-        }
-      }
-      order_item = new_order.order_products.new(order_product[:order_product])
-      new_order.must_be :valid?
+      good_order = Order.new(order[:order])
+      good_order.products << products(:wand)
+      good_order.order_products.first.quantity = 1
+      good_order.must_be :valid?
       start_count = Order.count
 
       post orders_path, params: order
 
+      binding.pry
+
       must_respond_with :redirect
-      must_redirect_to orders_path
+      must_redirect_to order_path
       Order.count.must_equal start_count + 1
     end
 
