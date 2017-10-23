@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
   def index
     @orders = Order.all
+    if session[:merchant]
+      @orders = Merchant.find(params[:merchant]).orders
+    end
   end
 
   def new
@@ -25,10 +28,6 @@ class OrdersController < ApplicationController
     find_order_by_params_id
   end
 
-  def edit
-    find_order_by_params_id
-  end
-
   def update
     if find_order_by_params_id
       @order.update_attributes(order_params)
@@ -46,8 +45,8 @@ class OrdersController < ApplicationController
     if find_order_by_params_id
       @order.destroy
       flash[:status] = :success
-      flash[:message] = "Deleted order #{@order.title}"
-      redirect_to order_path
+      flash[:message] = "Deleted order #{@order.id}"
+      redirect_to orders_path
     end
   end
 

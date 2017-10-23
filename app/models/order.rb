@@ -8,6 +8,8 @@ class Order < ApplicationRecord
   validate :has_order_products
 
   def has_order_products
-    errors.add(:products, 'must have at least one product') unless order_products.count > 0
+    if order_products.empty?
+     errors.add(:products, 'must have at least one product')
+    end
   end
 end

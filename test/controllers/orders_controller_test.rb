@@ -2,8 +2,9 @@ require "test_helper"
 
 describe OrdersController do
   describe "index" do
-    it "returns success for all orders" do
-      get order_path
+    it "returns success for the orders of a specific merchant if given a merchant" do
+      merchant = :ada
+      get merchant_orders_path(merchant)
       must_respond_with :success
     end
   end
@@ -19,22 +20,31 @@ describe OrdersController do
     it "adds order to the database and redirects when the data is valid" do
       order = {
         order: {
+          id: 4444,
           cust_name: "Mermaid",
           merchant_id: 21,
           cust_cc: 12345,
           cust_cc_exp: "11/22",
           cust_addr: "Sea World",
           cust_email: "forkhair@mermaid.com",
-          status: "complete"
+          status: "complete",
+          created_at: Time.now,
+          updated_at: Time.now,
+          products: [products(:wand)]
         }
       }
-      Order.new(order[:order]).must_be :valid?
+      good_order = Order.new(order[:order])
+      good_order.products << products(:wand)
+      good_order.order_products.first.quantity = 1
+      good_order.must_be :valid?
       start_count = Order.count
 
       post orders_path, params: order
 
+      binding.pry
+
       must_respond_with :redirect
-      must_redirect_to orders_path
+      must_redirect_to order_path
       Order.count.must_equal start_count + 1
     end
 
@@ -70,20 +80,6 @@ describe OrdersController do
     it "returns not_found with invalid id" do
       invalid_id = Order.last.id + 1
       get order_path(invalid_id)
-      must_respond_with :not_found
-    end
-  end
-
-  describe "edit" do
-    it "returns success with valid id" do
-      order_id = Order.first.id
-      get edit_order_path(order_id)
-      must_respond_with :success
-    end
-
-    it "returns not_found with invalid id" do
-      invalid_id = Order.last.id + 1
-      get edit_order_path(invalid_id)
       must_respond_with :not_found
     end
   end
