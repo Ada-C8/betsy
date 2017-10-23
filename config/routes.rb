@@ -6,16 +6,19 @@ Rails.application.routes.draw do
   resources :orders
 
   resources :products do
-    resources :reviews
+    resources :reviews, only: [:new, :create]
+
    end
 
   resources :merchants do
     get '/products', to: 'products#index'
   end
-  
+
   resources :categories do
     resources :products, only: [:index]
   end
+
+
 
   patch 'products/:id/add_product_to_cart', to: 'products#add_product_to_cart', as: 'add_product'
 

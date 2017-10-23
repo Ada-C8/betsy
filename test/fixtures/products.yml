@@ -9,7 +9,13 @@ pointy_hat:
   price: 9.99
   quantity_avail: 5
   merchant: spooky
-  
+
+sad_hat:
+  name: "Sad Hat"
+  price: 8.99
+  quantity_avail: 10
+  merchant: spooky
+
 
 missing_name:
   name:

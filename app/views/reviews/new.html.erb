@@ -1,1 +1,18 @@
-<%= render partial: "form" %>
+<section>
+  <% @product = Product.find_by(id: params[:product_id]) %>
+
+
+<%= form_for @review, url: product_reviews_path, method: :post do |f| %>
+
+  <!-- <%= f.hidden_field :product_id, :value => params[:product_id] %> -->
+
+     <%= f.label :rating %>
+     <%= f.select :rating, [1,2,3,4,5], required: true %>
+
+     <%= f.label :text_review %>
+     <%= f.text_area :text_review, required: true %>
+
+     <%= f.submit action_name, class: "button" %>
+ <% end %>
+
+</section>

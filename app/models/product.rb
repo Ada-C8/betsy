@@ -23,4 +23,23 @@ class Product < ApplicationRecord
     self.save
   end
 
+  def average_rating
+    rating = 0.0
+    counter = 0
+    if reviews.count == 0
+      return "Not yet rated!"
+    end
+    reviews.each do |review|
+      if review[:rating] == nil
+        next
+      else
+        rating += review[:rating]
+        counter += 1
+      end
+    end
+
+    rating /= counter
+    return rating
+  end
+
 end
