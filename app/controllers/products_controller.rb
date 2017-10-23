@@ -40,6 +40,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new product_params
+    @product.merchant_id = session[:user_id]
     if @product.save
       flash[:status] = :success
       flash[:result_text] = "Successfully created your product!"
@@ -167,7 +168,7 @@ class ProductsController < ApplicationController
 
 private
   def product_params
-    params.require(:product).permit(:name, :price, :quantity_avail, :merchant_id)
+    params.require(:product).permit(:name, :price, :quantity_avail)
   end
 
   def find_product
