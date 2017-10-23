@@ -1,0 +1,34 @@
+<%= form_for @order, html: {id: "order-form"} do |f| %>
+  <% if session[:merchant] %>
+    <%= f.hidden_field :merchant_id, value: session[:merchant] %>
+  <% end %>
+
+  <%= content_tag :div, class: "name-wrapper" do %>
+    <%= f.label :cust_name, "Name"%>
+    <%= f.text_field :cust_name  %>
+  <% end %>
+
+  <%= content_tag :div, class: "cc-wrapper" do %>
+    <%= f.label :cust_cc, "Credit Card Number" %>
+    <%= f.text_field :cust_cc %>
+  <% end %>
+
+  <%= content_tag :div, class: "ccexp-wrapper" do %>
+    <%= f.label :cust_cc_exp, "Expiration Date" %>
+    <%= f.text_field :cust_cc_exp %>
+  <% end %>
+
+  <%= content_tag :div, class: "addr-wrapper" do %>
+    <%= f.label :cust_addr, "Address" %>
+    <%= f.text_field :cust_addr %>
+  <% end %>
+
+  <%= content_tag :div, class: "email-wrapper" do %>
+    <%= f.label :cust_email, "Email" %>
+    <%= f.text_field :cust_email %>
+  <% end %>
+
+  <%= content_tag :div, class: "submit-wrapper" do %>
+    <%= f.submit button_text, class: "button" %>
+  <% end %>
+<% end %>
