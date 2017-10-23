@@ -20,7 +20,7 @@ describe OrdersController do
     it "adds order to the database and redirects when the data is valid" do
       order = {
         order: {
-          id: 4444,
+          # id: 4444,
           cust_name: "Mermaid",
           merchant_id: 21,
           cust_cc: 12345,
@@ -29,20 +29,17 @@ describe OrdersController do
           cust_email: "forkhair@mermaid.com",
           status: "complete",
           created_at: Time.now,
-          updated_at: Time.now,
-          products: [products(:wand)]
+          updated_at: Time.now
         }
       }
       good_order = Order.new(order[:order])
-      good_order.products << products(:wand)
-      good_order.order_products.first.quantity = 1
       good_order.must_be :valid?
       start_count = Order.count
 
       post orders_path, params: order
 
       must_respond_with :redirect
-      must_redirect_to order_path
+      must_redirect_to orders_path
       Order.count.must_equal start_count + 1
     end
 
