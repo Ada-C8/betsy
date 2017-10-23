@@ -39,18 +39,22 @@
 
       <nav>
         <ul>
-          <li><%=link_to "Appetizers", category_path(1)%></li>
-          <li><%=link_to "Breakfast", category_path(2)%></li>
-          <li><%=link_to "Lunch", category_path(3)%></li>
-          <li><%=link_to "Dinner", category_path(4)%></li>
-          <li><%=link_to "Desserts", category_path(5)%></li>
-          <li><%=link_to "Drinks", category_path(6)%></li>
+
+          <li><%=link_to "Appetizers", category_path(1)%> |</li>
+          <li><%=link_to "Breakfast", category_path(2)%> |</li>
+          <li><%=link_to "Lunch", category_path(3)%> |</li>
+          <li><%=link_to "Dinner", category_path(4)%> |</li>
+          <li><%=link_to "Desserts", category_path(5)%> |</li>
+          <li><%=link_to "Drinks", category_path(6)%> |</li>
+          <li><%=link_to "See More...", "#"%></li>
         </ul>
       </nav>
 
       <nav>
         <ul>
-          <li><%=link_to "View All Members", merchants_path %></li>
+          <li><%=link_to "Browse by Category", categories_path%> |</li>
+          <li><%=link_to "Browse by Merchant", merchants_path %> |</li>
+          <li><%=link_to "See all Products", products_path%></li>
         </ul>
       </nav>
     </header>
@@ -74,7 +78,7 @@
 
     <%# how to center? %>
     <footer class="row center">
-      Copyright &copy 2017 <%= link_to "Amy Cash", "#"%>, <%= link_to "Sara Frandsen", "https://github.com/sarafrandsen"%>, <%= link_to "Tanisha Hampden", "#"%>, <%= link_to "Angela Wilson", "#"%>
+      Copyright &copy 2017 <%= link_to "Amy Cash", "https://github.com/cashmonger"%>, <%= link_to "Sara Frandsen", "https://github.com/sarafrandsen"%>, <%= link_to "Tanisha Hampden", "#"%>, <%= link_to "Angela Wilson", "#"%>
     </footer>
   </body>
 </html>

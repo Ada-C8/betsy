@@ -1,4 +1,4 @@
-<h1><%= @category.category_name %></h1>
+<h1><%#= @category.category_name %></h1>
 
 
 <table>
@@ -44,7 +44,8 @@
       <%= link_to "Merchant", merchant_path(product.merchant.id) %>
     </td>
     <td>
-      <%= link_to "Direct Link to Purchase?", "#" %>
+      <%#= link_to "Direct Link to Purchase?", "#" %>
+      <%= link_to "Add to cart", add_to_cart_path(product.id), :class=>"button", method: :post %>
     </td>
     <% end %>
   </tr>
