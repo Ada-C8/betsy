@@ -88,11 +88,16 @@ describe ProductsController do
     end
 
     describe 'edit' do
-      # these tests will have to change when logging in actually works (dependent on fakey_login)
       it 'can successfully access edit for own product' do
         get edit_product_path(owned_product.id)
 
         must_respond_with :success
+      end
+
+      it 'CANNOT successfully access edit for not found product (returns not found)' do
+        get edit_product_path(Product.last.id + 1)
+
+        must_respond_with :not_found
       end
 
       it 'CANNOT successfully edit other users products' do
@@ -106,9 +111,9 @@ describe ProductsController do
     describe 'update' do
       it 'can successfully update own product with valid data' do
         patch product_path(owned_product.id), params: new_params
+        id = owned_product.id
 
-        # WHY does only this not work?
-        owned_product.name.must_equal "Updated Name"
+        Product.find(id).name.must_equal "Updated Name"
         flash[:status].must_equal :success
         must_respond_with :found
       end
