@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  skip_before_action :require_login, only: [:add_to_cart, :show]
 
   def index
   end

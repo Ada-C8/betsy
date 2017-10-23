@@ -1,6 +1,7 @@
 
 class MerchantsController < ApplicationController
   before_action :find_merchant_by_params_id, only: [:show, :edit, :update, :destroy]
+  skip_before_action :require_login, only: [:index, :show]
 
   def index
     @merchants = Merchant.all
