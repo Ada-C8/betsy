@@ -46,6 +46,18 @@ describe MerchantsController do
 
     end
 
+    it "generates failure with no info" do
+      start_count = Merchant.all.count
+      OmniAuth.config.mock_auth[:github] = nil
+      get login_path(:github)
+      Merchant.count.must_equal start_count
+      flash[:result_text].must_equal "Not logged in"
+      flash[:status].must_equal :failure
+      flash[:messages].must_include :email
+      flash[:messages].must_include :username
+      must_redirect_to root_path
+    end
+
   end
 
   describe "logout" do
@@ -110,8 +122,10 @@ describe MerchantsController do
   describe "destroy" do
     it "removes the merchant and goes to the root path" do
       first_count = Merchant.all.count
-      Merchant.first.destroy
-      # must_redirect_to root_path
+      delete_merchant = Merchant.first
+      delete merchant_path(delete_merchant)
+      must_respond_with :redirect
+      must_redirect_to root_path
       Merchant.all.count.must_equal first_count - 1
 
     end
