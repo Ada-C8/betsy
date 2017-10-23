@@ -14,8 +14,8 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     if @order.save
       flash[:status] = :success
-      flash[:message] = "Successfully created order #{@order.id}"
-      redirect_to order_path
+      flash[:message] = "Successfully created order"
+      redirect_to orders_path
     else
       flash.now[:status] = :failure
       flash.now[:message] = "Failed to create order"
@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
     if find_order_by_params_id
       @order.destroy
       flash[:status] = :success
-      flash[:message] = "Deleted order #{@order.id}"
+      flash[:message] = "Deleted order"
       redirect_to orders_path
     end
   end
