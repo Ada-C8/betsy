@@ -19,16 +19,21 @@
       <div> <%# displays each button from right to left %>
         <!-- update buttons to `button_to` -->
         <% if session[:merchant_id] %>
-        <%= link_to "Log Out", logout_path, method: :post, class: "button float-right" %>
+          <%= link_to "Log Out", logout_path, method: :post, class: "button float-right" %>
         <% else %>
-        <%= link_to "Log In", '/auth/github', class: "button float-right" %>
+          <%= link_to "Log In", '/auth/github', class: "button float-right" %>
         <% end %>
-        <%= link_to "Cart", order_path(session[:order_id]), class: "button float-right" %>
+
+        <% if session[:order_id] == nil %>
+          <%= link_to "Cart", orders_path, class: "button float-right" %>
+        <% else %>
+          <%= link_to "Cart", order_path(session[:order_id]), class: "button float-right" %>
+        <% end %>
 
         <%# if user is logged in, these buttons appear %>
         <% if session[:merchant_id] %>
-        <%= link_to "My Orders", "#", class: "button float-right" %>
-        <%= link_to "Sell on Satiety", "#", class: "button float-right" %>
+          <%= link_to "My Orders", "#", class: "button float-right" %>
+          <%= link_to "Sell on Satiety", "#", class: "button float-right" %>
         <% end %>
       </div>
 
