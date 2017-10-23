@@ -9,7 +9,12 @@ class MainController < ApplicationController
     if session[:cart].nil?
       session[:cart] = []
     end
-    session[:cart] << OrderProduct.new(quantity: params["quantity"], product_id: params["id"])
+    order_product = OrderProduct.create(quantity: params["quantity"], product_id: params["id"])
+    session[:cart] << order_product.id
     redirect_to products_path
+  end
+
+  def shopping_cart
+    @products = OrderProduct.find_in_cart(session[:cart])
   end
 end

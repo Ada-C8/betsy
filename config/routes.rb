@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   end
 
   post '/products/:id', to: 'main#add_to_cart', as: 'add_to_cart'
+  get '/cart', to: 'main#shopping_cart', as: 'shopping_cart'
 end
