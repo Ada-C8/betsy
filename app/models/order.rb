@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   has_many :order_products
   has_many :products, through: :order_products
+  has_many :merchants, through: :products
 
 # class methods instead of instance methods (like in ctrl)
   def self.start_new_order
@@ -16,7 +17,7 @@ class Order < ApplicationRecord
     order = Order.find_by(id: order_id, status: "pending") # rails won't blow up if the session id is nil, turns out
     # checking if the order has BOTH the same order_id and status "pending"
     unless order
-      order = start_new_order # if no matching orders, start a new order 
+      order = start_new_order # if no matching orders, start a new order
     end
     return order
   end
