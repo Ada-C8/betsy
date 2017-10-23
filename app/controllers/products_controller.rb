@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :find_product, only: [:show, :destroy, :add_product_to_cart, :remove_product_from_cart]
+
   def index
     if params[:merchant_id]
       merchant = Merchant.find_by(id: params[:merchant_id])
@@ -35,14 +37,12 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find_by(id: params[:id])
     unless @product
       redirect_to root_path, status: :not_found
     end
   end
 
   def destroy
-    @product = Product.find_by(id: params[:id])
     if !@product
       redirect_to root_path, status: :not_found
     elsif @product.destroy
@@ -53,12 +53,10 @@ class ProductsController < ApplicationController
       flash[:status] = :failure
       flash[:result_text] = "That product is unable to be deleted."
       redirect_to products_path, status: :not_found
-
     end
   end
 
   def add_product_to_cart
-    @product = Product.find_by(id: params[:id])
     if @product.remove_one_from_stock
       if Order.find_by(id: session[:order_id]) == nil
         create_order
@@ -82,39 +80,40 @@ class ProductsController < ApplicationController
 
 
   def remove_product_from_cart
-    @product = Product.find_by(id: params[:id])
+    if !@product
+      flash[:status] = :failure
+      flash[:result_text] = "That product isn't even in your cart."
+      redirect_to products_path, status: :bad_request
+    end
 
-  if !@product
-    flash[:status] = :failure
-    flash[:result_text] = "That product isn't even in your cart."
-    redirect_to products_path, status: :bad_request
-  end
+      order = Order.find_by(id: session[:order_id])
 
-    order = Order.find_by(id: session[:order_id])
+      index_of_first_found = order.products.index {|element| element.id == @product.id}
 
-    index_of_first_found = order.products.index {|element| element.id == @product.id}
+      orders_products_array = order.products.to_a
 
-    orders_products_array = order.products.to_a
+      orders_products_array.delete_at(index_of_first_found)
 
-    orders_products_array.delete_at(index_of_first_found)
+      order.products.replace([])
+      order.products.replace(orders_products_array)
 
-    order.products.replace([])
-    order.products.replace(orders_products_array)
+      @product.add_one_to_stock
+      flash[:status] = :success
+      flash[:result_text] = "Product successfully removed from your cart!"
 
-    @product.add_one_to_stock
-    flash[:status] = :success
-    flash[:result_text] = "Product successfully removed from your cart!"
-
-    redirect_to products_path
-
+      redirect_to products_path
   end
 
   def product_params
     params.require(:product).permit(:name, :quantity_avail, )
   end
-end
 
 private
   def product_params
     params.require(:product).permit(:name, :price, :quantity_avail, :merchant_id)
   end
+
+  def find_product
+    @product = Product.find_by(id: params[:id])
+  end
+end

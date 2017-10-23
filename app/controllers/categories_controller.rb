@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :find_category, only: [:show, :destroy]
 
   def index
     @categories = Category.all
@@ -23,7 +24,6 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find_by(id: params[:id])
     if @category == nil
       flash[:status] = :failure
       flash[:result_text] = "That category does not exist."
@@ -32,7 +32,6 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = Category.find_by(id: params[:id])
     if !@category
       redirect_to root_path, status: :not_found
     elsif @category.destroy
@@ -43,6 +42,12 @@ class CategoriesController < ApplicationController
       flash[:status] = :failure
       flash[:result_text] = "That category is unable to be deleted."
     end
+  end
+
+  private
+
+  def find_category
+    @category = Category.find_by(id: params[:id])
   end
 
 end

@@ -1,4 +1,6 @@
 class MerchantsController < ApplicationController
+  before_action :find_merchant, only: [:show, :edit, :update, :destroy]
+
   def index
     @merchants = Merchant.all
   end
@@ -18,20 +20,15 @@ class MerchantsController < ApplicationController
     end
   end
 
-  def show
-    @merchant = Merchant.find( params[:id].to_i )
-  end
+  def show; end
 
   def edit
-    @merchant = Merchant.find_by(id: params[:id].to_i)
-
     unless @merchant
       redirect_to root_path
     end
   end
 
   def update
-    @merchant = Merchant.find_by(id: params[:id].to_i)
     redirect_to root_path unless @merchant
 
     if @merchant.update_attributes merchant_params
@@ -42,7 +39,6 @@ class MerchantsController < ApplicationController
   end
 
   def destroy
-    Merchant.find_by(id: params[:id]).destroy
     redirect_to root_path
   end
 
@@ -50,5 +46,9 @@ class MerchantsController < ApplicationController
 
   def merchant_params
     return params.require(:merchant).permit(:username, :email)
+  end
+
+  def find_merchant
+    @merchant = Merchant.find_by(id: params[:id].to_i)
   end
 end
