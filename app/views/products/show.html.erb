@@ -7,11 +7,10 @@
   </div>
 
   <div class="show-details small-12 large-6 columns">
-    <p><%= @product.name.upcase %> by </p>
+    <p><em><%= @product.name.upcase %></em> by </p>
     <p>
     <%= link_to @product.merchant.username, merchant_path(@product.merchant.id) %></p>
-
-    <p>$<%= @product.price %></p>
+    <br /><p>$<%= @product.price %></p>
     <p>Average Rating: <%= @product.average_rating %></p>
     <% if @product.quantity_avail > 0 %>
     <p>In Stock</p>
@@ -23,13 +22,13 @@
     <% end %>
     <% if @product.quantity_avail == 0 %>
 
-      <button><%= button_to "Not available: Keep Shopping!", products_path, method: :get %></button>
+      <span class="button"><%= link_to "Not available: Keep Shopping!", products_path, method: :get %></span>
     <% elsif session[:order_id] == nil && @product.quantity_avail > 0 %>
-      <button><%= button_to "Add to cart", add_product_path(@product), method: :patch %></button>
+      <span class="button"><%= link_to "Add to cart", add_product_path(@product), method: :patch %></span>
     <% elsif @product.quantity_avail > 0 %>
-    <button><%= button_to "Add to cart", add_product_path(@product), method: :patch %></button>
+    <span class="button"><%= link_to "Add to cart", add_product_path(@product), method: :patch %></span>
     <% end %>
-    <button><%= button_to "Remove from cart", remove_product_path(@product), method: :patch %></button>
+    <span class="button"><%= link_to "Remove from cart", remove_product_path(@product), method: :patch %></span>
 </div>
 </section>
 

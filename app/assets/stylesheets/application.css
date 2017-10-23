@@ -201,13 +201,14 @@ header {
 
 .show-details {
   margin-left: 5rem;
-
 }
 
 .show-details p {
   /*display: inline-block;*/
   font-family: 'Josefin Slab', serif;
   font-size: 2rem;
+  line-height: 80%;
+
 }
 
 .show-details button {
@@ -288,4 +289,27 @@ background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0,
 -o-transform: rotateX(90deg) translateZ(-150px);
 transform: rotateX(90deg) translateZ(-150px);
 z-index: -1;
+}
+
+/*button styling*/
+.button {
+  flex: 1 1 auto;
+  margin: 10px;
+  padding: 20px;
+  border: 2px solid grey;
+  text-align: center;
+  font-family: 'Josefin Slab', serif;
+  text-transform: uppercase;
+  font-weight: bolder;
+  color: black;
+  background-color: transparent;
+  position: relative;
+  overflow:hidden;
+  transition: .3s;
+}
+
+.button:hover {
+  color: white;
+  background-color: black;
+  transform: scale(1.15);
 }
