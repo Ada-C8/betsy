@@ -18,3 +18,7 @@ input[type="checkbox"] {
   display: inline-block !important;
   width: inherit !important;
 }
+
+.button[type="submit"] {
+  margin: .25rem;
+}

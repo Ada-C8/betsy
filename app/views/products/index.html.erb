@@ -1,7 +1,10 @@
 <section>
-  <nav class='small-2 columns'>
+  <nav class='small-2 columns category-menu'>
     <h4>Categories</h4>
     <ul>
+      <li class='view-all'>
+        <%= link_to "View All Products", category_products_path('all') %>
+      </li>
       <% @categories.each do |category| %>
       <li>
         <%= link_to category.name.capitalize, category_products_path(category.id) %>

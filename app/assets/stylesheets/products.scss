@@ -86,13 +86,10 @@ section.product-info {
   // width: 30%;
 }
 
-.product-details [type="submit"] {
+.product-details .cart-btn {
   display: block;
-  margin: auto;
-}
-
-.product-details .button {
   font-size: 1.5rem;
+  margin: auto;
   padding: 1rem 2rem;
 }
 
@@ -149,4 +146,18 @@ section.product-info {
   background-color: #4F3640;
   border-color: #9FA2B2;
   color: white;
+}
+
+//////////////////////
+// CATEGORY SIDEBAR //
+//////////////////////
+
+.category-menu li a {
+  display: inline-block;
+  text-indent: -.5rem;
+}
+
+.view-all {
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
