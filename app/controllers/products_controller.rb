@@ -72,16 +72,9 @@ class ProductsController < ApplicationController
   def destroy
     result = @product.destroy
 
-    if result
-      flash.now[:status] = :success
-      flash.now[:message] = "Successfully deleted #{@product.name}"
-      return redirect_to products_path
-    else
-      flash.now[:status] = :failure
-      flash.now[:message] = "Could not delete product"
-      flash.now[:details] = @product.errors.messages
-      return redirect_back(fallback_location: products_path)
-    end
+    flash.now[:status] = :success
+    flash.now[:message] = "Successfully deleted #{@product.name}"
+    return redirect_to products_path
   end
 
   def categories

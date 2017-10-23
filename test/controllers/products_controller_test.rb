@@ -168,17 +168,34 @@ describe ProductsController do
     end
 
     describe 'add_categories' do
-      it 'can successfully add categories to own products' do
+      it 'can successfully add valid categories to own products' do
         cat_id = categories(:magic).id
         test_params = {
           id: owned_product.id,
           "category_Magic Items" => cat_id,
         }
+        before_count = owned_product.categories.count
 
         post add_categories_path(owned_product.id), params: test_params
 
         must_respond_with :found
         flash[:status].must_equal :success
+        owned_product.categories.count.must_equal (before_count + 1)
+      end
+
+      it 'CANNOT add invalid categories to own products' do
+        cat_id = categories(:magic).id
+        test_params = {
+          id: owned_product.id,
+          "category_bad_id" => (Category.last.id + 1),
+        }
+
+        before_count = owned_product.categories.count
+        post add_categories_path(owned_product.id), params: test_params
+
+        must_respond_with :found
+        flash[:status].must_equal :failure
+        owned_product.categories.count.must_equal before_count
       end
 
       it 'CANNOT successfully add categories to other users products' do
@@ -202,7 +219,7 @@ describe ProductsController do
 
         must_respond_with :success
       end
-      
+
       it 'can successfully access nested index of products with valid id' do
         get category_products_path(Category.first.id)
 
@@ -268,7 +285,10 @@ describe ProductsController do
 
     describe 'add_categories' do
       it 'CANNOT access add categories page' do
+        get add_categories_path(owned_product.id)
 
+        must_respond_with :found
+        flash[:status].must_equal :failure
       end
     end
   end

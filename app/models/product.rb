@@ -17,7 +17,11 @@ class Product < ApplicationRecord
     new_categories = params.keep_if{|key, value| key.include?'category'}
 
     new_categories.values.each do |cat|
-      category = Category.find(cat)
+      category = Category.find_by(id: cat)
+      if category.nil?
+         errors.add(:categories, 'doesn\'t exist')
+        return false
+      end
       self.categories << category unless self.categories.include? category
     end
 
