@@ -16,20 +16,6 @@ describe MerchantsController do
   end
 
   describe "login" do
-    it "should generate success if logged in" do
-      auth_hash = {
-        provider:"github",
-        uid: "9999999999",
-        email: "somebodnew@somesite.com",
-        username: "Somebodynew"
-      }
-
-      get login_path(auth_hash)
-      must_respond_with :found
-      must_redirect_to root_path
-      flash[:status].must_equal :success
-      flash[:result_text].must_equal "Successfully logged in "
-    end
 
     it "logs in an existing merchant and redirects to the root route" do
       start_count = Merchant.all.count
