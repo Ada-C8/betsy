@@ -16,19 +16,20 @@
     <header>
       <h1><%= link_to "Satiety || Serving home-cooked meals on demand", root_path %>  </h1>
 
-      <div class="float-right">
+      <div> <%# displays each button from right to left %>
         <!-- update buttons to `button_to` -->
-        <button type="button" name="button" class="button">Sell on Satiety</button>
-        <%# <button type="button" name="button" class="button">Sign-in</button> %>
-
         <% if session[:merchant_id] %>
-          <%= link_to "Log Out", logout_path, method: :post, class: "button float-right" %>
+        <%= link_to "Log Out", logout_path, method: :post, class: "button float-right" %>
         <% else %>
-          <%= link_to "Log In", '/auth/github', class: "button float-right" %>
+        <%= link_to "Log In", '/auth/github', class: "button float-right" %>
         <% end %>
+        <%= link_to "Cart", order_path(session[:order_id]), class: "button float-right" %>
 
-
-        <#%= link_to "Cart", order_path(session[:order_id]), :class=>"button" %>
+        <%# if user is logged in, these buttons appear %>
+        <% if session[:merchant_id] %>
+        <%= link_to "My Orders", "#", class: "button float-right" %>
+        <%= link_to "Sell on Satiety", "#", class: "button float-right" %>
+        <% end %>
       </div>
 
       <nav>
@@ -42,7 +43,11 @@
         </ul>
       </nav>
 
-
+      <nav>
+        <ul>
+          <li><%=link_to "View All Merchants", merchants_path %></li>
+        </ul>
+      </nav>
 
     </header>
     <main>
