@@ -69,7 +69,9 @@ class ProductsController < ApplicationController
   end
 
   def update
-    redirect_to root_path unless @product
+    if !@product
+      redirect_to root_path, status: :not_found
+    end
 
     if @product.update_attributes product_params
       flash[:status] = :success
