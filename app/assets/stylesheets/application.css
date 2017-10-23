@@ -27,7 +27,12 @@ body {
   width: 100%;
 }
 
-a:visited {
+em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+a, a:visited {
   color: inherit;
 }
 
@@ -65,7 +70,6 @@ header {
 
 }
 
-
 .dropdown {
   position: relative;
   display: flex;
@@ -80,7 +84,7 @@ header {
   text-decoration: none;
 }
 
-.dropdown a:hover {
+.dropdown a:hover, {
   color: grey;
 }
 
@@ -135,23 +139,41 @@ header {
 }
 
 /*index views for all models*/
-.all-products, .all-merchants, .all-categories {
+.all-products, .all-merchants, .all-categories, .show-merchant {
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
+  margin: 0;
+
+}
+
+.index-banner {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  font-family: 'Cinzel', serif;
+  font-size: 3em;
+  text-shadow: 1;
+}
+
+.index-banner .email {
+  font-size: 2.5rem;
+}
+
+.index-image {
+  height: 250px;
+  width: 260px;
+  margin-right: 0;
+  padding-right: 0;
+  padding-bottom: 1rem;
+  /*border-radius: 15px 50px;*/
 }
 
 .info-card {
   clear: both;
-  margin-left: -15px;
-  margin-right: -15px;
+  height: 400px;
+  width: 275px;
   overflow: hidden;
-
-}
-
-.info-card img {
-  padding-bottom: 1rem;
-  border-radius: 15px 50px;
 }
 
 .product, .merchant, .category {
@@ -166,6 +188,41 @@ header {
   margin: 1rem;
 }
 
+.category-name em {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/*index views for all models*/
+.show {
+  display: inline-block;
+  width: 100%;
+}
+
+.show-details {
+  margin-left: 5rem;
+
+}
+
+.show-details p {
+  /*display: inline-block;*/
+  font-family: 'Josefin Slab', serif;
+  font-size: 2rem;
+}
+
+.show-details button {
+  display: block;
+}
+
+.show-image {
+  display: inline;
+}
+
+.show-image img {
+  display: inline-block;
+  width: 500px;
+  height: 500px;
+}
 /*homepage background image*/
 .homepage {
   background-image: radial-gradient(transparent, rgba(0,0,0,.8)),  url("http://1.bp.blogspot.com/-kLbhA08qOUw/Vi5FAnWvs9I/AAAAAAAABBE/vrAlIqU9emk/s1600/seances.jpg%22");

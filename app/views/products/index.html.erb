@@ -1,17 +1,21 @@
 <section class="all-products">
+  <span class="index-banner">
   <% if @products.count == 0 %>
-  <h1>Yikes! No products meet those parameters.</h1>
+    Yikes! No products meet those parameters.
+  <% else %>
+    Product Gallery
   <% end %>
-  
+  </span>
+
   <% @products.each do |product| %>
   <section class="info-card">
     <section class="product">
-      <img src="http://www.visitbuffaloniagara.com/content/uploads/sv-event-images/434cfb09-bb34-449b-ac6c-d400b6a53f1d.jpg" />
-      <span>Product: <%= link_to product.name, product_path(product.id) %></span>
-      <span>Average Rating: <%= product.average_rating %></span>
-      <span>Price: <%= product.price %></span>
-      <span>Quantity: <%= product.quantity_avail %></span>
-      <span>Sold By: <%= product.merchant.username %></span>
+      <img class="index-image" src="http://www.visitbuffaloniagara.com/content/uploads/sv-event-images/434cfb09-bb34-449b-ac6c-d400b6a53f1d.jpg" />
+      <span><em>Product</em>: <%= link_to product.name, product_path(product.id) %></span>
+      <span><em>Rating</em>: <%= product.average_rating %></span>
+      <span><em>Price</em>: <%= product.price %></span>
+      <span><em>Quantity</em>: <%= product.quantity_avail %></span>
+      <span><em>Sold By</em>: <%= link_to product.merchant.username, merchant_path(product.merchant) %></span>
     </section>
     </section>
   <% end %>

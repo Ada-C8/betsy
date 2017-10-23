@@ -1,32 +1,37 @@
 <section>
 
-  <div class="show-image">
+<section class="row show">
 
+  <div class="show-image">
+    <img class="small-12 large-6 columns" src="https://ak6.picdn.net/shutterstock/videos/17347006/thumb/3.jpg?i10c=img.resize(height:160)" />
   </div>
 
-  <div class="show-details">
-    <h1><%= @product.name %></h1>
-    <h3>Sold By: <%= link_to @product.merchant.username, merchant_path(@product.merchant.id) %></h3>
+  <div class="show-details small-12 large-6 columns">
+    <p><%= @product.name.upcase %> by </p>
+    <p>
+    <%= link_to @product.merchant.username, merchant_path(@product.merchant.id) %></p>
 
-    <h3>$<%= @product.price %></h3>
-    <h3>Average Rating: <%= @product.average_rating %></h3>
+    <p>$<%= @product.price %></p>
+    <p>Average Rating: <%= @product.average_rating %></p>
     <% if @product.quantity_avail > 0 %>
-    <h3>In Stock</h3>
+    <p>In Stock</p>
     <% if @product.quantity_avail <= 5 %>
-    <h4>Only <%= @product.quantity_avail%> left!</h4>
+    <p>Only <%= @product.quantity_avail%> left!</p>
     <% end %>
     <% else %>
-    <h4>Out of Stock</h4>
+    <p>Out of Stock</p>
     <% end %>
     <% if @product.quantity_avail == 0 %>
-      <%= button_to "Not available: Keep Shopping!", products_path, method: :get %>
+
+      <button><%= button_to "Not available: Keep Shopping!", products_path, method: :get %></button>
     <% elsif session[:order_id] == nil && @product.quantity_avail > 0 %>
-      <%= button_to "Add to cart", add_product_path(@product), method: :patch %>
+      <button><%= button_to "Add to cart", add_product_path(@product), method: :patch %></button>
     <% elsif @product.quantity_avail > 0 %>
-    <%= button_to "Add to cart", add_product_path(@product), method: :patch %>
+    <button><%= button_to "Add to cart", add_product_path(@product), method: :patch %></button>
     <% end %>
-    <%= button_to "Remove from cart", remove_product_path(@product), method: :patch %>
-  </div>
+    <button><%= button_to "Remove from cart", remove_product_path(@product), method: :patch %></button>
+</div>
+</section>
 
   <div class="show-reviews">
 

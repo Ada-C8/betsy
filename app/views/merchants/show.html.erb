@@ -1,28 +1,18 @@
-<section>
-  <div class="show-details">
-    <h1><%= @merchant.username %></h1>
-    <h3><%= @merchant.email %></h3>
-  </div>
+<section class="show-merchant">
+  <span class="index-banner">
+    Welcome to <em><%= @merchant.username.upcase %></em>
+    <br/><span class="email"><%= @merchant.email %></span>
+  </span>
 
-  <div class="show-image">
-
-  </div>
-
-  <h1>Products</h1>
-
-  <section class="all-products">
-    <% @merchant.products.each do |product| %>
-    <section class="info-card">
-      <section class="product">
-        <img src="http://www.visitbuffaloniagara.com/content/uploads/sv-event-images/434cfb09-bb34-449b-ac6c-d400b6a53f1d.jpg" />
-        <span>Product: <%= link_to product.name, product_path(product.id) %></span>
-        <span>Average Rating: <%= product.average_rating %></span>
-        <span>Price: <%= product.price %></span>
-        <span>Quantity: <%= product.quantity_avail %></span>
-      </section>
-      </section>
-    <% end %>
-  </section>
-
-
+<% @merchant.products.each do |product| %>
+  <section class="info-card">
+    <section class="product">
+      <span><img class="index-image", src="http://www.dailypublic.com/sites/default/files/2015/Oct/buffalo-Niagara-Heritage-Village.jpg"</img></span>
+      <span><em>Product</em>: <%= link_to product.name, product_path(product.id) %></span>
+      <span><em>Average Rating</em>: <%= product.average_rating %></span>
+      <span><em>Price</em>: <%= product.price %></span>
+      <span><em>Quantity Available</em>: <%= product.quantity_avail %></span>
+    </section>
+    </section>
+  <% end %>
 </section>
