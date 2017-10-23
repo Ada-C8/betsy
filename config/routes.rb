@@ -22,4 +22,6 @@ Rails.application.routes.draw do
     # only: [:index, :new, :create] is nested
     resources :reviews, shallow: true
   end
+
+  post '/products/:id', to: 'main#add_to_cart', as: 'add_to_cart'
 end
