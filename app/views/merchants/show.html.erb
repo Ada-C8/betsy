@@ -1,3 +1,51 @@
-<% @merchant.products.each do |product| %>
-  <%= product.name %>
-<% end %>
+<h1><%= @merchant.username %></h1>
+
+
+<table>
+  <tr>
+    <th>
+      Name
+    </th>
+    <th>
+      Description
+    </th>
+    <th>
+      Price
+    </th>
+    <th>
+      Number in Stock
+    </th>
+    <th>
+      Category
+    </th>
+    <th>
+      Add to Cart
+    </th>
+  </tr>
+
+
+  <% merchant_products = @merchant.products %>
+
+  <% merchant_products.each do |product| %>
+  <tr>
+    <td>
+      <%= link_to product.name, product_path(product.id) %>
+    </td>
+    <td>
+      <%= product.description %>
+    </td>
+    <td>
+      <%= product.price %>
+    </td>
+    <td>
+      <%= product.stock %>
+    </td>
+    <td>
+      <%= link_to product.category.category_name, category_path(product.category.id) %>
+    </td>
+    <td>
+      <%= link_to "Direct Link to Purchase?", "#" %>
+    </td>
+    <% end %>
+  </tr>
+</table>

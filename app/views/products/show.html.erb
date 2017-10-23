@@ -16,7 +16,26 @@
 <h3>Reviews:</h3>
 
 <% reviews = @product.reviews.to_a %>
-<% reviews.each do |review| %>
-<%= review.rating %>
-<%= review.reviewtext %>
-<% end %>
+
+<table>
+  <tr>
+    <th>
+      Ratings
+    </th>
+    <th>
+      Reviews
+    </th>
+
+    <% reviews.each do |review| %>
+
+  </tr>
+  <tr>
+    <td>
+      <%= review.rating %>
+    </td>
+    <td>
+      <%= review.reviewtext %>
+    </td>
+    <% end %>
+  </tr>
+</table>
