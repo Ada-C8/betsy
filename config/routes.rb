@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#login', as: 'auth_callback'
   post '/logout', to: 'sessions#logout', as: 'logout'
 
-  post '/add_to_cart/:id', to: 'orders#add_to_cart'
+  post '/add_to_cart/:id', to: 'orders#add_to_cart', as: 'add_to_cart'
 end

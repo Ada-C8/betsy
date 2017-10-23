@@ -10,7 +10,6 @@ class Merchant < ApplicationRecord
     merchant.uid = auth_hash['uid']
     merchant.username = auth_hash['info']['name']
     merchant.email = auth_hash['info']['email']
-    merchant.username = auth_hash['info']['nickname']
 
     return merchant
   end

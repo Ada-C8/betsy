@@ -50,26 +50,19 @@
 
       <nav>
         <ul>
-          <li><%=link_to "View All Merchants", merchants_path %></li>
+          <li><%=link_to "View All Members", merchants_path %></li>
         </ul>
       </nav>
-
     </header>
+
     <main>
       <section class="flash <%= flash[:status] %>">
-        <p>
-          <%= flash[:message] %>
-        </p>
+        <p><%= flash[:message] %></p>
         <% if flash[:details] %>
           <ul>
             <% flash[:details].each do |field, problems| %>
               <% problems.each do |problem| %>
-                <li>
-                  <strong>
-                    <%= field %>:
-                  </strong>
-                  <%= problem %>
-                </li>
+                <li><strong><%= field %>:</strong> <%= problem %></li>
               <% end %>
             <% end %>
           </ul>
@@ -79,5 +72,9 @@
 
     <%= yield %>
 
+    <%# how to center? %>
+    <footer class="row center">
+      Copyright &copy 2017 <%= link_to "Amy Cash", "#"%>, <%= link_to "Sara Frandsen", "https://github.com/sarafrandsen"%>, <%= link_to "Tanisha Hampden", "#"%>, <%= link_to "Angela Wilson", "#"%>
+    </footer>
   </body>
 </html>

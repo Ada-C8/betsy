@@ -1,7 +1,7 @@
-<% if @order_products.any? %>
-  <% @order_products.each do |order_product| %>
-    <p><%= order_product.product.name %> | <%= link_to "Delete", order_product_path(order_product), :data => {:confirm => "You sure?", :method => "delete"} %></p>
-    <p> Unit Price: <%= order_product.product.price %></p>
+<% if @cart.products.any? %>
+  <% @cart.products.each do |product| %>
+    <p><%= product.name %> | <%= link_to "Delete", product_path(product), :data => {:confirm => "You sure?", :method => "delete"} %></p>
+    <p> Unit Price: <%= product.price %></p>
   <% end %>
 <% else %>
   <p>Your shopping cart is empty.</p>
