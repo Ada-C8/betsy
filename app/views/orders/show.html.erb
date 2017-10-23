@@ -8,12 +8,11 @@
 <section class="order-details">
   <ul>
   <% product_array.uniq.each do |product| %>
-    <li>
-      <%= link_to product.name, product_path(product.id) %> : <%= product.price %> Quantity: <%= product_array.count(product) %> Subtotal: <%= product_array.count(product) *  product.price %>    </li>
-
+    <li class="line-item">
+      <span class="product-info"><%= link_to product.name, product_path(product.id) %> : <%= product.price %> Quantity: <%= product_array.count(product) %> Subtotal: <%= product_array.count(product) *  product.price %></span>
 
       <span class="change-amount"><span class="button"><%= link_to "+ 1", add_product_path(product), method: :patch %></span> <span class="button"><%= link_to "- 1", remove_product_path(product), method: :patch %></span></span>
-
+    </li>
   <% end %>
 
   <li>Order Subtotal: <%= @order.order_total %> </li>
