@@ -3,6 +3,7 @@ class Merchant < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
+  # provider and uid are validated in the migration
 
   def self.from_auth_hash(provider, auth_hash)
     merchant = new
