@@ -1,17 +1,18 @@
-<nav class='small-2 columns'>
-  <h4>Categories</h4>
-  <ul>
-    <% @categories.each do |category| %>
+<section>
+  <nav class='small-2 columns'>
+    <h4>Categories</h4>
+    <ul>
+      <% @categories.each do |category| %>
       <li>
         <%= link_to category.name.capitalize, category_products_path(category.id) %>
       </li>
-    <% end %>
-  </ul>
-</nav>
+      <% end %>
+    </ul>
+  </nav>
 
-<main class='small-10 columns'>
-  <h2><%= @title %></h2>
-  <%= (render partial: 'temp-errors') if (flash[:message]) || (flash.now[:message])  %>
+  <section class='small-10 columns'>
+    <h2><%= @title %></h2>
 
-  <%= render partial: "product-list", locals: {products: @products} %>
-</main>
+    <%= render partial: "product-list", locals: {products: @products} %>
+  </section>
+</section>

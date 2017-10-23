@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :orders, except: [:edit]
   resources :order_products, only: [:update, :destroy]
-  get '/products/:id/categories', to: 'products#categories', as: 'add_categories'
+  get '/products/:id/categories', to: 'categories#add', as: 'add_categories'
   post '/products/:id/categories', to: 'products#add_categories'
   post '/products/:id/new_category', to: 'categories#create'
   resources :products
