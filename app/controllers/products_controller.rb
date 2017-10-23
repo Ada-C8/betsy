@@ -77,10 +77,6 @@ class ProductsController < ApplicationController
     return redirect_to products_path
   end
 
-  def categories
-    @categories = Category.all
-  end
-
   def add_categories
     result = @product.add_categories_by_params(params)
 
@@ -96,14 +92,6 @@ class ProductsController < ApplicationController
   end
 
   private
-
-  def find_product_by_params
-    @product = Product.find_by(id: params[:id])
-
-    unless @product
-      return head :not_found
-    end
-  end
 
   def confirm_ownership
     unless session[:merchant]['id'] == @product.merchant_id

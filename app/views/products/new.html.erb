@@ -1,5 +1,7 @@
-<h2>Create New Product</h2>
+<section>  
+  <h2>Create New Product</h2>
 
-<%= (render partial: 'temp-errors') if (flash[:message]) || (flash.now[:message])  %>
+  <%= (render partial: 'temp-errors') if (flash[:message]) || (flash.now[:message])  %>
 
-<%= render partial: "product-form", locals: {button: "Create"} %>
+  <%= render partial: "product-form", locals: {button: "Create"} %>
+</section>
