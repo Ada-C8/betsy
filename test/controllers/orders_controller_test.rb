@@ -41,8 +41,6 @@ describe OrdersController do
 
       post orders_path, params: order
 
-      binding.pry
-
       must_respond_with :redirect
       must_redirect_to order_path
       Order.count.must_equal start_count + 1
