@@ -1,5 +1,3 @@
-<section>
-
 <section class="row show">
 
   <div class="show-image">
@@ -28,7 +26,7 @@
     <% elsif @product.quantity_avail > 0 %>
     <span class="button"><%= link_to "Add to cart", add_product_path(@product), method: :patch %></span>
     <% end %>
-    <span class="button"><%= link_to "Remove from cart", remove_product_path(@product), method: :patch %></span>
+
 </div>
 </section>
 

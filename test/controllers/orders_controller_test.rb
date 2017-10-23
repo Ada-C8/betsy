@@ -2,7 +2,7 @@ require "test_helper"
 #TODO Look at update test that is commented out
 
 describe OrdersController do
-  
+
   describe "index" do
     it "succeeds when there are orders" do
       Order.count.must_be :>, 0, "No works in the test fixtures"
@@ -88,9 +88,7 @@ describe OrdersController do
         }
       }
 
-      patch order_path(order.id), params: order_data
       must_redirect_to confirm_order_path(order.id)
-
 
       # Verify the DB was really modified
       Order.find(order.id).status.must_equal "complete"

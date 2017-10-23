@@ -106,17 +106,18 @@ class ProductsController < ApplicationController
         order.products << @product
         order.save
         flash[:success] = "product added to cart"
-        #this redirects, which causes double redirect error
+        redirect_to order_path(order.id)
       else
         order = Order.find_by(id: session[:order_id])
         order.products << @product
         order.save
         flash[:success] = "product added to cart"
-        redirect_to order_path(session[:order_id])
+        redirect_to order_path(order.id)
       end
     else
-      flash[:error] = "product not available"
-      redirect_to products_path, status: :bad_request
+      flash[:error] = "Product not available"
+      redirect_back(fallback_location: products_path)
+      # status :bad_request
     end
   end
 
@@ -124,35 +125,32 @@ class ProductsController < ApplicationController
   def remove_product_from_cart
     @product = Product.find_by(id: params[:id])
 
-  if !@product
-    flash[:status] = :failure
-    flash[:result_text] = "That product isn't even in your cart."
-    redirect_to products_path, status: :bad_request
-  end
-
     order = Order.find_by(id: session[:order_id])
     index_of_first_found = order.products.index {|element| element.id == @product.id}
     orders_products_array = order.products.to_a
+    if @product && order
 
-    orders_products_array.delete_at(index_of_first_found)
+      index_of_first_found = order.products.index {|element| element.id == @product.id}
 
-    order.products.replace([])
-    order.products.replace(orders_products_array)
+      if index_of_first_found
 
-    @product.add_one_to_stock
-    flash[:status] = :success
-    flash[:result_text] = "Product successfully removed from your cart!"
+        orders_products_array = order.products.to_a
+        orders_products_array.delete_at(index_of_first_found)
 
-    redirect_to products_path
+        order.products.replace([])
+        order.products.replace(orders_products_array)
 
+        @product.add_one_to_stock
+        flash[:success] = "Successfully removed product from cart"
+        redirect_to order_path(order.id)
+      else
+        flash[:error] = "Error: Product not found in cart"
+      end
+    end
   end
-
-  def product_params
-    params.require(:product).permit(:name, :quantity_avail, )
-  end
-end
 
 private
   def product_params
     params.require(:product).permit(:name, :price, :quantity_avail, :merchant_id)
   end
+end
