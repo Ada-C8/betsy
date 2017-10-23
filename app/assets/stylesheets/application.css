@@ -23,3 +23,7 @@
 .row {
   max-width: 100%;
 }
+
+header nav {
+  text-align: right;
+}
