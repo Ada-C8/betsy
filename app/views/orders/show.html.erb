@@ -1,8 +1,9 @@
-<% if @cart.products.any? %>
+<%# will almost never *actually* use the through-table because rails will provide the tools for you--exists to connect the two tables only %>
+<% if @cart.products.any? %> <%# @cart.products = nice method rails gives us because it knows the relationship (a cart has many products) is there %>
   <% @cart.products.each do |product| %>
     <p><%= product.name %> | <%= link_to "Delete", product_path(product), :data => {:confirm => "You sure?", :method => "delete"} %></p>
     <p> Unit Price: <%= product.price %></p>
   <% end %>
 <% else %>
-  <p>Your shopping cart is empty.</p>
+  <p>Your shopping cart is empty.</p> <%# need to figure this out--currently, the index view is a work-around %>
 <% end %>
