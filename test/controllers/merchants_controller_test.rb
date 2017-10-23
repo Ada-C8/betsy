@@ -16,24 +16,9 @@ describe MerchantsController do
   end
 
   describe "login" do
-    it "should generate success if logged in" do
-      auth_hash = {
-        provider:"github",
-        uid: "9999999999",
-        email: "somebodnew@somesite.com",
-        username: "Somebodynew"
-      }
 
-      get login_path(auth_hash)
-      must_respond_with :found
-      must_redirect_to root_path
-      flash[:status].must_equal :success
-      flash[:result_text].must_equal "Successfully logged in "
-    end
-    
     it "logs in an existing merchant and redirects to the root route" do
-
-      start_count = Merchant.count
+      start_count = Merchant.all.count
 
       merchant = merchants(:grace)
       OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
@@ -44,17 +29,34 @@ describe MerchantsController do
 
       session[:merchant][:id].must_equal merchant.id
 
-      Merchant.count.must_equal start_count
+      Merchant.all.count.must_equal start_count
     end
-    # session[:merchant].must_be_nil
-    # flash[:status].must_equal :failure
-    # flash[:result_text].must_equal "Not logged in"
-    # flash[:messages].must_include :email
-    # flash[:messages].must_include :username
-    #   must_respond_with :failure
-    #   must_redirect_to root_path
-    # binding.pry
-    # end
+
+    it "creates new user with new info" do
+
+      start_count = Merchant.all.count
+      new_merchant = Merchant.new(oauth_provider: 'github',oauth_uid: "adlgkcl",email: 'mail@mail.com', username: 'Mr. New')
+      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(new_merchant))
+      get login_path(:github)
+      must_redirect_to root_path
+      Merchant.count.must_equal start_count + 1
+      session[:merchant][:id].must_equal Merchant.last.id
+      flash[:result_text].must_equal "Successfully created new merchant "
+      flash[:status].must_equal :success
+
+    end
+
+    it "generates failure with no info" do
+      start_count = Merchant.all.count
+      OmniAuth.config.mock_auth[:github] = nil
+      get login_path(:github)
+      Merchant.count.must_equal start_count
+      flash[:result_text].must_equal "Not logged in"
+      flash[:status].must_equal :failure
+      flash[:messages].must_include :email
+      flash[:messages].must_include :username
+      must_redirect_to root_path
+    end
 
   end
 
@@ -120,8 +122,10 @@ describe MerchantsController do
   describe "destroy" do
     it "removes the merchant and goes to the root path" do
       first_count = Merchant.all.count
-      Merchant.first.destroy
-      # must_redirect_to root_path
+      delete_merchant = Merchant.first
+      delete merchant_path(delete_merchant)
+      must_respond_with :redirect
+      must_redirect_to root_path
       Merchant.all.count.must_equal first_count - 1
 
     end

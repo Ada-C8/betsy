@@ -84,6 +84,7 @@ class MerchantsController < ApplicationController
   end
 
   def destroy
+    @merchant = Merchant.find_by(id: params[:id])
     @merchant.destroy
     redirect_to root_path
   end

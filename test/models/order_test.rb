@@ -15,7 +15,6 @@ describe Order do
     it "can be created with valid data" do
       orders(:order).must_be :valid?
     end
-
     it "won't be valid without status" do
       bad_order.wont_be :valid?
       bad_order.errors.messages.must_include :status
@@ -61,37 +60,24 @@ describe Order do
       bad_order.wont_be :valid?
       bad_order.errors.messages.must_include :cust_email
     end
-    it "won't be valid without order products" do
-      bad_order.wont_be :valid?
-      bad_order.errors.messages.must_include :products
-    end
   end
-  describe "releationships" do
+  describe "relationships" do
     describe "order products" do
-      it "will be valid with order products" do
-        orders(:order).must_be :valid?
-      end
-      it "contains an array of Products" do
-        orders(:order).order_products.each do |product|
-          product.must_be_kind_of OrderProduct
+      it "contains an array of Order Products" do
+        orders(:order).order_products.each do |order_product|
+          order_product.must_be_kind_of OrderProduct
         end
       end
-      it "won't be valid without order products" do
-        bad_order.products.must_equal []
-        bad_order.wont_be :valid?
+      it "contains an array of Products" do
+        orders(:order).products.each do |product|
+          product.must_be_kind_of Product
+        end
       end
     end
-    describe "merchant relationship" do
-      it "can have a merchant" do
+    describe "Merchant relationship" do
+      it "can have a Merchant" do
         orders(:order).must_respond_to :merchant
       end
     end
   end
-  # it "has a list of reviews" do
-  #   review = merchants(:ada)
-  #   review.must_respond_to :reviews
-  #   review.reviews.each do |review|
-  #     review.must_be_kind_of Review
-  #   end
-  # end
 end
