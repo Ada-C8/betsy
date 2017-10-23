@@ -20,7 +20,6 @@ describe OrdersController do
     it "adds order to the database and redirects when the data is valid" do
       order = {
         order: {
-          # id: 4444,
           cust_name: "Mermaid",
           merchant_id: 21,
           cust_cc: 12345,
@@ -41,6 +40,8 @@ describe OrdersController do
       must_respond_with :redirect
       must_redirect_to orders_path
       Order.count.must_equal start_count + 1
+      flash[:status].must_equal :success
+      flash[:message].must_include "Successfully created order"
     end
 
     it "re-renders form when the order data is invalid" do
