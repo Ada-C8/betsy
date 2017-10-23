@@ -145,7 +145,7 @@ header {
 }
 
 /*index views for all models*/
-.all-products, .all-merchants, .all-categories, .show-merchant {
+.all-products, .all-merchants, .all-categories, .show-merchant, .home {
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
@@ -185,6 +185,10 @@ header {
   height: 400px;
   width: 275px;
   overflow: hidden;
+}
+
+.info-card:hover {
+  transform: scale(1.15);
 }
 
 .product, .merchant, .category {
@@ -355,11 +359,17 @@ z-index: -1;
 }
 
 /*featured product homepage slider*/
+.scrolling-image {
+  display: block;
+  text-align: center;
+}
+
 #slider {
   position: relative;
   overflow: hidden;
   margin: 20px auto 0 auto;
   border-radius: 4px;
+  width: 80%;
 }
 
 #slider ul {
@@ -376,8 +386,8 @@ z-index: -1;
   float: left;
   margin: 0;
   padding: 0;
-  width: 500px;
-  height: 300px;
+  width: 800px;
+  height: 500px;
   background: #ccc;
   text-align: center;
   line-height: 300px;
@@ -415,7 +425,8 @@ a.control_next {
 }
 
 .slider_option {
-  position: relative;
+  display: block;
+  position: absolute;
   margin: 10px auto;
   width: 160px;
   font-size: 18px;
