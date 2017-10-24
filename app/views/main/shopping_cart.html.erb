@@ -6,7 +6,14 @@
     <p><%= order_product.total %></p>
   <% end %>
 
-  <p>cart total</p>
-  <%= total(@products)%>
+  <% unless @products.empty? %>
+    <p>cart total</p>
+    <%= total(@products) %>
 
+    <%= link_to "Checkout Cart", new_order_path, class: 'button' %>
+  <% else %>
+  <p>
+    Your cart is empty!! 👻
+  </p>
+  <% end %>
 </section>
