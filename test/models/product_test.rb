@@ -64,8 +64,9 @@ describe Product do
   # validates_associated :merchant, :category
   describe 'validate' do
     # Write at least two tests for each validation (positive and negative)
-    it "can be created and has all required fields" do
+    it "can be created and require fields cannot be nil" do
       @product.must_be_kind_of Product
+
       refute_nil @product.id
       refute_nil @product.name
       refute_nil @product.price
@@ -74,7 +75,7 @@ describe Product do
       refute_nil @product.category_id
     end
 
-    it "is invalid without required fields" do
+    it "is invalid if any required fields are missing" do
       @product.name = nil
       @product.valid?.must_equal false
 
@@ -90,45 +91,21 @@ describe Product do
       @product.category_id = nil
       @product.valid?.must_equal false
     end
-  #
-  #   it 'invalid without email' do
-  #     user = User.new(name: 'John')
-  #     refute user.valid?
-  #     assert_not_nil user.errors[:email]
-  #   end
-  # end
-  #
-  #
-  #
-  # it "requires a unique name" do
-  #   name = "it name"
-  #   b1 = Product.create!(name: name, price: 10, category_id: Category.first.id, merchant_id: Merchant.first.id)
-  #   b2 = Product.new(name: name, price: 10, category_id: Category.first.id, merchant_id: Merchant.first.id)
-  #
-  #   b2.wont_be :valid?
-  # end #unique name
-  #
-  # it "requires a price" do
-  #   b = Product.new(name: "name", category_id: Category.first.id, merchant_id: Merchant.first.id)
-  #   b.wont_be :valid?
-  #   b.errors.messages.must_include :price
-  # end
-  #
-  # it "requires price to be greater than 0" do
-  #   b = Product.new(name: "name", price: 0, category_id: 1, merchant_id: 1)
-  #   b.wont_be :valid?
-  #   b.errors.messages.must_include :price
-  # end
-  #
-  # it "requires an associated merchant" do
-  #   b = Product.new(name: "name", price: "10", category_id: 1)
-  #   b.wont_be :valid?
-  #   b.errors.messages.must_include :merchant_id
-  # end
-  #
-  # it "requires an associated category" do
-  #   b = Product.new(name: "name", price: "10", merchant_id: 1)
-  #   b.wont_be :valid?
-  #   b.errors.messages.must_include :category_id
+
+    it "requires price to be greater than 0" do
+      # @product.price = -1
+      # @product.valid?.must_equal false
+      #
+      # @product.price = 0
+      # @product.valid?.must_equal false
+      #
+      # @product.price = 1
+      puts ">>>>>>>>>"
+      puts @product.price
+      @product.valid?.must_equal true
+    end
+
+    it "requires stock to be greater than or equal to 0" do
+    end
   end
-end #validation tests
+end
