@@ -11,7 +11,13 @@
       <li class="line-item">
         <span class="product-info"><%= link_to product.name, product_path(product.id) %> : <%= product.price %> Quantity: <%= product_array.count(product) %> Subtotal: <%= product_array.count(product) *  product.price %></span>
 
-        <span class="change-amount"><span class="button"><%= link_to "+ 1", add_product_path(product), method: :patch %></span> <span class="button"><%= link_to "- 1", remove_product_path(product), method: :patch %></span></span>
+        <span class="change-amount">
+          <%= link_to add_product_path(product), method: :patch do %>
+            <span class="button">+1</span>
+          <% end %>
+          <%= link_to remove_product_path(product), method: :patch  do %>
+            <span class="button">-1</span>
+          <% end %>
       </li>
       <% end %>
 
@@ -20,6 +26,11 @@
   </section>
 
 
-  <span class="button"><%= link_to "Keep Shopping!", products_path, method: :get %></span>
-  <span class="button"><%= link_to "Checkout", edit_order_path(@order.id), method: :get %></span>
+  <%= link_to products_path do %>
+    <span class="button">Keep Shopping!</span>
+  <% end %>
+  <%= link_to edit_order_path(@order.id) do %>
+    <span class="button">Checkout</span>
+  <% end %>
+
 </section>

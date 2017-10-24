@@ -14,6 +14,9 @@
       <%= link_to @product.merchant.username, merchant_path(@product.merchant.id) %></p>
       <br /><p>$<%= @product.price %></p>
       <p>Average Rating: <%= @product.average_rating %></p>
+      <p>Categories: <% @product.categories.each do |category| %>
+       <%= link_to category.name , category_path(category.id) %>
+       <% end %> </p>
       <% if @product.quantity_avail > 0 %>
       <p>In Stock</p>
       <% if @product.quantity_avail <= 5 %>
@@ -26,16 +29,18 @@
 
       <span class="button"><%= link_to "Not available: Keep Shopping!", products_path, method: :get %></span>
       <% elsif session[:order_id] == nil && @product.quantity_avail > 0 %>
-      <span class="button"><%= link_to "Add to cart", add_product_path(@product), method: :patch %></span>
+        <%= link_to add_product_path(@product), method: :patch do %>
+          <span class="button">Add to Cart</span>
+        <% end %>
       <% elsif @product.quantity_avail > 0 %>
-      <!-- <span class="button"><%= link_to "Add to cart", add_product_path(@product), method: :patch %></span> -->
-      <%= link_to add_product_path(@product), method: :patch do %>
-        <span class="button">Add to Cart</span>
+        <%= link_to add_product_path(@product), method: :patch do %>
+          <span class="button">Add to Cart</span>
+        <% end %>
       <% end %>
-      
-      <% end %>
-      <span class="button"><%= link_to "Leave a review", new_product_review_path(@product.id) %></span>
 
+      <%= link_to new_product_review_path(@product.id) do %>
+        <span class="button">Leave a Review</span>
+      <% end %>
     </div>
   </section>
 
