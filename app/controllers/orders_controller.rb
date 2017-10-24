@@ -18,6 +18,12 @@ class OrdersController < ApplicationController
     @cart = Order.find_or_create_cart(session[:order_id]) # cart instance
   end
 
+  def submit
+    @cart.subtract_product
+    @cart.status = "paid"
+    session[:order_id] = nil
+  end
+
   def destroy
     #updates order to cancelled, removes all associated products from OP table
   end
