@@ -1,3 +1,20 @@
-<!-- <% @categories.each do |category| %>
-  <%= category.products %>
-<% end %> -->
+<section class="show-category">
+  <span class="index-banner">
+    <em><%= @category.name.upcase %></em>
+    <% if @category.products.count == 0 %>
+      <br />Yikes! No products are currently in this category.
+    <% end %>
+  </span>
+
+<% @category.products.where(available: "Available").each do |product| %>
+  <section class="info-card">
+    <section class="product">
+      <span><img class="index-image", src="http://www.dailypublic.com/sites/default/files/2015/Oct/buffalo-Niagara-Heritage-Village.jpg"</img></span>
+      <span><em>Product</em>: <%= link_to product.name, product_path(product.id) %></span>
+      <span><em>Average Rating</em>: <%= product.average_rating %></span>
+      <span><em>Price</em>: <%= product.price %></span>
+      <span><em>Quantity Available</em>: <%= product.quantity_avail %></span>
+    </section>
+    </section>
+  <% end %>
+</section>

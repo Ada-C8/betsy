@@ -10,12 +10,20 @@
   <% @products.each do |product| %>
   <section class="info-card">
     <section class="product">
-      <img class="index-image" src="http://www.visitbuffaloniagara.com/content/uploads/sv-event-images/434cfb09-bb34-449b-ac6c-d400b6a53f1d.jpg" />
+      <% if product.photo.file? %>
+        <span class= "index-image"><%= link_to image_tag(product.photo.url), product_path(product.id) %></span>
+      <% else %>
+        <span class= "index-image"><%= link_to image_tag("http://www.visitbuffaloniagara.com/content/uploads/sv-event-images/434cfb09-bb34-449b-ac6c-d400b6a53f1d.jpg"), product_path(product.id) %></span>
+      <% end %>
       <span><em>Product</em>: <%= link_to product.name, product_path(product.id) %></span>
       <span><em>Rating</em>: <%= product.average_rating %></span>
       <span><em>Price</em>: <%= product.price %></span>
-      <span><em>Quantity</em>: <%= product.quantity_avail %></span>
-      <span><em>Sold By</em>: <%= link_to product.merchant.username, merchant_path(product.merchant) %></span>
+      <span><em>Quantity</em>: <%= product.quantity_avail %>, <em><%= product.available %></em></span>
+      <% if product.merchant.id == session[:user_id] %>
+        <span><em><%= link_to "Edit this Product", edit_product_path(product.id)%></em></span>
+      <% else %>
+        <span><em>Sold By</em>: <%= link_to product.merchant.username, merchant_path(product.merchant) %></span>
+      <% end %>
     </section>
     </section>
   <% end %>

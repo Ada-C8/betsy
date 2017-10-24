@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" href="https://lh6.ggpht.com/7cfXEzMehr9OvKbOyL1p3c454kWKEmBON9CJ1NvhZFv-cJY0aTnX7pKBTG8vL-oQOQ=w300">
+  <link rel="icon" href="https://lh6.ggpht.com/7cfXEzMehr9OvKbOyL1p3c454kWKEmBON9CJ1NvhZFv-cJY0aTnX7pKBTG8vL-oQOQ=w300">
 
-    <title><%= content_for?(:title) ? yield(:title) : "Sourceress" %></title>
+  <title><%= content_for?(:title) ? yield(:title) : "Sourceress" %></title>
 
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "application" %>
+  <%= csrf_meta_tags %>
 
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
 
-    <%= yield :head %>
-  </head>
+  <%= yield :head %>
+</head>
 
-  <body>
+<body>
 
-<% if current_page?(root_path) %>
+  <% if current_page?(root_path) %>
   <% else %>
   <div class="row">
     <header class="navigation large-12 columns">
 
-      <button class="logo"><%= link_to "Sourceress", root_path %></button>
+      <button class="logo"><%= link_to "Sourceress", home_path %></button>
 
       <section class="dropdown">
         <ul class "browse-menu">
@@ -51,15 +50,15 @@
         </ul>
       </section>
 
-    <% if session[:user_id] != nil %>
+      <% if session[:user_id] != nil %>
       <section class="dropdown">
         <ul class "browse-menu">
           <button class="dropdown-button-browse">Merchant</button>
           <div class="dropdown-content-browse">
             <li><%= link_to "New Category", new_category_path %></li>
-            <li><%= link_to "List Product", new_product_path %></li>
-            <li><%= link_to "Account Products View", merchant_products_path(session[:user_id]) %></li>
             <li><%= link_to "Account Orders View", merchant_orders_path(session[:user_id]) %></li>
+            <li><%= link_to "Add Product", new_product_path %></li>
+            <li><%= link_to "My Products", merchant_products_path(session[:user_id]) %></li>
           </div>
         </ul>
       </section>
@@ -68,12 +67,12 @@
       <section class="dropdown">
         <ul class="login-menu">
           <button class="dropdown-button-login">
-          <% if session[:user_id] == nil %>
-           <%=link_to "Login", '/auth/github' %>
-          <% else %>
-           <%=link_to "Logout", logout_path, method: :post %>
-           <% end %>
-            </button>
+            <% if session[:user_id] == nil %>
+            <%=link_to "Login", '/auth/github' %>
+            <% else %>
+            <%=link_to "Logout", logout_path, method: :post %>
+            <% end %>
+          </button>
           <div class="dropdown-content-login">
             <li>Testing</li>
             <li></li>
@@ -81,14 +80,15 @@
         </ul>
       </section>
 
-  </header>
+    </header>
   </div>
 
-<% end %>
+  <% end %>
 
 
   <% if flash[:result_text] or flash[:messages] %>
-  <section class="row status <%= flash[:status] %>">
+  <script language=javascript>window.alert('<%= flash[:result_text] %>');</script>
+  <!-- <section class="row status <%= flash[:status] %>">
     <h3><%= flash[:status] == :failure ? "A problem occurred: " : "" %><%= flash[:result_text] %></h3>
     <% if flash[:messages] %>
     <ul>
@@ -99,12 +99,26 @@
       <% end %>
     </ul>
     <% end %>
-  </section>
+  </section> -->
   <% end %>
 
-<section class="content">
-  <%= yield %>
-</section>
+  <% if current_page?(root_path) %>
+  <% else %>
+    <div id="stars">
+
+    </div>
+    <div id="stars2">
+
+    </div>
+    <div id="stars3">
+
+    </div>
+  <% end %>
+
+
+  <section class="content">
+    <%= yield %>
+  </section>
 
 
 </body>
