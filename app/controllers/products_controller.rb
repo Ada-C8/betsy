@@ -42,6 +42,8 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new product_params
+    @product.price = params[:product][:price] * 100
+    @product.save
     @product.merchant_id = session[:user_id]
     if @product.save
       flash[:status] = :success
