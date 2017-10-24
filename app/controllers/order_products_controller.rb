@@ -1,7 +1,7 @@
 class OrderProductsController < ApplicationController
   def index
     if session[:merchant]
-      @order_products = Merchant.find(params[:merchant]).order_products
+      @order_products = Merchant.find(params[:merchant_id]).order_products
     end
   end
 
