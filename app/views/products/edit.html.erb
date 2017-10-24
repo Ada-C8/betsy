@@ -9,6 +9,9 @@
   <%= f.label :quantity_avail %>
   <%= f.text_field :quantity_avail %>
 
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
   <%= f.label :product_category %>
   <%= f.select :categories, options_for_select(Category.all.collect{ |c| c.name}), { :prompt => "SELECT UP TO 5"}, { :multiple => true, :size => 5 } %>
 
