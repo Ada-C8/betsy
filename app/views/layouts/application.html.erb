@@ -102,6 +102,20 @@
   </section>
   <% end %>
 
+  <% if current_page?(root_path) %>
+  <% else %>
+    <div id="stars">
+
+    </div>
+    <div id="stars2">
+
+    </div>
+    <div id="stars3">
+
+    </div>
+  <% end %>
+
+
   <section class="content">
     <%= yield %>
   </section>
