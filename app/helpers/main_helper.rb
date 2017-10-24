@@ -1,5 +1,5 @@
 module MainHelper
   def total(array)
-    array.inject { |sum, n| sum + n.total }
+    array.sum { |n| n.total }
   end
 end
