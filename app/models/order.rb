@@ -14,7 +14,7 @@ class Order < ApplicationRecord
   def subtract_product
     Order.transaction do
       self.order_products.each do |op|
-        quantity = op.quanitity
+        quantity = op.quantity
         op.product.stock -= quantity
         op.product.save!
       end
