@@ -27,6 +27,7 @@ body {
   width: 100%;
   background-color: black;
   color: white;
+  font-family: 'Josefin Slab', serif;
 }
 
 em {
@@ -41,9 +42,10 @@ a, a:visited {
 /*flash message styling*/
 .flash {
   border-radius: 5px;
-  background-color: #e6e6e6;
   padding: 20px 25px;
-  margin-top: 30px;
+  background-color: lightgrey;
+  color: black;
+  font-size: 2rem;
 }
 
 /*application wide header & dropdown menus*/
@@ -242,6 +244,15 @@ header {
   width: 500px;
   height: 500px;
 }
+
+// reviews for show product page
+.one-review {
+  background-color: lightgrey;
+  color: black;
+  border-radius: 5px;
+  font-size: 3rem;
+}
+
 /*homepage background image*/
 #homepage {
   background-image: radial-gradient(transparent, rgba(0,0,0,.8)),  url("http://1.bp.blogspot.com/-kLbhA08qOUw/Vi5FAnWvs9I/AAAAAAAABBE/vrAlIqU9emk/s1600/seances.jpg%22");
@@ -339,7 +350,7 @@ z-index: -1;
 
 
 /*button styling*/
-.button,  {
+.button, input[type=text] {
   flex: 1 1 auto;
   margin: 10px;
   padding: 20px;
@@ -359,6 +370,12 @@ z-index: -1;
   color: black;
   background-color: white;
   transform: scale(1.15);
+}
+
+// form styling
+label {
+  color: white;
+  font-size: 1.5rem;
 }
 
 /*featured product homepage slider*/

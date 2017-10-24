@@ -30,12 +30,24 @@
       <% elsif @product.quantity_avail > 0 %>
       <span class="button"><%= link_to "Add to cart", add_product_path(@product), method: :patch %></span>
       <% end %>
+      <span class="button"><%= link_to "Leave a review", new_product_review_path(@product.id) %></span>
 
     </div>
   </section>
 
   <div class="show-reviews">
-
-
+    <div class="index-banner">Reviews</div>
+    <% if @product.reviews.count == 0 %>
+    <div class="index-banner">This Product has not Been Reviewed</div>
+    <% else %>
+      <% @product.reviews.each do |review| %>
+      <div class="row one-review">
+        <span class="small-12 columns">
+        <p><em>Rating: </em><%= review.rating %></p>
+        <p><%= review.text_review %></p>
+        </span>
+      </div>
+      <% end %>
+    <% end %>
   </div>
 </section>
