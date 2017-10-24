@@ -6,6 +6,8 @@
     </div>
     <h6> <%= review.description %> </h6>
   </div>
+  <% if session[:merchant] %>
     <div class="button"> <%= link_to "Edit", edit_review_path(review.id) %></div>
     <div class="button"> <%= link_to "Delete", review_path(review.id), method: :delete, data: { confirm: "Are you sure?" }%></div>
+  <% end %>
 </section>
