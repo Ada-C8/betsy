@@ -10,7 +10,11 @@
   <% @products.each do |product| %>
   <section class="info-card">
     <section class="product">
-      <img class="index-image" src="http://www.visitbuffaloniagara.com/content/uploads/sv-event-images/434cfb09-bb34-449b-ac6c-d400b6a53f1d.jpg" />
+      <% if product.photo.file? %>
+        <span class= "index-image"> <%= image_tag product.photo.url %> </span>
+      <% else %>
+        <img class="index-image" src="http://www.visitbuffaloniagara.com/content/uploads/sv-event-images/434cfb09-bb34-449b-ac6c-d400b6a53f1d.jpg" />
+      <% end %>
       <span><em>Product</em>: <%= link_to product.name, product_path(product.id) %></span>
       <span><em>Rating</em>: <%= product.average_rating %></span>
       <span><em>Price</em>: <%= product.price %></span>

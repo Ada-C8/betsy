@@ -1,7 +1,11 @@
 <section class="row show">
 
   <div class="show-image">
-    <img class="small-12 large-6 columns" src="https://ak6.picdn.net/shutterstock/videos/17347006/thumb/3.jpg?i10c=img.resize(height:160)" />
+    <% if @product.photo.file? %>
+      <%= image_tag @product.photo.url %>
+    <% else %>
+      <img class="small-12 large-6 columns" src="https://ak6.picdn.net/shutterstock/videos/17347006/thumb/3.jpg?i10c=img.resize(height:160)" />
+    <% end %>
   </div>
 
   <div class="show-details small-12 large-6 columns">
