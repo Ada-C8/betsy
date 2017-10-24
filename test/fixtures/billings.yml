@@ -1,7 +1,17 @@
 # # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 #
 
-# one: {}
-# # column: value
+one:
+  street: 1313 Puppy Lane
+  apt: Apt 13
+  city: Seattle
+  state: WA
+  ship_zip: 98101
+  email: finn.dog@gmail.com
+  credit_card: 1111222233334444
+  exp: 0120
+  cvv: 123
+  bill_zip: 98101
+
 # #
 # two: {}
