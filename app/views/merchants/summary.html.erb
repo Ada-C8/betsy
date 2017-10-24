@@ -1,36 +1,36 @@
 <h2>Welcome, <%= @user.username %>!</h2>
 
-<section class="small-10 columns profile end">  
+<section class="small-10 columns profile end">
   <section class="row">
-    <div class="small-12 medium-6 columns">
+    <div class="medium-12 large-6 columns">
       <div class="profile-card">
         <h3>Pending Orders</h3>
-        <em class="profile-huge"><%= @user.pending_orders.count %></em>
-        <%= link_to "View Pending Orders", root_path, class: 'button profile-button' %>
+        <em class="profile-huge pending-orders"><%= @user.pending_orders.count %></em>
+        <%= link_to "Pending Orders", root_path, class: 'button profile-button' %>
       </div>
     </div>
-    <div class="small-12 medium-6 columns end">
-      <div class=" profile-card">
-
-        <h3>Total Revenue</h3>
-        <em class="profile-huge"><%= money(@user.total_revenue) %></em>
-        <%= link_to "View Completed Orders", root_path, class: 'button profile-button' %>
+    <div class="medium-12 large-6 columns end">
+      <div class="profile-card">
+        <h3>Currently Selling</h3>
+        <em class="profile-huge current-products"><%= @user.active_products.count %></em>
+        <%= link_to "Inventory Management", root_path, class: 'button profile-button' %>
       </div>
     </div>
   </section>
+
   <section class="row">
-    <div class="small-12 medium-6 columns">
+    <div class="medium-12 large-6 columns">
       <div class="profile-card">
-        <h3>Currently Selling</h3>
-        <em class="profile-huge"><%= @user.active_products.count %></em>
-        <h3><small>items</small></h3>
+        <h3>Completed Orders</h3>
+        <em class="profile-huge shipped-orders"><%= @user.shipped_orders.count %></em>
+        <%= link_to "Completed Orders", root_path, class: 'button profile-button' %>
       </div>
     </div>
-    <div class="small-12 medium-6 columns end">
-      <div class="profile-card">
-        <h3>Member For</h3>
-        <em class="profile-huge"><%= days_ago(@user.created_at) %></em>
-        <h3><small>days</small></h3>
+    <div class="medium-12 large-6 columns end">
+      <div class=" profile-card">
+        <h3>Total Revenue</h3>
+        <em class="profile-huge total-revenue"><%= money(@user.total_revenue) %></em>
+        <%= link_to "Income Details", root_path, class: 'button profile-button' %>
       </div>
     </div>
   </section>
