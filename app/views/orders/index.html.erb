@@ -6,20 +6,39 @@
   <% else %>
 
     <% @orders.each do |order| %>
-      <article class="media-object stack-for-small">
-        <% order.products.each do | product |%>
-
+      <article>
+        <div class="media-object stack-for-small">
           <div class="media-object-section">
-            <div class="thumbnail">
-              <img src= "<%= product.image_url %>">
+            <div>
+              <span class="order-small">ORDER PLACED</span>
+              <span class="order-data"><%= order.created_at.strftime("%B %d, %Y") %></span>
+            </div>
+            <div>
+              <span class="order-small">TOTAL</span>
+              <span class="order-data"><%= sprintf('%.2f', order.total) %></span>
+            </div>
+            <div>
+              <span class="order-small">ORDER #<%= order.id %></span>
+              <span class="order-data"><%= link_to "Order Details", order_path(order.id)%></span>
             </div>
           </div>
-          <div class="media-object-section">
-            <h4><%= product.name %></h4>
-            <p><%= product.description %></p>
-            <p><%= product.price %></p>
-          </div>
-        <% end %>
+        </div>
+
+          <% order.order_products.each do | order_product |%>
+          <div class="media-object stack-for-small">
+            <div class="media-object-section">
+              <div class="thumbnail mini-img">
+                <img src= "<%= order_product.product.image_url %>">
+              </div>
+            </div>
+            <div class="media-object-section">
+              <h4><%= order_product.product.name %></h4>
+              <p><%= order_product.product.description %></p>
+              <p>Price: <%= sprintf('%.2f', order_product.product.price) %> Quantity: <%= order_product.quantity %></p>
+              <p>Subtotal: <%= sprintf('%.2f', order_product.total) %></p>
+            </div>
+            </div>
+          <% end %>
 
       </article>
     <% end %>

@@ -17,12 +17,16 @@
         <h1 class="small-12 medium-4 columns">
           <%= link_to "LoreStore", root_path %>
         </h1>
+
         <nav class="small-12 medium-8 columns top-nav">
           <%= link_to "View Products", products_path, class: "button" %>
           <%= link_to "Shopping Cart", shopping_cart_path, class: "button" %>
           <% if session[:merchant] %>
             <%= link_to "Sell", new_product_path, class: "button" %>
+            <%= link_to "Sold items", merchant_sold_index_path(session[:merchant]['id']), class: "button" %>
+            <%= link_to "Purchased Items", merchant_orders_path(session[:merchant]['id']), class: "button" %>
             <%= link_to "Sign Out", logout_path, class: "button" %>
+
           <% else %>
             <%= link_to "Sign Up", '/auth/github', class: "button" %>
             <%= link_to "Sign In", '/auth/github', class: "button" %>
