@@ -23,23 +23,21 @@
             </div>
           </div>
         </div>
-
           <% order.order_products.each do | order_product |%>
-          <div class="media-object stack-for-small">
-            <div class="media-object-section">
-              <div class="thumbnail mini-img">
-                <img src= "<%= order_product.product.image_url %>">
+            <div class="media-object stack-for-small">
+              <div class="media-object-section">
+                <div class="thumbnail mini-img">
+                  <img src= "<%= order_product.product.image_url %>">
+                </div>
+              </div>
+              <div class="media-object-section">
+                <h4><%= order_product.product.name %></h4>
+                <p><%= order_product.product.description %></p>
+                <p>Price: <%= sprintf('%.2f', order_product.product.price) %> Quantity: <%= order_product.quantity %></p>
+                <p>Subtotal: <%= sprintf('%.2f', order_product.total) %></p>
               </div>
             </div>
-            <div class="media-object-section">
-              <h4><%= order_product.product.name %></h4>
-              <p><%= order_product.product.description %></p>
-              <p>Price: <%= sprintf('%.2f', order_product.product.price) %> Quantity: <%= order_product.quantity %></p>
-              <p>Subtotal: <%= sprintf('%.2f', order_product.total) %></p>
-            </div>
-            </div>
           <% end %>
-
       </article>
     <% end %>
 
