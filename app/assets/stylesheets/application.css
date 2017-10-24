@@ -27,3 +27,7 @@
 header nav {
   text-align: right;
 }
+
+.right {
+  float: right;
+}
