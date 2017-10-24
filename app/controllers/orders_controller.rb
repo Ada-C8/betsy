@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
       @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
 
       @merch_orders = @merch_orders.where(:status => "shipped")
-      
+
     else
       @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
     end
@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
           flash[:status] = :success
           flash[:result_text] = "You have successfully submitted your order!"
           session[:order_id] = nil
-          redirect_to confirm_order_path(@order.id)
+          redirect_to order_confirm_order_path(@order.id)
         else
           flash[:status] = :failure
           flash[:result_text] = "All fields are required to complete your order."

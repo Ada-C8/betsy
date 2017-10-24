@@ -95,75 +95,50 @@ class ProductsController < ApplicationController
   end
 
   def add_product_to_cart
+    @product = Product.find_by(id: params[:id])
     if @product.remove_one_from_stock
       if Order.find_by(id: session[:order_id]) == nil
         create_order
         order = Order.find_by(id: session[:order_id])
         order.products << @product
         order.save
-        flash[:success] = "product added to cart"
+        flash[:status] = :success
+        flash[:result_text] = "product added to cart"
         redirect_to order_path(order.id)
       else
         order = Order.find_by(id: session[:order_id])
         order.products << @product
         order.save
-        flash[:success] = "product added to cart"
+        flash[:status] = :success
+        flash[:result_text] = "product added to cart"
         redirect_to order_path(order.id)
       end
     else
-      flash[:error] = "Product not available"
+      flash[:status] = :failure
+      flash[:result_text] = "Product not available"
       redirect_back(fallback_location: products_path)
       # status :bad_request
     end
   end
-
-
   def remove_product_from_cart
+    @product = Product.find_by(id: params[:id])
     order = Order.find_by(id: session[:order_id])
-    index_of_first_found = order.products.index {|element| element.id == @product.id}
-    orders_products_array = order.products.to_a
     if @product && order
-
       index_of_first_found = order.products.index {|element| element.id == @product.id}
-
       if index_of_first_found
-
         orders_products_array = order.products.to_a
         orders_products_array.delete_at(index_of_first_found)
-
         order.products.replace([])
         order.products.replace(orders_products_array)
-
         @product.add_one_to_stock
-        flash[:success] = "Successfully removed product from cart"
+        flash[:status] = :success
+        flash[:result_text] = "Successfully removed product from cart"
         redirect_to order_path(order.id)
       else
-        flash[:error] = "Error: Product not found in cart"
+        flash[:status] = :failure
+        flash[:result_text] = "Error: Product not found in cart"
       end
     end
-
-    if !@product
-      flash[:status] = :failure
-      flash[:result_text] = "That product isn't even in your cart."
-      redirect_to products_path, status: :bad_request
-    end
-
-      order = Order.find_by(id: session[:order_id])
-
-      index_of_first_found = order.products.index {|element| element.id == @product.id}
-
-      orders_products_array = order.products.to_a
-
-      orders_products_array.delete_at(index_of_first_found)
-
-      order.products.replace([])
-      order.products.replace(orders_products_array)
-
-      @product.add_one_to_stock
-      flash[:status] = :success
-      flash[:result_text] = "Product successfully removed from your cart!"
-
-      redirect_to products_path
   end
 
 private
