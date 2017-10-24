@@ -2,43 +2,41 @@
   <h2 class="page-title">Order details</h2>
 
   <article>
-    <h3>Order # <%= @order.id %></h3>
+    <div class="odetails-heading">
+      <span>Ordered on <%= @order.created_at.strftime("%B %d, %Y") %></span>
+      <span>Order #<%= @order.id %></span>
+    </div>
+
+    <div class="odetails-customer">
+
+    </div>
+
+    <div class="odetails-products">
+      <table>
+        <thead>
+          <th>Quantity</th>
+          <th>Item</th>
+          <th>Total</th>
+        </thead>
+        <tbody>
+          <% @order.order_products.each do |order_product| %>
+            <tr>
+              <td><%= order_product.quantity %></td>
+              <td>
+                <div class="mini-img">
+                  <img src="<%= order_product.product.image_url %>" alt="">
+                </div>
+                <div class="odetail-info">
+                  <p><%= link_to order_product.product.name, product_path(id:order_product.product.id) %></p>
+                  <p><%= sprintf('%.2f', order_product.product.price) %></p>
+                </div>
+              </td>
+              <td><%= sprintf('%.2f', order_product.total) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </article>
 
-
-  <% @orders.each do |order| %>
-    <article>
-      <div class="media-object stack-for-small">
-        <div class="media-object-section">
-          <div>
-            <span class="order-small">ORDER PLACED</span>
-            <span class="order-data"><%= order.created_at.strftime("%B %d, %Y") %></span>
-          </div>
-          <div>
-            <span class="order-small">TOTAL</span>
-            <span class="order-data"><%= sprintf('%.2f', order.total) %></span>
-          </div>
-          <div>
-            <span class="order-small">ORDER #<%= order.id %></span>
-            <span class="order-data"><%= link_to "Order Details", order_path(order.id)%></span>
-          </div>
-        </div>
-      </div>
-        <% order.order_products.each do | order_product |%>
-          <div class="media-object stack-for-small">
-            <div class="media-object-section">
-              <div class="thumbnail mini-img">
-                <img src= "<%= order_product.product.image_url %>">
-              </div>
-            </div>
-            <div class="media-object-section">
-              <h4><%= order_product.product.name %></h4>
-              <p><%= order_product.product.description %></p>
-              <p>Price: <%= sprintf('%.2f', order_product.product.price) %> Quantity: <%= order_product.quantity %></p>
-              <p>Subtotal: <%= sprintf('%.2f', order_product.total) %></p>
-            </div>
-          </div>
-        <% end %>
-    </article>
-  <% end %>
 </section>
