@@ -11,7 +11,7 @@
   <section class="info-card">
     <section class="product">
       <% if product.photo.file? %>
-        <%= image_tag product.photo.url %>
+        <span class= "index-image"> <%= image_tag product.photo.url %> </span>
       <% else %>
         <img class="index-image" src="http://www.visitbuffaloniagara.com/content/uploads/sv-event-images/434cfb09-bb34-449b-ac6c-d400b6a53f1d.jpg" />
       <% end %>
