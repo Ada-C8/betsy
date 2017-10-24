@@ -1,7 +1,9 @@
 <section class="show-category">
- <%= params %>
   <span class="index-banner">
     <em><%= @category.name.upcase %></em>
+    <% if @category.products.count == 0 %>
+      <br />Yikes! No products are currently in this category.
+    <% end %>
   </span>
 
 <% @category.products.where(available: "Available").each do |product| %>
