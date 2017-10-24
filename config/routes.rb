@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :merchants do
     get '/products', to: 'products#index'
+    resources :orders, only: [:index]
   end
 
   resources :categories do

@@ -1,17 +1,24 @@
-<% if @order %>
-  <%= form_for @order do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+<h3><%= "Orders Index" %></h3>
 
-  <%= f.label :price %>
-  <%= f.text_field :price %>
+<section class="all-merchant-orders">
+  <span class="index-banner">
+  <% if @merch_orders == nil %>
+    No orders yet.
+  <% else %>
+    Your Merchant Orders
+  <% end %>
+  </span>
 
-  <%= f.label :quantity_avail %>
-  <%= f.text_field :quantity_avail %>
-
-  <%= f.label :merchant %>
-  <%= f.text_field :merchant %>
-
-<%= f.submit %>
-<% end %>
-<% end %>
+  <% @merch_orders.to_a.each do |orders| %>
+  <section class="info-card">
+    <section class="merchant">
+      <span><em><%= orders.id %></em></span>
+      <span><em><%= orders.status %></em></span>
+      <span><em><%= orders.name %></em></span>
+      <span><em><%= orders.email %></em></span>
+      <span><em><%= orders.product_name %></em></span>
+      <span><em><%= orders.product_price.to_f %></em></span>
+    </section>
+    </section>
+  <% end %>
+</section>

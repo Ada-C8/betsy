@@ -2,7 +2,9 @@ class OrdersController < ApplicationController
   before_action :find_order, only: [:show, :edit, :update]
 
   def index
-    @orders = Order.all
+    @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price")
+    puts "START #{@merch_orders.to_a[0]}"
+    # @orders = Order.all
   end
 
   def show
