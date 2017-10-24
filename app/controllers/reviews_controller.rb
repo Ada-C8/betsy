@@ -33,7 +33,7 @@ class ReviewsController < ApplicationController
     if @review.save
       flash[:status] = :success
       flash[:message] = "Successfully created review "
-      redirect_to product_path(@review) #review_path(@review)
+      redirect_to product_path(@review.product_id) 
     else
       render :edit, status: :bad_request
       return
