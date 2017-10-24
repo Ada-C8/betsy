@@ -10,7 +10,7 @@
       <p> From seller
         <%= link_to @product.merchant.username, merchant_path(@product.merchant_id) %>
       </p>
-      <p>$<%= '%.2f' % @product.price %></p>
+      <p><%= money(@product.price) %></p>
       <%= form_tag do %>
       <%= label_tag :quantity, "Quantity:", class: 'small-6 columns' %>
       <%= select_tag :quantity, options_for_select((1..@product.quantity)), class: 'small-6 columns' %>
