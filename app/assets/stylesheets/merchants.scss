@@ -1,3 +1,38 @@
 // Place all the styles related to the merchants controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/////////////
+// PROFILE //
+/////////////
+
+.profile {
+  float: none !important;
+  margin: auto;
+}
+
+.profile-card {
+  border: 2px solid grey;
+  border-radius: 2rem;
+  text-align: center;
+  padding: 2rem;
+  margin: 1rem auto;
+}
+
+.profile-huge {
+  font-size: 5rem;
+}
+
+.profile-button {
+  display: block;
+  margin: auto;
+  min-width: 12rem;
+  width: 80%;
+}
+
+@media print, screen and (min-width: 40em) {
+  .profile-card {
+    min-width: 14rem;
+    max-width: 22rem;
+  }
+}

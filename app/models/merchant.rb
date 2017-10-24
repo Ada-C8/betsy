@@ -20,4 +20,24 @@ class Merchant < ApplicationRecord
 
     merchant
   end
+
+  def orders
+    OrderProduct.all.find_all {|op| op.product.merchant_id == id && op.order != nil}
+  end
+
+  def pending_orders
+    orders.find_all { |o| o.status.downcase == "pending" }
+  end
+
+  def shipped_orders
+    orders.find_all { |o| o.status.downcase == "shipped" }
+  end
+
+  def total_revenue
+    shipped_orders.sum { |o| o.total }
+  end
+
+  def active_products
+    products.find_all { |p| p.quantity > 0 }
+  end
 end

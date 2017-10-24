@@ -1,4 +1,7 @@
 class MerchantsController < ApplicationController
+
+  before_action :confirm_login, only: [:summary]
+
   def login
     auth_hash = request.env['omniauth.auth']
     merchant = Merchant.find_by(oauth_uid: auth_hash['uid'], oauth_provider: auth_hash['provider'])
@@ -87,6 +90,10 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find_by(id: params[:id])
     @merchant.destroy
     redirect_to root_path
+  end
+
+  def summary
+    @user = Merchant.find(session[:merchant]['id'])
   end
 
 
