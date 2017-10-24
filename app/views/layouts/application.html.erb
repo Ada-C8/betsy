@@ -33,7 +33,7 @@
         <%# if user is logged in, these buttons appear %>
         <% if session[:merchant_id] %>
           <%= link_to "My Orders", "#", class: "button float-right" %>
-          <%= link_to "Sell on Satiety", "#", class: "button float-right" %>
+          <%= link_to "Sell on Satiety", new_product_path, class: "button float-right" %>
         <% end %>
       </nav>
 
