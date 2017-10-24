@@ -1,6 +1,6 @@
-<%= form_for @product do |f| %>
+<%= form_for @review do |f| %>
   <%= f.label :rating  %>
-  <%= f.integer :rating %>
+  <%= f.select :rating, options_for_select([1, 2, 3, 4, 5]) %>
 
   <%= f.label :description %>
   <%= f.text_field :description %>
