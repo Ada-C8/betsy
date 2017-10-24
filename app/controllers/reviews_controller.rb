@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :find_review_by_params_id, only: [:edit, :update, :destroy] #:show,
   before_action :check_for_product_owner_nested, only: [:new]
-  before_action :check_for_product_owner, only: [:edit, :update, :destroy]
+  before_action :check_for_product_owner, only: [:edit, :update, :destroy, :create]
 
   # def index      # leaving for future, if we rethink and decide to add later
   #   @reviews = Review.where(product_id: params[:product_id])
@@ -15,6 +15,7 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
+
     if @review.save
       flash[:status] = :success
       flash[:message] = "Successfully created review "

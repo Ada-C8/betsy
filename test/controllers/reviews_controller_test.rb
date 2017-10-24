@@ -54,21 +54,6 @@ describe ReviewsController do
   end
 
   describe "create" do
-    it " returns not_found if product doesn't exist" do
-
-      product = Product.first
-      product_review = {
-        product: {
-          name: "Tears"
-        }
-      }
-      product.update_attributes(product_review[:product])
-      product.must_be :valid?
-      product.destroy
-
-      post reviews_path, params: product_review
-      must_respond_with :not_found
-    end
 
     it "should return failure if product belongs to merchant " do
       # arrange: login 'ada' user
@@ -80,7 +65,7 @@ describe ReviewsController do
         }
       }
       start_review_count = Review.count
-
+      # binding.pry
       # act: review (Mermaid Fin)
       post reviews_path, params: review_data
 
