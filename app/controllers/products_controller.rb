@@ -84,7 +84,7 @@ class ProductsController < ApplicationController
     if @product.update_attributes product_params
       flash[:status] = :success
       flash[:result_text] = "Successfully updated product details!"
-      redirect_to product_path(@product.id)
+      redirect_to merchant_products_path(session[:user_id])
     else
       render :edit
     end

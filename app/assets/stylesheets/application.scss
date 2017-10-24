@@ -91,10 +91,6 @@ header {
   text-decoration: none;
 }
 
-.dropdown a:hover {
-  color: grey;
-}
-
 .dropdown-button-browse, .dropdown-button-cart, .dropdown-button-login {
   color: white;
   padding: 0;
@@ -129,6 +125,12 @@ header {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+}
+
+.dropdown-content-browse a:hover, .dropdown-content-merchant a:hover, .dropdown-content-cart, .dropdown-content-login a {
+  color: black;
+  width: 8em;
+  background-color: darkgrey;
 }
 
 .dropdown:hover .dropdown-content-browse {
