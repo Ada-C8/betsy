@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :categories
   has_and_belongs_to_many :orders
 
-  has_attached_file :photo, default_url: "/images/medium/spookyhands.jpg"
+  has_attached_file :photo
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 
   def remove_one_from_stock
