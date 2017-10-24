@@ -20,9 +20,11 @@
         <nav class="small-12 medium-8 columns top-nav">
           <%= link_to "View Products", products_path, class: "button" %>
           <%= link_to "Shopping Cart", shopping_cart_path, class: "button" %>
-          <% if session[:merchant] %>
+          <% if session[:merchant_id] %>
             <%= link_to "Sell", new_product_path, class: "button" %>
             <%= link_to "Sign Out", logout_path, class: "button" %>
+            <%= link_to "Sold items", merchant_sold_index_path(session[:merchant_id]), class: "button" %>
+            <%#= link_to "Purchased Items", merchant_orders_path(@orders.product.merchant), class: "button" %>
           <% else %>
             <%= link_to "Sign Up", '/auth/github', class: "button" %>
             <%= link_to "Sign In", '/auth/github', class: "button" %>
