@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <body>
+        <header class="page-header row">
+          <h2 class="row" "small-12 columns">
+          <%= link_to "Vine & Bloom | ", root_path %>
+          <small> Buy your plants here! </small>
+        </h2>
+          <nav class="row">
+            <div class="large-8 small-12 columns button-group">
+              <%= link_to "View All Products", products_path, class: "button" %>
+
+              <%= render partial: 'layouts/categorydropdown' %>
+              <%= render partial: 'layouts/merchantdropdown' %>
+
+            </div>
+
+
+            <div class="float-right">
+              <% if session[:merchant_id] %>
+
+                  Logged in as
+                  <%= Merchant.find(session[:merchant_id]).name %>
+
+                  <%= link_to "Add a New Product", new_product_path, class: "button" %>
+
+                  <%= link_to "Account", merchant_path(session[:merchant_id]), class: "button"%>
+                
+                  <% if session[:order_id] %>
+                    <%= link_to "View cart", order_path(session[:order_id]), class: "button" %>
+                  <% end %>
+                  <%= link_to "Log out", logout_path, class: "button" %>
+              <% else %>
+                <% if session[:order_id] %>
+                  <%= link_to "View cart", order_path(session[:order_id]), class: "button" %>
+                <% end %>
+                <%= link_to "SignUp or Log in", '/auth/github', class: "button" %>
+              <% end %>
+            </div>
+          </nav>
+        </header>
+        <%# NOTE: replaced the incomplete flash section with a complete flash section TV%>
+        <main class="row">
+          <% if flash[:message] %>
+          <section class="row flash">
+            <div>
+              <% if flash[:status] == :failure %>
+                <p class="error">
+              <% else %>
+                <p>
+              <% end %>
+                <%= flash[:message] %>
+              </p>
+              <% if flash[:details] %>
+              <ul>
+                <% flash[:details].each do |field, problems| %>
+                  <% problems.each do |problem| %>
+                  <li>
+                    <strong><%=field %>:</strong>
+                    <%= problem %>
+                  </li>
+                  <% end %>
+                <%end %>
+              </ul>
+              <% end %>
+            </div>
+          </section>
+          <% end %>
+          <%= yield %>
+        </main>
+      </body>
+  </body>
+</html>
