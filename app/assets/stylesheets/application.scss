@@ -42,12 +42,12 @@ a, a:visited {
 }
 
 /*flash message styling*/
-.flash {
+.flash, .status {
   border-radius: 5px;
   padding: 20px 25px;
-  background-color: lightgrey;
-  color: black;
-  font-size: 2rem;
+  background-color: transparent;
+  color: white;
+  font-size: 1.25rem;
   font-family: 'Josefin Slab', serif;
   text-align: center;
 }

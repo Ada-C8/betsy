@@ -88,7 +88,8 @@
 
 
   <% if flash[:result_text] or flash[:messages] %>
-  <section class="row status <%= flash[:status] %>">
+  <script language=javascript>window.alert('<%= flash[:result_text] %>');</script>
+  <!-- <section class="row status <%= flash[:status] %>">
     <h3><%= flash[:status] == :failure ? "A problem occurred: " : "" %><%= flash[:result_text] %></h3>
     <% if flash[:messages] %>
     <ul>
@@ -99,7 +100,7 @@
       <% end %>
     </ul>
     <% end %>
-  </section>
+  </section> -->
   <% end %>
 
   <% if current_page?(root_path) %>
