@@ -1,0 +1,38 @@
+<section class="welcome">
+  <% if session[:merchant_id] %>
+    <h1> Welcome Back, Bae</h1>
+  <% else %>
+    <h1> Welcome, Bae</h1>
+  <% end %>
+</section>
+
+  <section class="spotlight">
+    <h5>Spotlight | <small> Something, just for you</small></h5>
+    <% @spot = Product.all.sample %>
+    <div class="">
+      <%= link_to product_path(@spot.id) do %>
+        <%= image_tag @spot.photo_url %>
+        <% end %>
+        <%= link_to Category.spot.name.capitalize, product_path(@spot.id) %>
+    </div>
+  </section>
+</section>
+
+<section>
+  <h5>Spooky Seasonal Hits | <small> Boo! </small> </h5>
+  <section class="seasonal row">
+    <!-- <div class="row product"> -->
+      <%# cat = Category.all.where(name:"Halloween").each do |halloween| %>
+        <%# halloween.products.each do |product| %>
+
+    <% @all_products_for_season_cat.each do |product|%>
+      <div class="small-2 large-4 columns">
+      <%= link_to product_path(product.id) do %>
+        <%= image_tag product.photo_url %>
+
+        <%= link_to product.name.capitalize, product_path(product.id) %>
+
+      <% end %>
+    <% end %>
+  </section>
+</section>
