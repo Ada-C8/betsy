@@ -77,6 +77,10 @@ class ProductsController < ApplicationController
       redirect_to root_path, status: :not_found
     end
 
+    category = Category.where(name: params[:product][:categories])
+    @product.categories << category
+    @product.save
+
     if @product.update_attributes product_params
       flash[:status] = :success
       flash[:result_text] = "Successfully updated product details!"

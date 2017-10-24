@@ -2,6 +2,7 @@
   <%= f.label :name %>
   <%= f.text_field :name %>
 
+
   <%= f.label :price %>
   <%= f.text_field :price %>
 
@@ -9,7 +10,7 @@
   <%= f.text_field :quantity_avail %>
 
   <%= f.label :category %>
-  <%= f.select :category, options_for_select(Category.all.collect{ |c| c.name}) %>
+  <%= f.select :categories, options_for_select(Category.all.collect{ |c| c.name}) %>
 
 
   <%= f.label :upload_product_photo %>

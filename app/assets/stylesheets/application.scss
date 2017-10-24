@@ -106,6 +106,7 @@ header {
   display: none;
   position: absolute;
   font-family: 'Josefin Slab', serif;
+  color: white;
   text-transform: capitalize;
   font-size: 1.5rem;
   width: 20em;
@@ -150,7 +151,7 @@ header {
   flex-flow: row;
   flex-wrap: wrap;
   margin: 0;
-  color: black;
+  color: white;
 }
 
 .index-banner {
@@ -196,7 +197,7 @@ header {
   flex-flow: column;
   padding: 1em;
   text-align: left;
-  color: black;
+  color: white;
   font-family: 'Josefin Slab', serif;
   width: 25rem;
   height: 30rem;
@@ -221,6 +222,7 @@ header {
 .show-details p {
   /*display: inline-block;*/
   font-family: 'Josefin Slab', serif;
+  color: white;
   font-size: 2rem;
   line-height: 80%;
 
@@ -345,7 +347,7 @@ z-index: -1;
   font-family: 'Josefin Slab', serif;
   text-transform: uppercase;
   font-weight: bolder;
-  color: black;
+  color: white;
   background-color: transparent;
   position: relative;
   overflow:hidden;
@@ -353,8 +355,8 @@ z-index: -1;
 }
 
 .button:hover {
-  color: white;
-  background-color: black;
+  color: black;
+  background-color: white;
   transform: scale(1.15);
 }
 
@@ -438,7 +440,7 @@ a.control_next {
 html {
   height: 100%;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 #stars {
