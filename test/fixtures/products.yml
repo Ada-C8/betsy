@@ -7,6 +7,7 @@ fake_product1:
   price: 1
   stock: 1
   category_id: 1
+  merchant_id: 1
 
 fake_product2:
   id: 2
@@ -14,4 +15,5 @@ fake_product2:
   description: MyString
   price: 1
   stock: 1
-  category_id: 1
+  category_id: 2
+  merchant_id: 2
