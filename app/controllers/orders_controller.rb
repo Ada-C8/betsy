@@ -26,6 +26,7 @@ class OrdersController < ApplicationController
     @cart = Order.find_or_create_cart(session[:order_id]) # cart instance
   end
 
+
   def destroy
     #updates order to cancelled, removes all associated products from OP table
   end
