@@ -66,6 +66,7 @@ group :test do
   gem 'minitest-rails'
   gem 'minitest-reporters'
   gem 'pry-rails'
+  gem 'simplecov', :require => false
 end
 
 gem 'omniauth'
