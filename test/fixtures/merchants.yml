@@ -23,3 +23,10 @@ fake_user:
   email: blah@123.com
   uid: a_uid
   provider: github
+
+fake_user2:
+  id: 2
+  username: blah
+  email: blah@123.com
+  uid: a_uid
+  provider: github
