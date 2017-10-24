@@ -2,12 +2,15 @@
   <div class="row">
       <div class="small-12 medium-5 columns product-img" <%= (raw "style=\"background-image: url('#{@product.image_url}');\"") unless (@product.image_url.nil? || @product.image_url.empty?) %> >
       </div>
-    <div class="small-12 medium-5 columns product-details end">
-      <h3><%= @product.name %></h3>
+    <div class="small-12 medium-6 columns product-details end">
+      <h3>
+        <%= @product.name %>
+        <%= (link_to "Edit", edit_product_path(@product.id), class: 'right button') if @own_product %>
+      </h3>
       <p> From seller
         <%= link_to @product.merchant.username, merchant_path(@product.merchant_id) %>
       </p>
-      <p>$<%= '%.2f' % @product.price %></p>
+      <p><%= money(@product.price) %></p>
       <%= form_tag do %>
       <%= label_tag :quantity, "Quantity:", class: 'small-6 columns' %>
       <%= select_tag :quantity, options_for_select((1..@product.quantity)), class: 'small-6 columns' %>

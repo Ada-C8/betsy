@@ -1,8 +1,6 @@
 class OrderProductsController < ApplicationController
   def index
-    if session[:merchant]
-      @order_products = Merchant.find(params[:merchant_id]).order_products
-    end
+    @order_products = OrderProduct.all.find_all {|op| (op.product.merchant_id == params['merchant_id'].to_i) && op.order != nil}.sort_by{|op| -op.status}
   end
 
   def update
