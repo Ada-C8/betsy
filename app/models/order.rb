@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  VALID_STATS = ["pending", "complete"]
+  VALID_STATS = ["pending", "complete", "shipped"]
   has_and_belongs_to_many :products
   validates :status, presence: true, inclusion: { in: VALID_STATS }
   validates :name, presence: true, if: :completed?
@@ -18,6 +18,10 @@ class Order < ApplicationRecord
     self.status == "complete"
   end
 
+  def shipped
+    self.status == "shipped"
+  end
+
   def order_total
     total = 0
     self.products.each do |product|
@@ -26,7 +30,5 @@ class Order < ApplicationRecord
     return total
 
   end
-
-
 
 end

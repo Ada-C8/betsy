@@ -1,6 +1,8 @@
+<%= params %>
+
 <h3><%= "Orders Index" %></h3>
 
-<section class="all-merchant-orders">
+<section class="all-merchant-orders" >
   <span class="index-banner">
   <% if @merch_orders == nil %>
     No orders yet.
@@ -9,16 +11,35 @@
   <% end %>
   </span>
 
+  <% @total_revenue = 0.00 %>
   <% @merch_orders.to_a.each do |orders| %>
+  <% @total = 0.00 %>
+
   <section class="info-card">
     <section class="merchant">
       <span><em><%= orders.id %></em></span>
       <span><em><%= orders.status %></em></span>
-      <span><em><%= orders.name %></em></span>
-      <span><em><%= orders.email %></em></span>
-      <span><em><%= orders.product_name %></em></span>
+      <span><em><%= orders.created_at %></em></span>
+      <span><em><%= link_to orders.product_name, product_path(orders.product_id.to_i) %></em></span>
       <span><em><%= orders.product_price.to_f %></em></span>
+      <% @total += orders.product_price.to_f %>
+      <% @total_revenue += @total %>
+      <span><em><%= @total %></em></span>
+      <span class="button", id="shipped-button"><%= link_to "Mark As Shipped", ship_order_path(orders.id.to_i), method: :patch %></span>
     </section>
     </section>
   <% end %>
+  <%= @total_revenue %>
+
+
+
+
+  <span class="button"><%= link_to "Show Pending Orders", merchant_orders_path(params[:merchant_id].to_i, :status => "pending")%></span>
+
+  <span class="button"><%= link_to "Show Complete Orders", merchant_orders_path(params[:merchant_id].to_i, :status => "complete")%></span>
+
+  <span class="button"><%= link_to "Show Shipped Orders", merchant_orders_path(params[:merchant_id].to_i, :status => "shipped")%></span>
+
+  <span class="button"><%= link_to "Show All Orders", merchant_orders_path(params[:merchant_id].to_i)%></span>
+
 </section>

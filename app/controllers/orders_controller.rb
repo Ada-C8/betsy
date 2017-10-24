@@ -2,9 +2,25 @@ class OrdersController < ApplicationController
   before_action :find_order, only: [:show, :edit, :update]
 
   def index
-    @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price")
-    puts "START #{@merch_orders.to_a[0]}"
-    # @orders = Order.all
+    if params[:status] == "pending"
+      @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id]}).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
+
+      @merch_orders = @merch_orders.where(:status => "pending")
+
+    elsif params[:status] == "complete"
+      @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
+
+      @merch_orders = @merch_orders.where(:status => "complete")
+
+    elsif params[:status] == "shipped"
+      @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
+
+      @merch_orders = @merch_orders.where(:status => "shipped")
+      
+    else
+      @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
+    end
+
   end
 
   def show
@@ -37,9 +53,9 @@ class OrdersController < ApplicationController
     if !@order
       redirect_to root_path, status: :not_found
     elsif @order
-      if @order.status == "complete"
+      if @order.status == "shipped"
         flash[:status] = :failure
-        flash[:result_text] = "You cannot update a complete order"
+        flash[:result_text] = "You cannot update a shipped order"
         redirect_to root_path
       else @order.status = "complete"
         if @order.update_attributes order_params
@@ -53,6 +69,19 @@ class OrdersController < ApplicationController
           render :edit, status: :bad_request
         end
       end
+    end
+  end
+
+  def shipped
+    find_order
+    @order.status = "shipped"
+    if @order.save
+      flash[:status] = :success
+      flash[:result_text] = "You have successfully shipped your order!"
+      redirect_back fallback_location: root_path
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "Couldn't mark as shipped."
     end
   end
 
