@@ -155,6 +155,8 @@ header {
   flex-wrap: wrap;
   margin: 0;
   color: white;
+  text-align: center;
+  justify-content: center;
 }
 
 .index-banner {
@@ -406,8 +408,8 @@ label {
   float: left;
   margin: 0;
   padding: 0;
-  width: 800px;
-  height: 500px;
+  width: 600px;
+  height: 300px;
   background: #ccc;
   text-align: center;
   line-height: 300px;
@@ -452,9 +454,17 @@ a.control_next {
   font-size: 18px;
 }
 
+.slider-link {
+  position: absolute;
+}
+
+#checkbox {
+  display: none;
+}
 
 
-// *************************************
+// funexciting but ultimately unnecessary parralax background so comment out below this point if you need to for fun/sanity
+
 html {
   height: 100%;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
