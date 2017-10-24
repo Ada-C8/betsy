@@ -1,6 +1,6 @@
 <h2>Billing Info</h2>
 
-<%= form_for @billing do |f| %>
+<%= form_for @billing, url: billing_form_path do |f| %>
   <%= f.label "Name" %>
   <%= f.text_field :name %>
 
@@ -19,11 +19,8 @@
   <%= f.label "Zip Code" %>
   <%= f.text_field :bill_zip %>
 
-<% end %>
-
 <h2>Shipping Info</h2>
 
-<%= form_for @billing do |f| %>
   <%= f.label "Name" %>
   <%= f.text_field :name %>
 
@@ -43,3 +40,5 @@
   <%= f.text_field :bill_zip %>
 
   <%= f.submit "Submit", :class=>"button"  %>
+
+<% end %>
