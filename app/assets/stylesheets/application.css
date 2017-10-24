@@ -28,5 +28,9 @@ header nav {
   text-align: right;
 }
 
+.right {
+  float: right;
+}
+
 div.mini-img { width: 150px; height: 150px; text-align: center; }
 div.mini-img img { max-width: 100%; max-height: 100%; }
