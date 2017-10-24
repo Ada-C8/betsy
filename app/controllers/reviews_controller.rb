@@ -64,7 +64,6 @@ class ReviewsController < ApplicationController
     if !session[:merchant].nil? && @review.merchant_id == session[:merchant]["id"]
       flash[:status] = :failure
       flash[:result_text] = "Owner can not edit the review of the product!"
-      # render :nothing => true, :status => :bad_request
       redirect_to product_path(@review.product_id)
     end
   end
@@ -77,7 +76,6 @@ class ReviewsController < ApplicationController
     if !session[:merchant].nil? && @product.merchant_id == session[:merchant]["id"]
       flash[:status] = :failure
       flash[:result_text] = "Owner can not review the product!"
-      # render :nothing => true, :status => :bad_request
       redirect_to product_path(@product)
     end
   end
