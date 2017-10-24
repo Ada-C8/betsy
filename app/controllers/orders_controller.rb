@@ -42,8 +42,8 @@ class OrdersController < ApplicationController
     if !@order
       redirect_to root_path, status: :not_found
     elsif @order
-      if @order.status == "complete"
-        flash[:result_text] = "You cannot edit a complete order"
+      if @order.status == "shipped"
+        flash[:result_text] = "You cannot edit a shipped order"
         redirect_to root_path
       end
     end
