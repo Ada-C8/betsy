@@ -4,11 +4,7 @@ describe ReviewsController do
   let(:review) { reviews(:review) }
   let(:mermaid_fin) { products(:mermaid_fin) }
 
-  def login_test_user
-    user = merchants(:ada)
-    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
-    get login_path(:github)
-  end
+
 
 ######### Leaving for future, if we rethink and decide to add later
   # describe "index" do
@@ -38,7 +34,9 @@ describe ReviewsController do
 
   describe "new" do
 
-    it " should work for anon user" do
+    it " should work for a non-user" do
+      logout_test_user
+      binding.pry
       get new_product_review_path(mermaid_fin)
       must_respond_with :success
     end
@@ -165,7 +163,7 @@ describe ReviewsController do
       patch review_path(review.id), params: review_data
 
       must_respond_with :redirect
-      must_redirect_to product_path(review)
+      must_redirect_to product_path(mermaid_fin)
 
       Review.find(review.id).rating.must_equal 3
     end
