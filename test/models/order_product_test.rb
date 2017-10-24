@@ -8,5 +8,10 @@ describe OrderProduct do
       order_product = order_products(:one)
       order_product.must_respond_to :order
     end
+    it "responds to order" do
+      order_product = order_products(:one)
+      order_product.must_respond_to :product
+    end
   end
+
 end
