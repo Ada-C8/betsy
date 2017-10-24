@@ -33,7 +33,7 @@ class ReviewsController < ApplicationController
     if @review.save
       flash[:status] = :success
       flash[:message] = "Successfully created review "
-      redirect_to product_path(@review.product_id) 
+      redirect_to product_path(@review.product_id)
     else
       render :edit, status: :bad_request
       return
@@ -57,26 +57,6 @@ class ReviewsController < ApplicationController
     @review = Review.find_by(id: params[:id])
     unless @review
       head :not_found
-    end
-  end
-
-  def check_for_product_owner
-    if !session[:merchant].nil? && @review.merchant_id == session[:merchant]["id"]
-      flash[:status] = :failure
-      flash[:result_text] = "Owner can not edit the review of the product!"
-      redirect_to product_path(@review.product_id)
-    end
-  end
-
-  def check_for_product_owner_nested
-    @product = Product.find_by(id: params[:product_id])
-    unless @product
-      head :not_found
-    end
-    if !session[:merchant].nil? && @product.merchant_id == session[:merchant]["id"]
-      flash[:status] = :failure
-      flash[:result_text] = "Owner can not review the product!"
-      redirect_to product_path(@product)
     end
   end
 end
