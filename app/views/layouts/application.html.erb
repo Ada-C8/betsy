@@ -8,8 +8,7 @@
 
   <title><%= content_for?(:title) ? yield(:title) : "Sourceress" %></title>
 
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag "application" %>
   <%= csrf_meta_tags %>
 
   <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
@@ -57,8 +56,8 @@
           <button class="dropdown-button-browse">Merchant</button>
           <div class="dropdown-content-browse">
             <li><%= link_to "New Category", new_category_path %></li>
-            <li><%= link_to "List Product", new_product_path %></li>
-            <li><%= link_to "Account Products View", merchant_products_path(session[:user_id]) %></li>
+            <li><%= link_to "Add Product", new_product_path %></li>
+            <li><%= link_to "My Products", merchant_products_path(session[:user_id]) %></li>
             <li>Account Orders View</li>
           </div>
         </ul>

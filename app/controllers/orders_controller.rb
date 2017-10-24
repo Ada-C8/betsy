@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
           flash[:status] = :success
           flash[:result_text] = "You have successfully submitted your order!"
           session[:order_id] = nil
-          redirect_to confirm_order_path(@order.id)
+          redirect_to order_confirm_order_path(@order.id)
         else
           flash[:status] = :failure
           flash[:result_text] = "All fields are required to complete your order."
