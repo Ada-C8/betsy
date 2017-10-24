@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+#
+one:
+  created_at: <%= Date.today %>
+
+two:
+  created_at: <%= Date.today - 1 %>
+
+three:
+  created_at: <%= Date.today - 2 %>
+
+four:
+  created_at: <%= Date.today - 3 %>

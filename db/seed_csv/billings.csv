@@ -1,0 +1,3 @@
+id,name,email,street1,street2,city,state_prov,zip,country,ccnum,ccmonth,ccyear,cvv,order_id
+1,Ermina,Ermina@somesite.com,149 Rose Street,Unit 3,Snohomish,WA,97016,USA,1234900054672349,5,2021,012,1
+2,Franklin,Franklin@somesite.com,PO Box 12,,Seattle,WA,98112,USA,1234900054672350,6,2017,222,2
