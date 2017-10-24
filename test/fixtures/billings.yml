@@ -8,7 +8,7 @@ one:
   state: WA
   ship_zip: 98101
   email: finn.dog@gmail.com
-  credit_card: 1111222233334444
+  credit_card: "1111222233334444"
   exp: 0120
   cvv: 123
   bill_zip: 98101
