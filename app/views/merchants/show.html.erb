@@ -5,7 +5,7 @@
     <br/><span class="email"><%= @merchant.email %></span>
   </span>
 
-<% @merchant.products.where(available: "Available").each do |product| %>
+  <% @merchant.products.where(available: "Available").each do |product| %>
   <section class="info-card">
     <section class="product">
       <span><img class="index-image", src="http://www.dailypublic.com/sites/default/files/2015/Oct/buffalo-Niagara-Heritage-Village.jpg"</img></span>
@@ -14,6 +14,6 @@
       <span><em>Price</em>: <%= product.price %></span>
       <span><em>Quantity Available</em>: <%= product.quantity_avail %></span>
     </section>
-    </section>
+  </section>
   <% end %>
 </section>
