@@ -9,13 +9,13 @@ describe ReviewsController do
 ######### Leaving for future, if we rethink and decide to add later
   # describe "index" do
   #   it "returns success status for all reviews" do
-  #     get product_reviews_path(mermaid_fin)
+  #     get reviews_path
   #     must_respond_with :success
   #   end
   #
   #   it "works when there are no reviews" do
   #     Review.destroy_all
-  #     get product_reviews_path(mermaid_fin)
+  #     get reviews_path
   #     must_respond_with :success
   #   end
   # end
@@ -36,7 +36,6 @@ describe ReviewsController do
 
     it " should work for a non-user" do
       logout_test_user
-      binding.pry
       get new_product_review_path(mermaid_fin)
       must_respond_with :success
     end
@@ -55,41 +54,26 @@ describe ReviewsController do
   end
 
   describe "create" do
-    it " returns not_found if product doesn't exist" do
 
-      product = Product.first
-      product_review = {
-        product: {
-          name: "Tears"
-        }
-      }
-      product.update_attributes(product_review[:product])
-      product.must_be :valid?
-      product.destroy
-
-      post product_reviews_path(product), params: product_review
-      must_respond_with :not_found
-    end
-
-    it "should return failure if product belongs to merchant " do
-      # arrange: login 'ada' user
-      login_test_user
-      review_data = {
-        review: {
-          rating: 5,
-          product_id: mermaid_fin.id
-        }
-      }
-      start_review_count = Review.count
-
-      # act: review (Mermaid Fin)
-      post product_reviews_path(mermaid_fin), params: review_data
-
-      # assert: expect failure.
-      must_respond_with :redirect
-      must_redirect_to product_path(mermaid_fin)
-      Review.count.must_equal start_review_count
-    end
+    # it "should return failure if product belongs to merchant " do
+    #   # arrange: login 'ada' user
+    #   login_test_user
+    #   review_data = {
+    #     review: {
+    #       rating: 5,
+    #       product_id: mermaid_fin.id
+    #     }
+    #   }
+    #   start_review_count = Review.count
+    #   # binding.pry
+    #   # act: review (Mermaid Fin)
+    #   post reviews_path, params: review_data
+    #
+    #   # assert: expect failure.
+    #   must_respond_with :redirect
+    #   must_redirect_to product_path(mermaid_fin)
+    #   Review.count.must_equal start_review_count
+    # end
 
     it "adds the review to the product and redirects when the review data is valid" do
       # Arrange
@@ -101,7 +85,7 @@ describe ReviewsController do
       }
       start_review_count = Review.count
       # Act
-      post product_reviews_path(mermaid_fin), params: review_data
+      post reviews_path, params: review_data
       # Assert
       must_redirect_to product_path(mermaid_fin)
       Review.count.must_equal start_review_count + 1
@@ -121,7 +105,7 @@ describe ReviewsController do
       start_review_count = Review.count
 
       # Act
-      post product_reviews_path(mermaid_fin), params: invalid_review_data
+      post reviews_path, params: invalid_review_data
 
       # Assert
       must_respond_with :bad_request

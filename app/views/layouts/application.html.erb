@@ -35,6 +35,7 @@
       </section>
 
     </header>
+    <%= render partial: 'layouts/error-messages' if flash[:status] %>
     <main class="small-12 columns main">
       <%= yield %>
     </main>

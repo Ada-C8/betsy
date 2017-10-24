@@ -19,9 +19,9 @@ Rails.application.routes.draw do
   end
 
   resources :products do
-    resources :reviews, only: [:new, :create]
+    resources :reviews, only: [:new]
   end
-  resources :reviews, only: [:edit, :update, :destroy]
+  resources :reviews, only: [:create, :edit, :update, :destroy]
 
   post '/products/:id', to: 'main#add_to_cart', as: 'add_to_cart'
   get '/cart', to: 'main#shopping_cart', as: 'shopping_cart'

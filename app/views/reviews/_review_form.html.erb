@@ -5,5 +5,7 @@
   <%= f.label :description %>
   <%= f.text_field :description %>
 
+  <%= f.hidden_field :product_id, value: params[:product_id] %>
+
   <%= f.submit button, class: 'button' %>
 <% end %>
