@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :merchants
-  resources :categories, only: [:index, :show]
+  resources :categories
   resources :orders
   resources :order_products
 
