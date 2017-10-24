@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   has_many :order_products
   has_many :products, through: :order_products
+  has_many :merchants, through: :products
 
 # class methods instead of instance methods (like in ctrl)
   def self.start_new_order
