@@ -12,7 +12,6 @@
   <%= f.label :category %>
   <%= f.select :categories, options_for_select(Category.all.collect{ |c| c.name}) %>
 
-
   <%= f.label :upload_product_photo %>
   <%= f.file_field :photo %>
 
