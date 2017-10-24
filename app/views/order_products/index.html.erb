@@ -1,13 +1,11 @@
-<h2>order products index</h2>
+<h2>Sold Items</h2>
 
 <% @order_products.each do |op| %>
-<p>
-  <strong>
-    Order #<%= op.order_id %> <br />
-    Customer: <%= op.order.cust_name %>
-  </strong>
-</p>
-<p>
-  <%= op.product.name %> | <%= op.quantity %> | Status: <%= op.status %>
-</p>
+<div class="order-product">
+  <img class="th" src=<%= op.product.image_url %> alt="<%= op.product.name %>">
+  <h4><%= op.product.name %></h4>
+  <h4><%= op.quantity %></h4>
+  <h4><%= op %></h4>
+
+</div>
 <% end %>
