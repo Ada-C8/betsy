@@ -18,8 +18,10 @@ class OrdersController < ApplicationController
   def create
     # create new order, either with no merchant_id or with the logged-in-user's merchant_id
     @order = Order.new(order_params)
-    # @order.order_products += session[:cart]
+    @order.order_products += OrderProduct.find_in_cart(session[:cart])
+
     if @order.save
+      session[:cart] = nil
       flash[:status] = :success
       flash[:message] = "Successfully created order"
       redirect_to orders_path

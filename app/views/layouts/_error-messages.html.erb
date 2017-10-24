@@ -1,4 +1,4 @@
-<div class="errors <%= flash[:status] if flash[:status] %>">
+<section class="errors <%= flash[:status] if flash[:status] %>">
   <%= flash[:message] if flash[:message] %>
   <% if flash[:details] %>
     <ul>
@@ -11,4 +11,4 @@
       <% end %>
     </ul>
   <% end %>
-</div>
+</section>

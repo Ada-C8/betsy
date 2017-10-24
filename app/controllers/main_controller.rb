@@ -15,6 +15,7 @@ class MainController < ApplicationController
   end
 
   def shopping_cart
+    session[:cart] ||= []
     @products = OrderProduct.find_in_cart(session[:cart])
   end
 end

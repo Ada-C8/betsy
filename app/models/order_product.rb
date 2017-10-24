@@ -9,8 +9,6 @@ class OrderProduct < ApplicationRecord
   end
 
   def self.find_in_cart(cart)
-    OrderProduct.all.find_all {
-      |order_product| cart.include? order_product.id
-    }
+    OrderProduct.all.find_all { |order_product| cart.include? order_product.id } unless cart.nil?
   end
 end
