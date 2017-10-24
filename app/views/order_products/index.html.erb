@@ -1,1 +1,13 @@
 <h2>order products index</h2>
+
+<% @order_products.each do |op| %>
+<p>
+  <strong>
+    Order #<%= op.order_id %> <br />
+    Customer: <%= op.order.cust_name %>
+  </strong>
+</p>
+<p>
+  <%= op.product.name %> | <%= op.quantity %> | Status: <%= op.status %>
+</p>
+<% end %>
