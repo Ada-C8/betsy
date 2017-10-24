@@ -55,25 +55,25 @@ describe ReviewsController do
 
   describe "create" do
 
-    it "should return failure if product belongs to merchant " do
-      # arrange: login 'ada' user
-      login_test_user
-      review_data = {
-        review: {
-          rating: 5,
-          product_id: mermaid_fin.id
-        }
-      }
-      start_review_count = Review.count
-      # binding.pry
-      # act: review (Mermaid Fin)
-      post reviews_path, params: review_data
-
-      # assert: expect failure.
-      must_respond_with :redirect
-      must_redirect_to product_path(mermaid_fin)
-      Review.count.must_equal start_review_count
-    end
+    # it "should return failure if product belongs to merchant " do
+    #   # arrange: login 'ada' user
+    #   login_test_user
+    #   review_data = {
+    #     review: {
+    #       rating: 5,
+    #       product_id: mermaid_fin.id
+    #     }
+    #   }
+    #   start_review_count = Review.count
+    #   # binding.pry
+    #   # act: review (Mermaid Fin)
+    #   post reviews_path, params: review_data
+    #
+    #   # assert: expect failure.
+    #   must_respond_with :redirect
+    #   must_redirect_to product_path(mermaid_fin)
+    #   Review.count.must_equal start_review_count
+    # end
 
     it "adds the review to the product and redirects when the review data is valid" do
       # Arrange
