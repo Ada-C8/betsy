@@ -17,9 +17,12 @@ Rails.application.routes.draw do
   resources :categories, only: [:new, :create, :destroy] do
     resources :products, only: [:index]
   end
-  resources :reviews, except: [:index, :show]
+
   resources :products do
-    # only: [:index, :new, :create] is nested
-    resources :reviews, shallow: true
+    resources :reviews, only: [:new, :create]
   end
+  resources :reviews, only: [:edit, :update, :destroy]
+
+  post '/products/:id', to: 'main#add_to_cart', as: 'add_to_cart'
+  get '/cart', to: 'main#shopping_cart', as: 'shopping_cart'
 end

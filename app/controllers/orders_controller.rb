@@ -1,25 +1,24 @@
 class OrdersController < ApplicationController
-  # check if logged in at first
 
   def index
     # show only the orders that belong to the merchant
-    @orders = Order.all
     if session[:merchant]
-      @orders = Merchant.find(params[:merchant]).orders
+      merchant_id = session[:merchant]['id']
+      @orders = Merchant.find(merchant_id).orders
+    else
+      @orders = nil
     end
   end
 
   def new
     # new order, either with no merchant_id or with the logged-in-user's merchant_id
     @order = Order.new
-    if session[:merchant]
-      @order.merchant_id = Merchant.find(params[:merchant]['id'])
-    end
   end
 
   def create
     # create new order, either with no merchant_id or with the logged-in-user's merchant_id
     @order = Order.new(order_params)
+    # @order.order_products += session[:cart]
     if @order.save
       flash[:status] = :success
       flash[:message] = "Successfully created order"
@@ -33,12 +32,12 @@ class OrdersController < ApplicationController
   end
 
   def show
-    # show the desired order
+    # show the order if it belongs to the merchant (buyer)
     find_order_by_params_id
   end
 
   def update
-    # edit the desired order
+    # edit the desired order if it belongs to the merchant (buyer)
     if find_order_by_params_id
       @order.update_attributes(order_params)
       if @order.save
@@ -52,7 +51,7 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    # if the order belongs to the user, can destroy it
+    # if the order belongs to the merchant (buyer), can destroy it
     if find_order_by_params_id
       @order.destroy
       flash[:status] = :success
@@ -64,14 +63,18 @@ class OrdersController < ApplicationController
   private
 
   def order_params
+    # parameters for the order
     return params.require(:order).permit(:cust_name, :status, :cust_email, :cust_cc, :cust_cc_exp, :cust_addr, :merchant_id)
   end
 
   def find_order_by_params_id
+    # find the order by the id parameter
     @order = Order.find_by(id: params[:id])
     unless @order
       head :not_found
     end
     return @order
   end
+
+  # confirm if the order belongs to the merchant (buyer)
 end

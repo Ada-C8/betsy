@@ -1,13 +1,13 @@
 class ReviewsController < ApplicationController
-  before_action :find_review_by_params_id, only: [:show, :edit, :update, :destroy]
+  before_action :find_review_by_params_id, only: [:edit, :update, :destroy] #:show,
   before_action :check_for_product_owner_nested, only: [:create, :new]
   before_action :check_for_product_owner, only: [:edit, :update, :destroy]
 
-  def index
-    @reviews = Review.where(product_id: params[:product_id])
-  end
+  # def index      # leaving for future, if we rethink and decide to add later
+  #   @reviews = Review.where(product_id: params[:product_id])
+  # end
 
-  def show ; end
+  # def show ; end
 
   def new
     @review = Review.new
@@ -33,7 +33,7 @@ class ReviewsController < ApplicationController
     if @review.save
       flash[:status] = :success
       flash[:message] = "Successfully created review "
-      redirect_to review_path(@review)
+      redirect_to product_path(@review.product_id)
     else
       render :edit, status: :bad_request
       return
@@ -57,28 +57,6 @@ class ReviewsController < ApplicationController
     @review = Review.find_by(id: params[:id])
     unless @review
       head :not_found
-    end
-  end
-
-  def check_for_product_owner
-    if !session[:merchant].nil? && @review.merchant_id == session[:merchant]["id"]
-      flash[:status] = :failure
-      flash[:result_text] = "Owner can not edit the review of the product!"
-      # render :nothing => true, :status => :bad_request
-      redirect_to product_path(@review.product_id)
-    end
-  end
-
-  def check_for_product_owner_nested
-    @product = Product.find_by(id: params[:product_id])
-    unless @product
-      head :not_found
-    end
-    if !session[:merchant].nil? && @product.merchant_id == session[:merchant]["id"]
-      flash[:status] = :failure
-      flash[:result_text] = "Owner can not review the product!"
-      # render :nothing => true, :status => :bad_request
-      redirect_to product_path(@product)
     end
   end
 end

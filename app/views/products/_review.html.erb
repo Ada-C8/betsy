@@ -1,4 +1,11 @@
-<h4>Placeholder review text</h4>
-<%= review.rating %>
-<br />
-<%= review.description %>
+<section class="review_info">
+  <div class="review row">
+    <div class = "first_line">
+      <h6> Rating: <%=review.rating %> </h6>
+      <h6> <%= review.updated_at.strftime("%b %d, %Y") %> </h6>
+    </div>
+    <h6> <%= review.description %> </h6>
+  </div>
+    <div class="button change"> <%= link_to "Edit", edit_review_path(review.id) %></div>
+    <div class="button change"> <%= link_to "Delete", review_path(review.id), method: :delete, data: { confirm: "Are you sure?" }%></div>
+</section>

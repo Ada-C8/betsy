@@ -1,0 +1,9 @@
+<%= form_for @review do |f| %>
+  <%= f.label :rating  %>
+  <%= f.select :rating, options_for_select([1, 2, 3, 4, 5]) %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.submit button, class: 'button' %>
+<% end %>

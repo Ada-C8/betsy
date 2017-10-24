@@ -1,1 +1,28 @@
-<h2>order index</h2>
+<section class="order-index">
+  <h2 class="page-title">Order history</h2>
+
+  <% if @orders == nil %>
+    <h3> You haven't purchased anything yet!</h3>
+  <% else %>
+
+    <% @orders.each do |order| %>
+      <article class="media-object stack-for-small">
+        <% order.products.each do | product |%>
+
+          <div class="media-object-section">
+            <div class="thumbnail">
+              <img src= "<%= product.image_url %>">
+            </div>
+          </div>
+          <div class="media-object-section">
+            <h4><%= product.name %></h4>
+            <p><%= product.description %></p>
+            <p><%= product.price %></p>
+          </div>
+        <% end %>
+
+      </article>
+    <% end %>
+
+  <% end %>
+</section>
