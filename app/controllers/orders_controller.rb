@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
     # will show order with all products listed and their quantity,
     # as well as the status,
     # so this info is also pulled in from the orders_products
-    
+
     @cart = find_cart
 
     unless @cart
@@ -43,6 +43,19 @@ class OrdersController < ApplicationController
 
   def show_cart
     # find_cart
+  end
+
+  def billing_form
+    # needed to show billing form view
+    @billing = Billing.new
+  end
+
+  def submit
+    @order = Order.find_by(id:session[:order_id], status: "pending")
+    @order.subtract_product
+    @order.status = "paid"
+    render :show_order
+    session[:order_id] = nil
   end
 
   def destroy
