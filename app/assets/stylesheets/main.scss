@@ -3,5 +3,23 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .hero {
-  background-image: image('assets/hero.jpeg');
+  background-image: url('hero.jpeg');
+  background-position: center center;
+  background-size: cover;
+  height: 40rem;
+  text-align: center;
+  width: 100%;
+}
+
+.hero-text {
+  color: white;
+  display: inline-block;
+  margin: 5rem auto;
+}
+
+h1.hero-title {
+}
+
+h2.hero-subtitle {
+  font-style: italic;
 }
