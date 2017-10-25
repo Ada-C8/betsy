@@ -35,3 +35,15 @@ almost_there_order:
   card_exp: 01/21
   card_cvv: "546"
   zip_code: "98122"
+
+shipped_order:
+  status: shipped
+  email: me@mail.com
+  address: 111 Main Street
+  name: Martha Stewart
+  card_number: 1234567890987654
+  card_exp: Sun, 1 Oct 2017
+  card_cvv: 546
+  zip_code: 98115
+  city: Scranton
+  state: PA
