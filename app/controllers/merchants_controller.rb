@@ -110,6 +110,7 @@ class MerchantsController < ApplicationController
     if order_product
       order_product.status = "shipped"
       order_product.save
+      order_product.order.order_status
       flash[:status] = :success
       flash[:message] = "Marked #{order_product.product.name} as shipped"
       return redirect_to self_pending_path
