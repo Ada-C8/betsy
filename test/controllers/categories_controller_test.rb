@@ -25,47 +25,44 @@ end #all tests
 ## NEED TO ADD FIXTURES !!
 
   describe "create" do
-    it "redirects to categories_path when category data is valid" do
+    it "creates a valid category when data is valid" do
       # test failing because i need to add test data for merchant and category
 
-      category_data = {
-        category: {
-          category_name: "Fake Category"
-        }
-      }
-
-      c = Category.new(category_data[:category])
-
-      c.must_be :valid?
-
+      # category_data = {
+      #   category: {
+      #     category_name: "abcdefg"
+      #   }
+      # }
       start_category_count = Category.count
+      # c = Category.new(category_data[:category])
+      c = Category.new
+      c.category_name = "abcdefg"
+      c.must_be :valid?
       c.save
-      # post categories_path, params: category_data
-      # must_respond_with :redirect
-      # must_redirect_to categories_path
 
+      # # post categories_url, params: { category: { category_name: "ABCDE"} }
+      # # must_respond_with 302
+      # # must_redirect_to categories_url
+      #
       Category.count.must_equal start_category_count + 1
     end #valid data test
-  end #create tests
-  #
-  #   it "sends bad request when product data is invalid" do
-  #     invalid_product_data = {
-  #       product: {
-  #         name: "",
-  #         price: "12"
-  #       }
-  #     }
-  #     Product.new(invalid_product_data[:product]).wont_be :valid?
-  #
-  #     start_product_count = Product.count
-  #
-  #     post products_path, params: invalid_product_data
-  #     must_respond_with :bad_request
-  #
-  #     Product.count.must_equal start_product_count
-  #   end
-  # end
 
+
+    it "will not create a new cateogry when data is invalid" do
+      start_category_count = Category.count
+      c = Category.new
+      c.category_name = ""
+      c.wont_be :valid?
+      c.save
+
+      #
+      # post products_path, params: invalid_product_data
+      # must_respond_with :bad_request
+
+      Category.count.must_equal start_category_count
+    end
+
+  end #create tests
   # describe "show" do
   #   it "return success when given a valid work id" do
   #     product_id = Product.first.id
