@@ -9,11 +9,34 @@
 
   <div class="odetails-summary">
     <h3>Payment by</h3>
-    <p><i class="fa fa-user"></i> <%= @order.cust_name %></p>
-    <p><i class="fa fa-envelope-square"></i> <%= @order.cust_email %></p>
-    <p><i class="fa fa-address"></i> <%= @order.cust_addr %></p>
-    <p><i class="fa fa-credit-card-alt"></i> ****<%= @order.cust_cc.last(4) %></p>
-    <p>Expires <%= @order.cust_cc_exp %></p>
+    <p>
+      <span class="fa-stack">
+        <i class="fa fa-circle-thin fa-stack-2x"></i>
+        <i class="fa fa-user fa-stack-1x"></i>
+      </span>
+      <%= @order.cust_name %>
+    </p>
+    <p>
+      <span class="fa-stack">
+        <i class="fa fa-circle-thin fa-stack-2x"></i>
+        <i class="fa fa-envelope fa-stack-1x"></i>
+      </span>
+      <%= @order.cust_email %>
+    </p>
+    <p>
+      <span class="fa-stack">
+        <i class="fa fa-circle-thin fa-stack-2x"></i>
+        <i class="fa fa-map-marker fa-stack-1x"></i>
+      </span>
+      <%= @order.cust_addr %>
+    </p>
+    <p>
+      <span class="fa-stack">
+        <i class="fa fa-circle-thin fa-stack-2x"></i>
+        <i class="fa fa-user fa-stack-1x"></i>
+      </span>
+      ****<%= @order.cust_cc.last(4) %> (expires <%= @order.cust_cc_exp %>)
+    </p>
   </div>
 
   <div class="odetails-products">
