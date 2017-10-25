@@ -38,6 +38,7 @@ class Order < ApplicationRecord
     result = order_products.all? do |order_product|
       order_product.status == "shipped"
     end
-      self.status = "complete" if result
+    self.status = "complete" if result
+    self.save
   end
 end
