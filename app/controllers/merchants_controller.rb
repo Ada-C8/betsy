@@ -92,10 +92,31 @@ class MerchantsController < ApplicationController
     redirect_to root_path
   end
 
+  # USER PAGES
   def summary
     @user = Merchant.find(session[:merchant]['id'])
   end
 
+  def pending
+    @order_products = Merchant.find(session[:merchant]['id']).pending_orders
+  end
+
+  def completed
+    @order_products = Merchant.find(session[:merchant]['id']).shipped_orders
+  end
+
+  def mark_shipped
+    order_product = OrderProduct.find_by(id: params[:id])
+    if order_product
+      order_product.status = "shipped"
+      order_product.save
+      flash[:status] = :success
+      flash[:message] = "Marked #{order_product.product.name} as shipped"
+      return redirect_to self_pending_path
+    else
+      return head :not_found
+    end
+  end
 
   private
 

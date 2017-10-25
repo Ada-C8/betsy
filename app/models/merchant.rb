@@ -26,11 +26,11 @@ class Merchant < ApplicationRecord
   end
 
   def pending_orders
-    orders.find_all { |o| o.status.downcase == "pending" }
+    orders.find_all { |o| o.status == "pending" }
   end
 
   def shipped_orders
-    orders.find_all { |o| o.status.downcase == "shipped" }
+    orders.find_all { |o| o.status == "shipped" }
   end
 
   def total_revenue

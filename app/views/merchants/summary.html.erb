@@ -6,7 +6,7 @@
       <div class="profile-card">
         <h3>Pending Orders</h3>
         <em class="profile-huge pending-orders"><%= @user.pending_orders.count %></em>
-        <%= link_to "Pending Orders", root_path, class: 'button profile-button' %>
+        <%= link_to "Pending Orders", self_pending_path, class: 'button profile-button' %>
       </div>
     </div>
     <div class="medium-12 large-6 columns end">
@@ -23,13 +23,14 @@
       <div class="profile-card">
         <h3>Completed Orders</h3>
         <em class="profile-huge shipped-orders"><%= @user.shipped_orders.count %></em>
-        <%= link_to "Completed Orders", root_path, class: 'button profile-button' %>
+        <%= link_to "Completed Orders", self_completed_path, class: 'button profile-button' %>
       </div>
     </div>
     <div class="medium-12 large-6 columns end">
       <div class=" profile-card">
         <h3>Total Revenue</h3>
-        <em class="profile-huge total-revenue"><%= money(@user.total_revenue) %></em>
+        <em class="profile-huge total-revenue"><%= money(@user.total_revenue, true) %></em>
+
         <%= link_to "Income Details", root_path, class: 'button profile-button' %>
       </div>
     </div>
