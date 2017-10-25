@@ -241,7 +241,12 @@ describe MerchantsController do
         end
 
         it 'redirects without changing if product does not belong to user' do
+          op_id = order_products(:other_order_products).id
+          get mark_shipped_path(op_id)
 
+          must_respond_with :found
+          flash[:status].must_equal :failure
+          OrderProduct.find(op_id).status.wont_equal "shipped"
         end
       end
     end
@@ -253,7 +258,38 @@ describe MerchantsController do
         must_respond_with :found
       end
 
+      it 'guest user cannot access pending' do
+        get self_pending_path
 
+        must_respond_with :found
+      end
+
+      it 'guest user cannot access completed' do
+        get self_completed_path
+
+        must_respond_with :found
+      end
+
+      it 'guest user cannot access revenue' do
+        get self_summary_path
+
+        must_respond_with :found
+      end
+
+      it 'guest user cannot access inventory' do
+        get self_summary_path
+
+        must_respond_with :found
+      end
+
+      it 'guest user cannot access mark_shipped' do
+        op_id = order_products(:order_products).id
+        get mark_shipped_path(op_id)
+
+        must_respond_with :found
+        flash[:status].must_equal :failure
+        OrderProduct.find(op_id).status.wont_equal "shipped"
+      end
     end
   end
 end

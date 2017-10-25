@@ -8,4 +8,13 @@ order:
   cust_cc_exp: 11/22
   cust_addr: Sea World
   cust_email: forkhair@mermaid.com
-  status: complete
+  status: pending
+
+other_order:
+  cust_name: Demon
+  merchant_id: :grace
+  cust_cc: 5432314
+  cust_cc_exp: 66/66
+  cust_addr: Fire World
+  cust_email: flameshair@mermaid.com
+  status: pending

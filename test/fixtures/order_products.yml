@@ -10,3 +10,9 @@ order_products:
   product: mermaid_fin
   order: order
   status: pending
+
+other_order_products:
+  quantity: 3
+  product: wand
+  order: order
+  status: pending
