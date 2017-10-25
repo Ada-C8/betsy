@@ -22,7 +22,6 @@ class OrdersController < ApplicationController
 
     if @order.save
       @order.decrement_products
-      binding.pry
       session[:cart] = nil
       flash[:status] = :success
       flash[:message] = "Successfully created order"
