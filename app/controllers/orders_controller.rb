@@ -55,16 +55,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def destroy
-    # if the order belongs to the merchant (buyer), can destroy it
-    if find_order_by_params_id
-      @order.destroy
-      flash[:status] = :success
-      flash[:message] = "Deleted order"
-      redirect_to orders_path
-    end
-  end
-
   def confirmation
     find_order_by_params_id
   end
