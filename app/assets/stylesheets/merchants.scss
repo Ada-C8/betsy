@@ -42,7 +42,7 @@
 // INVENTORY //
 ///////////////
 
-.info > div {
+.inventory-info > div {
   margin: 2rem 0;
   overflow-x: hidden;
   white-space: nowrap;
@@ -57,4 +57,8 @@ label.inventory-form {
 input.inventory-form {
   display: inline-block;
   width: 50%;
+}
+
+.new-product-button {
+  margin: 3rem 0;
 }
