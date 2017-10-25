@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  before_action :no_nil_cart
+
   protected
+
+  def no_nil_cart
+    session[:cart] ||= []
+  end
 
   def confirm_login
     if session[:merchant].nil?

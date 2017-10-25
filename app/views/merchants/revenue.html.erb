@@ -3,14 +3,14 @@
 <h3>Total Revenue to Date: <small><%= money(@user.total_revenue) %></small></h3>
 
 <div class="order-list">
-<h3>Completed Orders:</h3>
-<h4>Completed Orders: <small><%= @completed.count %></small></h4>
-<h4>Income: <small><%= money(@completed.sum{|order| order.total}) %></small></h4>
-<h4>Average Income Per Order: <small><%= money((@completed.sum{|order| order.total})/@completed.count) %></small></h4>
+  <h3>Completed Orders:</h3>
+  <h4>Completed Orders: <small><%= @completed.count %></small></h4>
+  <h4>Income: <small><%= money(@completed.sum{|order| order.total}) %></small></h4>
+  <h4>Average Income Per Order: <small><%= money(@completed_average) %></small></h4>
 </div>
 <div class="order-list">
-<h3>Pending Orders:</h3>
-<h4>Pending Orders: <small><%= @pending.count %></small></h4>
-<h4>Income: <small><%= money(@pending.sum{|order| order.total}) %></small></h4>
-<h4>Average Income Per Order: <small><%= money((@pending.sum{|order| order.total})/@pending.count) %></small></h4>
+  <h3>Pending Orders:</h3>
+  <h4>Pending Orders: <small><%= @pending.count %></small></h4>
+  <h4>Income: <small><%= money(@pending.sum{|order| order.total}) %></small></h4>
+  <h4>Average Income Per Order: <small><%= money(@pending_average) %></small></h4>
 </div>

@@ -126,6 +126,8 @@ class MerchantsController < ApplicationController
     @user = Merchant.find(session[:merchant]['id'])
     @pending = @user.pending_orders
     @completed = @user.shipped_orders
+    @pending_average = (@pending.count == 0 ? 0 : (@pending.sum{|order| order.total})/@pending.count)
+    @completed_average = (@completed.count == 0 ? 0 : (@completed.sum{|order| order.total})/@completed.count)
   end
 
   def inventory

@@ -21,7 +21,7 @@ gem 'simplecov', :require => false, :group => :test
 
 
 #added these gems because the terminal told me to
-ruby '2.4.0'
+ruby '2.4.1'
 # Use CoffeeScript for .coffee assets and views
 # gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -34,7 +34,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem "omniauth"
 gem "omniauth-github"
-gem 'pry-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
