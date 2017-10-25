@@ -38,8 +38,17 @@ class OrdersController < ApplicationController
     @order = Order.find_by(id:session[:order_id], status: "pending")
     @order.subtract_product
     @order.status = "paid"
-    render :show_order
+
     session[:order_id] = nil
+
+    if @order.status = "paid" && session[:order_id] = nil
+      flash[:status]  = :success
+      flash[:message] = "Successfully submitted your order"
+    else
+      flash.now[:status] = :failure
+      flash.now[:message] = "Failed submit your order"
+    end
+    render :show_order
   end
 
   def destroy
