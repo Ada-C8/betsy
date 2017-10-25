@@ -11,19 +11,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def find_product_by_params
-    @product = Product.find_by(id: params[:id])
+  def find_object_by_params(model)
+    @product = model.find_by(id: params[:id])
 
     unless @product
       return head :not_found
     end
   end
 
-  def confirm_product_ownership
-    unless session[:merchant]['id'] == @product.merchant_id
+  def confirm_object_ownership(model)
+    unless session[:merchant]['id'] == model.merchant_id
       flash[:status] = :failure
-      flash[:message] = "Only a product's merchant can modify a product."
-      return redirect_back(fallback_location: products_path)
+      flash[:message] = "Only a #{model}'s merchant can modify a #{model}."
+      return redirect_back(fallback_location: send("#{model.class.to_s.downcase}_path"))
     end
   end
 

@@ -185,4 +185,68 @@ describe MerchantsController do
       merchant.username.wont_equal invalid_merchant_data[:merchant][:username]
     end
   end
+
+  describe "user pages" do
+    describe "logged in" do
+      before do
+        user = merchants(:ada)
+        OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
+        get login_path(:github)
+      end
+
+      it 'logged in user can access summary' do
+        get self_summary_path
+
+        must_respond_with :success
+      end
+
+      it 'logged in user can access pending' do
+        get self_pending_path
+
+        must_respond_with :success
+      end
+
+      it 'logged in user can access completed' do
+        get self_completed_path
+
+        must_respond_with :success
+      end
+
+      it 'logged in user can access revenue' do
+        get self_summary_path
+
+        must_respond_with :success
+      end
+
+      it 'logged in user can access inventory' do
+        get self_summary_path
+
+        must_respond_with :success
+      end
+
+      describe 'mark_shipped' do
+        it 'changes the status of an existing product owned by the user' do
+
+        end
+
+        it 'returns not_found if product does not exist' do
+
+        end
+
+        it 'redirects without changing if product does not belong to user' do
+
+        end
+      end
+    end
+
+    describe "guests" do
+      it 'guest user cannot access summary' do
+        get self_summary_path
+
+        must_respond_with :found
+      end
+
+
+    end
+  end
 end

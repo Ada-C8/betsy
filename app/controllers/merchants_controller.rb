@@ -1,6 +1,6 @@
 class MerchantsController < ApplicationController
 
-  before_action :confirm_login, only: [:summary]
+  before_action :confirm_login, only: [:summary, :pending, :completed, :mark_shipped, :revenue, :inventory]
 
   def login
     auth_hash = request.env['omniauth.auth']
