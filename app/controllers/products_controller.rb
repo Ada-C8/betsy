@@ -65,7 +65,11 @@ class ProductsController < ApplicationController
     if result
       flash.now[:status] = :success
       flash.now[:message] = "Successfully updated #{@product.name}"
-      return redirect_to product_path(@product.id)
+      if request.referer.include?'inventory'
+        return redirect_to self_inventory_path
+      else
+        return redirect_to product_path(@product.id)
+      end
     else
       flash.now[:status] = :failure
       flash.now[:message] = "Could not update product"
