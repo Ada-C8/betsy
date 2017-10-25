@@ -1,6 +1,15 @@
 class MerchantsController < ApplicationController
 
-  before_action :confirm_login, only: [:summary]
+  before_action :confirm_login, only: [:summary, :pending, :completed, :mark_shipped, :revenue, :inventory]
+
+  before_action only: [:mark_shipped] do
+    @order_product = find_object_by_params(OrderProduct)
+  end
+
+  before_action only: [:mark_shipped] do
+    confirm_object_ownership(@order_product, @order_product.product.merchant_id)
+  end
+
 
   def login
     auth_hash = request.env['omniauth.auth']
@@ -123,6 +132,8 @@ class MerchantsController < ApplicationController
     @user = Merchant.find(session[:merchant]['id'])
     @pending = @user.pending_orders
     @completed = @user.shipped_orders
+    @pending_average = (@pending.count == 0 ? 0 : (@pending.sum{|order| order.total})/@pending.count)
+    @completed_average = (@completed.count == 0 ? 0 : (@completed.sum{|order| order.total})/@completed.count)
   end
 
   def inventory

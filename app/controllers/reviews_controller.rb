@@ -2,7 +2,9 @@ class ReviewsController < ApplicationController
   before_action :find_review_by_params_id, only: [:edit, :update, :destroy] #:show,
   before_action :check_for_product_owner_nested, only: [:new]
   before_action :check_for_product_owner, only: [:edit, :update, :destroy]
-
+  before_action only: [] do
+    confirm_object_ownership(@review, @review.merchant_id)
+  end
   # def index      # leaving for future, if we rethink and decide to add later
   #   @reviews = Review.where(product_id: params[:product_id])
   # end
@@ -11,17 +13,17 @@ class ReviewsController < ApplicationController
 
   def new
     @review = Review.new
+    @review.product_id = params[:product_id]
   end
 
   def create
     @review = Review.new(review_params)
+    @review.merchant_id = session[:merchant]["id"] if session[:merchant]
     if @review.save
       flash[:status] = :success
       flash[:message] = "Successfully created review "
-      # binding.pry
       redirect_to product_path(@review.product)
     else
-      binding.pry
       flash[:status] = :failure
       flash[:message] = "Failed to create review"
       render :new, status: :bad_request
@@ -32,20 +34,23 @@ class ReviewsController < ApplicationController
 
   def update
     @review.update_attributes(review_params)
-    if @review.save
+    result = @review.save
+    if result
       flash[:status] = :success
       flash[:message] = "Successfully created review "
       redirect_to product_path(@review.product_id)
     else
-      render :edit, status: :bad_request
-      return
+      flash.now[:status] = :failure
+      flash.now[:message] = "Could not update the review"
+      flash.now[:details] = @review.errors.messages
+      return render :edit, status: :bad_request
     end
   end
 
   def destroy
     @review.destroy
     flash[:status] = :success
-    flash[:result_text] = "Successfully destroyed review"
+    flash[:message] = "Successfully destroyed review"
     redirect_to product_path(@review.product_id)
   end
 
@@ -65,7 +70,7 @@ class ReviewsController < ApplicationController
   def check_for_product_owner
     if !session[:merchant].nil? && @review.merchant_id == session[:merchant]["id"]
       flash[:status] = :failure
-      flash[:result_text] = "Owner can not edit the review of the product!"
+      flash[:message] = "Owner can not edit the review of the product!"
       redirect_to product_path(@review.product_id)
     end
   end
@@ -77,7 +82,7 @@ class ReviewsController < ApplicationController
     end
     if !session[:merchant].nil? && @product.merchant_id == session[:merchant]["id"]
       flash[:status] = :failure
-      flash[:result_text] = "Owner can not review the product!"
+      flash[:message] = "Owner can not review the product!"
       redirect_to product_path(@product)
     end
   end

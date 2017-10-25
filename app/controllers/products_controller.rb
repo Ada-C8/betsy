@@ -1,10 +1,14 @@
 class ProductsController < ApplicationController
 
-  before_action :find_product_by_params, only: [:show, :edit, :update, :destroy, :categories, :add_categories]
+  before_action only: [:show, :edit, :update, :destroy, :categories, :add_categories] do
+    find_object_by_params(Product)
+  end
 
   before_action :confirm_login, except: [:index, :show]
 
-  before_action :confirm_product_ownership, only: [:edit, :update, :destroy, :categories, :add_categories]
+  before_action only: [:edit, :update, :destroy, :categories, :add_categories] do
+    confirm_object_ownership(@product, @product.merchant_id)
+  end
 
 
   def index
@@ -25,6 +29,7 @@ class ProductsController < ApplicationController
       @title = "Popular Now"
       @products = Product.most_popular
     end
+    @products = @products.reject {|prod| prod.quantity == 0}
     @categories = Category.all
   end
 
@@ -65,7 +70,11 @@ class ProductsController < ApplicationController
     if result
       flash.now[:status] = :success
       flash.now[:message] = "Successfully updated #{@product.name}"
-      return redirect_to product_path(@product.id)
+      if request.referer.include?'inventory'
+        return redirect_to self_inventory_path
+      else
+        return redirect_to product_path(@product.id)
+      end
     else
       flash.now[:status] = :failure
       flash.now[:message] = "Could not update product"

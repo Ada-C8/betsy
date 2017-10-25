@@ -110,12 +110,23 @@ describe ProductsController do
     end
 
     describe 'update' do
-      it 'can successfully update own product with valid data' do
-        patch product_path(owned_product.id), params: new_params
+      it 'can successfully update own product & redirect to product show page with valid data' do
+        patch product_path(owned_product.id), params: new_params, headers: { "HTTP_REFERER" => edit_product_path(owned_product.id) }
         id = owned_product.id
 
         Product.find(id).name.must_equal "Updated Name"
         flash[:status].must_equal :success
+        must_redirect_to product_path
+        must_respond_with :found
+      end
+
+      it 'redirects to inventory path if coming from inventory management page' do
+        patch product_path(owned_product.id), params: new_params, headers: { "HTTP_REFERER" => self_inventory_path }
+        id = owned_product.id
+
+        Product.find(id).name.must_equal "Updated Name"
+        flash[:status].must_equal :success
+        must_redirect_to self_inventory_path
         must_respond_with :found
       end
 
@@ -255,7 +266,7 @@ describe ProductsController do
       must_respond_with :found
     end
 
-    it 'CANNOT successfully create valid product' do
+    it 'CANNOT create valid product' do
       post products_path(prod.id), params: good_params
 
       flash[:status].must_equal :failure
@@ -283,13 +294,11 @@ describe ProductsController do
       must_respond_with :found
     end
 
-    describe 'add_categories' do
-      it 'CANNOT access add categories page' do
-        get add_categories_path(owned_product.id)
+    it 'CANNOT access add categories page' do
+      get add_categories_path(owned_product.id)
 
-        must_respond_with :found
-        flash[:status].must_equal :failure
-      end
+      must_respond_with :found
+      flash[:status].must_equal :failure
     end
   end
 end

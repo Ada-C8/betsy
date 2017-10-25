@@ -1,21 +1,17 @@
-<section class="order-show">
-  <h2 class="page-title">Order details</h2>
-</section>
-<article>
-  <div class="odetails-heading">
-    <span>Ordered on <%= @order.created_at.strftime("%B %d, %Y") %></span>
-    <span>Order #<%= @order.id %></span>
+<section class="order-confirm">
+  <h2 class="page-title">Order confirmation</h2>
+
+  <p>Thanks for your purchase!</p>
+  <div class="oconfirm-summary">
+    <ul>
+      <li>Order Number: #<%= @order.id %></li>
+      <li>Total: <%= @order.total %></li>
+      <li>Date: <%= @order.created_at.strftime("%B %d, %Y") %></li>
+      <li>Status: <%= @order.status.capitalize %></li>
+    </ul>
   </div>
 
-  <div class="odetails-summary">
-    <h3>Payment by</h3>
-    <p><i class="fa fa-user"></i> <%= @order.cust_name %></p>
-    <p><i class="fa fa-envelope-square"></i> <%= @order.cust_email %></p>
-    <p><i class="fa fa-address"></i> <%= @order.cust_addr %></p>
-p    <p><i class="fa fa-credit-card-alt"></i> ****<%= @order.cust_cc.last(4) %></p>
-    <p>Expires <%= @order.cust_cc_exp %></p>
-  </div>
-
+  <h3>Order details</h3>
   <div class="odetails-products">
     <table>
       <thead>
@@ -43,5 +39,4 @@ p    <p><i class="fa fa-credit-card-alt"></i> ****<%= @order.cust_cc.last(4) %><
       </tbody>
     </table>
   </div>
-</article>
-<div>
+</section>

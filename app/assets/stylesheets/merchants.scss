@@ -17,6 +17,7 @@
   text-align: center;
   padding: 2rem;
   margin: 1rem auto;
+  min-width: 15.5rem;
 }
 
 .profile-huge {
@@ -30,12 +31,11 @@
   width: 80%;
 }
 
-@media print, screen and (min-width: 64em) {
-  .profile-card {
-    min-width: 14rem;
-    max-width: 22rem;
-  }
-}
+// @media print, screen and (min-width: 40em) {
+//   .profile-card {
+//     min-height: 15.5rem;
+//   }
+// }
 
 
 ///////////////

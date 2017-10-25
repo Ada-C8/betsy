@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
 
+  before_action :confirm_login, except: [:new, :create, :confirmation]
+
   def index
     # show only the orders that belong to the merchant
     if session[:merchant]
@@ -20,11 +22,12 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.order_products += OrderProduct.find_in_cart(session[:cart])
 
-    if @order.save
+    if @order.save && @order.order_products.length > 0
+      @order.decrement_products
       session[:cart] = nil
       flash[:status] = :success
       flash[:message] = "Successfully created order"
-      redirect_to orders_path
+      redirect_to confirmation_path(@order)
     else
       flash.now[:status] = :failure
       flash.now[:message] = "Failed to create order"
@@ -62,6 +65,10 @@ class OrdersController < ApplicationController
     end
   end
 
+  def confirmation
+    find_order_by_params_id
+  end
+
   private
 
   def order_params
@@ -77,6 +84,4 @@ class OrdersController < ApplicationController
     end
     return @order
   end
-
-  # confirm if the order belongs to the merchant (buyer)
 end

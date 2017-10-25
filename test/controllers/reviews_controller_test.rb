@@ -4,8 +4,6 @@ describe ReviewsController do
   let(:review) { reviews(:review) }
   let(:mermaid_fin) { products(:mermaid_fin) }
 
-
-
 ######### Leaving for future, if we rethink and decide to add later
   # describe "index" do
   #   it "returns success status for all reviews" do
@@ -33,6 +31,12 @@ describe ReviewsController do
   # end
 
   describe "new" do
+    it " should not work if product doesn't exist" do
+      bad_product = Product.last.id + 1
+      get new_product_review_path(bad_product)
+
+      must_respond_with :not_found
+    end
 
     it " should work for a non-user" do
       logout_test_user
@@ -55,6 +59,7 @@ describe ReviewsController do
 
   describe "create" do
 
+    # We are already checking "new" method for owenership
     # it "should return failure if product belongs to merchant " do
     #   # arrange: login 'ada' user
     #   login_test_user

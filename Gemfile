@@ -18,6 +18,10 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'simplecov', :require => false, :group => :test
+
+
+#added these gems because the terminal told me to
+ruby '2.4.1'
 # Use CoffeeScript for .coffee assets and views
 # gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -30,7 +34,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem "omniauth"
 gem "omniauth-github"
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -39,8 +42,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
-  gem 'pry-rails'
   gem 'selenium-webdriver'
+  gem 'pry-rails'
 end
 
 group :development do
@@ -60,7 +63,6 @@ gem 'jquery-turbolinks'
 gem 'foundation-rails', '6.4.1.2'
 group :development do
   gem 'better_errors'
-  gem 'pry-rails'
   gem 'binding_of_caller'
 end
 
