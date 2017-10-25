@@ -34,6 +34,8 @@ describe OrdersController do
           cust_cc_exp: "11/22",
           cust_addr: "Sea World",
           cust_email: "forkhair@mermaid.com",
+          cvv: 123,
+          zip_code: 32444,
           status: "complete",
           created_at: Time.now,
           updated_at: Time.now
@@ -60,6 +62,8 @@ describe OrdersController do
           cust_cc: 12345,
           cust_cc_exp: "11/22",
           cust_addr: "Sea World",
+          cvv: 123,
+          zip_code: 32444,
           cust_email: "forkhair@mermaid.com",
           status: ""
         }
