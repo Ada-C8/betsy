@@ -20,7 +20,7 @@ class Order < ApplicationRecord
       available = order_product.product.quantity
       desired = order_product.quantity
       if desired > available
-        errors.add(:product, 'does not have enough stock')
+        errors.add("#{order_product.product.name} does not have enough stock")
       end
     end
   end
