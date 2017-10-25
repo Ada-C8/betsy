@@ -1,8 +1,42 @@
 <section class="order-confirm">
   <h2 class="page-title">Order confirmation</h2>
 
-  <p><%= @order.id %></p>
-  <% @order.order_products.each do |order_product| %>
-    <p><%= order_product.product.name %></p>
-  <% end %>
+  <p>Thanks for your purchase!</p>
+  <div class="oconfirm-summary">
+    <ul>
+      <li>Order Number: #<%= @order.id %></li>
+      <li>Total: <%= @order.total %></li>
+      <li>Date: <%= @order.created_at.strftime("%B %d, %Y") %></li>
+      <li>Status: <%= @order.status.capitalize %></li>
+    </ul>
+  </div>
+
+  <h3>Order details</h3>
+  <div class="odetails-products">
+    <table>
+      <thead>
+        <th>Quantity</th>
+        <th>Item</th>
+        <th>Total</th>
+      </thead>
+      <tbody>
+        <% @order.order_products.each do |order_product| %>
+          <tr>
+            <td><%= order_product.quantity %></td>
+            <td>
+              <div class="mini-img">
+                <img src="<%= order_product.product.image_url %>" alt="">
+              </div>
+              <div class="odetail-info">
+                <p><%= link_to order_product.product.name, product_path(id:order_product.product.id) %></p>
+                <p>Sold by <%= order_product.product.merchant.username %></p>
+                <p>$ <%= sprintf('%.2f', order_product.product.price) %></p>
+              </div>
+            </td>
+            <td>$ <%= sprintf('%.2f', order_product.total) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </section>
