@@ -12,7 +12,7 @@
 //
 
 //= require jquery
-//= require home.js
+
 //= require rails-ujs
 //= require foundation
 //= require turbolinks
