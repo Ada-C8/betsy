@@ -4,6 +4,7 @@
     <p><%= product.name %> | <%= link_to "Delete", product_path(product), :data => {:confirm => "You sure?", :method => "delete"} %></p>
     <p> Unit Price: <%= product.price %></p>
   <% end %>
+  <p><%= link_to "Checkout", billing_form_path, class: "button" %></p>
 <% else %>
   <p>Your shopping cart is empty.</p> <%# need to figure this out--currently, the index view is a work-around %>
 <% end %>

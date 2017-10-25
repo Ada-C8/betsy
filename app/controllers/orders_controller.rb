@@ -18,6 +18,22 @@ class OrdersController < ApplicationController
     @cart = Order.find_or_create_cart(session[:order_id]) # cart instance
   end
 
+  def billing_form
+    # needed to show billing form view
+    @billing = Billing.new
+  end
+
+  def submit
+    @cart = Order.find_or_create_cart(session[:order_id]) # cart instance
+    @cart.subtract_product
+    @cart.status = "paid"
+    # this is currently broken
+    # TODO: figure out the current id to pass into show_order_path
+    render show_order_path(@cart.id)
+    session[:order_id] = nil
+    redirect_to show_order_path
+  end
+
   def destroy
     #updates order to cancelled, removes all associated products from OP table
   end
