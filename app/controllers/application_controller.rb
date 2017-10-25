@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   def confirm_object_ownership(model, merchant_id)
     unless session[:merchant]['id'] == merchant_id
       flash[:status] = :failure
-      flash[:message] = "Only a #{model}'s merchant can modify a #{model}."
+      flash[:message] = "Only a #{model}'s creator can modify a #{model}."
       return redirect_back(fallback_location: pathfinder(model.class))
     end
   end
