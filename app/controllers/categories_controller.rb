@@ -9,7 +9,6 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
-
   def create
     @category = Category.new(category_params)
 
@@ -35,7 +34,6 @@ class CategoriesController < ApplicationController
   def update
     @category = Category.find_by(id: params[:id])
     @category.update_attributes(category_params)
-
     if @category.save
       redirect_to product_path(@category)
     else
