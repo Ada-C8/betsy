@@ -40,4 +40,8 @@ class Merchant < ApplicationRecord
   def active_products
     products.find_all { |p| p.quantity > 0 }
   end
+
+  def inactive_products
+    products.find_all { |p| p.quantity == 0 }
+  end
 end

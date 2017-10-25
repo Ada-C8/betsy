@@ -1,12 +1,12 @@
 class ProductsController < ApplicationController
 
-  before_action only: [:show, :edit, :update, :destroy, :categories, :add_categories] do
+  before_action only: [:show, :edit, :update, :destroy, :categories, :add_categories, :retire] do
     find_object_by_params(Product)
   end
 
   before_action :confirm_login, except: [:index, :show]
 
-  before_action only: [:edit, :update, :destroy, :categories, :add_categories] do
+  before_action only: [:edit, :update, :destroy, :categories, :add_categories, :retire] do
     confirm_object_ownership(@product, @product.merchant_id)
   end
 
@@ -103,6 +103,12 @@ class ProductsController < ApplicationController
       flash.now[:details] = @product.errors.messages
     end
     return redirect_to product_path(@product.id)
+  end
+
+  def retire
+    @product.quantity = 0
+    @product.save
+    return redirect_to self_inventory_path
   end
 
   private

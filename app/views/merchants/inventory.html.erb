@@ -1,5 +1,5 @@
 <h2 class = 'page-title'>Inventory Management</h2>
-
+<h3>Active Products</h3>
 <% if @products.empty? %>
 <div class="no-products">
   <h4>You are not currently selling any items!</h4>
@@ -8,6 +8,40 @@
 <% else %>
   <section >
     <% @products.each do |product| %>
+      <%= form_for product do |f| %>
+        <div class="row">
+
+          <span class=" small-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{product.image_url}');\"") unless (product.image_url.nil? || product.image_url.empty?) %> > </span>
+          <span class="small-10 columns inventory-info">
+            <div class= "product-list small-2 columns">
+              <h4><%= product.name %></h4>
+            </div>
+            <div class="small-3 columns">
+              <%= f.label :price, class: 'inventory-form' %>
+              <%= f.text_field :price, class: 'inventory-form' %>
+            </div>
+            <div class="small-3 columns">
+              <%= f.label :quantity, class: 'inventory-form' %>
+              <%= f.text_field :quantity, class: 'inventory-form' %>
+            </div>
+            <div class="small-4 columns end">
+              <%= f.submit "Update Item", class: 'button' %>
+              <%= link_to "Retire Item", retire_product_path(product.id), class: 'button' %>
+            </div>
+          </span>
+
+        </div>
+      <% end %>
+    <% end %>
+  </section>
+<% end %>
+
+<%= link_to "Sell A New Product", new_product_path, class: 'button new-product-button' %>
+
+<% unless @inactive_products.empty? %>
+  <section >
+    <h3>Inactive Products</h3>
+    <% @inactive_products.each do |product| %>
       <%= form_for product do |f| %>
         <div class="row">
 
@@ -34,5 +68,3 @@
     <% end %>
   </section>
 <% end %>
-
-<%= link_to "Sell A New Product", new_product_path, class: 'button new-product-button' %>
