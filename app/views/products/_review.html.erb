@@ -1,8 +1,8 @@
 <section class="review_info">
   <div class="review row">
     <div class = "first_line_info">
-      <%if session[:merchant]%>
-        <h6><%= Merchant.new(session[:merchant]).username%>: </h6>
+      <%if review.merchant%>
+        <h6><%= review.merchant.username%>: </h6>
       <%else%>
         <h6>Guest: </h6>
       <%end%>
