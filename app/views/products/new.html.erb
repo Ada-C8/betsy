@@ -2,27 +2,5 @@
 
 <%#= render partial: 'layouts/error_messages',
     locals: { model: @work } %>
-
-<%= form_for @product do |f| %>
-  <%= f.label "Name" %>
-  <%= f.text_field :name %>
-
-  <%= f.label "Description" %>
-  <%= f.text_field :description %>
-
-  <%= f.label "Price" %>
-  <%= f.text_field :price %>
-
-  <%= f.label "Publication_year" %>
-  <%= f.text_field :stock %>
-
-  <%= f.label "Category_id" %>
-  <%= f.text_field :category_id %>
-  <%= f.select :category, [5, 4, 3, 2, 1] %>
-
-  <%= f.label "Photo_URL" %>
-  <%= f.text_field :photo_URL %>
-
-  <%= f.submit "Create product", :class=>"button"  %>
-
-<% end %>
+<%= render partial: 'form',
+      locals: { button_text: "Add Product", :class=>"button"} %>

@@ -1,1 +1,48 @@
-<h2>This is the review index page.</h2>
+<h2>This is some stuff that wasn't working so I'm saving it here.</h2>
+
+
+<ul>
+  <li><%=link_to "Appetizers", category_path(1)%> |</li>
+  <li><%=link_to "Breakfast", category_path(2)%> |</li>
+  <li><%=link_to "Lunch", category_path(3)%> |</li>
+  <li><%=link_to "Dinner", category_path(4)%> |</li>
+  <li><%=link_to "Desserts", category_path(5)%> |</li>
+  <li><%=link_to "Drinks", category_path(6)%> |</li>
+</ul>
+
+<ul class="dropdown menu" data-dropdown-menu>
+  <li class="is-dropdown-submenu-parent"><a href="#">Item 1</a></li>
+    <ul class="menu">
+      <li><a href="#">Item 1A</a></li>
+      <li><a href="#">Item 1B</a></li>
+      <li><a href="#">Item 1C</a></li>
+    </ul>
+</ul>
+
+
+<%= form_for @product do |f| %>
+  <%= f.label "Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label "Description" %>
+  <%= f.text_field :description %>
+
+  <%= f.label "Price" %>
+  <%= f.text_field :price %>
+
+  <%= f.label "Publication_year" %>
+  <%= f.text_field :stock %>
+
+  <%= f.label "Category_id" %>
+  <%= f.text_field :category_id %>
+
+  <%= f.label "Photo_URL" %>
+  <%= f.text_field :photo_URL %>
+
+  <%= f.submit "Update product", :class=>"button"  %>
+
+<% end %>
+  <#% end %>
+<#% if @product.category_id %>
+  <#%= f.hidden_field :category_id %>
+<#% else %>
