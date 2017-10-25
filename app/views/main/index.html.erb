@@ -1,0 +1,60 @@
+<div class="media-highlight row">
+  <%= image_tag "birds.png" %>
+</div>
+
+<div class="row">
+  <aside class="small-3 columns">
+    <h3 class="main-buttons button">new birds</h3>
+    <%if @products.present?%>
+    <ul>
+      <%= render partial: "aside_products", locals: {products: @new_products} %>
+    </ul>
+    <%end%>
+
+    <h3 class="main-buttons button">best seller</h3>
+    <%if @products.present? %>
+    <ul>
+      <%= render partial: "aside_products", locals: {products: @best_sellers} %>
+    </ul>
+    <%end%>
+  </aside>
+
+  <article class="small-9 columns">
+    <section>
+      <%if @products.present? %>
+      <div class="small-12 columns">
+        <%= render partial: "random_products", locals: { products: @products.first(3) } %>
+      </div>
+      <%end%>
+    </section>
+    <section>
+      <div class="ads small-5 columns">
+        <div class="float-left">
+          <%= image_tag "truck.png" %>
+        </div>
+        <div class="float-right">
+          <h3>FREE SHIPPING</h3>
+          <p>on order over $50</p>
+        </div>
+      </div>
+      <div class="ads small-5 columns">
+        <div class="float-left">
+          <%= image_tag "phone.png" %>
+        </div>
+        <div class="float-right">
+          <h3>GIVE US A CALL</h3>
+          <p>1-800-00-BIRDS</p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <%if @products.present? %>
+      <div class="small-12 columns">
+        <%= render partial: "random_products", locals: { products: @products[3..-1] } %>
+      </div>
+      <%end%>
+    </section>
+
+  </article>
+
+</div>
