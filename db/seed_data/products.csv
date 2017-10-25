@@ -1,13 +1,17 @@
 name,description,price,stock,category_id,photo_URL,merchant_id
 Ginger Beer,Bubbly Bits of Ginger,10,10,1,GingerBeer_URL,2
-Cheesy Crackers,Like Crackers and Cheese,5,5,2,CheesyCrackersURL,1
-Tacos,Good Even on Wednesdays,12,12,3,Tacos_URL,3
-Fried Chicken,Like Mom used to Make,10,10,2,Chicken_URL,2
 Bubble Tea,Tea but with Bubbles,3,100,1,Tea_URL,5
-Baked Ziti,Hometown Favorite,15,10,4,Ziti_URL,1
+
+
+Shakshuka,Tomato and Egg Delight,10,10,2,https://images.food52.com/XriDgBBMyPKkfhmcNBNOfFrHMEY=/753x502/b51df01a-73a1-46df-b311-31fd6111d761--2014-0819_shakshuka-003.jpg,2
+Red Chilaquiles with Fried Eggs,Cheese and Eggs and Sauce Oh My!,17,10,6,https://images.food52.com/rzgZ01EXRiJd1szmmQTaws1UG-4=/753x502/f87d6799-35b8-4d96-a7c5-c624e1f70938--2015_0112_quick-red-chilaquiles-5651.jpg,2
+Brioche,Fancy Pastries to Start Your Day Right,2,12,2,https://images.food52.com/Rt1n7F7N5qpmMofeWadqMJPHtC4=/753x502/12bcfa24-59e6-4b49-9aa2-6b0a31ab8830--brioche_yossy_arefi-15.jpg,1
 Pancakes,Flat and Syrupy,12,5,2,Pancakes_URL,2
+
+
+Baked Ziti,Hometown Favorite,15,10,4,Ziti_URL,1
 Pad Thai,Noodle Delight,12,23,6,Noodle_URL,3
 Apple Pie,Flaky Crust,15,12,5,Pie_URL,3
-Borscht,Good if you like Beets,17,10,6,Soup_URL,2
-Bagels,Round with a Hole in them,2,12,3,Bagels_URL,1
 Lumpia,Not just Lumps,5,15,6,Lumpia_URL,2
+Cheesy Crackers,Like Crackers and Cheese,5,5,2,CheesyCrackersURL,1
+Tacos,Good Even on Wednesdays,12,12,3,Tacos_URL,3
