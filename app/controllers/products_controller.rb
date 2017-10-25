@@ -25,6 +25,7 @@ class ProductsController < ApplicationController
       @title = "Popular Now"
       @products = Product.most_popular
     end
+    @products = @products.reject {|prod| prod.quantity == 0}
     @categories = Category.all
   end
 
