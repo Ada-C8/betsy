@@ -1,0 +1,12 @@
+<main class="wrap">
+
+<section>
+  <%= form_for @category do |f| %>
+
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.submit class: "button" %>
+  <% end %>
+</section>
+</main>

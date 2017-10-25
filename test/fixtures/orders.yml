@@ -1,0 +1,8 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+order1:
+  status: "pending"
+
+
+order2:
+  status: "pending"
