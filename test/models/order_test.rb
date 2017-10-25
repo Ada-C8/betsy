@@ -51,14 +51,15 @@ describe Order do
       product1 = products(:fake_product1)
       product2 = products(:fake_product2)
 
-      op1 = order_products(:one)
-      op2 = order_products(:two)
+      op1 = order_products(:op_one)
+      op2 = order_products(:op_two)
 
-      order = Order.create!(
-        status: "pending"
-      )
+      # order = Order.create!(
+      #   status: "pending"
+      # )
 
       op1.order = order
+      op1.order_id = order.id
       op1.save!
       op2.order = order
       op2.save!
@@ -79,45 +80,52 @@ describe Order do
 
     it "returns false when the database is not updated for any reason" do
       # step 1 (set up for the test)
-      category = Category.create!(
-        category_name: "stuff"
-      )
 
-      product1 = Product.create!(
-        id: 1,
-        name: "MyString",
-        description: "MyString",
-        price: 1,
-        stock: 3,
-        category_id: category,
-        merchant_id: 1
-      )
+      product1 = products(:fake_product1)
+      product2 = products(:fake_product2)
 
-      product2 = Product.create!(
-        id: 2,
-        name: "MyString",
-        description: "MyString",
-        price: 1,
-        stock: 1,
-        category_id: 1,
-        merchant_id: 1
-      )
+      op1 = order_products(:op_one)
+      op2 = order_products(:op_two)
 
-      OrderProduct.create!(
-        product: product1,
-        order_id: 1,
-        quanitity: 4
-      )
-
-      OrderProduct.create!(
-        product: product2,
-        order_id: 1,
-        quanitity: 1
-      )
-      # step 2 (don't remember name)
-      order = Order.create!(
-        status: "pending"
-      )
+      # category = Category.create!(
+      #   category_name: "stuff"
+      # )
+      #
+      # product1 = Product.create!(
+      #   id: 1,
+      #   name: "MyString",
+      #   description: "MyString",
+      #   price: 1,
+      #   stock: 3,
+      #   category_id: category,
+      #   merchant_id: 1
+      # )
+      #
+      # product2 = Product.create!(
+      #   id: 2,
+      #   name: "MyString",
+      #   description: "MyString",
+      #   price: 1,
+      #   stock: 1,
+      #   category_id: 1,
+      #   merchant_id: 1
+      # )
+      #
+      # OrderProduct.create!(
+      #   product: product1,
+      #   order_id: 1,
+      #   quanitity: 4
+      # )
+      #
+      # OrderProduct.create!(
+      #   product: product2,
+      #   order_id: 1,
+      #   quanitity: 1
+      # )
+      # # step 2 (don't remember name)
+      # order = Order.create!(
+      #   status: "pending"
+      # )
       # Assert
       order.subtract_product.must_be false
     end

@@ -1,11 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+op_one:
   quantity: 1
   product: fake_product1
   order: one
 
-two:
+op_two:
   quantity: 1
   product: fake_product2
-  order: two
+  order: one
+
+op_three:
+  quantity: 2
+  product: fake_product2
