@@ -295,8 +295,7 @@ describe MerchantsController do
 
   describe "summary" do
     it "responds with success with the given path" do
-      merchant = merchants(:ada)
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
+      login_test_user
       get self_summary_path
       must_respond_with :found
 
@@ -305,9 +304,7 @@ describe MerchantsController do
 
   describe "pending" do
     it "responds with success with the given path" do
-      merchant = merchants(:ada)
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
-      get login_path(:github)
+      login_test_user
       get self_pending_path
       must_respond_with :success
     end
@@ -315,9 +312,7 @@ describe MerchantsController do
 
   describe "completed" do
     it "responds with success in the given path" do
-      merchant = merchants(:ada)
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
-      get login_path(:github)
+      login_test_user
       get self_completed_path
       must_respond_with :success
     end
@@ -325,9 +320,7 @@ describe MerchantsController do
 
   describe "mark-shipped" do
     it "responds with success upon completion" do
-      merchant = merchants(:ada)
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
-      get login_path(:github)
+      login_test_user
       op = order_products(:one)
       get mark_shipped_path(op)
       must_respond_with :found
@@ -342,9 +335,7 @@ describe MerchantsController do
 
   describe "revenue" do
     it "responds with success upon completion" do
-      merchant = merchants(:ada)
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
-      get login_path(:github)
+      login_test_user
       get self_revenue_path
       must_respond_with :success
     end
@@ -352,9 +343,7 @@ describe MerchantsController do
 
   describe "inventory" do
     it "responds with success upon completion" do
-      merchant = merchants(:ada)
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
-      get login_path(:github)
+    login_test_user
       get self_inventory_path
       must_respond_with :success
     end
