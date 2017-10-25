@@ -4,7 +4,6 @@ describe ReviewsController do
   let(:review) { reviews(:review) }
   let(:mermaid_fin) { products(:mermaid_fin) }
 
-
 ######### Leaving for future, if we rethink and decide to add later
   # describe "index" do
   #   it "returns success status for all reviews" do
