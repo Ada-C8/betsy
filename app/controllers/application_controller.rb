@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
     unless @product
       return head :not_found
     end
+    return @product
   end
 
   def confirm_object_ownership(model)

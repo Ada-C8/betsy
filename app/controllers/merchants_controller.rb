@@ -106,16 +106,13 @@ class MerchantsController < ApplicationController
   end
 
   def mark_shipped
-    order_product = OrderProduct.find_by(id: params[:id])
-    if order_product
-      order_product.status = "shipped"
-      order_product.save
-      flash[:status] = :success
-      flash[:message] = "Marked #{order_product.product.name} as shipped"
-      return redirect_to self_pending_path
-    else
-      return head :not_found
-    end
+    @order_product = find_object_by_params(OrderProduct)
+    confirm_object_ownership(@order_product)
+    @order_product.status = "shipped"
+    @order_product.save
+    flash[:status] = :success
+    flash[:message] = "Marked #{@order_product.product.name} as shipped"
+    return redirect_to self_pending_path
   end
 
   def revenue

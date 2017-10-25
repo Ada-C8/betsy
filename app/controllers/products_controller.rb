@@ -10,7 +10,6 @@ class ProductsController < ApplicationController
     confirm_object_ownership(@product)
   end
 
-
   def index
     if params[:category_id]
       if params[:category_id] == 'all'
