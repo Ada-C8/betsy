@@ -24,6 +24,16 @@ class OrdersController < ApplicationController
 
   def show
     @cart = Order.find_or_create_cart(session[:order_id]) # cart instance
+
+    if @cart.status == "pending"
+     @cart.destroy
+   end
+  end
+
+  def submit
+    @cart = Order.find_or_create_cart(session[:order_id])
+    @cart.status = "paid"
+    @card.subtract_product
   end
 
   def submit

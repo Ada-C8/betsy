@@ -46,80 +46,77 @@ describe Order do
     end
   end
 
-  describe "Dan stuff" do
-    it "the fixtures work" do
-
-      product = products(:fake_product1)
-      puts "Got product: #{product.inspect}"
-      puts "order items: #{product.order_products.count}"
-    end
-  end
-
   describe "subtract_product" do
     it "returns true when the database is updated" do
-      order1 = Product.create!(
-        product_id: 1,
-        order_id: 1,
-        stock: 3
-      )
+      product1 = products(:fake_product1)
+      product2 = products(:fake_product2)
 
-      order2 = Product.create!(
-        product_id: 2,
-        order_id: 1,
-        stock: 2
-      )
-
-      OrderProduct.create!(
-        product_id: 1,
-        order_id: 1,
-        quanitity: 1
-      )
-
-      OrderProduct.create!(
-        product_id: 2,
-        order_id: 1,
-        quanitity: 1
-      )
+      op1 = order_products(:one)
+      op2 = order_products(:two)
 
       order = Order.create!(
-        status: pending
+        status: "pending"
       )
 
+      op1.order = order
+      op1.save!
+      op2.order = order
+      op2.save!
 
-      order.subtract_product.must_be true
-      order1.stock.must_be 2
-      order2.stock.must_be 1
+
+
+      order.subtract_product.must_equal true
+      # use reload when the database has changed and the local variable goes stale e.g. subtract_product updates the database and product1 was not updated.
+      expected_stock = product1.stock - op1.quantity
+      product1.reload
+      product1.stock.must_equal expected_stock
+
+      expected_stock = product2.stock - op2.quantity
+      product2.reload
+      product2.stock.must_equal expected_stock
 
     end
 
     it "returns false when the database is not updated for any reason" do
       # step 1 (set up for the test)
-      order1 = Product.create!(
-        product_id: 1,
-        order_id: 1,
-        stock: 3
+      category = Category.create!(
+        category_name: "stuff"
       )
 
-      order2 = Product.create!(
-        product_id: 2,
-        order_id: 1,
-        stock: 2
+      product1 = Product.create!(
+        id: 1,
+        name: "MyString",
+        description: "MyString",
+        price: 1,
+        stock: 3,
+        category_id: category,
+        merchant_id: 1
+      )
+
+      product2 = Product.create!(
+        id: 2,
+        name: "MyString",
+        description: "MyString",
+        price: 1,
+        stock: 1,
+        category_id: 1,
+        merchant_id: 1
       )
 
       OrderProduct.create!(
-        product_id: 1,
+        product: product1,
         order_id: 1,
         quanitity: 4
       )
 
       OrderProduct.create!(
-        product_id: 2,
+        product: product2,
         order_id: 1,
         quanitity: 1
       )
       # step 2 (don't remember name)
       order = Order.create!(
-        status: pending
+        status: "pending"
       )
       # Assert
       order.subtract_product.must_be false
