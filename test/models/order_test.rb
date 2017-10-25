@@ -46,6 +46,15 @@ describe Order do
     end
   end
 
+  describe "Dan stuff" do
+    it "the fixtures work" do
+
+      product = products(:fake_product1)
+      puts "Got product: #{product.inspect}"
+      puts "order items: #{product.order_products.count}"
+    end
+  end
+
   describe "subtract_product" do
     it "returns true when the database is updated" do
       order1 = Product.create!(
