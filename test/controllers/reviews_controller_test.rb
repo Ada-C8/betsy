@@ -33,6 +33,9 @@ describe ReviewsController do
   # end
 
   describe "new" do
+    it " should not work if product doesn't exist" do
+
+    end
 
     it " should work for a non-user" do
       logout_test_user
