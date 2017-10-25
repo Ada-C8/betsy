@@ -6,6 +6,8 @@ order:
   merchant_id: :ada
   cust_cc: 12345
   cust_cc_exp: 11/22
+  cvv: 111
+  zip_code: 32444
   cust_addr: Sea World
   cust_email: forkhair@mermaid.com
   status: pending
@@ -15,6 +17,8 @@ other_order:
   merchant_id: :grace
   cust_cc: 5432314
   cust_cc_exp: 66/66
+  cvv: 111
+  zip_code: 32444
   cust_addr: Fire World
   cust_email: flameshair@mermaid.com
   status: pending
