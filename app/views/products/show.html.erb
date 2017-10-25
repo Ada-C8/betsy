@@ -40,7 +40,7 @@
   </div>
 
   <div class="row reviews">
-    <h4><%= link_to "Add review", new_product_review_path(@product.id) %></h4>
+    <%= link_to "Add review", new_product_review_path(@product.id) %>
     <h4>Average Review: <%= @product.reviews.average(:rating) %></h4>
     <% @product.reviews.each do |review| %>
       <%= render partial: 'review', locals: {review: review} %>
