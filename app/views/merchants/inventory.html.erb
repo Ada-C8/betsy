@@ -13,7 +13,7 @@
 
           <span class=" small-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{product.image_url}');\"") unless (product.image_url.nil? || product.image_url.empty?) %> > </span>
           <span class="small-10 columns inventory-info">
-            <div class= "product-list small-2 columns">
+            <div class= "product-list small-3 columns">
               <h4><%= product.name %></h4>
             </div>
             <div class="small-3 columns">
@@ -24,9 +24,9 @@
               <%= f.label :quantity, class: 'inventory-form' %>
               <%= f.text_field :quantity, class: 'inventory-form' %>
             </div>
-            <div class="small-4 columns end">
-              <%= f.submit "Update Item", class: 'button' %>
-              <%= link_to "Retire Item", retire_product_path(product.id), class: 'button' %>
+            <div class="small-3 columns end">
+              <%= f.submit "Update", class: 'button' %>
+              <%= link_to "Retire", retire_product_path(product.id), class: 'button' %>
             </div>
           </span>
 
@@ -59,7 +59,7 @@
               <%= f.text_field :quantity, class: 'inventory-form' %>
             </div>
             <div class="small-3 columns">
-              <%= f.submit "Update Item", class: 'button' %>
+              <%= f.submit "Update", class: 'button' %>
             </div>
           </span>
 
