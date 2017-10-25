@@ -1,10 +1,14 @@
 class ProductsController < ApplicationController
 
-  before_action :find_product_by_params, only: [:show, :edit, :update, :destroy, :categories, :add_categories]
+  before_action only: [:show, :edit, :update, :destroy, :categories, :add_categories] do
+    find_object_by_params(Product)
+  end
 
   before_action :confirm_login, except: [:index, :show]
 
-  before_action :confirm_product_ownership, only: [:edit, :update, :destroy, :categories, :add_categories]
+  before_action only: [:edit, :update, :destroy, :categories, :add_categories] do
+    confirm_object_ownership(@product, @product.merchant_id)
+  end
 
 
   def index

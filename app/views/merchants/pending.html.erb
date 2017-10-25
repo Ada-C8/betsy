@@ -1,4 +1,4 @@
-<h2>Pending Orders</h2>
+<h2 class = 'page-title'>Pending Orders</h2>
 
 <% if @order_products.empty? %>
   <div class="no-orders">
@@ -11,7 +11,7 @@
       <span class="medium-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{op.product.image_url}');\"") unless (op.product.image_url.nil? || op.product.image_url.empty?) %> > </span>
       <span class="medium-10 columns info">
 
-        <div class="row">
+        <div class="product-list row">
           <h4 class="medium-3 columns"><%= op.product.name %></h4>
           <h4 class="medium-3 columns"><small>Quantity: </small><%= op.quantity %></h4>
           <h4 class="medium-3 columns"><small>Price: </small><%= money(op.product.price) %></h4>

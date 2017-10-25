@@ -4,7 +4,7 @@
   <p>This merchant has no products.</p>
   <% else %>
   <%  products.each do |product| %>
-      <div class="product small-12 medium-6 large-3 columns">
+      <div class=" product-list product small-12 medium-6 large-3 columns">
         <%= link_to product_path(product.id) do %>
         <div class="product-img"
              <%= (raw "style=\"background-image: url('#{product.image_url}');\"") unless (product.image_url.nil? || product.image_url.empty?) %>

@@ -21,16 +21,16 @@ class Merchant < ApplicationRecord
     merchant
   end
 
-  def orders
+  def own_orders
     OrderProduct.all.find_all {|op| op.product.merchant_id == id && op.order != nil}
   end
 
   def pending_orders
-    orders.find_all { |o| o.status == "pending" }
+    own_orders.find_all { |o| o.status == "pending" }
   end
 
   def shipped_orders
-    orders.find_all { |o| o.status == "shipped" }
+    own_orders.find_all { |o| o.status == "shipped" }
   end
 
   def total_revenue

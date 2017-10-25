@@ -1,9 +1,13 @@
 class CategoriesController < ApplicationController
   before_action :confirm_login
 
-  before_action :find_product_by_params, only: [:add]
+  before_action only: [:add] do
+    find_object_by_params(Product)
+  end
 
-  before_action :confirm_product_ownership, only: [:add]
+  before_action only: [:add] do
+    confirm_object_ownership(@product, @product.merchant_id)
+  end
 
 
     def create

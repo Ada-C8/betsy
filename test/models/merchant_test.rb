@@ -70,7 +70,7 @@ describe Merchant do
   end
 
   describe 'relationships' do
-    it "has a list of products" do
+    it "has a list of order_products" do
       mermaid_fin = merchants(:ada)
       mermaid_fin.must_respond_to :products
       mermaid_fin.products.each do |product|
@@ -87,9 +87,9 @@ describe Merchant do
     end
 
     it "has a list of orders" do
-      order = merchants(:ada)
-      order.must_respond_to :orders
-      order.orders.each do |order|
+      merchant = merchants(:ada)
+      merchant.must_respond_to :orders
+      merchant.orders.each do |order|
         order.must_be_kind_of Order
       end
     end

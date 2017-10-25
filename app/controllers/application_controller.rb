@@ -11,19 +11,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def find_product_by_params
-    @product = Product.find_by(id: params[:id])
-
+  def find_object_by_params(model)
+    @product = model.find_by(id: params[:id])
     unless @product
       return head :not_found
     end
+    return @product
   end
 
-  def confirm_product_ownership
-    unless session[:merchant]['id'] == @product.merchant_id
+  def confirm_object_ownership(model, merchant_id)
+    unless session[:merchant]['id'] == merchant_id
       flash[:status] = :failure
-      flash[:message] = "Only a product's merchant can modify a product."
-      return redirect_back(fallback_location: products_path)
+      flash[:message] = "Only a #{model}'s merchant can modify a #{model}."
+      return redirect_back(fallback_location: pathfinder(model.class))
     end
   end
 
@@ -46,6 +46,16 @@ class ApplicationController < ActionController::Base
       flash[:status] = :failure
       flash[:result_text] = "Owner can not review the product!"
       redirect_to product_path(@product)
+    end
+  end
+
+  private
+  def pathfinder(model)
+    case model
+    when Product
+      return products_path
+    else
+      return root_path
     end
   end
 end
