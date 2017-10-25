@@ -1,7 +1,7 @@
 require "test_helper"
 
 describe OrderProduct do
-  let(:order_product) { order_products(:order_products)}
+  let(:order_product) { order_products(:one)}
 
   describe "validations" do
     describe "quantity" do
@@ -20,7 +20,7 @@ describe OrderProduct do
 
   describe "relationships" do
     it "has a product" do
-      b = order_products(:order_products)
+      b = order_products(:one)
       a = products(:mermaid_fin)
 
       b.must_respond_to :product
@@ -29,7 +29,7 @@ describe OrderProduct do
     end
 
     it "has an order" do
-      b = order_products(:order_products)
+      b = order_products(:one)
       a = orders(:order)
 
       b.must_respond_to :order
