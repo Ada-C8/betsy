@@ -255,7 +255,7 @@ describe ProductsController do
       must_respond_with :found
     end
 
-    it 'CANNOT successfully create valid product' do
+    it 'CANNOT create valid product' do
       post products_path(prod.id), params: good_params
 
       flash[:status].must_equal :failure
@@ -283,13 +283,11 @@ describe ProductsController do
       must_respond_with :found
     end
 
-    describe 'add_categories' do
-      it 'CANNOT access add categories page' do
-        get add_categories_path(owned_product.id)
+    it 'CANNOT access add categories page' do
+      get add_categories_path(owned_product.id)
 
-        must_respond_with :found
-        flash[:status].must_equal :failure
-      end
+      must_respond_with :found
+      flash[:status].must_equal :failure
     end
   end
 end
