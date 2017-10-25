@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root to: 'products#root', as: "root"
   get '/home', to: 'products#home', as: "home"
 
+
+
   patch 'orders/:id/shipped', to: 'orders#shipped', as: 'ship_order'
 
 
