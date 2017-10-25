@@ -22,11 +22,10 @@ class OrdersController < ApplicationController
 
     if @order.save
       @order.decrement_products
-      binding.pry
       session[:cart] = nil
       flash[:status] = :success
       flash[:message] = "Successfully created order"
-      redirect_to orders_path
+      redirect_to confirmation_path(@order)
     else
       flash.now[:status] = :failure
       flash.now[:message] = "Failed to create order"
@@ -64,6 +63,10 @@ class OrdersController < ApplicationController
     end
   end
 
+  def confirmation
+    find_order_by_params_id
+  end
+
   private
 
   def order_params
@@ -79,5 +82,4 @@ class OrdersController < ApplicationController
     end
     return @order
   end
-  # confirm if the order belongs to the merchant (buyer)
 end

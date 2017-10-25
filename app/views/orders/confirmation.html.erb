@@ -1,0 +1,8 @@
+<section class="order-confirm">
+  <h2 class="page-title">Order confirmation</h2>
+
+  <p><%= @order.id %></p>
+  <% @order.order_products.each do |order_product| %>
+    <p><%= order_product.product.name %></p>
+  <% end %>
+</section>

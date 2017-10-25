@@ -21,7 +21,7 @@ gem 'simplecov', :require => false, :group => :test
 
 
 #added these gems because the terminal told me to
-ruby '2.4.0'
+ruby '2.4.1'
 # Use CoffeeScript for .coffee assets and views
 # gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
