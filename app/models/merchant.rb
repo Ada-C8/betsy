@@ -21,7 +21,7 @@ class Merchant < ApplicationRecord
     merchant
   end
 
-  def order_items
+  def own_orders
     OrderProduct.all.find_all {|op| op.product.merchant_id == id && op.order != nil}
   end
 
