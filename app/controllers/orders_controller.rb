@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
     @order.order_products += OrderProduct.find_in_cart(session[:cart])
 
     if @order.save
-      decrement_products
+      @order.decrement_products
       session[:cart] = nil
       flash[:status] = :success
       flash[:message] = "Successfully created order"
@@ -78,15 +78,5 @@ class OrdersController < ApplicationController
     end
     return @order
   end
-
-  def decrement_products
-      @order.order_products.each do |order_product|
-        quantity = order_product.quantity
-        product = Product.find(order_product.product_id)
-        product.quantity -= quantity
-        product.save
-      end
-  end
-
   # confirm if the order belongs to the merchant (buyer)
 end

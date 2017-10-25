@@ -24,4 +24,13 @@ class Order < ApplicationRecord
       end
     end
   end
+
+  def decrement_products
+    order_products.each do |order_product|
+      quantity = order_product.quantity
+      product = Product.find(order_product.product_id)
+      product.quantity -= quantity
+      product.save
+    end
+  end
 end
