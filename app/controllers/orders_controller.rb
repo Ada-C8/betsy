@@ -20,8 +20,6 @@ class OrdersController < ApplicationController
       flash.now[:details] = order.products.errors.messages
     end
     redirect_to product_path(product)
-
-
   end
 
   def show
@@ -29,21 +27,6 @@ class OrdersController < ApplicationController
     # as well as the status,
     # so this info is also pulled in from the orders_products
     @cart = Order.find_or_create_cart(session[:order_id]) # cart instance
-  end
-
-  def billing_form
-    # needed to show billing form view
-    @billing = Billing.new
-  end
-
-  def submit
-    @cart.subtract_product
-    @cart.status = "paid"
-    # this is currently broken
-    # TODO: figure out the current id to pass into show_order_path
-    render show_order_path(@cart.id)
-    session[:order_id] = nil
-    redirect_to show_order_path
   end
 
   def billing_form
