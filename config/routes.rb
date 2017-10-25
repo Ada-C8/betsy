@@ -33,7 +33,8 @@ Rails.application.routes.draw do
   get '/revenue', to: 'merchants#revenue', as: 'self_revenue'
   get '/inventory', to: 'merchants#inventory', as: 'self_inventory'
 
-  get '/mark_shipped/:id', to: 'merchants#mark_shipped', as: 'mark_shipped'
+  get '/:id/mark_shipped', to: 'merchants#mark_shipped', as: 'mark_shipped'
+  get '/:id/retire', to: 'products#retire', as: 'retire_product'
 
   get '/confirmation/:id', to: 'orders#confirmation', as: 'confirmation'
 end
