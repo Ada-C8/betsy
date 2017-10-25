@@ -1,6 +1,9 @@
 <h2>Billing Info</h2>
 
-<%= form_for @billing, url: billing_form_path do |f| %>
+
+<%# hard coded order id%>
+<%# TODO: uodate order id that is passed into show_order_path %>
+<%= form_for @billing, url: show_order_path(Order.first) do |f| %>
   <%= f.label "Name" %>
   <%= f.text_field :name %>
 
