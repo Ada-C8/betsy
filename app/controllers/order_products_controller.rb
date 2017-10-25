@@ -7,7 +7,8 @@ class OrderProductsController < ApplicationController
     if find_order_product_by_params_id
       @order_product.update_attributes(order_product_params)
       if @order_product.save
-        redirect_to order_product_path(@order_product)
+        redirect_to shopping_cart_path
+        # redirect_to order_product_path(@order_product)
         return
       else
         render :edit, status: :bad_request
@@ -20,8 +21,9 @@ class OrderProductsController < ApplicationController
     if find_order_product_by_params_id
       @order_product.destroy
       flash[:status] = :success
-      flash[:message] = "Deleted order product #{@order_product.product.name}"
-      redirect_to  merchant_sold_index_path(@order_product.product.merchant)
+      flash[:message] = "Deleted item #{@order_product.product.name} from cart"
+      redirect_to shopping_cart_path
+      # redirect_to  merchant_sold_index_path(@order_product.product.merchant)
     end
   end
 
