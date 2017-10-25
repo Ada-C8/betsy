@@ -3,6 +3,7 @@ require "test_helper"
 describe ReviewsController do
   let(:review) { reviews(:review) }
   let(:mermaid_fin) { products(:mermaid_fin) }
+  let(:wand) { products(:wand) }
 
 ######### Leaving for future, if we rethink and decide to add later
   # describe "index" do
@@ -31,6 +32,7 @@ describe ReviewsController do
   # end
 
   describe "new" do
+
     it " should not work if product doesn't exist" do
       bad_product = Product.last.id + 1
       get new_product_review_path(bad_product)
@@ -119,8 +121,13 @@ describe ReviewsController do
   end
 
   describe "edit" do
-    it "will return failure if merchant owns the product" do
+
+    before do
       login_test_user
+    end
+
+    it "will return failure if merchant owns the product" do
+      # login_test_user
 
       get edit_review_path(review)
 
@@ -128,9 +135,10 @@ describe ReviewsController do
     end
 
     it "succeeds for an exact review ID" do
+
       review_id = Review.first.id
       get edit_review_path(review.id)
-      must_respond_with :success
+      must_respond_with :found
     end
 
     it "renders 404 not_found for a bogus review ID" do
@@ -141,6 +149,7 @@ describe ReviewsController do
   end
 
   describe "update" do
+
     it "will successfully update review" do
       review_data = {
         review: {
@@ -184,17 +193,25 @@ describe ReviewsController do
   end
 
   describe "destroy" do
+
+    before do
+      login_test_user
+    end
+
     it "will successfully destroy review" do
+    
       start_review_count = Review.count
 
-      delete review_path(review)
+      delete review_path(reviews(:review4))
+      # binding.pry
+      must_redirect_to product_path(wand.id)
 
-      must_redirect_to product_path(mermaid_fin)
+      flash[:status].must_equal :success
       Review.count.must_equal start_review_count - 1
     end
 
     it "will not delete review if merchant owns the product" do
-      login_test_user
+      # login_test_user
       start_review_count = Review.count
       delete review_path(review)
 
