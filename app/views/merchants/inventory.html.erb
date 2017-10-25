@@ -12,7 +12,7 @@
         <div class="row">
 
           <span class="small-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{product.image_url}');\"") unless (product.image_url.nil? || product.image_url.empty?) %> > </span>
-          <span class="small-10 columns info">
+          <span class="small-10 columns inventory-info">
             <div class="small-3 columns">
               <h4><%= product.name %></h4>
             </div>
@@ -34,3 +34,5 @@
     <% end %>
   </section>
 <% end %>
+
+<%= link_to "Sell A New Product", new_product_path, class: 'button new-product-button' %>

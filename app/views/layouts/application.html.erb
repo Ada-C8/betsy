@@ -23,8 +23,9 @@
           <%= link_to "Shopping Cart", shopping_cart_path, class: "button" %>
           <% if session[:merchant] %>
             <%= link_to "Sell", new_product_path, class: "button" %>
-            <%= link_to "Sold items", merchant_sold_index_path(session[:merchant]['id']), class: "button" %>
-            <%= link_to "Purchased Items", merchant_orders_path(session[:merchant]['id']), class: "button" %>
+            <%= link_to "Account Home", self_summary_path, class: "button" %>
+            <%# link_to "Sold items", merchant_sold_index_path(session[:merchant]['id']), class: "button" %>
+            <%# link_to "Purchased Items", merchant_orders_path(session[:merchant]['id']), class: "button" %>
             <%= link_to "Sign Out", logout_path, class: "button" %>
 
           <% else %>
