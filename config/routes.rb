@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:index]
   end
 
-  resources :categories do
+  resources :categories, except: [:update, :edit] do
     resources :products, only: [:index]
   end
 
