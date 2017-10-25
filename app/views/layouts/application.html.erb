@@ -6,61 +6,60 @@
 
     <title><%= content_for?(:title) ? yield(:title) : "Satiety" %></title>
 
+    <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <%= stylesheet_link_tag    "application" %>
-    <!-- <%= javascript_include_tag "application", 'data-turbolinks-track' => true %> -->
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <!-- ==========header========== -->
-    <header>
-      <nav class="top-bar">
-        <div class="top-bar-left">
-          <ul class="menu">"
-            <li class="menu-text">
-              <h1><%= link_to "Satiety || Serving home-cooked meals on demand", root_path %> </h1>
-            </li>
-    <!-- ========browse by========= -->
-            <li><%=link_to "Browse by Category", categories_path%> |</li>
-            <li><%=link_to "Browse by Merchant", merchants_path %> |</li>
-            <li><%=link_to "See all Products", products_path%></li>
-          </ul>
+<!-- ===========HEADER=========== -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <div class="menu column large-3">
+          <h1><%= link_to "Satiety", root_path %></h1>
         </div>
-    <!-- ========categories======== -->
-        <div class="top-bar-right">
-          <ul class="menu">
-            <li>
-              <% @categories = Category.all%>
-              <% @categories.each do |cat| %>
-              <%= link_to cat.category_name, category_path(cat.id) %>
-              <% end %>
-            </li>
-    <!-- =======merchant tools====== -->
-            <%# displays each button from right to left %>
-            <li>
-              <% if session[:merchant_id] %>
-                <%= link_to "Log Out", logout_path, method: :post, class: "button float-right" %>
-              <% else %>
-                <%= link_to "Log In", '/auth/github', class: "button float-right" %>
-              <% end %>
-            </li>
-            <li>
-              <% if session[:order_id] == nil %>
-                <%= link_to "Cart", orders_path, class: "button float-right" %>
-              <% else %>
-                <%= link_to "Cart", order_path(session[:order_id]), class: "button float-right" %>
-              <% end %>
-            </li>
-            <li>
-            <%# if user is logged in, these buttons appear %>
-              <% if session[:merchant_id] %>
-                <%= link_to "My Orders", "#", class: "button float-right" %>
-                <%= link_to "Sell on Satiety", new_product_path, class: "button float-right" %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </nav>
+  <!-- ========browse by========= -->
+        <ul class="menu">
+          <li><%=link_to "Browse by Category", categories_path%></li>
+          <li><%=link_to "Browse by Merchant", merchants_path %></li>
+          <li><%=link_to "See all Products", products_path%></li>
+        </ul>
+        <ul class="menu">
+          <% @categories = Category.all%>
+          <% @categories.each do |cat| %>
+          <li><%= link_to cat.category_name, category_path(cat.id) %></li>
+          <% end %>
+        </ul>
+      </div>
+  <!-- ========categories======== -->
+      <div class="top-bar-right">
+        <ul class="menu">
+  <!-- =======merchant tools====== -->
+          <li>
+          <%# if user is logged in, these buttons appear %>
+            <% if session[:merchant_id] %>
+              <%= link_to "My Orders", "#", class: "button float-right" %>
+              <%= link_to "Sell on Satiety", new_product_path, class: "button float-right" %>
+            <% end %>
+          </li>
+          <li>
+            <% if session[:order_id] == nil %>
+            <%= link_to "Cart", orders_path, class: "button float-right" %>
+            <% else %>
+            <%= link_to "Cart", order_path(session[:order_id]), class: "button float-right" %>
+            <% end %>
+          </li>
+          <li>
+            <% if session[:merchant_id] %>
+            <%= link_to "Log Out", logout_path, method: :post, class: "button float-right" %>
+            <% else %>
+            <%= link_to "Log In", '/auth/github', class: "button float-right" %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
     </header>
 
     <main>
