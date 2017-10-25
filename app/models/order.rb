@@ -35,14 +35,13 @@ class Order < ApplicationRecord
   end
 
   def order_status
-    shipped_count = 0
-    order_products.each do |order_product|
-      if order_product.status == "shipped"
-        shipped_count += 1
-      end
+    # shipped_count = 0
+    result = order_products.all? do |order_product|
+      order_product.status == "shipped"
     end
-    if shipped_count == order_products.length
-      self.status == "complete"
-    end
+
+    # if shipped_count == order_products.length
+      self.status = "complete" if result
+    # end
   end
 end
