@@ -1,0 +1,36 @@
+<h2>Inventory Management</h2>
+
+<% if @products.empty? %>
+<div class="no-products">
+  <h4>You are not currently selling any items!</h4>
+</div>
+
+<% else %>
+  <section >
+    <% @products.each do |product| %>
+      <%= form_for product do |f| %>
+        <div class="row">
+
+          <span class="small-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{product.image_url}');\"") unless (product.image_url.nil? || product.image_url.empty?) %> > </span>
+          <span class="small-10 columns info">
+            <div class="small-3 columns">
+              <h4><%= product.name %></h4>
+            </div>
+            <div class="small-3 columns">
+              <%= f.label :price, class: 'inventory-form' %>
+              <%= f.text_field :price, class: 'inventory-form' %>
+            </div>
+            <div class="small-3 columns">
+              <%= f.label :quantity, class: 'inventory-form' %>
+              <%= f.text_field :quantity, class: 'inventory-form' %>
+            </div>
+            <div class="small-3 columns">
+              <%= f.submit "Update Item", class: 'button' %>
+            </div>
+          </span>
+
+        </div>
+      <% end %>
+    <% end %>
+  </section>
+<% end %>

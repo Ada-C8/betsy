@@ -30,5 +30,9 @@ Rails.application.routes.draw do
   get '/home', to: 'merchants#summary', as: 'self_summary'
   get '/pending', to: 'merchants#pending', as: 'self_pending'
   get '/completed', to: 'merchants#completed', as: 'self_completed'
+  get '/revenue', to: 'merchants#revenue', as: 'self_revenue'
+  get '/inventory', to: 'merchants#inventory', as: 'self_inventory'
+
   get '/mark_shipped/:id', to: 'merchants#mark_shipped', as: 'mark_shipped'
+
 end

@@ -118,6 +118,16 @@ class MerchantsController < ApplicationController
     end
   end
 
+  def revenue
+    @user = Merchant.find(session[:merchant]['id'])
+    @pending = @user.pending_orders
+    @completed = @user.shipped_orders
+  end
+
+  def inventory
+    @products = Merchant.find(session[:merchant]['id']).products
+  end
+
   private
 
   def merchant_params
