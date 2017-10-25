@@ -80,12 +80,12 @@ class OrdersController < ApplicationController
   end
 
   def decrement_products
-    @order.order_products.each do |order_product|
-      quantity = order_product.quantity
-      product = Product.find(order_product.product_id)
-      product.quantity -= quantity
-      product.save
-    end
+      @order.order_products.each do |order_product|
+        quantity = order_product.quantity
+        product = Product.find(order_product.product_id)
+        product.quantity -= quantity
+        product.save
+      end
   end
 
   # confirm if the order belongs to the merchant (buyer)
