@@ -70,7 +70,7 @@
             <% if session[:user_id] == nil %>
             <%=link_to "Login", '/auth/github' %>
             <% else %>
-            <%= link_to "Logout", logout_path, method: :post %>
+            <%=button_to "Logout", logout_path %>
             <% end %>
           </button>
           <div class="dropdown-content-login">
