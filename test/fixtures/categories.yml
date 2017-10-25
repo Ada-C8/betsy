@@ -2,7 +2,9 @@
 
 
 cat_one:
+  id: 1
   category_name: Dinner
 
 cat_two:
+  id: 2
   category_name: Breakfast

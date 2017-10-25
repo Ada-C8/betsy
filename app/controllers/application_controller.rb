@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  
+  before_action :require_login
+
   protected
   def require_login
     @login_user = Merchant.find_by(id: session[:merchant_id])
@@ -16,10 +17,10 @@ class ApplicationController < ActionController::Base
 
     if result
       flash[:status] = :success
-      flash[:message] = "Successfully saved #{model.class} #{model.id}"
+      flash[:message] = "Successfully created a new Satiety account for #{model.username}." # this is the message that appears when a person logs in with GitHub for the first time
     else
       flash.now[:status] = :failure
-      flash.now[:message] = "Failed to save #{model.class}"
+      flash.now[:message] = "Failed to save #{model.class}."
       flash.now[:details] = model.errors.messages
     end
 

@@ -1,3 +1,52 @@
+<h2>This is some stuff that wasn't working so I'm saving it here.</h2>
+
+
+<ul>
+  <li><%=link_to "Appetizers", category_path(1)%> |</li>
+  <li><%=link_to "Breakfast", category_path(2)%> |</li>
+  <li><%=link_to "Lunch", category_path(3)%> |</li>
+  <li><%=link_to "Dinner", category_path(4)%> |</li>
+  <li><%=link_to "Desserts", category_path(5)%> |</li>
+  <li><%=link_to "Drinks", category_path(6)%> |</li>
+</ul>
+
+<ul class="dropdown menu" data-dropdown-menu>
+  <li class="is-dropdown-submenu-parent"><a href="#">Item 1</a></li>
+    <ul class="menu">
+      <li><a href="#">Item 1A</a></li>
+      <li><a href="#">Item 1B</a></li>
+      <li><a href="#">Item 1C</a></li>
+    </ul>
+</ul>
+
+
+<%= form_for @product do |f| %>
+  <%= f.label "Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label "Description" %>
+  <%= f.text_field :description %>
+
+  <%= f.label "Price" %>
+  <%= f.text_field :price %>
+
+  <%= f.label "Publication_year" %>
+  <%= f.text_field :stock %>
+
+  <%= f.label "Category_id" %>
+  <%= f.text_field :category_id %>
+
+  <%= f.label "Photo_URL" %>
+  <%= f.text_field :photo_URL %>
+
+  <%= f.submit "Update product", :class=>"button"  %>
+
+<% end %>
+  <#% end %>
+<#% if @product.category_id %>
+  <#%= f.hidden_field :category_id %>
+<#% else %>
+
 name,description,price,stock,category_id,photo_URL,merchant_id
 Ginger Beer,Bubbly Bits of Ginger,10,10,6,https://static.pexels.com/photos/418225/pexels-photo-418225.jpeg,2
 Bubble Tea,Tea but with Bubbles,3,100,6,https://prods3.imgix.net/images/articles/2017_06/non-feature-bubble-tea-bad-health.jpg,5
@@ -6,6 +55,7 @@ Fruit Smoothie,This Smoothie Brings all the Vitamins to the Yard,7,4,6,http://ww
 Shakshuka,Tomato and Egg Delight,10,10,2,https://images.food52.com/XriDgBBMyPKkfhmcNBNOfFrHMEY=/753x502/b51df01a-73a1-46df-b311-31fd6111d761--2014-0819_shakshuka-003.jpg,2
 Red Chilaquiles with Fried Eggs,Cheese and Eggs and Sauce Oh My!,17,10,6,https://images.food52.com/rzgZ01EXRiJd1szmmQTaws1UG-4=/753x502/f87d6799-35b8-4d96-a7c5-c624e1f70938--2015_0112_quick-red-chilaquiles-5651.jpg,2
 Brioche,Fancy Pastries to Start Your Day,3 Right,2,12,2,https://images.food52.com/Rt1n7F7N5qpmMofeWadqMJPHtC4=/753x502/12bcfa24-59e6-4b49-9aa2-6b0a31ab8830--brioche_yossy_arefi-15.jpg,1
+Pancakes,Flat and Syrupy,12,5,2,Pancakes_URL,2
 Pork Roll Breakfast Sandwich,New Jersey's Finest,5,10,2,http://myjerseyshorelife.com/wp-content/uploads/2016/08/13654367_621255891372198_576486027620737011_n-1.jpg,4
 Sinangag,Garlic Fried Rice with Vinegar Sauce,15,6,2,https://www.saveur.com/g00/3_c-6bbb.x78fajzw.htr_/c-6RTWJUMJZX77x24myyux78x3ax2fx2fbbb.x78fajzw.htrx2fx78nyjx78x2fx78fajzw.htrx2fknqjx78x2fx78ydqjx78x2f100_6c_x2fuzgqnhx2fnrutwyx2f7569x2f7569-65x2fwjhnuj_x78nsfslfl-knqnunst-lfwqnh-kwnji-wnhj_355c6755.oulx3fnytpx3daEz_3YTx78x26n65h.rfwp.nrflj.yduj_$/$/$/$/$/$/$/$/$/$/$,5
 Baked Ziti,Hometown Favorite,15,10,4,Ziti_URL,1

@@ -1,0 +1,47 @@
+<h2>Billing Info</h2>
+
+
+<%# hard coded order id%>
+<%# TODO: uodate order id that is passed into show_order_path %>
+<%= form_for @billing, url: show_order_path(Order.first) do |f| %>
+  <%= f.label "Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label "Street" %>
+  <%= f.text_field :street %>
+
+  <%= f.label "Apt" %>
+  <%= f.text_field :apt %>
+
+  <%= f.label "City" %>
+  <%= f.text_field :city %>
+
+  <%= f.label "State" %>
+  <%= f.text_field :state %>
+
+  <%= f.label "Zip Code" %>
+  <%= f.text_field :bill_zip %>
+
+<h2>Shipping Info</h2>
+
+  <%= f.label "Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label "Street" %>
+  <%= f.text_field :street %>
+
+  <%= f.label "Apt" %>
+  <%= f.text_field :apt %>
+
+  <%= f.label "City" %>
+  <%= f.text_field :city %>
+
+  <%= f.label "State" %>
+  <%= f.text_field :state %>
+
+  <%= f.label "Zip Code" %>
+  <%= f.text_field :bill_zip %>
+
+  <%= f.submit "Submit", :class=>"button"  %>
+
+<% end %>

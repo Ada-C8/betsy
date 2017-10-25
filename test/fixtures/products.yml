@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-  # name: MyString
-  # description: MyString
-  # price: 1
-  # stock: 1
-  # category_id: 1
+fake_product1:
+  name: MyString
+  description: MyString
+  price: 1
+  stock: 3
+  category_id: 1
+  merchant_id: 1
 
-# two:
-#   name: MyString
-#   description: MyString
-#   price: 1
-#   stock: 1
-#   category_id: 1
+fake_product2:
+  name: MyString
+  description: MyString
+  price: 1
+  stock: 1
+  category_id: 2
+  merchant_id: 2
