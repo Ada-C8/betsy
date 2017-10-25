@@ -18,3 +18,8 @@ review3:
   rating: 4
   merchant: grace
   product: wand
+
+review4:
+  rating: 4
+  merchant: ada
+  product: wand
