@@ -12,7 +12,7 @@
     <h6> <%= review.description %> </h6>
   </div>
 
-  <% if session[:merchant] %>
+  <% if session[:merchant] && session[:merchant]['id'] == review.merchant_id%>
     <div class="button change"> <%= link_to "Edit", edit_review_path(review.id) %></div>
     <div class="button change"> <%= link_to "Delete", review_path(review.id), method: :delete, data: { confirm: "Are you sure?" }%></div>
   <% end %>
