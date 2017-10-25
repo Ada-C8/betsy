@@ -2,6 +2,15 @@ class MerchantsController < ApplicationController
 
   before_action :confirm_login, only: [:summary, :pending, :completed, :mark_shipped, :revenue, :inventory]
 
+  before_action only: [:mark_shipped] do
+    @order_product = find_object_by_params(OrderProduct)
+  end
+
+  before_action only: [:mark_shipped] do
+    confirm_object_ownership(@order_product, @order_product.product.merchant_id)
+  end
+
+
   def login
     auth_hash = request.env['omniauth.auth']
     merchant = Merchant.find_by(oauth_uid: auth_hash['uid'], oauth_provider: auth_hash['provider'])
@@ -106,10 +115,8 @@ class MerchantsController < ApplicationController
   end
 
   def mark_shipped
-    @order_product = find_object_by_params(OrderProduct)
-    confirm_object_ownership(@order_product)
     @order_product.status = "shipped"
-    @order_product.save
+    @order_product.save!
     flash[:status] = :success
     flash[:message] = "Marked #{@order_product.product.name} as shipped"
     return redirect_to self_pending_path

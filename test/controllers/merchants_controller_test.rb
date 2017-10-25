@@ -226,11 +226,18 @@ describe MerchantsController do
 
       describe 'mark_shipped' do
         it 'changes the status of an existing product owned by the user' do
+          op_id = order_products(:order_products).id
+          get mark_shipped_path(op_id)
 
+          must_respond_with :found
+          flash[:status].must_equal :success
+          OrderProduct.find(op_id).status.must_equal "shipped"
         end
 
         it 'returns not_found if product does not exist' do
+          get mark_shipped_path(OrderProduct.last.id + 1)
 
+          must_respond_with :not_found
         end
 
         it 'redirects without changing if product does not belong to user' do

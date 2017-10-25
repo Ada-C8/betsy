@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   end
 
   before_action only: [:add] do
-    confirm_object_ownership(@product)
+    confirm_object_ownership(@product, @product.merchant_id)
   end
 
 

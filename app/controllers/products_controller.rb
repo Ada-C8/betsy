@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
   before_action :confirm_login, except: [:index, :show]
 
   before_action only: [:edit, :update, :destroy, :categories, :add_categories] do
-    confirm_object_ownership(@product)
+    confirm_object_ownership(@product, @product.merchant_id)
   end
 
   def index

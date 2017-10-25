@@ -9,3 +9,4 @@ order_products:
   quantity: 6
   product: mermaid_fin
   order: order
+  status: pending
