@@ -1,7 +1,7 @@
-<h2><%=@merchant.username%></h2>
+<h2 class = 'page-title'><%=@merchant.username%></h2>
 <a href="mailto:<%=@merchant.email%>">Contact Merchant</a>
 <h3>Products</h3>
 
-<main class='small-10 columns'>
+<main class=' product-list small-10 columns'>
 <%= render partial: "list-merchant-products", locals: {products: @merchant.products} %>
 </main>

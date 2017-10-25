@@ -5,8 +5,14 @@
 # below each fixture, per the syntax in the comments below
 
 
+one:
+  quantity: 2
+  product: mermaid_fin
+  order: order
+  status: pending
+
 order_products:
-  quantity: 6
+  quantity: 2
   product: mermaid_fin
   order: order
   status: pending
@@ -16,3 +22,9 @@ other_order_products:
   product: wand
   order: order
   status: pending
+
+two:
+  quantity: 3
+  product: mermaid_fin
+  order: order
+  status: shipped

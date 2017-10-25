@@ -1,14 +1,11 @@
 class ProductsController < ApplicationController
 
-  before_action only: [:show, :edit, :update, :destroy, :categories, :add_categories] do
-    find_object_by_params(Product)
-  end
+  before_action :find_product_by_params, only: [:show, :edit, :update, :destroy, :categories, :add_categories]
 
   before_action :confirm_login, except: [:index, :show]
 
-  before_action only: [:edit, :update, :destroy, :categories, :add_categories] do
-    confirm_object_ownership(@product, @product.merchant_id)
-  end
+  before_action :confirm_product_ownership, only: [:edit, :update, :destroy, :categories, :add_categories]
+
 
   def index
     if params[:category_id]
@@ -28,6 +25,7 @@ class ProductsController < ApplicationController
       @title = "Popular Now"
       @products = Product.most_popular
     end
+    @products = @products.reject {|prod| prod.quantity == 0}
     @categories = Category.all
   end
 
