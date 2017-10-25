@@ -1,0 +1,109 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require foundation_and_overrides
+
+ */
+
+
+/* FLASH NOTIFICATIONS */
+
+ul {
+  list-style-type: none;
+}
+
+body{
+  position: relative;
+  font-family: monospace;
+  background-color: rgb(255, 204, 153);
+}
+
+header h2 {
+  font-family: 'Calligraffitti';
+}
+
+.page-header {
+  max-width: 100%;
+  background-color: #fbcea1;
+  /*background: url("https://slack-imgs.com/?c=1&url=https%3A%2F%2F78.media.tumblr.com%2Fc5c216b73a8bfb67f14a2039a2028f0e%2Ftumblr_oe0u0sDBLb1vuuoz3o1_540.gif") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;*/
+  /*border-bottom: 1px solid #EEEEEE;*/
+  box-shadow: 5px 5px 5px #d6b695;
+  padding: 25px 20px 10px 20px;
+  left: 0;
+  top: 0;
+
+}
+
+.flash {
+  border: 1px solid;
+  border-radius: 3px;
+  margin: 5px;
+  min-height: 50px;
+  font-size: 1.1rem;
+  display: none;
+}
+.success {
+  background-color: #DFF0D8;
+  border-color: #D9ECCC;
+  color: #4C7D45;
+  display: block;
+}
+.error {
+  background-color: #F2DEDE;
+  border-color: #DDB5B5;
+  color: #AB4B4A;
+  display: block;
+}
+.flash p {
+  margin-left: 10px;
+  margin-bottom: 0px;
+  line-height: 50px;
+}
+.flash .error-messages {
+  margin-left: 50px;
+  padding-bottom: 10px;
+}
+
+
+
+.cart {
+  float: right;
+}
+
+.float-right {
+  float: right;
+}
+
+.drop-down {
+  position: relative;
+  disply: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.drop-down:hover .dropdown-content {
+  display: block;
+}
