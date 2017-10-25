@@ -9,7 +9,7 @@ class MainController < ApplicationController
     if session[:cart].nil?
       session[:cart] = []
     end
-    order_product = OrderProduct.create(quantity: params["quantity"], product_id: params["id"])
+    order_product = OrderProduct.create(quantity: params["quantity"], product_id: params["id"], status: "pending")
     session[:cart] << order_product.id
     redirect_to products_path
   end
