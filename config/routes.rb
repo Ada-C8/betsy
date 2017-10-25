@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     get '/orders/:id/confirm', to: 'orders#confirm', as: 'confirm_order'
   end
 
-  get "/auth/:provider/callback", to: "sessions#create"
+  get "/auth/:provider/callback", to: "sessions#create", as: 'auth_callback'
 
   post '/logout', to: 'sessions#logout', as: 'logout'
 
