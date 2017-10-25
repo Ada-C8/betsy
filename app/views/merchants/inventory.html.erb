@@ -1,4 +1,4 @@
-<h2>Inventory Management</h2>
+<h2 class = 'page-title'>Inventory Management</h2>
 
 <% if @products.empty? %>
 <div class="no-products">
@@ -11,9 +11,9 @@
       <%= form_for product do |f| %>
         <div class="row">
 
-          <span class="small-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{product.image_url}');\"") unless (product.image_url.nil? || product.image_url.empty?) %> > </span>
+          <span class=" small-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{product.image_url}');\"") unless (product.image_url.nil? || product.image_url.empty?) %> > </span>
           <span class="small-10 columns inventory-info">
-            <div class="small-3 columns">
+            <div class= "product-list small-3 columns">
               <h4><%= product.name %></h4>
             </div>
             <div class="small-3 columns">
