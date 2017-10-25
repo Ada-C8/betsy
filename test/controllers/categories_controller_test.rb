@@ -1,5 +1,44 @@
 require "test_helper"
 require 'pry'
+#add that users can't do things if not logged in.
+# describe BooksController do
+#
+#   describe "Logged in users" do
+#     before do
+#       login(users(:grace))
+#     end
+#
+#
+#     describe "show" do
+#       # Just the standard show tests
+#       it "succeeds for a book that exists" do
+#         book_id = Book.first.id
+#         get book_path(book_id)
+#         must_respond_with :success
+#       end
+#
+#       it "returns 404 not_found for a book that D.N.E." do
+#         book_id = Book.last.id + 1
+#         get book_path(book_id)
+#         must_respond_with :not_found
+#       end
+#     end
+#   end
+#
+#     describe "Guest users" do
+#       it "can access the index" do #Will Fail, our app does not currently allow guest to see index
+#         get books_path
+#         must_respond_with :success
+#       end
+#
+#       it "cannot access new" do
+#         get new_book_path
+#         must_redirect_to root_path
+#         flash[:message].must_equal "You must be logged in to do that!"
+#       end
+#
+#     end
+
 
 describe CategoriesController do
 
@@ -100,39 +139,42 @@ describe CategoriesController do
     end #not found when not found
   end #all edit tests
 
-describe "update" do
-  it "returns success if category id is valid and change is valid" do
-    category = Category.first
-
-    category_data = {
-      category: {
-        category_name: "Test"
+  describe "update" do
+    it "returns success if category id is valid and change is valid" do
+      category = Category.first
+      category_data = {
+        category: {
+          category_name: "Test"
+        }
       }
-    }
+      category.update_attributes(category_data[:category])
+      category.must_be :valid?
+      patch category_path(category), params: category_data
+    end #return success on valid change
 
-    category.update_attributes(category_data[:category])
-    category.must_be :valid?
-    patch category_path(category), params: category_data
-  end #return success on valid change
+    it "returns not found if the work id is invalid" do
+      category_id = Category.last.id + 1
+      get category_path(category_id)
+      must_respond_with :not_found
+    end #returns not found if work is invalid
+  end #update tests
 
-  it "returns not found if the work id is invalid" do
-    category_id = Category.last.id + 1
-    get category_path(category_id)
-    must_respond_with :not_found
-  end #returns not found if work is invalid
-end #update tests
+  describe "destroy" do
+    it "returns success and destroys the category when given a valid ID" do
+      category_id = Category.first.id
+      delete category_path(category_id)
 
-describe "destroy" do
-  it "will destory a category if it exists" do
-    category_id = Category.first.id
-    get category_path(category_id)
-    must_respond_with :success
-  end
+      must_respond_with :redirect
+      must_redirect_to categories_path
+      Category.find_by(id: category_id).must_be_nil
+    end #successful destroy
 
-  it "does not exist" do
-    product_id = Product.first.id
-    delete product_path(product_id)
-    must_respond_with :redirect
-  end
-end
+    it "returns not_found when given an invalid book ID" do
+      invalid_category_id = Category.last.id + 1
+      start_category_count = Category.count
+      delete category_path(invalid_category_id)
+      must_respond_with :not_found
+      Category.count.must_equal start_category_count
+    end #invalid id destroy
+  end #destroy tests
 end #all tests

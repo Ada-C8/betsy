@@ -35,17 +35,29 @@ class CategoriesController < ApplicationController
     @category = Category.find_by(id: params[:id])
     @category.update_attributes(category_params)
     if @category.save
-      redirect_to product_path(@category)
+      redirect_to category_path(@category)
     else
       render :edit, status: :bad_request
     end
   end
 
+  #Need to set this so that it can only be destroyed if there are no products assigned to it. category.products must be empty
+
   def destroy
     @category = Category.find(params[:id])
-    @category.destroy
-    redirect_to categories_path
+    if @category.products.count != nil
+      flash.now[:status] = :failure
+      flash.now[:message] = "Can't delete a category that contains products."
+      flash.now[:details] = @category.errors.messages
+      render :index, status: :bad_request
+    else
+      @category.destroy
+      flash.now[:status] = :success
+      flash.now[:message] = "Category Deleted"
+      redirect_to categories_path
+    end
   end
+
 
   def show
     @category = Category.find_by(id: params[:id])
