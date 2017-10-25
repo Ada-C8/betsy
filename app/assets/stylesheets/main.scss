@@ -23,3 +23,29 @@ h1.hero-title {
 h2.hero-subtitle {
   font-style: italic;
 }
+
+//////////
+// CART //
+//////////
+
+
+.shopping-cart-info > div {
+  margin: 2rem 0;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+.cart-text {
+  line-height: 2;
+}
+
+label.shopping-cart-form {
+  display: inline;
+  text-align: right;
+  width: 40%;
+}
+
+input.shopping-cart-form {
+  display: inline-block;
+  width: 50%;
+}
