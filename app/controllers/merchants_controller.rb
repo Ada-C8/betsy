@@ -137,7 +137,9 @@ class MerchantsController < ApplicationController
   end
 
   def inventory
-    @products = Merchant.find(session[:merchant]['id']).products
+    merchant = Merchant.find(session[:merchant]['id'])
+    @products = merchant.active_products
+    @inactive_products = merchant.inactive_products
   end
 
   private
