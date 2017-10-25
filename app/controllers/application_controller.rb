@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     if session[:merchant].nil?
       flash[:status] = :failure
       flash[:message] = "You must be logged in to do that."
-      return redirect_back(fallback_location: products_path)
+      return redirect_back(fallback_location: root_path)
     end
   end
 

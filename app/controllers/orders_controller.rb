@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
 
+  before_action :confirm_login, except: [:new, :create, :confirmation]
+
   def index
     # show only the orders that belong to the merchant
     if session[:merchant]
@@ -20,7 +22,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.order_products += OrderProduct.find_in_cart(session[:cart])
 
-    if @order.save
+    if @order.save && @order.order_products.length > 0
       @order.decrement_products
       session[:cart] = nil
       flash[:status] = :success
