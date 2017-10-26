@@ -6,7 +6,7 @@
   </div>
 <% else %>
   <% @order_products.each do |op| %>
-    <div class="order-product row">
+    <div class="order-tracker row small-11 columns">
 
       <span class="large-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{op.product.image_url}');\"") unless (op.product.image_url.nil? || op.product.image_url.empty?) %> > </span>
       <span class="large-10 columns info">

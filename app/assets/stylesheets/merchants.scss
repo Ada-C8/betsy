@@ -21,11 +21,11 @@ $burgundy: #4F3640;
 }
 
 .profile-card {
-  background-color: $teal;
-  // border: 2px solid $navy;
+  // background-color: $teal;
+  border: 2px solid $teal;
   border-radius: 2rem;
   // box-shadow: 3px 2px 0 $navy;
-  color: #fefefe;
+  color: $navy;
   text-align: center;
   padding: 2rem;
   margin: 1rem auto;
@@ -108,11 +108,23 @@ input.inventory-form {
   margin: 3rem 0;
 }
 
+.product-list h4 small {
+  color: $teal;
+}
+
 /////////////////
 // ORDER PAGES //
 /////////////////
 
-.order-product span {
+.order-tracker {
+  border: 1px solid $grey;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: -1px;
+  padding: 1rem 0;
+}
+
+.order-tracker span {
   margin: 0;
 }
 
@@ -122,5 +134,6 @@ input.inventory-form {
 }
 
 .button.ship-btn {
+  background-color: $teal;
   margin: 0;
 }
