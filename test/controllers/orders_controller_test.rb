@@ -168,39 +168,4 @@ describe OrdersController do
       must_respond_with :bad_request
     end
   end
-
-  describe "confirmation" do
-    it "shows the order summary of an order" do
-      # login_test_user
-      # cart_params = {
-      #   "quantity" => 4,
-      #   "id" => products(:wand).id
-      # }
-      # post add_to_cart_path(products(:wand).id), params: cart_params
-      #
-      # order = {
-      #   order: {
-      #     cust_name: "Mermaid",
-      #     merchant_id: 21,
-      #     cust_cc: 12345,
-      #     cust_cc_exp: "11/22",
-      #     cust_addr: "Sea World",
-      #     cust_email: "forkhair@mermaid.com",
-      #     cvv: 123,
-      #     zip_code: 32444,
-      #     status: "complete",
-      #     created_at: Time.now,
-      #     updated_at: Time.now
-      #   }
-      # }
-      # good_order = Order.new(order[:order])
-      # good_order.must_be :valid?
-      # start_count = Order.count
-      #
-      # post orders_path, params: order
-      #
-      # must_respond_with :redirect
-      # must_redirect_to confirmation_path(Order.last.id)
-    end
-  end
 end

@@ -6,12 +6,11 @@ class OrderProductsController < ApplicationController
   def update
     if find_order_product_by_params_id
       @order_product.update_attributes(order_product_params)
-      if @order_product.save
+      if @order_product.save && @order_product.check_quantity
         redirect_to shopping_cart_path
-        # redirect_to order_product_path(@order_product)
         return
       else
-        render :edit, status: :bad_request
+        render 'main/shopping_cart', status: :bad_request
         return
       end
     end
@@ -23,7 +22,6 @@ class OrderProductsController < ApplicationController
       flash[:status] = :success
       flash[:message] = "Deleted item #{@order_product.product.name} from cart"
       redirect_to shopping_cart_path
-      # redirect_to  merchant_sold_index_path(@order_product.product.merchant)
     end
   end
 
