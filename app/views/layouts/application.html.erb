@@ -9,30 +9,30 @@
   </head>
 
   <body>
+<!-- ============================ -->
 <!-- ===========HEADER=========== -->
-    <header class="top-bar">
-      <div class="top-bar-left">
-        <div class="menu column large-3">
+    <header class="top-bar" id="static">
+      <nav class="top-bar-left">
+        <!-- <div class="menu column large-3">
           <h1 class="menu-text"><%= link_to "Satiety", root_path %></h1>
-        </div>
+        </div> -->
   <!-- ========browse by========= -->
-        <nav>
-          <ul class="menu">
-            <li><%=link_to "Browse by Category", categories_path%></li>
-            <li><%=link_to "Browse by Merchant", merchants_path %></li>
-            <li><%=link_to "See all Products", products_path%></li>
-          </ul>
+        <ul class="menu">
+          <li><strong><%=link_to "Satiety", root_path %></strong></li>
+          <li><%=link_to "Browse by Category", categories_path%></li>
+          <li><%=link_to "Browse by Merchant", merchants_path %></li>
+          <li><%=link_to "See all Products", products_path%></li>
+        </ul>
   <!-- ========categories======== -->
-          <ul class="menu">
+          <!-- <ul class="menu">
             <% @categories = Category.all%>
             <% @categories.each do |cat| %>
             <li><%= link_to cat.category_name, category_path(cat.id) %></li>
             <% end %>
-          </ul>
-        </nav>
-      </div>
+          </ul> -->
+      </nav>
   <!-- =======merchant tools====== -->
-      <div class="top-bar-right">
+      <nav class="top-bar-right">
         <ul class="menu">
           <li>
           <%# if user is logged in, "my orders" and "sell"  buttons appear %>
@@ -56,10 +56,10 @@
             <% end %>
           </li>
         </ul>
-      </div>
+      </nav>
     </header>
-<!-- ===========HEADER=========== -->
-<!-- ============MAIN============ -->
+<!-- =============MAIN============ -->
+  <!-- =======flash messages====== -->
     <main>
       <section class="flash <%= flash[:status] %>">
         <p><%= flash[:message] %></p>
@@ -77,8 +77,9 @@
 
     <%= yield %>
 
-    <%# how to center? %>
-    <footer class="row center">
+<!-- ============================= -->
+<!-- ============FOOTER=========== -->
+    <footer class="row text-center">
       Copyright &copy 2017 <%= link_to "Amy Cash", "https://github.com/cashmonger"%>, <%= link_to "Sara Frandsen", "https://github.com/sarafrandsen"%>, <%= link_to "Tanisha Hampden", "#"%>, <%= link_to "Angela Wilson", "#"%>
     </footer>
   </body>
