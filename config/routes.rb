@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :order_products, only:[:index], as: 'sold'
   end
 
-  resources :orders, except: [:edit]
+  resources :orders
   resources :order_products, only: [:update, :destroy]
   get '/products/:id/categories', to: 'categories#add', as: 'add_categories'
   post '/products/:id/categories', to: 'products#add_categories'

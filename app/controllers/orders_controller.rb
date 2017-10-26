@@ -39,6 +39,12 @@ class OrdersController < ApplicationController
     find_order_by_params_id
   end
 
+  def edit
+    # edit the order if it belongs to the merchant (buyer)
+    find_order_by_params_id
+    confirm_object_ownership(@order, @order.merchant_id)
+  end
+
   def update
     # edit the desired order if it belongs to the merchant (buyer)
     if find_order_by_params_id
@@ -56,11 +62,6 @@ class OrdersController < ApplicationController
         return
       end
     end
-  end
-
-  def confirmation
-    # route successful orders to a confirmation order summary page
-    find_order_by_params_id
   end
 
   private
