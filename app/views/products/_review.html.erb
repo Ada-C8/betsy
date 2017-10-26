@@ -6,7 +6,20 @@
       <%else%>
         <h6>Guest: </h6>
       <%end%>
-      <h6> Rating: <%=review.rating %> </h6>
+      <h6> Rating:
+        <%  rating = review.rating %>
+        <% if rating <= 1 %>
+          ⭑⭒⭒⭒⭒
+        <% elsif rating <= 2 %>
+          ⭑⭑⭒⭒⭒
+        <% elsif rating <= 3 %>
+          ⭑⭑⭑⭒⭒
+        <% elsif rating <= 4 %>
+          ⭑⭑⭑⭑⭒
+        <% else %>
+          ⭑⭑⭑⭑⭑
+        <% end %>
+      </h6>
       <h6> <%= review.updated_at.strftime("%b %d, %Y") %> </h6>
     </div>
     <h6> <%= review.description %> </h6>
@@ -16,4 +29,5 @@
     <div class="button change"> <%= link_to "Edit", edit_review_path(review.id) %></div>
     <div class="button change"> <%= link_to "Delete", review_path(review.id), method: :delete, data: { confirm: "Are you sure?" }%></div>
   <% end %>
+
 </section>
