@@ -1,5 +1,24 @@
 require "test_helper"
 
+
+
+
+
+
+
+    #
+    # describe "Guest users" do
+    #   it "can access the index" do #Will Fail, our app does not currently allow guest to see index
+    #     get books_path
+    #     must_respond_with :success
+    #   end
+    #
+    #   it "cannot access new" do
+    #     get new_book_path
+    #     must_redirect_to root_path
+    #     flash[:message].must_equal "You must be logged in to do that!"
+    #   end
+    # end
 describe ProductsController do
 
   describe "index" do
@@ -15,14 +34,32 @@ describe ProductsController do
     end #no products
   end #index tests
 
+  describe "show" do
+    it "return success when given a valid product id" do
+      product_id = Product.first.id
+      get product_path(product_id)
+      must_respond_with :success
+    end
+
+    it "returns not found when given an invalid product id" do
+      product_id = Product.last.id + 1
+      get product_path(product_id)
+      must_respond_with :not_found
+    end
+  end
+
+#Tests for things only logged in users can do
+  describe "Logged in users" do
+    before do
+      login(merchants(:fake_user))
+    end #login
+
   describe "new" do
     it "returns a success status" do
       get new_product_path
       must_respond_with :success
     end #succes
   end #new tests
-
-  ## NEED TO ADD FIXTURES !!
 
   describe "create" do
     it "redirects to products_path when product data is valid" do
@@ -66,21 +103,6 @@ describe ProductsController do
     end #create when data is not valid
   end #create tests
 
-
-  describe "show" do
-    it "return success when given a valid product id" do
-      product_id = Product.first.id
-      get product_path(product_id)
-      must_respond_with :success
-    end
-
-    it "returns not found when given an invalid product id" do
-      product_id = Product.last.id + 1
-      get product_path(product_id)
-      must_respond_with :not_found
-    end
-  end
-
   describe "edit" do
     it "returns success when given a valid product id" do
       product_id = Product.first.id
@@ -95,6 +117,26 @@ describe ProductsController do
     end #edit failure
   end #all edit
 
+  describe "update" do
+    it "returns success if product id valid and change is valid" do
+      product = Product.first
+      product_data = {
+        product: {
+          name: "new name"
+        }
+      }
+      product.update_attributes(product_data[product])
+      product.must_be :valid?
+      patch product_path(product), params: product_data
+    end #update
+
+    it "returns not found if the work id is invalid" do
+      product_id = Product.last.id + 1
+      get product_path(product_id)
+      must_respond_with :not_found
+    end #invalid
+  end #all update tests
+
   describe "destroy" do
     it "succeeds for an extant work ID" do
       product_id = Product.first.id
@@ -106,7 +148,7 @@ describe ProductsController do
       Product.find_by(id: product_id).must_be_nil
     end #success
 
-    it "renders 404 not_found and does not update the DB for a bogus work ID" do
+    it "does not destroy a product that does not exist and renders not found." do
       start_count = Product.count
 
       bogus_work_id = Product.last.id + 1
@@ -116,73 +158,6 @@ describe ProductsController do
       Product.count.must_equal start_count
     end #failure
   end #destory tests
-
-  # describe "destroy" do
-  #   it "returns success and destroys the book when given a valid book ID" do
-  #     # Arrange
-  #     product_id = Product.last.id
-  #     @product = Product.find_by(id: product_id)
-  #     # Act
-  #     delete product_path(product_id)
-  #
-  #     # Assert
-  #     must_respond_with :redirect
-  #     must_redirect_to root_path
-  #     @product.must_be_nil
-  #   end #success
-  #
-  #   it "returns not_found when given an invalid book ID" do
-  #     invalid_product_id = Product.last.id + 1
-  #
-  #     start_product_count = Product.count
-  #
-  #     delete product_path(invalid_product_id)
-  #
-  #     must_respond_with :not_found
-  #     Product.count.must_equal start_product_count
-  #   end #not foudn
-  # end #destroy
-  #
-  # describe "destroy" do
-  #   it "it destroys an existing product and redirects" do
-  #     valid_product_id = Product.last.id
-  #     delete product_path(valid_product_id)
-  #     #get product_path(product_id)
-  #     must_respond_with :redirect
-  #     must_redirect_to root_path
-  #     Product.find_by(id: valid_product_id).must_be_nil
-  #   end #exists
-  #
-  #   it "returns not found when given an invalid ID" do
-  #     invalid_product_id = Product.last.id + 1
-  #     start_product_count = Product.count
-  #     delete product_path(invalid_product_id)
-  #     must_respond_with :not_found
-  #     Product.count.must_equal start_product_count
-  #   end #doesn't exist
-  # end #all destroy
-
-
+end #logged in
 
 end #all tests
-# describe "update" do
-#   it "returns success if product id valid and change is valid" do
-#     product = Work.first
-#     product_data = {
-#       product: {
-#         name: "different test",
-#         price: 13
-#       }
-#     }
-#     product.update_attributes(product_data[product])
-#     product.must_be :valid?
-#
-#     patch product_path(product), params: product_data
-#   end
-#   it "returns not found if the work id is invalid" do
-#     product_id = Product.first.id + 1
-#     get product_path(product_id)
-#     must_respond_with :not_found
-#   end
-#
-# end

@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
       return
     else
       @review = @product.reviews.build
-    end 
+    end
 
     # unless @product
     #   head :not_found

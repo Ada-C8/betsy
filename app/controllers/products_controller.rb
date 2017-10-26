@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  skip_before_action :require_login, only: [:main, :index, :show, :new, :edit, :update, :create, :destroy]
-  before_action :set_product, only: [:destroy]
+  skip_before_action :require_login, only: [:main, :index, :show]
+  before_action :set_product, only: [:edit, :show, :destroy]
 
   def index
     @products = Product.all
@@ -26,17 +26,9 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find_by(id: params[:id])
-    unless @product
-      head :not_found
-    end
   end
 
   def edit
-    @product = Product.find_by(id: params[:id])
-    unless @product
-      head :not_found
-    end
   end
 
   def update
@@ -57,18 +49,6 @@ class ProductsController < ApplicationController
     flash.now[:message] = "Successfully deleted product"
     redirect_to root_path
   end
-
-  # def destroy
-  #   @product = Product.find(params[:id])
-  #
-  #   if !@product
-  #     head :not_found
-  #     return
-  #   else
-  #     @product.destroy
-  #     redirect_to products_path
-  #   end
-  # end
 
   private
   def product_params
