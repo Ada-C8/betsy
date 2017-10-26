@@ -99,14 +99,14 @@ describe ProductsController do
     it "returns success and destroys the book when given a valid book ID" do
       # Arrange
       product_id = Product.last.id
-
+      @product = Product.find_by(id: product_id)
       # Act
       delete product_path(product_id)
 
       # Assert
       must_respond_with :redirect
       must_redirect_to root_path
-      Product.find_by(id: product_id).must_be_nil
+      @product.must_be_nil
     end #success
 
     it "returns not_found when given an invalid book ID" do
