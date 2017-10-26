@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+tree1:
+  name: Tree1
+  price: 10
+  merchant: sappy1
+  categories: [indoor]
+  quantity: 12
+  status: "active"
+
+
+tree2:
+  name: Tree2
+  price: 20
+  merchant: sappy2
+  categories: [outdoor]
+  quantity: 10
+  status: "active"
+  description: This is a tree
+
+tree3:
+  name: Tree3
+  price: 30
+  merchant: sappy1
+  categories: [christmas]
+  quantity: 12
+  status: "retired"
