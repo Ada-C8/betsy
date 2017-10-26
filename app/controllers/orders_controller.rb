@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
     order = Order.find_or_create_cart(session[:order_id]) # find or create a cart (in order.rb)
     session[:order_id] = order.id # the session's order_id will be reset to the current order.id (was either nil or existed already--"unless")
     product = Product.find_by(id: params[:id]) # find the product from the URL param
+
     result = order.products << product # (the has_many declaration creates some cool ruby magic methods like this)
 
     if result
@@ -44,18 +45,21 @@ class OrdersController < ApplicationController
   def billing_form
     # needed to show billing form view
     @billing = Billing.new
+    @order = Order.find_by(id:session[:order_id], status: "pending")
   end
 
   def submit
+    # billing = Billing.find_by(id:session[:order_id])
     @order = Order.find_by(id:session[:order_id], status: "pending")
     @order.subtract_product
-    @order.status = "paid"
 
-    session[:order_id] = nil
+    @billing = Billing.new(billing_params)
 
-    if @order.status = "paid" && session[:order_id] = nil
+    if @billing.save
+      @order.status = "paid"
       flash[:status]  = :success
       flash[:message] = "Successfully submitted your order"
+      session[:order_id] = nil
     else
       flash.now[:status] = :failure
       flash.now[:message] = "Failed submit your order"
@@ -67,4 +71,8 @@ class OrdersController < ApplicationController
     #updates order to cancelled, removes all associated products from OP table
   end
   # moved private methods to model
+  private
+  def billing_params
+    return params.require(:billing).permit(:street, :apt, :city, :state ,:ship_zip, :email, :credit_card, :exp, :cvv, :bill_zip, :name)
+  end
 end
