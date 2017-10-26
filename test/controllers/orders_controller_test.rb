@@ -208,7 +208,8 @@ describe OrdersController do
     end
 
     it "Allow the merchant to change an order's status from complete to shipped" do
-      #can't initialize a session with an order that has the shipped status
+      proc { patch ship_order_path(orders(:order_one)) }
+      must_respond_with :success
     end
     it "Doesn't allow the merchant to change an order's status to shipped FROM pending" do
       patch ship_order_path(@order.id)
