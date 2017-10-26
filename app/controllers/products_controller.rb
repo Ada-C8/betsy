@@ -2,6 +2,10 @@ class ProductsController < ApplicationController
   skip_before_action :require_login, only: [:main, :index, :show]
   before_action :set_product, only: [:edit, :show, :destroy]
 
+  def main
+    render template: "products/main"
+  end
+
   def index
     @products = Product.all
   end
