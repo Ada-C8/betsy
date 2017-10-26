@@ -40,16 +40,22 @@
   </div>
 
   <div class="row reviews">
+
     <% unless @product.reviews.empty?%>
       <h4 class="columns small-6">Average Review:
         <% rating = @product.reviews.average(:rating) %>
         <span class="stars"><%= Review.get_rating_stars(rating) %></span>
       </h4>
     <% end %>
-    <%= link_to "Add review", new_product_review_path(@product.id), class: "columns small-6" %>
+    <%= link_to new_product_review_path(@product.id) do %>
+    <i class="fa fa-comments-o"></i>
+    Add Review
+    <%#= link_to "Add review", new_product_review_path(@product.id) %>
+    <% end %>
   </div>
 
   <div class="row reviews">
+
     <% @product.reviews.each do |review| %>
       <%= render partial: 'review', locals: {review: review} %>
     <% end %>

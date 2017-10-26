@@ -18,22 +18,75 @@
 
 /* ------ import URLS ------*/
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('https://fonts.googleapis.com/css?family=Astloch:700|Josefin+Sans:400,600');
+
 
 * {
   /*border: 1px solid lawngreen;*/
 }
 
-.row {
-  max-width: 100%;
+
+/* ------ UNIVERSAL STYLES ------ */
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+html, body { height: 100%; }
+body {
+  width: 100%;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Astloch', cursive;
+  font-weight: 700;
 }
 
-header nav {
-  text-align: right;
+/*--------------- header ---------------*/
+header.header {
+  background: #3C7A89;
+  padding: 1% 0;
+}
+h1.main-heading { margin: 0 0 0 1%; }
+h1.main-heading a { color: #fefefe; }
+main.main {
+  padding: 0;
+  flex: 1 0 auto;
+}
+footer.footer {
+  color: #fcfcfc;
+  background: #16262E;
+  text-align: center;
+  padding: 3% 6% 2%;
 }
 
-.right {
-  float: right;
+/*--------------- navigation ---------------*/
+header.header section {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
 }
+nav.top-nav ul {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+}
+nav.top-nav ul li {
+  width: 15%;
+  text-align: center;
+}
+nav.top-nav ul li a { color: #fefefe; }
 
+
+.row { max-width: 100%; }
+header nav { text-align: right; }
+.right { float: right; }
+
+/*--------------- mini thumbnails ---------------*/
 div.mini-img { width: 150px; height: 150px; text-align: center; }
 div.mini-img img { max-width: 100%; max-height: 100%; }
