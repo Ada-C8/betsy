@@ -8,3 +8,7 @@ cat_one:
 cat_two:
   id: 2
   category_name: Breakfast
+
+cat_three:
+  id: 20
+  category_name: Empty
