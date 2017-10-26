@@ -9,12 +9,23 @@ class OrdersController < ApplicationController
     order = Order.find_or_create_cart(session[:order_id]) # find or create a cart (in order.rb)
     session[:order_id] = order.id # the session's order_id will be reset to the current order.id (was either nil or existed already--"unless")
     product = Product.find_by(id: params[:id]) # find the product from the URL param
-    order.products << product # (the has_many declaration creates some cool ruby magic methods like this)
+    result = order.products << product # (the has_many declaration creates some cool ruby magic methods like this)
 
+    if result
+      flash[:status]  = :success
+      flash[:message] = "Successfully added item to cart"
+    else
+      flash.now[:status] = :failure
+      flash.now[:message] = "Failed to add item to cart"
+      flash.now[:details] = order.products.errors.messages
+    end
     redirect_to product_path(product)
   end
 
   def show
+    # will show order with all products listed and their quantity,
+    # as well as the status,
+    # so this info is also pulled in from the orders_products
     @cart = Order.find_or_create_cart(session[:order_id]) # cart instance
   end
 
@@ -24,14 +35,20 @@ class OrdersController < ApplicationController
   end
 
   def submit
-    @cart = Order.find_or_create_cart(session[:order_id]) # cart instance
-    @cart.subtract_product
-    @cart.status = "paid"
-    # this is currently broken
-    # TODO: figure out the current id to pass into show_order_path
-    render show_order_path(@cart.id)
+    @order = Order.find_by(id:session[:order_id], status: "pending")
+    @order.subtract_product
+    @order.status = "paid"
+
     session[:order_id] = nil
-    redirect_to show_order_path
+
+    if @order.status = "paid" && session[:order_id] = nil
+      flash[:status]  = :success
+      flash[:message] = "Successfully submitted your order"
+    else
+      flash.now[:status] = :failure
+      flash.now[:message] = "Failed submit your order"
+    end
+    render :show_order
   end
 
   def destroy

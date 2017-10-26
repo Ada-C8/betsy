@@ -17,6 +17,9 @@ class Product < ApplicationRecord
   validates :merchant_id, presence: true
   validates :category_id, presence: true
 
+  def average_rating
+    reviews.average(:rating)
+  end
   # validates_associated :merchant, :category
 
 end

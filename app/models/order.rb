@@ -11,6 +11,22 @@ class Order < ApplicationRecord
     return order
   end
 
+  # def submit
+  #   something.transaction
+  #   1. subtract_product
+  #   2. status change from pending to paid
+  #   3. clear cart
+  #
+  # end
+
+  def pending_to_paid
+    self.status = "paid"
+  end
+
+  def clear_cart
+
+  end
+
   def subtract_product
     Order.transaction do
       self.order_products.each do |op|

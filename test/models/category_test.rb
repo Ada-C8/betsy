@@ -20,7 +20,7 @@ describe Category do
 
   it "requires a unique name" do
     name = "test name"
-    b1 = Category.create!(category_name: name))
+    b1 = Category.create!(category_name: name)
     b2 = Category.new(category_name: name)
 
     b2.wont_be :valid?

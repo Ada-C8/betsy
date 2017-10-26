@@ -7,6 +7,7 @@
 <p>description: <%= @product.description %></p>
 <p>price: <%= @product.price %></p>
 <p>stock: <%= @product.stock %></p>
+
 <p>photo: <%= @product.photo_URL %></p>
 
 <%# TODO :: point to proper product id, right now pointing to product/1 %>
@@ -14,6 +15,7 @@
 <%= link_to "Review Product", new_product_review_path(@product.id), :class=>"button" %>
 
 <h3>Reviews:</h3>
+<h3>Average Rating: <%= @product.average_rating %></h3>
 
 <% reviews = @product.reviews.to_a %>
 
@@ -25,9 +27,7 @@
     <th>
       Reviews
     </th>
-
     <% reviews.each do |review| %>
-
   </tr>
   <tr>
     <td>
