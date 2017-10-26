@@ -36,7 +36,7 @@ describe OrderProductsController do
         }
       }
       patch order_product_path(order_product), params: changes
-      order_product.wont_be :valid?
+      order_product.quantity.wont_equal 900000
     end
 
     it "returns not_found if order product does not exist" do
