@@ -10,19 +10,13 @@ background-size: 100%;
 // MAIN.HTML.ERB //
 #cool-splash-transparency {
   background-color:rgba(0,0,0,0.8);
-  min-height:100%;
   width:100%;
   color: white;
 }
 
-.vertical-align {
-    display: flex;
-    vertical-align: center;
-}
-
 .logo-nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 

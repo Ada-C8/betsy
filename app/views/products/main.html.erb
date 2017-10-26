@@ -1,24 +1,33 @@
-      <div id="cool-splash-transparency">
-        <div class="vertical-align logo-nav">
-          <div>
-            <h3 class="inline-bl">Satiety <span>Home-Cooked Meals on Demand</span></h3>
-          </div>
-          <ul class="menu">
-            <li>
-              <% if session[:order_id] == nil %>
-                <%= link_to "Cart", orders_path, class: "hollow link-hover button" %>
-              <% else %>
-                <%= link_to "&nbsp;&nbsp;&nbsp;Cart&nbsp;&nbsp;&nbsp;".html_safe, order_path(session[:order_id]), class: "hollow link-hover button" %>
-              <% end %>
-            </li>
-            <li>
-              <% if session[:merchant_id] %>
-                <%= link_to "Log Out", logout_path, method: :post, class: "hollow link-hover button" %>
-              <% else %>
-                <%= link_to "&nbsp;Log &nbsp;In&nbsp".html_safe, '/auth/github', class: "hollow link-hover button" %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-        <%= render partial: "layouts/message" %>
-      </div>
+<div id="cool-splash-transparency">
+  <div class="logo-nav">
+    <div>
+      <h3 class="inline-bl">Satiety <span>Home-Cooked Meals on Demand</span></h3>
+    </div>
+    <nav>
+  <!-- ========browse by========= -->
+      <ul class="menu">
+        <li><%=link_to "Browse by Category", categories_path%></li>
+        <li><%=link_to "Browse by Merchant", merchants_path %></li>
+        <li><%=link_to "See all Products", products_path%></li>
+      </ul>
+    </nav>
+    <ul class="menu">
+      <li>
+        <% if session[:order_id] == nil %>
+          <%= link_to "Cart", orders_path, class: "hollow link-hover button" %>
+        <% else %>
+          <%= link_to "&nbsp;&nbsp;&nbsp;Cart&nbsp;&nbsp;&nbsp;".html_safe, order_path(session[:order_id]), class: "hollow link-hover button" %>
+        <% end %>
+      </li>
+      &nbsp;
+      <li>
+        <% if session[:merchant_id] %>
+          <%= link_to "Log Out", logout_path, method: :post, class: "hollow link-hover button" %>
+        <% else %>
+          <%= link_to "&nbsp;Log &nbsp;In&nbsp".html_safe, '/auth/github', class: "hollow link-hover button" %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>
+<%= render partial: "layouts/message" %>
