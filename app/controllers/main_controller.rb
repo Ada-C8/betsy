@@ -1,16 +1,17 @@
 class MainController < ApplicationController
 
   def index
-    @products = Product.all
-    @merchants = Merchant.all
   end
 
   def add_to_cart
     if session[:cart].nil?
       session[:cart] = []
     end
-    order_product = OrderProduct.create(quantity: params["quantity"], product_id: params["id"], status: "pending")
+    find_object_by_params(Product)
+    order_product = OrderProduct.create(quantity: params["quantity"], product_id: @product.id, status: "pending")
     session[:cart] << order_product.id
+    flash[:status] = :success
+    flash[:message] = "#{@product.name} added to cart."
     redirect_to products_path
   end
 
