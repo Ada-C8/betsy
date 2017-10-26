@@ -1,6 +1,19 @@
 // Place all the styles related to the Main controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+// @keyframes fadeIn {
+//   0% {opacity: 0;}
+//   100% {opacity: 1;}
+// }
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
 
 .hero {
   background-image: url('http://3.bp.blogspot.com/-Z23LsR1pXhE/VN7uK5CR9yI/AAAAAAAAAOk/N_CksAB4Cbw/s1600/Dark%2BMagic%2BFloating%2BAway%2BFrom%2BCreepy%2BForest.jpg');
@@ -22,6 +35,12 @@
 h1 span.hero-lorestore {
   font-family: 'Astloch', cursive;
   font-size: 3em;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
 }
 h1.hero-title, h2.hero-subtitle { font-family: 'Josefin Sans', sans-serif; }
 h1.hero-title {
