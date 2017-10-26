@@ -43,17 +43,19 @@
     <%= link_to "Add review", new_product_review_path(@product.id) %>
     <h4>Average Review:
        <% rating = @product.reviews.average(:rating) %>
-       <% if rating <= 1 %>
-         ⭑⭒⭒⭒⭒
-       <% elsif rating <= 2 %>
-         ⭑⭑⭒⭒⭒
-       <% elsif rating <= 3 %>
-         ⭑⭑⭑⭒⭒
-       <% elsif rating <= 4 %>
-         ⭑⭑⭑⭑⭒
-       <% else %>
-         ⭑⭑⭑⭑⭑
-       <% end %>
+       <% if rating %>
+         <% if rating <= 1 %>
+           ⭑⭒⭒⭒⭒
+         <% elsif rating <= 2 %>
+           ⭑⭑⭒⭒⭒
+         <% elsif rating <= 3 %>
+           ⭑⭑⭑⭒⭒
+         <% elsif rating <= 4 %>
+           ⭑⭑⭑⭑⭒
+         <% else %>
+           ⭑⭑⭑⭑⭑
+         <% end %>
+        <% end %>
     </h4>
     <% @product.reviews.each do |review| %>
       <%= render partial: 'review', locals: {review: review} %>

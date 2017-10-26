@@ -88,4 +88,26 @@ class ReviewsController < ApplicationController
       redirect_to product_path(@product)
     end
   end
+
+  # def check_for_product_owner
+  #   unless session[:merchant].nil?
+  #     if @review.merchant_id == session[:merchant]["id"]
+  #       flash[:status] = :failure
+  #       flash[:result_text] = "Owner can not edit the review of the product!"
+  #       redirect_to product_path(@review.product_id)
+  #     end
+  #   end
+  # end
+  #
+  # def check_for_product_owner_nested
+  #   @product = Product.find_by(id: params[:product_id])
+  #   unless @product
+  #     head :not_found
+  #   end
+  #   if !session[:merchant].nil? && @product.merchant_id == session[:merchant]["id"]
+  #     flash[:status] = :failure
+  #     flash[:result_text] = "Owner can not review the product!"
+  #     redirect_to product_path(@product)
+  #   end
+  # end
 end
