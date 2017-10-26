@@ -105,78 +105,123 @@ describe OrdersController do
     end
   end
 
-  # describe "update" do
-  #   it "succeeds for valid data and an existing order ID" do
-  #     order = orders(:pending_order)
-  #     order_data = {
-  #       order: {
-  #         email: "buyer@email.com",
-  #         address: "100 Witchy Way, Seattle, WA",
-  #         name: "Gale",
-  #         card_number: "1234 1234 1234 1234",
-  #         card_exp: "01/21",
-  #         card_cvv: "546",
-  #         zip_code: "98122"
-  #       }
-  #     }
-  #     patch order_path(order.id), params: order_data
-  #     must_redirect_to confirm_order_path(order.id)
-  #
-  #     # Verify the DB was really modified
-  #     Order.find(order.id).status.must_equal "complete"
-  #   end
-  #
-  #   it "resets the session[:order_id] to nil when order is complete" do
-  #     order = orders(:pending_order)
-  #     order_data = {
-  #       order: {
-  #         email: "buyer@email.com",
-  #         address: "100 Witchy Way, Seattle, WA",
-  #         name: "Gale",
-  #         card_number: "1234 1234 1234 1234",
-  #         card_exp: "01/21",
-  #         card_cvv: "546",
-  #         zip_code: "98122"
-  #       }
-  #     }
-  #
-  #     patch order_path(order.id), params: order_data
-  #
-  #     session[:order_id].must_equal nil
-  #   end
-  #
-  #   it "renders bad_request for insufficient buyer data" do
-  #     order = orders(:pending_order)
-  #     order_data = {
-  #       order: {
-  #         email: nil,
-  #         address: "100 Witchy Way, Seattle, WA",
-  #         name: "Gale",
-  #         card_number: "1234 1234 1234 1234",
-  #         card_exp: "01/21",
-  #         card_cvv: "546",
-  #         zip_code: "98122"
-  #       }
-  #     }
-  #
-  #     patch order_path(order), params: order_data
-  #     must_respond_with :bad_request
-  #
-  #     # Verify the DB was not modified
-  #     Order.find(order.id).status.must_equal "pending"
-  #   end
-  #
-  #   it "renders 404 not_found for a bogus order ID" do
-  #     bogus_order_id = Order.last.id + 1
-  #     get order_path(bogus_order_id)
-  #     must_respond_with :not_found
-  #   end
-  #
-  #   it "does not allow changes to a complete order" do
-  #     order = orders(:complete_order)
-  #     patch order_path(order.id)
-  #     must_redirect_to root_path
-  #   end
-  # end
+  describe "update" do
+    setup { session_setup }
 
+    before do
+      @order = Order.find_by(id: session[:order_id])
+    end
+
+    it "succeeds for valid data and an existing order ID" do
+      order_data = {
+        order: {
+          email: "buyer@email.com",
+          address: "100 Witchy Way",
+          city: "Seattle",
+          state: "Washington",
+          name: "Gale",
+          card_number: 1234123412341234,
+          card_exp: "Sun, 1 Oct 2017",
+          card_cvv: 546,
+          zip_code: "98122"
+        }
+      }
+      patch order_path(@order.id), params: order_data
+      must_redirect_to order_confirm_order_path(@order.id)
+
+      # Verify the DB was really modified
+      Order.find(@order.id).status.must_equal "complete"
+    end
+
+    it "resets the session[:order_id] to nil when order is complete" do
+      order_data = {
+        order: {
+          email: "buyer@email.com",
+          address: "100 Witchy Way",
+          city: "Seattle",
+          state: "Washington",
+          name: "Gale",
+          card_number: 1234123412341234,
+          card_exp: "Sun, 1 Oct 2017",
+          card_cvv: 546,
+          zip_code: "98122"
+        }
+      }
+
+      patch order_path(@order.id), params: order_data
+
+      session[:order_id].must_equal nil
+    end
+
+    it "renders bad_request for insufficient buyer data and does not change status to complete" do
+      order_data = {
+        order: {
+          email: nil,
+          address: "100 Witchy Way",
+          city: "Seattle",
+          state: "Washington",
+          name: "Gale",
+          card_number: 1234123412341234,
+          card_exp: "Sun, 1 Oct 2017",
+          card_cvv: 546,
+          zip_code: "98122"
+        }
+      }
+
+      patch order_path(@order.id), params: order_data
+      must_respond_with :bad_request
+
+      # Verify the DB was not modified
+      Order.find(@order.id).status.must_equal "pending"
+    end
+
+    it "renders 404 not_found for a bogus order ID" do
+      order_data = {
+        order: {
+          email: "buyer@email.com",
+          address: "100 Witchy Way",
+          city: "Seattle",
+          state: "Washington",
+          name: "Gale",
+          card_number: 1234123412341234,
+          card_exp: "Sun, 1 Oct 2017",
+          card_cvv: 546,
+          zip_code: "98122"
+        }
+      }
+
+      @order.destroy
+      get order_path(@order.id), params: order_data
+      must_respond_with :not_found
+    end
+
+    it "does not allow changes to an order with the status of shipped" do
+      #
+      # order_data = {
+      #   order: {
+      #     email: "buyer@email.com",
+      #     address: "100 Witchy Way",
+      #     city: "Seattle",
+      #     state: "Washington",
+      #     name: "Gale",
+      #     card_number: 1234123412341234,
+      #     card_exp: "Sun, 1 Oct 2017",
+      #     card_cvv: 546,
+      #     zip_code: "98122",
+      #     status: "shipped"
+      #   }
+      # }
+      #
+      # #store the order id so that when session is set back to nil, I can retrieve it
+      # order = Order.find(@order.id)
+      # #this update should succeed
+      # patch order_path(@order.id), params: order_data
+      # #Verify that the order's current status is shipped
+      # order.status.must_equal "shipped"
+      # #this update should not succeed now that status is shipped
+      # patch order_path(order.id), params: order_data
+      #
+      # must_redirect_to home_path
+    end
+  end
 end
