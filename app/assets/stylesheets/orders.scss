@@ -1,3 +1,41 @@
 // Place all the styles related to the orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.tiny-img {
+  width: 48px;
+  height: 48px;
+}
+
+section.order-index { padding: 2% 5%; }
+h3.no-orders {
+  font-family: 'Josefin Sans', sans-serif;
+  margin: 1% 0;
+}
+h2.page-title { font-size: 2.5em; }
+section.order-index article {
+  width: 100%;
+  margin-top: 2%;
+  padding: 1% 2%;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  background: #fefefe;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+div.o-products {
+  display: flex;
+  flex-direction: column;
+}
+div.oitem-wrapper {
+  display: flex;
+  flex-wrap: none;
+  justify-content: flex-start;
+  align-items: center;
+}
+a.ls-btn {
+  padding: 5% 10%;
+  background: #4F3640;
+  color: #fefefe;
+}
