@@ -22,6 +22,18 @@ class OrdersController < ApplicationController
     redirect_to product_path(product)
   end
 
+  # def remove_from_cart
+  #   # order = Order.find_or_create_cart(session[:order_id]) # find or create a cart (in order.rb)
+  #
+  #   product = Product.find_by(id: params[:id])
+  #   arrary_orderproducts = product.order_products
+  #   arrary_orderproducts.each do |op|
+  #     if op.order.id == session[:order_id]
+  #       op.destroy
+  #     end
+  #   end
+  # end
+
   def show
     # will show order with all products listed and their quantity,
     # as well as the status,
