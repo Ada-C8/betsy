@@ -2,6 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// Palette:
+$pink: #DBC2CF;
+$grey: #A7AAB9;
+$gray: #A7AAB9;
+$teal: #3C7A89;
+$navy: #16262E;
+$burgundy: #4F3640;
+
+
 /////////////
 // PROFILE //
 /////////////
@@ -12,8 +21,11 @@
 }
 
 .profile-card {
-  border: 2px solid grey;
+  background-color: $teal;
+  // border: 2px solid $navy;
   border-radius: 2rem;
+  // box-shadow: 3px 2px 0 $navy;
+  color: #fefefe;
   text-align: center;
   padding: 2rem;
   margin: 1rem auto;
@@ -29,10 +41,17 @@
 }
 
 .profile-button {
+  background-color: $teal;
+  border: 2px solid #fefefe;
+  border-radius: 2rem;
   display: block;
   margin: auto;
   min-width: 12rem;
   width: 80%;
+}
+
+.profile-button:hover {
+  background-color: $pink;
 }
 
 .summary-empty {
@@ -40,7 +59,7 @@
 }
 
 .summary-urgent {
-  color: crimson;
+  color: lightcoral;
 }
 
 
