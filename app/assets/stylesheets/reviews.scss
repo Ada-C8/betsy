@@ -7,12 +7,12 @@
 .first_line_info h6 {
   display: inline-block;
 }
-.change {
-  background-color: white;
-  border: .5px solid black;
-  border-radius: 1rem;
-  color: inherit;
-}
+// .change {
+//   background-color: white;
+//   border: .5px solid black;
+//   border-radius: 1rem;
+//   color: inherit;
+// }
 .review_info {
   padding-left: 10%;
   background-color: white;
@@ -22,8 +22,15 @@
   margin-bottom: 20px;
 }
 
+.magenta_buttons{
+  color: #4F3640;
+}
 .stars {
   color: gold;
+}
+
+.review_date {
+padding-left: 15%;
 }
 //////////////****Review form****/////////////
 
