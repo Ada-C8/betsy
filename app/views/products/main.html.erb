@@ -3,11 +3,35 @@
     <div class="large-12 columns">
       <div id="cool-splash-transparency">
         <div class="display-table" id="cool-splash">
-          <div class="vertical-align">
+          <div class="vertical-align-table">
             <div>
               <h1>Satiety</h1>
             </div>
             Home-Cooked Meals on Demand<br><br>
+
+            <% if session[:order_id] == nil %>
+            <%= link_to "Cart", orders_path, class: "hollow link-hover button" %>
+            <% else %>
+            <%= link_to "&nbsp;&nbsp;&nbsp;Cart&nbsp;&nbsp;&nbsp;".html_safe, order_path(session[:order_id]), class: "hollow link-hover button" %>
+            <% end %>
+
+            <% if session[:merchant_id] %>
+            <%= link_to "Log Out", logout_path, method: :post, class: "hollow link-hover button" %>
+            <% else %>
+            <%= link_to "&nbsp;Log &nbsp;In&nbsp".html_safe, '/auth/github', class: "hollow link-hover button" %>
+            <% end %>
+            <section class="flash <%= flash[:status] %>">
+              <p><%= flash[:message] %></p>
+              <% if flash[:details] %>
+                <ul>
+                  <% flash[:details].each do |field, problems| %>
+                    <% problems.each do |problem| %>
+                      <li><strong><%= field %>:</strong> <%= problem %></li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              <% end %>
+            </section>
           </div>
         </div>
       </div>
