@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :merchants
   resources :categories
   resources :orders
-  resources :order_products
+  resources :orders_products
 
   get '/auth/:provider/callback', to: 'sessions#login', as: 'auth_callback'
   post '/logout', to: 'sessions#logout', as: 'logout'
