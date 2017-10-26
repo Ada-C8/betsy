@@ -7,6 +7,8 @@ class Review < ApplicationRecord
   def self.get_rating_stars(rating)
     stars = ""
 
+    return stars if !(rating.is_a? Numeric)
+
     if rating <= 1
       stars = "⭑⭒⭒⭒⭒"
     elsif rating <= 2

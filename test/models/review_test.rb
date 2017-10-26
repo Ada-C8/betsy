@@ -42,4 +42,38 @@ describe Review do
       review.valid?.must_equal false
     end
   end
+
+  describe "get_rating_stars" do
+    it 'returns 1 star if given a rating of 0-1' do
+      Review.get_rating_stars(0).must_equal "⭑⭒⭒⭒⭒"
+      Review.get_rating_stars(0.5).must_equal "⭑⭒⭒⭒⭒"
+      Review.get_rating_stars(1.0).must_equal "⭑⭒⭒⭒⭒"
+    end
+
+    it 'returns 2 star if given a rating of 1-2' do
+      Review.get_rating_stars(1.5).must_equal "⭑⭑⭒⭒⭒"
+      Review.get_rating_stars(2).must_equal "⭑⭑⭒⭒⭒"
+    end
+
+    it 'returns 3 star if given a rating of 2-3' do
+      Review.get_rating_stars(2.5).must_equal "⭑⭑⭑⭒⭒"
+      Review.get_rating_stars(3).must_equal "⭑⭑⭑⭒⭒"
+    end
+
+    it 'returns 4 star if given a rating of 3-4' do
+      Review.get_rating_stars(3.5).must_equal "⭑⭑⭑⭑⭒"
+      Review.get_rating_stars(4).must_equal "⭑⭑⭑⭑⭒"
+    end
+
+    it 'returns 5 star if given a rating of greater than 4' do
+      Review.get_rating_stars(4.5).must_equal "⭑⭑⭑⭑⭑"
+      Review.get_rating_stars(5).must_equal "⭑⭑⭑⭑⭑"
+      Review.get_rating_stars(6).must_equal "⭑⭑⭑⭑⭑"
+    end
+
+    it 'returns empty string if rating is nil or empty' do
+      Review.get_rating_stars("").must_equal ""
+      Review.get_rating_stars(nil).must_equal ""
+    end
+  end
 end
