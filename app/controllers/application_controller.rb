@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
     unless session[:merchant]['id'] == merchant_id
       flash[:status] = :failure
       flash[:message] = "Only a #{model}'s creator can modify a #{model}."
-      return redirect_back(fallback_location: pathfinder(model.class))
+      return redirect_back(fallback_location: root_path)
     end
   end
 
@@ -52,16 +52,6 @@ class ApplicationController < ActionController::Base
       flash[:status] = :failure
       flash[:result_text] = "Owner can not review the product!"
       redirect_to product_path(@product)
-    end
-  end
-
-  private
-  def pathfinder(model)
-    case model
-    when Product
-      return products_path
-    else
-      return root_path
     end
   end
 end

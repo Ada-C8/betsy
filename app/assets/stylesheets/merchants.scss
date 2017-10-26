@@ -35,6 +35,15 @@
   width: 80%;
 }
 
+.summary-empty {
+  color: grey;
+}
+
+.summary-urgent {
+  color: crimson;
+}
+
+
 // @media print, screen and (min-width: 40em) {
 //   .profile-card {
 //     min-height: 15.5rem;
@@ -65,4 +74,20 @@ input.inventory-form {
 
 .new-product-button {
   margin: 3rem 0;
+}
+
+
+// ORDER PAGES
+
+.order-product span {
+  margin: 0;
+}
+
+.ord-name {
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+.button.ship-btn {
+  margin: 0;
 }

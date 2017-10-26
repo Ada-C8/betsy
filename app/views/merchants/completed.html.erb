@@ -8,23 +8,30 @@
   <% @order_products.each do |op| %>
     <div class="order-product row">
 
-      <span class="medium-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{op.product.image_url}');\"") unless (op.product.image_url.nil? || op.product.image_url.empty?) %> > </span>
-      <span class="medium-10 columns info">
+      <span class="large-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{op.product.image_url}');\"") unless (op.product.image_url.nil? || op.product.image_url.empty?) %> > </span>
+      <span class="large-10 columns info">
 
         <div class="product-list row">
-          <h4 class="medium-3 columns"><%= op.product.name %></h4>
-          <h4 class="medium-3 columns"><small>Quantity: </small><%= op.quantity %></h4>
-          <h4 class="medium-3 columns"><small>Price: </small><%= money(op.product.price) %></h4>
-          <h4 class="medium-3 columns"><small>Total: </small><%= money(op.total) %></h4>
+          <h4 class="large-3 medium-6 columns ord-name"><%= link_to op.product.name, product_path(op.product.id) %></h4>
+          <h4 class="large-3 medium-6 columns"><small>Quantity: </small><%= op.quantity %></h4>
+          <h4 class="large-3 medium-6 columns"><small>Price: </small><%= money(op.product.price) %></h4>
+          <h4 class="large-3 medium-6 columns"><small>Total: </small><%= money(op.total) %></h4>
         </div>
 
         <div class="row">
-          <div class="row medium-9 columns">
+          <div class="row large-12 columns">
 
-            <p class="medium-10 columns">
-              Customer: <%= op.order.cust_name %>
+            <p class="large-4 medium-4 columns">
+              <strong>Customer:</strong> <%= op.order.cust_name %>
             </p>
-            <p class="medium-10 columns end">
+            <p class="large-4 medium-4 columns">
+              <strong>Order Placed:</strong> <%= op.order.created_at.strftime('%B %d, %Y') %>
+            </p>
+            <p class="large-4 medium-4 columns">
+              <strong>Order Status:</strong> Completed
+            </p>
+
+            <p class="large-12 columns end">
               <%= op.order.cust_addr %>
             </p>
           </div>

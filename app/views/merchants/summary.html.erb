@@ -29,7 +29,7 @@
         <div class="card-title">
           <h3>Pending Orders</h3>
         </div>
-        <em class="profile-huge pending-orders"><%= @user.pending_orders.count %></em>
+        <em class="profile-huge pending-orders <%= @user.pending_orders.count == 0 ? "summary-zero" : "summary-urgent" %>"><%= @user.pending_orders.count %></em>
         <%= link_to "Pending Orders", self_pending_path, class: 'button profile-button' %>
       </div>
     </div>
