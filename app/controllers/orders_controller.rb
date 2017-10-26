@@ -76,13 +76,14 @@ class OrdersController < ApplicationController
   end
 
   def shipped
-    find_order
+    @order = Order.find_by(id: params[:id].to_i)
     if @order.status == "complete"
       @order.status = "shipped"
       if @order.save
         flash[:status] = :success
         flash[:result_text] = "You have successfully shipped your order!"
         redirect_back fallback_location: root_path
+        params[:id] = nil
       else
         flash[:status] = :failure
         flash[:result_text] = "Couldn't mark as shipped."
