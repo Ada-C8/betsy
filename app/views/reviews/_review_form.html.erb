@@ -1,9 +1,8 @@
 
 <%= form_for @review do |f| %>
 
-
+  <h4 class = "text_command"> Please rate the product: </h4>
   <fieldset class="rating">
-
     <%= f.radio_button(:rating, "5") %> <%= f.label(:rating.to_s + "_5") %>
     <%= f.radio_button(:rating, "4") %> <%= f.label(:rating.to_s + "_4") %>
     <%= f.radio_button(:rating, "3") %> <%= f.label(:rating.to_s + "_3") %>
