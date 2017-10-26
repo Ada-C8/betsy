@@ -30,6 +30,7 @@ describe ProductsController do
   end
 
   describe "create" do
+    let(:merchant) { merchants(:ada) }
 
     it "creates a new product" do
       proc   {
