@@ -74,6 +74,7 @@ header {
   font-weight: bold;
   font-size: 4rem;
   float: left;
+  transition: all .2s ease-in-out;
 }
 
 .dropdown {
@@ -98,6 +99,7 @@ header {
   cursor: pointer;
   font-weight: bolder;
   margin: 0;
+  transition: all .2s ease-in-out;
 }
 
 .dropdown-button-browse:hover, .dropdown-button-cart:hover, .dropdown-button-login:hover, .logo:hover {
@@ -403,6 +405,7 @@ input[type=text], input[type=text]:focus, textarea, textarea:focus {
   margin: 20px auto 0 auto;
   border-radius: 4px;
   width: 80%;
+  transition: all .2s ease-in-out;
 }
 
 #slider ul {
