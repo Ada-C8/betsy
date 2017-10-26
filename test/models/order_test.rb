@@ -6,14 +6,17 @@ describe Order do
 
   describe "relations" do
     it "has many products" do
-      order1 = orders(:pending_order)
+      order1 = orders(:order_one)
       product = products(:pointy_hat)
 
       order1.must_respond_to :products
 
       order1.products << product
       order1.products.count.must_equal 1
+      order1.products << product
+      order1.products.count.must_equal 2
     end
+
     it "belongs to many products" do
       order1 = orders(:pending_order)
       order2 = orders(:almost_there_order)

@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
     elsif @order
       if @order.status == "shipped"
         flash[:result_text] = "You cannot edit a shipped order"
-        redirect_to root_path
+        redirect_to home_path
       end
     end
   end
