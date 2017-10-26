@@ -160,7 +160,7 @@ describe CategoriesController do
   end #update tests
 
   describe "destroy" do
-    it "returns success and destroys the category when given a valid ID" do
+    it "returns success and destroys the category when given a valid ID and that category is empty" do
       category_id = Category.last.id
       delete category_path(category_id)
 
@@ -176,5 +176,14 @@ describe CategoriesController do
       must_respond_with :not_found
       Category.count.must_equal start_category_count
     end #invalid id destroy
+
+    it "will not destroy a category that contains products." do
+      category_id = Category.first.id
+      delete category_path(category_id)
+      must_respond_with :bad_request
+    end
+
+
+
   end #destroy tests
 end #all tests

@@ -54,7 +54,7 @@ class CategoriesController < ApplicationController
     if @category.products.count != 0
       flash.now[:status] = :failure
       flash.now[:message] = "Can't delete a category that contains products."
-      #render :index, status: :bad_request
+      redirect_to categories_path, status: :bad_request
 
     else
       @category.destroy
