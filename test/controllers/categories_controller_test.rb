@@ -1,43 +1,5 @@
 require "test_helper"
 require 'pry'
-#add that users can't do things if not logged in.
-# describe BooksController do
-#
-#   describe "Logged in users" do
-#     before do
-#       login(users(:grace))
-#     end
-#
-#
-#     describe "show" do
-#       # Just the standard show tests
-#       it "succeeds for a book that exists" do
-#         book_id = Book.first.id
-#         get book_path(book_id)
-#         must_respond_with :success
-#       end
-#
-#       it "returns 404 not_found for a book that D.N.E." do
-#         book_id = Book.last.id + 1
-#         get book_path(book_id)
-#         must_respond_with :not_found
-#       end
-#     end
-#   end
-#
-#     describe "Guest users" do
-#       it "can access the index" do #Will Fail, our app does not currently allow guest to see index
-#         get books_path
-#         must_respond_with :success
-#       end
-#
-#       it "cannot access new" do
-#         get new_book_path
-#         must_redirect_to root_path
-#         flash[:message].must_equal "You must be logged in to do that!"
-#       end
-#
-#     end
 
 
 describe CategoriesController do
@@ -54,6 +16,68 @@ describe CategoriesController do
       must_respond_with :success
     end #no categories
   end #index tests
+
+  describe "show" do
+    it "should get show" do
+      get category_path(categories(:cat_one).id)
+      must_respond_with :success
+    end #get show
+
+    it "return success when given a valid category id" do
+      category_id = Category.first.id
+      get category_path(category_id)
+      must_respond_with :success
+    end #return success
+
+    it "returns not found when given an invalid product id" do
+      category_id = Category.last.id + 1
+      get category_path(category_id)
+      must_respond_with :not_found
+    end #return not found
+  end #return show
+
+### Guest user restrictions
+
+#things guess users can/cannot do
+describe "Guest user access" do
+  it "can access the index" do
+    get categories_path
+    must_respond_with :success
+  end #index
+
+  it "can access show page" do
+    category_id = Category.first.id
+    get category_path(category_id)
+    must_respond_with :success
+  end
+
+  it "cannot access new" do
+    get new_category_path
+    must_redirect_to root_path
+    flash[:message].must_equal "You must be logged in to do that!"
+  end #new
+
+  it "cannot access edit" do
+    category_id = Category.first.id
+    get edit_category_path(category_id)
+    must_redirect_to root_path
+    flash[:message].must_equal "You must be logged in to do that!"
+  end
+
+  it "cannot access destroy" do
+    category_id = Category.first.id
+    delete category_path(category_id)
+    must_redirect_to root_path
+    flash[:message].must_equal "You must be logged in to do that!"
+  end
+end #guest users
+
+
+#### Logged in users only
+  describe "Logged in users" do
+    before do
+      login(merchants(:fake_user))
+    end #login
 
   describe "new" do
     it "returns a success status" do
@@ -102,30 +126,8 @@ describe CategoriesController do
   end #create tests
 
 
-  describe "show" do
-    it "should get show" do
-      get category_path(categories(:cat_one).id)
-      must_respond_with :success
-    end #get show
-
-    it "return success when given a valid category id" do
-      category_id = Category.first.id
-      get category_path(category_id)
-      must_respond_with :success
-    end #return success
-
-    it "returns not found when given an invalid product id" do
-      category_id = Category.last.id + 1
-      get category_path(category_id)
-      must_respond_with :not_found
-    end #return not found
-  end #return show
-
-
   describe "edit" do
     it "returns success when given a valid category id" do
-      # category_id = Category.first.id
-      # get edit_category_path(category_id)
       get edit_category_path(categories(:cat_one).id)
       must_respond_with :success
     end #success for edit
@@ -157,9 +159,6 @@ describe CategoriesController do
     end #returns not found if work is invalid
   end #update tests
 
-
-
-
   describe "destroy" do
     it "destroys the category when given a valid ID and that category is empty and redirects to categories path" do
       category_id = Category.last.id
@@ -183,8 +182,6 @@ describe CategoriesController do
       delete category_path(category_id)
       must_respond_with :bad_request
     end
-
-  
-
   end #destroy tests
+end #logged in user tests
 end #all tests
