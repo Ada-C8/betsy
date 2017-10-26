@@ -1,18 +1,11 @@
 require "test_helper"
 
-# Are Relations Set up as Expected
-# Do my validations catch invalid models and let valid ones through
-# Do my custom methods return the correct data?
-# Write at least one test for each Custom Method
-# Write at least two tests for each scope
-
 describe Product do
   before do
     @product = products(:fake_product1)
   end
 
   describe 'relationships' do
-    # Write at least one test for each Model Relationship
     it "responds to merchant" do
       @product.must_respond_to :merchant
     end
@@ -46,10 +39,8 @@ describe Product do
     end
   end
 
-
   describe 'validate' do
-    # Write at least two tests for each validation (positive and negative)
-    it "can be created and require fields cannot be nil" do
+    it "can be created and required fields cannot be nil" do
       @product.must_be_kind_of Product
 
       refute_nil @product.id
@@ -77,20 +68,26 @@ describe Product do
       @product.valid?.must_equal false
     end
 
-    it "requires price to be greater than 0" do
-      # @product.price = -1
-      # @product.valid?.must_equal false
-      #
-      # @product.price = 0
-      # @product.valid?.must_equal false
-      #
-      # @product.price = 1
-      puts ">>>>>>>>>"
-      puts @product.price
+    it "requires price to be an integer greater than 0" do
+      @product.price = -1
+      @product.valid?.must_equal false
+      @product.errors.messages.must_include :price
+
+      @product.price = 0
+      @product.valid?.must_equal false
+      @product.errors.messages.must_include :price
+
+      @product.price = 1
       @product.valid?.must_equal true
     end
 
     it "requires stock to be greater than or equal to 0" do
+      @product.stock = -1
+      @product.valid?.must_equal false
+      @product.errors.messages.must_include :stock
+
+      @product.stock = 0
+      @product.valid?.must_equal true
     end
   end
 end
