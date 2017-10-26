@@ -64,50 +64,47 @@ describe OrdersController do
       get order_path(@order.id)
       must_respond_with :success
     end
-  end
 
-  describe "show" do
-    #note: I couldn't do session setup within the it block, so I had to pull this negative case out into a different describe block
     it "renders 404 not_found for a bogus order ID" do
-      #show action finds the order by matching it to the session ID. Here there will be no session, so it should not find an order.
-      get order_path(0)
+      @order.destroy
+      get order_path(@order.id)
       must_respond_with :not_found
     end
   end
-  # #
-  # describe "edit" do
-  #   it "succeeds for an existing order" do
-  #     setup { session_setup }
-  #
-  #     get edit_order_path(order.id)
-  #     must_respond_with :success
-  #   end
-  #
-  #   it "renders 404 not_found for a bogus order ID" do
-  #     #no session, therefore can't find order.id
-  #     get edit_order_path(order.id)
-  #     must_respond_with :not_found
-  #   end
-  #
-  #   it "allows edits to a complete order" do
-  #     setup { session_setup }
-  #     order = orders(:pending_order)
-  #     order.status = "complete"
-  #     order.save
-  #     get edit_order_path(order.id)
-  #     must_respond_with :success
-  #   end
-  #
-  #   it "does not allow edits to a shipped order" do
-  #     setup { session_setup }
-  #     order = orders(:pending_order)
-  #     order.status = "shipped"
-  #     order.save
-  #     get edit_order_path(order.id)
-  #     must_redirect_to home_path
-  #   end
-  # end
-  #
+
+  describe "edit" do
+    setup { session_setup }
+
+    before do
+      @order = Order.find_by(id: session[:order_id])
+    end
+
+    it "succeeds for an existing order" do
+      get edit_order_path(@order.id)
+      must_respond_with :success
+    end
+
+    it "allows edits to a complete order" do
+      @order.status = "complete"
+      @order.save
+      get edit_order_path(@order.id)
+      must_respond_with :success
+    end
+
+    it "does not allow edits to a shipped order" do
+      @order.status = "shipped"
+      @order.save
+      get edit_order_path(@order.id)
+      must_redirect_to home_path
+    end
+
+    it "renders 404 not_found for a bogus order ID" do
+      @order.destroy
+      get edit_order_path(@order.id)
+      must_respond_with :not_found
+    end
+  end
+
   # describe "update" do
   #   it "succeeds for valid data and an existing order ID" do
   #     order = orders(:pending_order)
