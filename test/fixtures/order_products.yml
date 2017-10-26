@@ -1,15 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-
-
 one:
   quantity: 2
   product: mermaid_fin
   order: order
   status: pending
+
+two:
+  quantity: 3
+  product: mermaid_fin
+  order: order
+  status: shipped
 
 order_products:
   quantity: 2
@@ -23,8 +24,8 @@ other_order_products:
   order: order
   status: pending
 
-two:
-  quantity: 3
+guest_op:
+  quantity: 5
   product: mermaid_fin
-  order: order
-  status: shipped
+  order: guest_order
+  status: pending
