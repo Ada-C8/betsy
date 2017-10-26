@@ -6,6 +6,10 @@ class ProductsController < ApplicationController
     render template: "products/main"
   end
 
+  def main
+    render template: "products/main"
+  end
+
   def index
     @products = Product.all
   end

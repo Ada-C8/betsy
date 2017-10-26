@@ -1,0 +1,48 @@
+<!-- ===========HEADER=========== -->
+<header>
+  <nav>
+    <!-- <div class="menu column large-3">
+      <h1 class="menu-text"><%= link_to "Satiety", root_path %></h1>
+    </div> -->
+<!-- ========browse by========= -->
+    <ul class="menu">
+      <li><strong><%=link_to "Satiety", root_path %></strong></li>
+      <li><%=link_to "Browse by Category", categories_path%></li>
+      <li><%=link_to "Browse by Merchant", merchants_path %></li>
+      <li><%=link_to "See all Products", products_path%></li>
+    </ul>
+<!-- ========categories======== -->
+    <ul>
+      <% @categories = Category.all%>
+      <% @categories.each do |cat| %>
+      <li><%= link_to cat.category_name, category_path(cat.id) %></li>
+      <% end %>
+    </ul>
+  </nav>
+<!-- =======merchant tools====== -->
+  <nav>
+    <ul>
+      <li>
+      <%# if user is logged in, "my orders" and "sell"  buttons appear %>
+        <% if session[:merchant_id] %>
+          <%= link_to "My Orders", "#", class: "link-hover button" %>
+          <%= link_to "Sell on Satiety", new_product_path, class: "link-hover button" %>
+        <% end %>
+      </li>
+      <li>
+        <% if session[:order_id] == nil %>
+        <%= link_to "Cart", orders_path, class: "link-hover button" %>
+        <% else %>
+        <%= link_to "Cart", order_path(session[:order_id]), class: "link-hover button" %>
+        <% end %>
+      </li>
+      <li>
+        <% if session[:merchant_id] %>
+        <%= link_to "Log Out", logout_path, method: :post, class: "link-hover button" %>
+        <% else %>
+        <%= link_to "Log In", '/auth/github', class: "link-hover button" %>
+        <% end %>
+      </li>
+    </ul>
+  </nav>
+</header>
