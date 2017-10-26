@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   has_many :merchants, through: :products
 
 # class methods instead of instance methods (like in ctrl)
+  # self.start_new_order is a class method
   def self.start_new_order
     order = Order.new
     order.status = "pending"
@@ -27,8 +28,11 @@ class Order < ApplicationRecord
 
   end
 
+  # subtract_product is an instance method
+  # self inside this method is calling `self` on an instance of order
   def subtract_product
     Order.transaction do
+      # self is redundant but does not break anything
       self.order_products.each do |op|
         quantity = op.quantity
         op.product.stock -= quantity
