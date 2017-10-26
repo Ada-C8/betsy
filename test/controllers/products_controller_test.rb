@@ -96,30 +96,52 @@ describe ProductsController do
   end #all edit
 
   describe "destroy" do
-    it "returns success and destroys the book when given a valid book ID" do
-      # Arrange
-      product_id = Product.last.id
-      @product = Product.find_by(id: product_id)
-      # Act
-      delete product_path(product_id)
+    it "succeeds for an extant work ID" do
+      product_id = Product.first.id
 
-      # Assert
-      must_respond_with :redirect
+      delete product_path(product_id)
       must_redirect_to root_path
-      @product.must_be_nil
+
+      # The work should really be gone
+      Product.find_by(id: product_id).must_be_nil
     end #success
 
-    it "returns not_found when given an invalid book ID" do
-      invalid_product_id = Product.last.id + 1
+    it "renders 404 not_found and does not update the DB for a bogus work ID" do
+      start_count = Product.count
 
-      start_product_count = Product.count
-
-      delete product_path(invalid_product_id)
-
+      bogus_work_id = Product.last.id + 1
+      delete product_path(bogus_work_id)
       must_respond_with :not_found
-      Product.count.must_equal start_product_count
-    end #not foudn
-  end #destroy
+
+      Product.count.must_equal start_count
+    end #failure
+  end #destory tests
+
+  # describe "destroy" do
+  #   it "returns success and destroys the book when given a valid book ID" do
+  #     # Arrange
+  #     product_id = Product.last.id
+  #     @product = Product.find_by(id: product_id)
+  #     # Act
+  #     delete product_path(product_id)
+  #
+  #     # Assert
+  #     must_respond_with :redirect
+  #     must_redirect_to root_path
+  #     @product.must_be_nil
+  #   end #success
+  #
+  #   it "returns not_found when given an invalid book ID" do
+  #     invalid_product_id = Product.last.id + 1
+  #
+  #     start_product_count = Product.count
+  #
+  #     delete product_path(invalid_product_id)
+  #
+  #     must_respond_with :not_found
+  #     Product.count.must_equal start_product_count
+  #   end #not foudn
+  # end #destroy
   #
   # describe "destroy" do
   #   it "it destroys an existing product and redirects" do
