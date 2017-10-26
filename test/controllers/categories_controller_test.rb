@@ -62,8 +62,6 @@ describe CategoriesController do
     end #return success
   end #new tests
 
-  ## NEED TO ADD FIXTURES !!
-
   describe "create" do
     it "creates a valid category when data is valid" do
 
@@ -86,7 +84,7 @@ describe CategoriesController do
     end #valid data test
 
 
-    it "will not create a new cateogry when data is invalid" do
+    it "will not create a new category when data is invalid" do
       invalid_category_data = {
         category: {
           category_name: ""

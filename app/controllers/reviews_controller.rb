@@ -1,16 +1,22 @@
 class ReviewsController < ApplicationController
   skip_before_action :require_login, only: [:new, :create, :show]
+  before_action :get_product, only: [:new, :create, :show]
 
+  # def index
+  #   @reviews = @product.reviews
+  # end
 
 def new
-  @product = Product.find(params[:product_id])
-  # @review = Review.new
+  #@product = Product.find(params[:product_id])
   @review = @product.reviews.build
+  unless @product
+    head :not_found
+    return
+  end
 end
 
 def create
-  @product = Product.find(params[:product_id])
-  # @review = Review.new(review_params)
+  #@product = Product.find(params[:product_id])
   @review = @product.reviews.build(review_params)
   if @review.save
     flash[:status] = :success
@@ -32,6 +38,11 @@ def show
 end
 
 private
+
+def get_product
+  @product = Product.find(params[:product_id])
+end
+
 def review_params
   return params.require(:review).permit(:product_id, :rating, :reviewtext)
 end

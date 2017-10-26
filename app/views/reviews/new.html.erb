@@ -1,7 +1,4 @@
 
-
-<% @product = Product.find(params[:product_id]) %>
-<% product_id = @product.id %>
 <h1>Reviewing: <%= @product.name%></h1>
 
 <%= form_for [@product,@review] do |f| %>
