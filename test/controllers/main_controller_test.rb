@@ -16,7 +16,7 @@ describe MainController do
         "id" => wand.id
       }
 
-      get add_to_cart_path(wand.id), params: params
+      post add_to_cart_path(wand.id), params: params
 
       binding.pry
 
