@@ -5,6 +5,19 @@
     </div>
     <nav>
   <!-- ========browse by========= -->
+  <div class="dropdown">
+    <span>Categories</span>
+    <div class="dropdown-content">
+      <p><%= link_to "All Categories", new_category_path %></p>
+      <p><%= link_to "Add Categories", categories_path %></p>
+    </div>
+  </div>
+
+
+
+
+
+
       <ul class="menu">
         <li><%=link_to "Browse by Category", categories_path%></li>
         <li><%=link_to "Browse by Merchant", merchants_path %></li>
