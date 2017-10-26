@@ -38,7 +38,9 @@ body {
   flex-direction: column;
   background: #fafafa;
 }
+
 h1, h2, h3, h4, h5, h6 {
+  color: #16262E;
   font-family: 'Astloch', cursive;
   font-weight: 700;
 }

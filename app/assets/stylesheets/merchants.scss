@@ -70,6 +70,19 @@ $burgundy: #4F3640;
 // }
 
 
+/////////////
+// REVENUE //
+/////////////
+
+table.revenue {
+  margin: auto;
+  float: none !important;
+}
+
+.revenue-total {
+  color: $teal;
+}
+
 ///////////////
 // INVENTORY //
 ///////////////
@@ -95,8 +108,9 @@ input.inventory-form {
   margin: 3rem 0;
 }
 
-
-// ORDER PAGES
+/////////////////
+// ORDER PAGES //
+/////////////////
 
 .order-product span {
   margin: 0;

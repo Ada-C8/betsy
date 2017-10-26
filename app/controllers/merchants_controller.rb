@@ -130,8 +130,10 @@ class MerchantsController < ApplicationController
 
   def revenue
     @user = Merchant.find(session[:merchant]['id'])
+    @all = @user.own_orders
     @pending = @user.pending_orders
     @completed = @user.shipped_orders
+    @all_average = (@all.count == 0 ? 0 : (@all.sum{|order| order.total})/@all.count)
     @pending_average = (@pending.count == 0 ? 0 : (@pending.sum{|order| order.total})/@pending.count)
     @completed_average = (@completed.count == 0 ? 0 : (@completed.sum{|order| order.total})/@completed.count)
   end
