@@ -1,7 +1,4 @@
-<%= params %>
-<%= session[:user_id] %>
-
-<h3><%= "Orders Index" %></h3>
+<section class="order">
 
 <section class="all-merchant-orders" >
   <span class="index-banner">
@@ -10,11 +7,11 @@
   <% elsif params[:status] %>
     Your <%= params[:status].capitalize %> Merchant Orders
   <% else %>
-    All Your Merchant Orders
+    All Merchant Orders
   <% end %>
   </span>
   <% @number_of_orders = @merch_orders.to_a.uniq {|o| o.id} %>
-  <h3><%= @number_of_orders.length %> Orders </h3>
+  <p><%= @number_of_orders.length %> TOTAL ORDERS </p>
 
   <% @total_revenue = 0.00 %>
   <% @merch_orders.to_a.each do |orders| %>
@@ -35,15 +32,18 @@
     </section>
   <% end %>
 
-  <% if params[:status] %>
+  <section class="revenue">
+      <% if params[:status] %>
     <span>Total Revenue for <%= params[:status].capitalize %> Orders: <%= @total_revenue %></span>
   <% else %>
     <span>Total Revenue for All Orders: <%= @total_revenue %></span>
   <% end %>
+</section>
 
 
 
 
+<section class="view-buttons">
   <span class="button"><%= link_to "Show Pending Orders", merchant_orders_path(params[:merchant_id].to_i, :status => "pending")%></span>
 
   <span class="button"><%= link_to "Show Complete Orders", merchant_orders_path(params[:merchant_id].to_i, :status => "complete")%></span>
@@ -51,5 +51,8 @@
   <span class="button"><%= link_to "Show Shipped Orders", merchant_orders_path(params[:merchant_id].to_i, :status => "shipped")%></span>
 
   <span class="button"><%= link_to "Show All Orders", merchant_orders_path(params[:merchant_id].to_i)%></span>
+</section>
 
+
+</section>
 </section>

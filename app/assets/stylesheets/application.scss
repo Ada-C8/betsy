@@ -66,6 +66,12 @@ header {
     background-size: cover;*/
 }
 
+@media screen and (max-width: 1000px) {
+    .dropdown ul {
+        display: none;
+    }
+}
+
 .logo a, .home-link {
   /*font-family: 'Berkshire Swash', cursive;*/
   font-family: 'Cinzel', serif;
@@ -120,6 +126,7 @@ header {
   overflow: visible;
   margin: 0;
   z-index: 1;
+  transition: all .2s ease-in-out;
 }
 
 .dropdown-content-browse a, .dropdown-content-cart, .dropdown-content-login a {
@@ -200,6 +207,7 @@ header {
   height: 400px;
   width: 275px;
   overflow: hidden;
+  transition: all .2s ease-in;
 }
 
 .info-card:hover {
@@ -358,6 +366,11 @@ z-index: -1;
   float: right;
 }
 
+// merchant views
+.view-buttons {
+  display: inline-block;
+  align-items: center;
+}
 
 /*button styling*/
 .button, input[type=text], input[type=submit] {

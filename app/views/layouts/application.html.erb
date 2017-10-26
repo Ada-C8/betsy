@@ -25,11 +25,9 @@
 
   <% if current_page?(root_path) %>
   <% else %>
-  <div class="row">
-    <header class="navigation large-12 columns">
+    <header class="navigation">
 
       <button class="logo"><%= link_to "Sourceress", home_path %></button>
-
       <section class="dropdown">
         <ul class "browse-menu">
           <button class="dropdown-button-browse">Browse</button>
@@ -84,8 +82,6 @@
       </section>
 
     </header>
-  </div>
-
   <% end %>
 
 
