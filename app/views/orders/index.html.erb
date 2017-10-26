@@ -13,7 +13,8 @@
     All Your Merchant Orders
   <% end %>
   </span>
-  <h3><%=@merch_orders.to_a.length %> Orders</h3>
+  <% @number_of_orders = @merch_orders.to_a.uniq {|o| o.id} %>
+  <h3><%= @number_of_orders.length %> Orders </h3>
 
   <% @total_revenue = 0.00 %>
   <% @merch_orders.to_a.each do |orders| %>
@@ -21,7 +22,7 @@
 
   <section class="info-card">
     <section class="merchant">
-      <span><em><%= orders.id %></em></span>
+      <span><em>Order ID: <%= link_to orders.id, indi_order_path(orders.id.to_i) %></em></span>
       <span><em><%= orders.status %></em></span>
       <span><em><%= orders.created_at %></em></span>
       <span><em><%= link_to orders.product_name, product_path(orders.product_id.to_i) %></em></span>
@@ -29,10 +30,11 @@
       <% @total += orders.product_price.to_f %>
       <% @total_revenue += @total %>
       <span><em>Order Total: <%= @total %></em></span>
-      <span class="button", id="shipped-button"><%= link_to "Mark As Shipped", ship_order_path(orders.id.to_i), method: :patch %></span>
+      <span class="button", id="shipped-button"><%= link_to "Mark Product As Shipped", ship_order_path(orders.id.to_i), method: :patch %></span>
     </section>
     </section>
   <% end %>
+
   <% if params[:status] %>
     <span>Total Revenue for <%= params[:status].capitalize %> Orders: <%= @total_revenue %></span>
   <% else %>
