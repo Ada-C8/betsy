@@ -40,7 +40,11 @@
   </div>
 
   <div class="row reviews">
-    <%= link_to "Add review", new_product_review_path(@product.id) %>
+    <%= link_to new_product_review_path(@product.id) do %>
+    <i class="fa fa-comments-o"></i>
+    Add Review
+    <%#= link_to "Add review", new_product_review_path(@product.id) %>
+    <% end %>
     <h4>Average Review:
        <% rating = @product.reviews.average(:rating) %>
        <% if rating %>
