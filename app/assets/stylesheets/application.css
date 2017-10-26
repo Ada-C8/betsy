@@ -26,3 +26,38 @@ nav li {
   list-style: none;
   display: inline;
 }
+
+/* ========== */
+#cool-splash-transparency {
+  background-color:rgba(0,0,0,0.8);
+  min-height:100%;
+  width:100%;
+}
+#cool-splash {
+  height:600px;
+  width:100%;
+}
+
+.link-hover:focus {
+    color: #fff;
+    background-color:#E67526;
+}
+
+.display-table {
+    display: table;
+}
+
+.vertical-align {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.cute-bg {
+    background: url(https://i.imgur.com/4OROSfE.jpg) no-repeat center center;
+    background-size: cover;
+    min-height: 700px;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    background-position: bottom center;
+}

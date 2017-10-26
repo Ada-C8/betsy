@@ -37,22 +37,22 @@
           <li>
           <%# if user is logged in, "my orders" and "sell"  buttons appear %>
             <% if session[:merchant_id] %>
-              <%= link_to "My Orders", "#", class: "button float-right" %>
-              <%= link_to "Sell on Satiety", new_product_path, class: "button float-right" %>
+              <%= link_to "My Orders", "#", class: "link-hover button float-right" %>
+              <%= link_to "Sell on Satiety", new_product_path, class: "link-hover button float-right" %>
             <% end %>
           </li>
           <li>
             <% if session[:order_id] == nil %>
-            <%= link_to "Cart", orders_path, class: "button float-right" %>
+            <%= link_to "Cart", orders_path, class: "link-hover button float-right" %>
             <% else %>
-            <%= link_to "Cart", order_path(session[:order_id]), class: "button float-right" %>
+            <%= link_to "Cart", order_path(session[:order_id]), class: "link-hover button float-right" %>
             <% end %>
           </li>
           <li>
             <% if session[:merchant_id] %>
-            <%= link_to "Log Out", logout_path, method: :post, class: "button float-right" %>
+            <%= link_to "Log Out", logout_path, method: :post, class: "link-hover button float-right" %>
             <% else %>
-            <%= link_to "Log In", '/auth/github', class: "button float-right" %>
+            <%= link_to "Log In", '/auth/github', class: "link-hover button float-right" %>
             <% end %>
           </li>
         </ul>
