@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:index]
   end
 
-  resources :categories do
+  resources :categories, except: [:update, :edit] do
     resources :products, only: [:index]
   end
 
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     get '/orders/:id/confirm', to: 'orders#confirm', as: 'confirm_order'
   end
 
-  get "/auth/:provider/callback", to: "sessions#create"
+  get "/auth/:provider/callback", to: "sessions#create", as: 'auth_callback'
 
   post '/logout', to: 'sessions#logout', as: 'logout'
 
