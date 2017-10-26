@@ -1,28 +1,24 @@
-<div class="cool-transparency-text">
-  <div class="row">
-    <div class="large-12 columns">
       <div id="cool-splash-transparency">
-        <div class="display-table">
-
-          <div class="vertical-align-table">
-            <ul class="menu">
-              <li class="left"><h1>Satiety</h1></li>
-              <li>Home-Cooked Meals on Demand</li>
-              <li class="right"> <% if session[:order_id] == nil %>
-              <%= link_to "Cart", orders_path, class: "hollow link-hover button" %>
-              <% else %>
-              <%= link_to "&nbsp;&nbsp;&nbsp;Cart&nbsp;&nbsp;&nbsp;".html_safe, order_path(session[:order_id]), class: "hollow link-hover button" %>
-              <% end %></li>
-              <li><% if session[:merchant_id] %>
-              <%= link_to "Log Out", logout_path, method: :post, class: "hollow link-hover button float-right" %>
-              <% else %>
-              <%= link_to "&nbsp;Log &nbsp;In&nbsp".html_safe, '/auth/github', class: "hollow link-hover button float-right" %>
-              <% end %></li>
-            </ul>
-            <%= render partial: "layouts/message" %>
+        <div class="vertical-align logo-nav">
+          <div>
+            <h3 class="inline-bl">Satiety <span>Home-Cooked Meals on Demand</span></h3>
           </div>
+          <ul class="menu">
+            <li>
+              <% if session[:order_id] == nil %>
+                <%= link_to "Cart", orders_path, class: "hollow link-hover button" %>
+              <% else %>
+                <%= link_to "&nbsp;&nbsp;&nbsp;Cart&nbsp;&nbsp;&nbsp;".html_safe, order_path(session[:order_id]), class: "hollow link-hover button" %>
+              <% end %>
+            </li>
+            <li>
+              <% if session[:merchant_id] %>
+                <%= link_to "Log Out", logout_path, method: :post, class: "hollow link-hover button" %>
+              <% else %>
+                <%= link_to "&nbsp;Log &nbsp;In&nbsp".html_safe, '/auth/github', class: "hollow link-hover button" %>
+              <% end %>
+            </li>
+          </ul>
         </div>
+        <%= render partial: "layouts/message" %>
       </div>
-    </div>
-  </div>
-</div>

@@ -12,24 +12,24 @@ background-size: 100%;
   background-color:rgba(0,0,0,0.8);
   min-height:100%;
   width:100%;
+  color: white;
 }
 
-.display-table {
-    display: table;
-    width: 100%;
-}
-
-.vertical-align-table {
-    display: table-cell;
+.vertical-align {
+    display: flex;
     vertical-align: center;
 }
 
-.cool-transparency-text {
-    // background: url(https://i.imgur.com/UNi4pXz.jpg) no-repeat center center;
-    // background-size: cover;
-    // min-height: 700px;
-    color: white;
-    padding: 30px;
-    text-align: center;
-    background-position: bottom center;
+.logo-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inline-bl {
+  display: inline-block;
+}
+
+.inline-bl span {
+  font-size: .5em;
 }
