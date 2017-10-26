@@ -161,7 +161,7 @@ describe CategoriesController do
 
   describe "destroy" do
     it "returns success and destroys the category when given a valid ID" do
-      category_id = Category.first.id
+      category_id = Category.last.id
       delete category_path(category_id)
 
       must_respond_with :redirect
@@ -169,7 +169,7 @@ describe CategoriesController do
       Category.find_by(id: category_id).must_be_nil
     end #successful destroy
 
-    it "returns not_found when given an invalid book ID" do
+    it "returns not_found when given an invalid ID" do
       invalid_category_id = Category.last.id + 1
       start_category_count = Category.count
       delete category_path(invalid_category_id)
