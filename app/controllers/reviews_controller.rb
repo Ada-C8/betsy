@@ -6,45 +6,54 @@ class ReviewsController < ApplicationController
   #   @reviews = @product.reviews
   # end
 
-def new
-  #@product = Product.find(params[:product_id])
-  @review = @product.reviews.build
-  unless @product
-    head :not_found
-    return
+  def new
+    if !@product
+      head :not_found
+      return
+    else
+      @review = @product.reviews.build
+    end 
+
+    # unless @product
+    #   head :not_found
+    #   return
+    # end
+
+    #@product = Product.find(params[:product_id])
+
+
   end
-end
 
-def create
-  #@product = Product.find(params[:product_id])
-  @review = @product.reviews.build(review_params)
-  if @review.save
-    flash[:status] = :success
-    flash[:message] = "Your Review has been Created"
-    redirect_to root_path
-  else
-    flash.now[:status] = :failure
-    flash.now[:message] = "Review failed to save"
-    flash.now[:details] = @review.errors.messages
-    render :new, status: :bad_request
+  def create
+    #@product = Product.find(params[:product_id])
+    @review = @product.reviews.build(review_params)
+    if @review.save
+      flash[:status] = :success
+      flash[:message] = "Your Review has been Created"
+      redirect_to root_path
+    else
+      flash.now[:status] = :failure
+      flash.now[:message] = "Review failed to save"
+      flash.now[:details] = @review.errors.messages
+      render :new, status: :bad_request
+    end
   end
-end
 
-def show
-  @review = Review.find_by(id: params[:id])
-  unless @review
-    head :not_found
+  def show
+    @review = Review.find_by(id: params[:id])
+    unless @review
+      head :not_found
+    end
   end
-end
 
-private
+  private
 
-def get_product
-  @product = Product.find(params[:product_id])
-end
+  def get_product
+    @product = Product.find(params[:product_id])
+  end
 
-def review_params
-  return params.require(:review).permit(:product_id, :rating, :reviewtext)
-end
+  def review_params
+    return params.require(:review).permit(:product_id, :rating, :reviewtext)
+  end
 
 end
