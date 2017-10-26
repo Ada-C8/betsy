@@ -3,13 +3,11 @@
   <% @cart.products.each do |product| %>
     <p><%= product.name %> | <%= link_to "Delete", product_path(product), :data => {:confirm => "You sure?", :method => "delete"} %></p>
     <p> Unit Price: <%= product.price %></p>
-
     <p>We have <%= product.stock %> in stock</p>
-  <% end %>
-
     <p><%= link_to "Remove Product", orders_product_path, method: :delete, class: "button" %></p>
   <% end %>
+
   <p><%= link_to "Checkout", billing_form_path, class: "button" %></p>
-<% else %>
-  <p>Your shopping cart is empty.</p> <%# need to figure this out--currently, the index view is a work-around %>
+  <% else %>
+    <p>Your shopping cart is empty.</p> <%# need to figure this out--currently, the index view is a work-around %>
 <% end %>
