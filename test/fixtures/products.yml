@@ -38,3 +38,10 @@ not_in_order:
   price: 9.99
   quantity_avail: 5
   merchant: spooky
+
+available:
+  name: "Not selling"
+  price: 30.33
+  quantity_avail: 3
+  merchant: spooky
+  available: "Retired"
