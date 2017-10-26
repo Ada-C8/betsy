@@ -31,15 +31,15 @@
       <% if @product.quantity_avail == 0 %>
 
       <span class="button"><%= link_to "Not available: Keep Shopping!", products_path, method: :get %></span>
-      <% elsif session[:order_id] == nil && @product.quantity_avail > 0 %>
-        <%= link_to add_product_path(@product.id), method: :patch do %>
-          <span class="button">Add to Cart</span>
-        <% end %>
-      <% elsif @product.quantity_avail > 0 %>
-        <%= link_to add_product_path(@product.id), method: :patch do %>
-          <span class="button">Add to Cart</span>
-        <% end %>
+    <% elsif session[:order_id] == nil && @product.quantity_avail > 0 %>
+      <%= link_to add_product_path(@product), method: :patch do %>
+        <span class="button">Add to Cart</span>
       <% end %>
+    <% elsif @product.quantity_avail > 0 %>
+      <%= link_to add_product_path(@product), method: :patch do%>
+      <span class="button">Add to Cart</span>
+      <% end %>
+    <% end %>
 
       <%= link_to new_product_review_path(@product.id) do %>
         <span class="button">Leave a Review</span>

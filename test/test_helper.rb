@@ -28,6 +28,7 @@ class ActiveSupport::TestCase
   def session_setup
     post orders_path, params: { sig: orders }
   end
+
   # Add more helper methods to be used by all tests here...
   def setup
     OmniAuth.config.test_mode = true

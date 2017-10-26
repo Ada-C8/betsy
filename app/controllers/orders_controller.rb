@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
     elsif @order
       if @order.status == "shipped"
         flash[:result_text] = "You cannot edit a shipped order"
-        redirect_to root_path
+        redirect_to home_path
       end
     end
   end
@@ -56,9 +56,12 @@ class OrdersController < ApplicationController
       if @order.status == "shipped"
         flash[:status] = :failure
         flash[:result_text] = "You cannot update a shipped order"
-        redirect_to root_path
-      else @order.status = "complete"
+        redirect_to home_path
+      else
+        @order.status = "complete"
         if @order.update_attributes order_params
+          # @order.status = "complete"
+          @order.save
           flash[:status] = :success
           flash[:result_text] = "You have successfully submitted your order!"
           session[:order_id] = nil
@@ -74,14 +77,20 @@ class OrdersController < ApplicationController
 
   def shipped
     find_order
-    @order.status = "shipped"
-    if @order.save
-      flash[:status] = :success
-      flash[:result_text] = "You have successfully shipped your order!"
-      redirect_back fallback_location: root_path
+    if @order.status == "complete"
+      @order.status = "shipped"
+      if @order.save
+        flash[:status] = :success
+        flash[:result_text] = "You have successfully shipped your order!"
+        redirect_back fallback_location: root_path
+      else
+        flash[:status] = :failure
+        flash[:result_text] = "Couldn't mark as shipped."
+      end
     else
       flash[:status] = :failure
-      flash[:result_text] = "Couldn't mark as shipped."
+      flash[:result_text] = "Can't ship an order that is not complete"
+      must_redirect_to home_path
     end
   end
 
@@ -92,7 +101,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    return params.require(:order).permit(:name, :address, :city, :state, :zip_code, :email, :card_number, :card_exp, :card_cvv)
+    return params.require(:order).permit(:status, :name, :address, :city, :state, :zip_code, :email, :card_number, :card_exp, :card_cvv)
   end
 
   def find_order
