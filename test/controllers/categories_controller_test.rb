@@ -157,8 +157,11 @@ describe CategoriesController do
     end #returns not found if work is invalid
   end #update tests
 
+
+
+
   describe "destroy" do
-    it "returns success and destroys the category when given a valid ID and that category is empty" do
+    it "destroys the category when given a valid ID and that category is empty and redirects to categories path" do
       category_id = Category.last.id
       delete category_path(category_id)
 
@@ -181,7 +184,7 @@ describe CategoriesController do
       must_respond_with :bad_request
     end
 
-
+  
 
   end #destroy tests
 end #all tests

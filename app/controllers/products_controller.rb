@@ -50,10 +50,16 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])
-    @product.destroy
 
+    @product = Product.find(params[:id])
+
+    unless @product
+      head :not_found
+    end
+
+    @product.destroy
     redirect_to products_path
+
   end
 
   private
