@@ -1,6 +1,6 @@
 <h2 class = 'page-title'>Earnings Details</h2>
 
-<h3>Total Revenue to Date: <small class="revenue-total"><%= money(@user.total_revenue) %></small></h3>
+<h3 class="readable">Total Revenue to Date: <strong class="revenue-total"><%= money(@user.total_revenue) %></strong></h3>
 
 <table class="small-10 columns revenue">
   <thead>
@@ -12,10 +12,10 @@
         # Orders
       </th>
       <th>
-        Total Income
+        Average Income per Order
       </th>
       <th>
-        Average Income per Order
+        Total Income
       </th>
     </tr>
   </thead>
@@ -36,20 +36,6 @@
     </tr>
     <tr>
       <td>
-        Pending
-      </td>
-      <td>
-        <%= @pending.count %>
-      </td>
-      <td>
-        <%= money(@pending.sum{|order| order.total}) %>
-      </td>
-      <td>
-        <%= money(@pending_average) %>
-      </td>
-    </tr>
-    <tr>
-      <td>
         Total
       </td>
       <td>
@@ -60,6 +46,20 @@
       </td>
       <td>
         <%= money(@all_average) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Pending
+      </td>
+      <td>
+        <%= @pending.count %>
+      </td>
+      <td>
+        <%= money(@pending.sum{|order| order.total}) %>
+      </td>
+      <td>
+        <%= money(@pending_average) %>
       </td>
     </tr>
   </tbody>
