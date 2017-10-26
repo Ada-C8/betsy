@@ -1,44 +1,46 @@
 <section class="view-cart">
   <h2 class="page-title">Shopping Cart</h2>
 
-  <% @products.each do |order_product| %>
-    <%= form_for order_product do |f| %>
-      <div class="row">
+  <% if @products %>
+    <% @products.each do |order_product|%>
+      <%= form_for order_product do |f| %>
+        <div class="row">
 
-        <span class="small-12 medium-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{order_product.product.image_url}');\"") unless (order_product.product.image_url.nil? || order_product.product.image_url.empty?) %> > </span>
-        <span class="small-12 medium-10 columns cart-info">
-          <div class="top-row row">
-            <div class= "product-list small-12 columns">
-              <h4><%= order_product.product.name %></h4>
+          <span class="small-12 medium-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{order_product.product.image_url}');\"") unless (order_product.product.image_url.nil? || order_product.product.image_url.empty?) %> > </span>
+          <span class="small-12 medium-10 columns cart-info">
+            <div class="top-row row">
+              <div class= "product-list small-12 columns">
+                <h4><%= order_product.product.name %></h4>
+              </div>
             </div>
-          </div>
-          <div class="medium-2 small-12 columns">
-            <p class="cart-text">Price:
-              <strong><%= money(order_product.product.price) %></strong>
-            </p>
-          </div>
-          <div class="medium-3 small-12 columns">
-            <%= f.label :quantity, "Quantity:", class: 'shopping-cart-form' %>
-            <%= f.text_field :quantity, class: 'shopping-cart-form' %>
-          </div>
-          <div class="medium-2 small-12 columns">
-            <p class="cart-text">Total:
-              <strong><%= money(order_product.total) %></strong>
-            </p>
-          </div>
-          <div class="medium-5 small-12 columns end">
-            <%= f.submit "Update Item", class: 'button' %>
-            <%= link_to "Remove From Cart", order_product_path(order_product.id), method: :delete, data: { confirm: "Are you sure?" }, class: "button delete-button" %>
-          </div>
-        </span>
+            <div class="medium-2 small-12 columns">
+              <p class="cart-text">Price:
+                <strong><%= money(order_product.product.price) %></strong>
+              </p>
+            </div>
+            <div class="medium-3 small-12 columns">
+              <%= f.label :quantity, "Quantity:", class: 'shopping-cart-form' %>
+              <%= f.text_field :quantity, class: 'shopping-cart-form' %>
+            </div>
+            <div class="medium-2 small-12 columns">
+              <p class="cart-text">Total:
+                <strong><%= money(order_product.total) %></strong>
+              </p>
+            </div>
+            <div class="medium-5 small-12 columns end">
+              <%= f.submit "Update Item", class: 'button' %>
+              <%= link_to "Remove From Cart", order_product_path(order_product.id), method: :delete, data: { confirm: "Are you sure?" }, class: "button delete-button" %>
+            </div>
+          </span>
 
-      </div>
+        </div>
+      <% end %>
+      <!-- <p><%= order_product.product.name %></p>
+      <p><%= order_product.total %></p> -->
     <% end %>
-    <!-- <p><%= order_product.product.name %></p>
-    <p><%= order_product.total %></p> -->
   <% end %>
 
-  <% unless @products.empty? %>
+  <% unless @products.nil? || @products.empty? %>
     <p>Cart Total: <%= money(total(@products)) %></p>
 
     <%= link_to "Checkout Cart", new_order_path, class: 'button' %>
