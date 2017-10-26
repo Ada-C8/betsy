@@ -10,11 +10,7 @@ describe Product do
   before do
     @product = products(:fake_product1)
   end
-  # belongs_to :merchant
-  # belongs_to :category
-  # has_many :order_products
-  # has_many :orders, through: :order_products
-  # has_many :reviews, dependent: :destroy
+
   describe 'relationships' do
     # Write at least one test for each Model Relationship
     it "responds to merchant" do
@@ -50,18 +46,7 @@ describe Product do
     end
   end
 
-  # validates :name, presence: true
-  # validates :price, presence: true, numericality: {
-  #   greater_than: 0
-  # }
-  # validates :stock, presence: true, numericality: {
-  #   greater_than_or_equal_to: 0,
-  #   only_integer: true
-  # }
-  # validates :merchant_id, presence: true
-  # validates :category_id, presence: true
-  #
-  # validates_associated :merchant, :category
+
   describe 'validate' do
     # Write at least two tests for each validation (positive and negative)
     it "can be created and require fields cannot be nil" do

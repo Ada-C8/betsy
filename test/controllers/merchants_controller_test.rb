@@ -7,9 +7,8 @@ describe MerchantsController do
       must_respond_with :success
     end
 
-    it "success with their are no merchants" do
+    it "responds with success when thereare no merchants" do
       Merchant.destroy_all
-
       get merchants_path
       must_respond_with :success
     end
@@ -24,23 +23,19 @@ describe MerchantsController do
 
   describe "create" do
     it "adds the merchant to the DB and redirects when the merchant data is valid" do
-      # Arrange
       merchant_data = {
         merchant: {
           username: "Test merchant",
           email: "fake@email.com"
         }
       }
-      # Test data should result in a valid merchant, otherwise
-      # the test is broken
+
       Merchant.new(merchant_data[:merchant]).must_be :valid?
 
       start_merchant_count = Merchant.count
 
-      # Act
       post merchants_path, params: merchant_data
 
-      # Assert
       must_respond_with :redirect
       must_redirect_to merchants_path
 
@@ -72,11 +67,6 @@ describe MerchantsController do
 
     it "gives not_found for bogus merchant ID" do
       bogus_merchant = Merchant.last.id + 1
-
-
-      # merchant = Merchant.first
-      #what is the context (can be variable)
-      #what are we testing (methods,etc.)
 
       get edit_merchant_path(bogus_merchant)
       must_respond_with :not_found

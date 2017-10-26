@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :get_category, only: [:edit, :update, :destroy, :show]
-  skip_before_action :require_login, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  skip_before_action :require_login, only: [:index, :show]
 
   def index
     @categories = Category.all
@@ -41,7 +41,6 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-
     unless @category
       head :not_found
       return

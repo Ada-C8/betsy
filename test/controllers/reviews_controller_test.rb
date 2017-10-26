@@ -42,10 +42,6 @@ describe ReviewsController do
       Review.count.must_equal start_review_count + 1
     end #valid data test
 
-
-
-
-
     it "will not create a new review when data is invalid" do
       invalid_review_data = {
         review: {
