@@ -11,8 +11,9 @@ class OrdersController < ApplicationController
     product = Product.find_by(id: params[:id]) # find the product from the URL param
 
     result = order.products << product # (the has_many declaration creates some cool ruby magic methods like this)
-
+    # order.save
     if result
+      # order.order_products.sum(:quantity)
       flash[:status]  = :success
       flash[:message] = "Successfully added item to cart"
     else
@@ -21,6 +22,7 @@ class OrdersController < ApplicationController
       flash.now[:details] = order.products.errors.messages
     end
     redirect_to product_path(product)
+    # raise
   end
 
   # def remove_from_cart

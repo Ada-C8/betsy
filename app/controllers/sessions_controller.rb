@@ -23,6 +23,7 @@ class SessionsController < ApplicationController
 
   def logout
     session[:merchant_id] = nil
+    session[:order_id] = nil
     flash[:status] = :success
     flash[:message] = "Successfully logged out"
     redirect_to root_path
