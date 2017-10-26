@@ -4,51 +4,13 @@
 
 body
 {
-background: url(https://i.imgur.com/UNi4pXz.jpg) no-repeat;
-background-size: 100%;
+  background: url(https://i.imgur.com/UNi4pXz.jpg) no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
 }
 // MAIN.HTML.ERB //
-#cool-splash-transparency {
-  background-color:rgba(0,0,0,0.8);
+.cool-prod-transparency {
+  background-color:rgba(192,192,192,0.2);
   width:100%;
   color: white;
-}
-
-.logo-nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.inline-bl {
-  display: inline-block;
-}
-
-.inline-bl span {
-  font-size: .5em;
-}
-
-
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-  /*width: 100px;*/
-  padding: 3% 6%;
-  font-size: 20px;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-  z-index: 1;
-  font-size: 15px;
-
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
 }
