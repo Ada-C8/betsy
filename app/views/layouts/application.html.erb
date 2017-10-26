@@ -8,7 +8,60 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <header id="cool-splash-transparency">
+    <section class="logo-nav">
+      <!-- ===========logo=========== -->
+      <section>
+        <h3 class="inline-bl">Satiety <span class="span">Home-Cooked Meals on Demand</span></h3>
+      </section>
+      <!-- ========browse by========= -->
+      <!--
+      <section class="align-nav">
+        <div class="dropdown">
+          <span class="span-align">Categories</span>
+          <div class="dropdown-content">
+            <p><%= link_to "All Categories", new_category_path %></p>
+            <p><%= link_to "Add Categories", categories_path %></p>
+          </div>
+        </div>
 
+        <div class="dropdown">
+          <span class="span-align">Merchants</span>
+          <div class="dropdown-content">
+            <p><%= link_to "All Categories", new_category_path %></p>
+            <p><%= link_to "Add Categories", categories_path %></p>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <span class="span-align">Products</span>
+          <div class="dropdown-content">
+            <p><%= link_to "All Categories", new_category_path %></p>
+            <p><%= link_to "Add Categories", categories_path %></p>
+          </div>
+        </div>
+      </section>
+      -->
+      <!-- ==========log in=========== -->
+      <ul class="menu">
+        <li>
+          <% if session[:order_id] == nil %>
+            <%= link_to "Cart", orders_path, class: "hollow link-hover button" %>
+          <% else %>
+            <%= link_to "&nbsp;&nbsp;&nbsp;Cart&nbsp;&nbsp;&nbsp;".html_safe, order_path(session[:order_id]), class: "hollow link-hover button" %>
+          <% end %>
+        </li>
+        &nbsp;
+        <li>
+          <% if session[:merchant_id] %>
+            <%= link_to "Log Out", logout_path, method: :post, class: "hollow link-hover button" %>
+          <% else %>
+            <%= link_to "&nbsp;Log &nbsp;In&nbsp".html_safe, '/auth/github', class: "hollow link-hover button" %>
+          <% end %>
+        </li>
+      </ul>
+    </section>
+  </header>
   <body>
 <!-- ============================ -->
 <!-- =============MAIN=========== -->
