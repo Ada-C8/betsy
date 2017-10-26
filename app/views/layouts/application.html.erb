@@ -10,69 +10,8 @@
 
   <body>
 <!-- ============================ -->
-<!-- ===========HEADER=========== -->
-    <header class="top-bar" id="static">
-      <nav class="top-bar-left">
-        <!-- <div class="menu column large-3">
-          <h1 class="menu-text"><%= link_to "Satiety", root_path %></h1>
-        </div> -->
-  <!-- ========browse by========= -->
-        <ul class="menu">
-          <li><strong><%=link_to "Satiety", root_path %></strong></li>
-          <li><%=link_to "Browse by Category", categories_path%></li>
-          <li><%=link_to "Browse by Merchant", merchants_path %></li>
-          <li><%=link_to "See all Products", products_path%></li>
-        </ul>
-  <!-- ========categories======== -->
-          <!-- <ul class="menu">
-            <% @categories = Category.all%>
-            <% @categories.each do |cat| %>
-            <li><%= link_to cat.category_name, category_path(cat.id) %></li>
-            <% end %>
-          </ul> -->
-      </nav>
-  <!-- =======merchant tools====== -->
-      <nav class="top-bar-right">
-        <ul class="menu">
-          <li>
-          <%# if user is logged in, "my orders" and "sell"  buttons appear %>
-            <% if session[:merchant_id] %>
-              <%= link_to "My Orders", "#", class: "link-hover button float-right" %>
-              <%= link_to "Sell on Satiety", new_product_path, class: "link-hover button float-right" %>
-            <% end %>
-          </li>
-          <li>
-            <% if session[:order_id] == nil %>
-            <%= link_to "Cart", orders_path, class: "link-hover button float-right" %>
-            <% else %>
-            <%= link_to "Cart", order_path(session[:order_id]), class: "link-hover button float-right" %>
-            <% end %>
-          </li>
-          <li>
-            <% if session[:merchant_id] %>
-            <%= link_to "Log Out", logout_path, method: :post, class: "hollow link-hover button float-right" %>
-            <% else %>
-            <%= link_to "Log In", '/auth/github', class: "hollow link-hover button float-right" %>
-            <% end %>
-          </li>
-        </ul>
-      </nav>
-    </header>
-<!-- =============MAIN============ -->
-  <!-- =======flash messages====== -->
+<!-- =============MAIN=========== -->
     <main>
-      <section class="flash <%= flash[:status] %>">
-        <p><%= flash[:message] %></p>
-        <% if flash[:details] %>
-          <ul>
-            <% flash[:details].each do |field, problems| %>
-              <% problems.each do |problem| %>
-                <li><strong><%= field %>:</strong> <%= problem %></li>
-              <% end %>
-            <% end %>
-          </ul>
-        <% end %>
-      </section>
     </main>
 
     <%= yield %>
