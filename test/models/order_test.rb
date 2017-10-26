@@ -5,14 +5,28 @@ describe Order do
   let(:order_one) { orders(:order_one) }
 
   describe "relations" do
-    it "has a list of products" do
-      pending_order = orders(:pending_order)
+    it "has many products" do
+      order1 = orders(:order_one)
       product = products(:pointy_hat)
 
-      pending_order.must_respond_to :products
+      order1.must_respond_to :products
 
-      pending_order.products << product
-      pending_order.products.count.must_equal 1
+      order1.products << product
+      order1.products.count.must_equal 1
+      order1.products << product
+      order1.products.count.must_equal 2
+    end
+
+    it "belongs to many products" do
+      order1 = orders(:pending_order)
+      order2 = orders(:almost_there_order)
+      product = products(:pointy_hat)
+
+      order1.products << product
+      order2.products << product
+
+      product.must_respond_to :orders
+      product.orders.count.must_equal 2
     end
   end
 
@@ -174,6 +188,40 @@ describe Order do
       order_one.state = " "
       order_one.valid?.must_equal false
       order_one.errors.messages.must_include :state
+    end
+  end
+
+  describe "shipped" do
+    it "returns true if the order has a status of shipped" do
+      orders(:shipped_order).shipped.must_equal true
+    end
+    it "returns false if the order does not have a status of shipped" do
+      orders(:pending_order).shipped.must_equal false
+    end
+  end
+
+  describe "completed?" do
+    it "returns true if the order has a status of complete" do
+      orders(:order_one).completed?.must_equal true
+    end
+    it "returns false if the order does not have a status of complete" do
+      orders(:pending_order).shipped.must_equal false
+    end
+  end
+
+  describe "order_total" do
+    it "returns an accurate sum of the prices of the products connected to the order" do
+      order = orders(:pending_order)
+      product1 = products(:pointy_hat)
+      product2 = products(:sad_hat)
+
+      order.order_total.must_equal 0
+      order.products << product1
+      order.order_total.must_equal 9.99
+      order.products << product1
+      order.order_total.must_equal (9.99 * 2)
+      order.products << product2
+      order.order_total.must_equal (9.99 * 2) + 8.99
     end
   end
 end
