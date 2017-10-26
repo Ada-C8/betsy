@@ -18,7 +18,14 @@ describe OrdersController do
   end
 
   describe "create" do
-    it "adds order to the database and redirects when the data is valid" do
+    it "adds order to the database with at least 1 order product and redirects when the data is valid" do
+      login_test_user
+      cart_params = {
+        "quantity" => 4,
+        "id" => products(:wand).id
+      }
+      post add_to_cart_path(products(:wand).id), params: cart_params
+
       order = {
         order: {
           cust_name: "Mermaid",
@@ -27,19 +34,21 @@ describe OrdersController do
           cust_cc_exp: "11/22",
           cust_addr: "Sea World",
           cust_email: "forkhair@mermaid.com",
+          cvv: 123,
+          zip_code: 32444,
           status: "complete",
           created_at: Time.now,
           updated_at: Time.now
         }
       }
-      good_order = Order.new(order[:another_order])
+      good_order = Order.new(order[:order])
       good_order.must_be :valid?
       start_count = Order.count
 
       post orders_path, params: order
 
       must_respond_with :redirect
-      must_redirect_to orders_path
+      must_redirect_to confirmation_path(Order.last.id)
       Order.count.must_equal start_count + 1
       flash[:status].must_equal :success
       flash[:message].must_include "Successfully created order"
@@ -53,6 +62,8 @@ describe OrdersController do
           cust_cc: 12345,
           cust_cc_exp: "11/22",
           cust_addr: "Sea World",
+          cvv: 123,
+          zip_code: 32444,
           cust_email: "forkhair@mermaid.com",
           status: ""
         }
@@ -68,14 +79,14 @@ describe OrdersController do
   end
 
   describe "show" do
-    it "returns success with valid id" do
+    it "returns success with valid id when logged in" do
       login_test_user
       order_id = Order.first.id
       get order_path(order_id)
       must_respond_with :success
     end
 
-    it "returns not_found with invalid id" do
+    it "returns not_found with invalid id when logged in" do
       login_test_user
       invalid_id = Order.last.id + 1
       get order_path(invalid_id)
@@ -84,7 +95,8 @@ describe OrdersController do
   end
 
   describe "update" do
-    it "returns success if order product exists and changes are valid" do
+    it "returns success if at least 1 order product exists and changes are valid" do
+      login_test_user
       order = Order.first
       changes = {
         order: {
@@ -95,44 +107,19 @@ describe OrdersController do
       order.must_be :valid?
 
       patch order_path(order), params: changes
-      must_respond_with :redirect
-      must_redirect_to order_path(order)
 
+      must_respond_with :redirect
+      must_redirect_to order_path(order.id)
       order.reload
       order.cust_name.must_equal changes[:order][:cust_name]
     end
-
-    it "returns not_found if work does not exist" do
-      order = Order.first
-      changes = {
-        order: {
-          cust_name: "Wienerschnitzel"
-        }
-      }
-      order.update_attributes(changes[:order])
-      order.must_be :valid?
-      order.destroy
-
-      patch order_path(order), params: changes
-      must_respond_with :not_found
-    end
   end
 
-  # describe "destroy" do
-  #   it "returns success and destroys if order exists" do
-  #     order = Order.first
-  #     order.must_be :valid?
-  #     delete order_path(order)
-  #     must_respond_with :redirect
-  #     must_redirect_to orders_path
-  #   end
-  #
-  #   it "returns not_found if work does not exist" do
-  #     order = Order.first
-  #     order.must_be :valid?
-  #     delete order_path(order)
-  #     delete order_path(order)
-  #     must_respond_with :not_found
-  #   end
-  # end
+  describe "confirmation" do
+    it "shows the order summary of an order after it is created for a guest user" do
+    end
+
+    it "shows the order summary of an order after it is created for a logged in user" do
+    end
+  end
 end

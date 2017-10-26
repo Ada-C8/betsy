@@ -7,8 +7,6 @@ class OrdersController < ApplicationController
     if session[:merchant]
       merchant_id = session[:merchant]['id']
       @orders = Merchant.find(merchant_id).orders
-    else
-      @orders = nil
     end
   end
 
@@ -46,9 +44,14 @@ class OrdersController < ApplicationController
     if find_order_by_params_id
       @order.update_attributes(order_params)
       if @order.save
+        flash[:status] = :success
+        flash[:message] = "Successfully updated order"
         redirect_to order_path(@order)
         return
       else
+        flash.now[:status] = :failure
+        flash.now[:message] = "Order could not be updated"
+        flash.now[:details] = @order.errors.messages
         render :edit, status: :bad_request
         return
       end
@@ -56,6 +59,7 @@ class OrdersController < ApplicationController
   end
 
   def confirmation
+    # route successful orders to a confirmation order summary page
     find_order_by_params_id
   end
 
@@ -63,7 +67,7 @@ class OrdersController < ApplicationController
 
   def order_params
     # parameters for the order
-    return params.require(:order).permit(:cust_name, :status, :cust_email, :cust_cc, :cust_cc_exp, :cust_addr, :merchant_id)
+    return params.require(:order).permit(:cust_name, :status, :cust_email, :cust_cc, :cust_cc_exp, :cust_addr, :merchant_id, :order_products, :cvv, :zip_code)
   end
 
   def find_order_by_params_id
