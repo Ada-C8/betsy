@@ -7,9 +7,11 @@ class ApplicationController < ActionController::Base
 
     if @order.save
       session[:order_id] = @order.id
-      flash[:success] = "Successfully created pending order."
+      flash[:status] = :success
+      flash[:result_text] = "Successfully created pending order."
     else
-      flash[:error] = "Could not initialize pending order."
+      flash[:status] = :failure
+      flash[:result_text] = "Could not initialize pending order."
     end
   end
 end

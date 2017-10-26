@@ -31,4 +31,9 @@ class Order < ApplicationRecord
 
   end
 
+  def last_four
+    cc_last = self.card_number.slice(10..-1)
+    return cc_last
+  end
+
 end

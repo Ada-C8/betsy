@@ -94,6 +94,10 @@ class OrdersController < ApplicationController
     end
   end
 
+  def individual_order
+    find_order
+  end
+
   private
 
   def order_params

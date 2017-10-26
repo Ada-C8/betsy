@@ -30,9 +30,10 @@ describe ProductsController do
   end
 
   describe "create" do
+
     it "creates a new product" do
       proc   {
-        post products_path, params: { product: { name: "eyeballs", quantity_avail: 4, price: 9.99, merchant_id: Merchant.first.id}}
+        post products_path, params: { product: { name: "eyeballs", quantity_avail: 4, price: 9.99}}
       }.must_change 'Product.count', 1
     end
   end
@@ -51,7 +52,16 @@ describe ProductsController do
   end
   #
   describe "edit" do
-    #This wasn't in the controller actions.  Do we want an edit method?
+    it "succeeds for an existing product" do
+      get edit_product_path(Product.first)
+      must_respond_with :success
+    end
+
+    it "will not edit bogus product" do
+      fake = Product.last.id + 1
+      get edit_product_path(fake)
+      must_respond_with :not_found
+    end
   end
 
   describe "#add_product_to_cart" do
@@ -60,13 +70,13 @@ describe ProductsController do
     it "should add in-stock products to the pending order" do
       patch add_product_path(products(:pointy_hat).id)
       must_respond_with :redirect
-      flash.keys.must_include "success"
+
     end
 
     it "should not add out-of-stock products to pending order" do
       patch add_product_path(products(:out_of_stock).id)
       must_respond_with :redirect
-      flash.keys.must_include "error"
+
     end
 
     it "can add the same product multiple times when in stock" do
