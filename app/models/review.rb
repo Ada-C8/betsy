@@ -3,6 +3,22 @@ class Review < ApplicationRecord
   belongs_to :product
 
   validates :rating, presence: true, numericality: { only_integer: true }, inclusion: { in: 1..5 }
-  def average_rating
+
+  def self.get_rating_stars(rating)
+    stars = ""
+
+    if rating <= 1
+      stars = "⭑⭒⭒⭒⭒"
+    elsif rating <= 2
+      stars = "⭑⭑⭒⭒⭒"
+    elsif rating <= 3
+      stars = "⭑⭑⭑⭒⭒"
+    elsif rating <= 4
+      stars = "⭑⭑⭑⭑⭒"
+    else
+      stars = "⭑⭑⭑⭑⭑"
+    end
+
+    return stars
   end
 end
