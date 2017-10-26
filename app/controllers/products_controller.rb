@@ -1,6 +1,10 @@
 class ProductsController < ApplicationController
   skip_before_action :require_login, only: [:main, :index, :show, :new, :edit, :update, :create]
 
+  def main
+    render template: "products/main"
+  end
+
   def index
     @products = Product.all
   end

@@ -1,79 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title><%= content_for?(:title) ? yield(:title) : "Satiety" %></title>
-
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <title>Satiety</title>
     <%= csrf_meta_tags %>
+
+    <%#= stylesheet_link_tag 'application', 'google font' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
-
-    <header>
-      <h1><%= link_to "Satiety || Serving home-cooked meals on demand", root_path %>  </h1>
-
-      <nav> <%# displays each button from right to left %>
-        <!-- update buttons to `button_to` -->
-        <% if session[:merchant_id] %>
-          <%= link_to "Log Out", logout_path, method: :post, class: "button float-right" %>
-        <% else %>
-          <%= link_to "Log In", '/auth/github', class: "button float-right" %>
-        <% end %>
-
-        <% if session[:order_id] == nil %>
-          <%= link_to "Cart", orders_path, class: "button float-right" %>
-        <% else %>
-          <%= link_to "Cart", order_path(session[:order_id]), class: "button float-right" %>
-        <% end %>
-
-        <%# if user is logged in, these buttons appear %>
-        <% if session[:merchant_id] %>
-          <%= link_to "My Orders", "#", class: "button float-right" %>
-          <%= link_to "Sell on Satiety", new_product_path, class: "button float-right" %>
-        <% end %>
-      </nav>
-
-      <nav>
-        <ul>
-          <% @categories = Category.all%>
-            <% @categories.each do |cat| %>
-            <li><%= link_to cat.category_name, category_path(cat.id) %></li>
-            <% end %>
-        </ul>
-      </nav>
-
-      <nav>
-        <ul>
-          <li><%=link_to "Browse by Category", categories_path%> |</li>
-          <li><%=link_to "Browse by Merchant", merchants_path %> |</li>
-          <li><%=link_to "See all Products", products_path%></li>
-        </ul>
-      </nav>
-    </header>
-
-    <main>
-      <section class="flash <%= flash[:status] %>">
-        <p><%= flash[:message] %></p>
-        <% if flash[:details] %>
-          <ul>
-            <% flash[:details].each do |field, problems| %>
-              <% problems.each do |problem| %>
-                <li><strong><%= field %>:</strong> <%= problem %></li>
-              <% end %>
-            <% end %>
-          </ul>
-        <% end %>
+  <header id="cool-splash-transparency">
+    <section class="logo-nav">
+      <!-- ===========logo=========== -->
+      <section>
+        <h3 class="inline-bl">Satiety <span class="span">Home-Cooked Meals on Demand</span></h3>
       </section>
+      <!-- ========browse by========= -->
+      <!--
+      <section class="align-nav">
+        <div class="dropdown">
+          <span class="span-align">Categories</span>
+          <div class="dropdown-content">
+            <p><%= link_to "All Categories", new_category_path %></p>
+            <p><%= link_to "Add Categories", categories_path %></p>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <span class="span-align">Merchants</span>
+          <div class="dropdown-content">
+            <p><%= link_to "All Categories", new_category_path %></p>
+            <p><%= link_to "Add Categories", categories_path %></p>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <span class="span-align">Products</span>
+          <div class="dropdown-content">
+            <p><%= link_to "All Categories", new_category_path %></p>
+            <p><%= link_to "Add Categories", categories_path %></p>
+          </div>
+        </div>
+      </section>
+      -->
+      <!-- ==========log in=========== -->
+      <ul class="menu">
+        <li>
+          <% if session[:order_id] == nil %>
+            <%= link_to "Cart", orders_path, class: "hollow link-hover button" %>
+          <% else %>
+            <%= link_to "&nbsp;&nbsp;&nbsp;Cart&nbsp;&nbsp;&nbsp;".html_safe, order_path(session[:order_id]), class: "hollow link-hover button" %>
+          <% end %>
+        </li>
+        &nbsp;
+        <li>
+          <% if session[:merchant_id] %>
+            <%= link_to "Log Out", logout_path, method: :post, class: "hollow link-hover button" %>
+          <% else %>
+            <%= link_to "&nbsp;Log &nbsp;In&nbsp".html_safe, '/auth/github', class: "hollow link-hover button" %>
+          <% end %>
+        </li>
+      </ul>
+    </section>
+  </header>
+  <body>
+<!-- ============================ -->
+<!-- =============MAIN=========== -->
+    <main>
     </main>
 
     <%= yield %>
 
-    <%# how to center? %>
-    <footer class="row center">
+<!-- ============================= -->
+<!-- ============FOOTER=========== -->
+    <footer class="row text-center">
       Copyright &copy 2017 <%= link_to "Amy Cash", "https://github.com/cashmonger"%>, <%= link_to "Sara Frandsen", "https://github.com/sarafrandsen"%>, <%= link_to "Tanisha Hampden", "#"%>, <%= link_to "Angela Wilson", "#"%>
     </footer>
   </body>

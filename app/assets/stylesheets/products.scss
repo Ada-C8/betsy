@@ -1,3 +1,16 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body
+{
+  background: url(https://i.imgur.com/UNi4pXz.jpg) no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+}
+// MAIN.HTML.ERB //
+.cool-prod-transparency {
+  background-color:rgba(192,192,192,0.2);
+  width:100%;
+  color: white;
+}
