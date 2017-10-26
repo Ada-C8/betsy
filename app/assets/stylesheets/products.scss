@@ -2,7 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
+body
+{
+background: url(https://i.imgur.com/UNi4pXz.jpg) no-repeat;
+background-size: 100%;
+}
 // MAIN.HTML.ERB //
 #cool-splash-transparency {
   background-color:rgba(0,0,0,0.8);
@@ -10,23 +14,19 @@
   width:100%;
 }
 
-#cool-splash {
-  height:600px;
-  width:100%;
-}
-
 .display-table {
     display: table;
+    width: 100%;
 }
 
 .vertical-align-table {
     display: table-cell;
-    vertical-align: middle;
+    vertical-align: center;
 }
 
-.cute-bg {
-    background: url(https://i.imgur.com/4OROSfE.jpg) no-repeat center center;
-    background-size: cover;
+.cool-transparency-text {
+    // background: url(https://i.imgur.com/UNi4pXz.jpg) no-repeat center center;
+    // background-size: cover;
     // min-height: 700px;
     color: white;
     padding: 30px;
