@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Foodsie!</title>
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag 'faviconsquarespacecupcake.png' %>
+    <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  </head>
+
+<!-- This portion is solid, please leave it alone. -->
+
+<body>
+  <!-- Navigation bar/links -->
+  <header>
+    <nav>
+      <%= link_to "Home", root_path, class: "button" %>
+      <%= link_to "Categories", root_path, class: "button" %>
+      <%= link_to "All Products", products_path, class: "button" %>
+      <%= link_to "Cart", cart_path, class: "button" %>
+      <div class="float-right">
+        <% if @auth_user %>
+        <%= link_to "Hello, #{@auth_user.username}", merchant_path(@auth_user), class: "button" %>
+        <%= link_to "Sign Out", logout_path, method: :post, class: "button" %>
+        <% else %>
+        <%= link_to "Sign In/Up", login_path, class: "button" %>
+        <% end %>
+      </div>
+    </nav>
+  </header>
+
+  <!-- LEAVE THIS IN: displays flash messages -->
+  <%= render partial: "/layouts/flash" %>
+
+  <main class="row">
+    <%= yield %>
+  </main>
+
+  <section class="row debug">
+    <%= debug(params) if Rails.env.development? %>
+  </section>
+  <hr class="root-hr">
+  <footer>
+    <div class="footer">
+      <p id="copyright">
+        © 2017 - Foodsie.
+      </p>
+    </footer>
+</body>
+</html>

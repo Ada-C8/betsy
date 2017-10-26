@@ -1,0 +1,50 @@
+<head>
+  <h2>Cart</h2>
+  <%= csrf_meta_tags %>
+  <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+</head>
+
+
+<p>
+DEBUG:
+session[:order_id] = <%= session[:order_id] %>
+session[:user_id] = <%= session[:user_id] %>
+</p>
+<hr>
+<hr>
+
+<% if @order == nil || @order_items.length == 0%>
+  <h3>You have nothing in your cart!</h3>
+  <p>Please add something to your cart!</p>
+  <%= link_to("See All Our Products", products_path, class: "button") %>
+<% else %>
+  <p>Order Item Count: <%= @order_items.count %></p>
+  <% @order_items.each do |item| %>
+  <p>DEBUG:
+  order_item id = <%= item.id %>
+  product id = <%= item.product.id %>
+
+  </p>
+
+  <h3><%= item.product.name %></h3>
+  <p>Amount Ordered: <%= item.quantity %></p>
+
+  <%= form_tag(update_quantity_in_cart_path(item.id), method: :patch) do %>
+    <%= label_tag :quantity %>
+    <%= select_tag :quantity, options_for_select(1..item.product.quantity, item.quantity)%>
+    <%= submit_tag 'Change Quantity' %>
+  <% end %>
+
+  <%= link_to("Delete", remove_from_cart_path(item.id), method: :patch, class: "alert button") %>
+
+  <hr>
+  <% end %>
+
+<% end %>
+
+<% if @order != nil && @order.order_items.length > 0 %>
+  <%= link_to("Checkout", new_order_billing_path(session[:order_id]), class: "button") %>
+<% end  %>
+<!--  Should go to order/order_id/billing/new -->
