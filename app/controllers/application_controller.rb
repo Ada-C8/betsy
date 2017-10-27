@@ -16,9 +16,11 @@ class ApplicationController < ActionController::Base
     result = model.save
 
     if result
+      puts "Save successful"
       flash[:status] = :success
       flash[:message] = "Successfully created a new Satiety account for #{model.username}." # this is the message that appears when a person logs in with GitHub for the first time
     else
+      puts "Save failed: #{model.errors.messages}"
       flash.now[:status] = :failure
       flash.now[:message] = "Failed to save #{model.class}."
       flash.now[:details] = model.errors.messages
