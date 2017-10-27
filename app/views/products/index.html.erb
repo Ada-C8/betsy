@@ -1,19 +1,19 @@
-<section>
-  <nav class='small-2 columns category-menu'>
+<section class="page-holder">
+  <nav class='small-12 medium-2 columns category-menu'>
     <h4>Categories</h4>
     <ul>
       <li class='view-all'>
         <%= link_to "View All Products", category_products_path('all') %>
       </li>
       <% @categories.each do |category| %>
-      <li>
+      <li class="small-6 medium-12 columns category">
         <%= link_to category.name.capitalize, category_products_path(category.id) %>
       </li>
       <% end %>
     </ul>
   </nav>
 
-  <section class='small-10 columns'>
+  <section class='small-12 medium-10 columns end'>
     <h2><%= @title %></h2>
 
     <%= render partial: "product-list", locals: {products: @products} %>
