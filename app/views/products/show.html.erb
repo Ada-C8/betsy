@@ -1,6 +1,13 @@
 <div class="row">
   <div class="medium-6 large-5 columns">
-    <h3><%= @product.name %><%# sold by who? %></h3>
+    <h3><%= @product.name %><%# sold by who? %> <small>
+      <% if session[:merchant_id] %>
+        <%= link_to "Edit", edit_product_path %>
+      <% end %> |
+      <% if session[:merchant_id] %>
+        <%= link_to "Delete", product_path(@product), method: :delete %> <!-- double check -->
+      <% end %>
+    </small></h3>
     <p><%= @product.description %><br />
     Only: $<%= @product.price %>.00</p>
   <!-- hella faking the price here -->
@@ -19,8 +26,14 @@
 <!-- reviews -->
 <div class="column row">
   <h3>Reviews</h3>
-  <h4>Average Rating: <%= @product.average_rating.round(2) %> / 5 Hearts</h4>
-  <div class="media-object stack-for-small">
+  <h4>Average Rating:
+    <!-- this logic needs to go somewhere else -->
+    <% if @product.average_rating == nil %>
+      0
+    <% else %>
+      <%= @product.average_rating.round(2) %>
+    <% end %> / 5 Hearts</h4>
+  <div class="media-object">
     <div class="media-object-section">
       <% reviews = @product.reviews.to_a %>
       <!-- what does .to_a do? -->
@@ -34,9 +47,6 @@
 </div>
 
 <!-- REVISIT
-<%= link_to "Edit Product", edit_product_path, :class=>"button"  %>
-<%= link_to "Delete Product", product_path(@product), method: :delete, :class=>"button" %>
-
 <%= form_tag(add_to_cart_path(@product.id), method: "post") do %>
   <%= label_tag("Quantity:") %>
   <%=  text_field_tag(:q) %>
