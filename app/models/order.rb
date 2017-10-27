@@ -29,16 +29,16 @@ class Order < ApplicationRecord
   # end
 
   def get_quantities
-    items = {}
+    items = {} # there are no items in the cart, where products are keys and quantity is the value
 
     self.order_products.each do | item |
       if items.include?(item.product)
-        items[item.product] += 1
+        items[item.product] += 1  # if the current product is in the cart, add 1 to its value
       else
-        items[item.product] = 1
+        items[item.product] = 1 # if the current product is not in the cart, set its initial value to 1
       end
     end
-    return items
+    return items # hash of all items in the cart, k = product, v = quantity
   end
 
   def quantity_of(product)
@@ -59,13 +59,14 @@ class Order < ApplicationRecord
       # self is redundant but does not break anything
       self.order_products.each do |op|
         quantity = op.quantity
-        op.product.stock -= quantity
+        op.product.stock -= quantity # reduce from STOCK
         op.product.save!
       end
 
 
       return true #update saved to database and we are done
-      # return nil # this method does not return anything, it only updates the product database.
+      # return nil
+      # this method does not return anything, it only updates the product database.
     end
   rescue StandardError # something failed when updating the database
     return false # explicitly returning false instead of an exception

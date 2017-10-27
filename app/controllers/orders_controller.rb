@@ -51,17 +51,15 @@ class OrdersController < ApplicationController
   end
 
   def submit
-    # billing = Billing.find_by(id:session[:order_id])
     @order = Order.find_by(id:session[:order_id], status: "pending")
-    @order.subtract_product
-
-    @billing = Billing.new(billing_params)
+    @order.subtract_product # decrease quantity in stock after purchase
+    @billing = Billing.new(billing_params) # create a new billing instance (used in the model)
 
     if @billing.save
       @order.status = "paid"
       flash[:status]  = :success
       flash[:message] = "Successfully submitted your order"
-      session[:order_id] = nil
+      session[:order_id] = nil # reset the cart by setting it to nil
     else
       flash.now[:status] = :failure
       flash.now[:message] = "Failed submit your order"
@@ -72,7 +70,7 @@ class OrdersController < ApplicationController
   def destroy
     #updates order to cancelled, removes all associated products from OP table
   end
-  # moved private methods to model
+
   private
   def billing_params
     return params.require(:billing).permit(:street, :apt, :city, :state ,:ship_zip, :email, :credit_card, :exp, :cvv, :bill_zip, :name)
