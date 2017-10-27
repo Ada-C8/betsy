@@ -1,6 +1,8 @@
 <section class="page-holder">
-  <h2 class = 'page-title'>Completed Orders</h2>
-
+  <h2 class = 'page-title'>
+    <%= image_tag("002-eye.png", class:'tiny-img')  %> Completed Orders
+  </h2>
+  
   <% if @order_products.empty? %>
     <div class="no-orders">
       <h4>You have no completed orders at this time!</h4>

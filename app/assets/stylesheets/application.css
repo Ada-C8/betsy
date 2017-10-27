@@ -100,22 +100,17 @@ nav.top-nav ul li {
   text-align: center;
 }
 nav.top-nav ul li a { color: #fefefe; }
-
-
 .nav-text {
   display: none;
   white-space: nowrap;
 }
-
 .nav-icon {
   font-size: 1.5rem;
 }
-
 @media print, screen and (min-width: 42em) {
   .nav-text {
     display: inline-block;
   }
-
   .nav-icon {
     font-size: 1rem;
   }
@@ -124,6 +119,12 @@ nav.top-nav ul li a { color: #fefefe; }
 .row { max-width: 100%; }
 header nav { text-align: right; }
 .right { float: right; }
+
+/*--------------- main ---------------*/
+main.main section:first-of-type {
+  padding: 1.5% 5% 6%;
+}
+main.main section.hero { padding: 0; }
 
 /*--------------- mini thumbnails ---------------*/
 div.mini-img {
