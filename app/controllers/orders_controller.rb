@@ -39,6 +39,7 @@ class OrdersController < ApplicationController
 
   def create
     create_order
+    render :show
     #see application controller
   end
 
