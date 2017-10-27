@@ -57,7 +57,7 @@
           <button class="dropdown-button-browse">Merchant</button>
           <div class="dropdown-content-browse">
             <li><%= link_to "New Category", new_category_path %></li>
-            <li><%= link_to "Account Orders View", merchant_orders_path(session[:user_id]) %></li>
+            <li><%= link_to "Account View", merchant_orders_path(session[:user_id]) %></li>
             <li><%= link_to "Add Product", new_product_path %></li>
             <li><%= link_to "My Products", merchant_products_path(session[:user_id]) %></li>
           </div>
