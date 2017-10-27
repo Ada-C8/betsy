@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     end
 
     redirect_to root_path
-    raise
+    # raise
   end
 
   def logout
