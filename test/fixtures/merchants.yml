@@ -7,15 +7,13 @@
 
 
 fake_user:
-  id: 1
-  username: blah
+  username: amy
   email: blah@123.com
   uid: a_uid
   provider: github
 
 fake_user2:
-  id: 2
-  username: blah
+  username: angela
   email: blah@123.com
-  uid: a_uid
+  uid: b_uid
   provider: github

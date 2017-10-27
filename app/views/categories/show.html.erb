@@ -41,7 +41,7 @@
       <%= product.stock %>
     </td>
     <td>
-      <%= link_to "Merchant", merchant_path(product.merchant.id) %>
+      <%= link_to product.merchant.username, merchant_path(product.merchant.id) %>
     </td>
     <td>
       <%#= link_to "Direct Link to Purchase?", "#" %>

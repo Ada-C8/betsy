@@ -7,7 +7,7 @@
 <p>price: <%= @product.price %></p>
 <p>stock: <%= @product.stock %></p>
 
-<p>photo: <%= @product.photo_URL %></p>
+<p>photo: <%= image_tag(@product.photo_URL) %></p>
 
 
 <%#= form_tag(add_to_cart_path(@product.id), method: "post") do %>
