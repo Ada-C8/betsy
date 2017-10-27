@@ -1,0 +1,78 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+grass:
+  merchant: diane
+  name: Grass
+  inventory: 5
+  price: 8.75
+  description: A full grown spider plant with some babies growing off it.
+  visible: true
+  image_url: https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg
+
+spider_plant:
+  merchant: tamira
+  name: Spider Plant
+  inventory: 5
+  price: 8.75
+  description: A full grown spider plant with some babies growing off it.
+  visible: true
+  image_url: https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg
+  # category: house_plants
+
+aloe_vera:
+  merchant: tamira
+  name: Aloe vera
+  inventory: 2
+  price: 5.50
+  description: A small aloe vera plant
+  visible: true
+  image_url: https://altmanplants.com/wp-content/uploads/Echeveria-Bluebird.jpg
+  # category: succulents, house_plants
+
+
+red_cap_cactus:
+  merchant: diane
+  name: Red Cap Cactus
+  inventory: 10
+  price: 6.00
+  description: A cactus with a pink flower at the top.
+  visible: true
+  image_url: http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg
+  # category: cactus, house_plants
+
+audrey_ficus:
+  merchant: diane
+  name: Audrey Ficus
+  inventory: 3
+  price: 80.00
+  description: A small tree with large leaves
+  visible: true
+  image_url: https://www.plantshed.com//media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/p/s/ps20008_1_1.jpg
+  # category: house_plants
+
+ogre_ears:
+  merchant: diane
+  name: Ogre Ears
+  inventory: 10
+  price: 9.00
+  description: something
+  visible: false
+  image_url: http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg
+
+string_of_pearls:
+  merchant: diane
+  name: String of Pearls
+  inventory: 10
+  price: 16.00
+  description: something.
+  visible: true
+  image_url: http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg
+
+tulip_bulb:
+  merchant: tamira
+  name: Tulip bulb
+  inventory: 0
+  price: 2.00
+  description: A tulip
+  visible: true
+  image_url: https://d23x084dcxncv3.cloudfront.net/sarahraven/product/77aa0d14.261046_1.jpg/320x320.crop.261046_1.jpg
