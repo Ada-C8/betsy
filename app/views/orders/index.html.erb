@@ -22,7 +22,7 @@
     <section class="merchant">
       <span><em>Order ID: <%= link_to orders.id, indi_order_path(orders.id.to_i) %></em></span>
       <span><em><%= orders.status %></em></span>
-      <span><em><%= orders.created_at %></em></span>
+      <span><em><%= orders.created_at.strftime("%B %d, %Y") %></em></span>
       <span><em><%= link_to orders.product_name, product_path(orders.product_id.to_i) %></em></span>
       <span><em>Product Price: <%= orders.product_price.to_f %></em></span>
       <% @total += orders.product_price.to_f %>
