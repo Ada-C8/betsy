@@ -2,25 +2,30 @@ class OrdersController < ApplicationController
   before_action :find_order, only: [:show, :edit, :update]
 
   def index
-    if params[:status] == "pending"
-      @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id]}).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
+    if session[:user_id] == params[:merchant_id].to_i
 
-      @merch_orders = @merch_orders.where(:status => "pending")
+      if params[:status] == "pending"
+        @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id]}).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
 
-    elsif params[:status] == "complete"
-      @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
+        @merch_orders = @merch_orders.where(:status => "pending")
 
-      @merch_orders = @merch_orders.where(:status => "complete")
+      elsif params[:status] == "complete"
+        @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
 
-    elsif params[:status] == "shipped"
-      @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
+        @merch_orders = @merch_orders.where(:status => "complete")
 
-      @merch_orders = @merch_orders.where(:status => "shipped")
+      elsif params[:status] == "shipped"
+        @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
 
+        @merch_orders = @merch_orders.where(:status => "shipped")
+
+      else
+        @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
+      end
     else
-      @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
+      flash[:result_text] = "You cannot view this page"
+      redirect_to home_path
     end
-
   end
 
   def show

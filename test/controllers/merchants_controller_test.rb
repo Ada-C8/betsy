@@ -1,6 +1,7 @@
 require "test_helper"
 
 describe MerchantsController do
+
   describe "#index" do
     it "should respond with success when there are many merchants" do
       Merchant.count.must_be :>, 0
@@ -46,6 +47,26 @@ describe MerchantsController do
       proc   {
         post merchants_path, params: {merchant: {username: "witch9999", email: "witchywitch@witches.com"}}
       }.must_change 'Merchant.count', 1
+    end
+  end
+
+  describe "when authenticated" do
+    let(:merchant) { merchants(:ada) }
+
+    it "should allow a merchant to view its own orders page" do
+      merchant = merchants(:ada)
+      login(merchant)
+      get merchant_orders_path(merchants(:ada).id)
+      must_respond_with :success
+    end
+
+    it "should not allow merchants to view other merchants orders page" do
+      merchant = merchants(:ada)
+      login(merchant)
+      get merchant_orders_path(merchants(:spooky).id)
+      must_respond_with :redirect
+      must_redirect_to home_path
+      flash.keys.must_include "result_text"
     end
   end
 

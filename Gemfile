@@ -45,6 +45,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'dotenv-rails'
   gem 'simplecov'
+  gem 'pry-rails'
 end
 
 group :development do
@@ -63,7 +64,7 @@ gem 'jquery-turbolinks'
 gem 'foundation-rails', '6.4.1.2'
 group :development do
   gem 'better_errors'
-  gem 'pry-rails'
+
   gem 'binding_of_caller'
 end
 
