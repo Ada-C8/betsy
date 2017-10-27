@@ -7,7 +7,12 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    puts params
+    @product = Product.find_by(id: params[:product_id])
+
+    if current_user && owner?
+      flash[:result_text] = "You cannot review your own product"
+      return redirect_to home_path
+    end
     @review = Review.new(review_params)
     @review.product_id = params[:product_id]
     # @review.rating = @review.rating.to_i
@@ -32,6 +37,11 @@ class ReviewsController < ApplicationController
 
 
   private
+
+  def owner?
+    return session[:user_id] == @product.merchant.id ? true : false
+  end
+
 
  def review_params
     params.require(:review).permit(:rating, :text_review)

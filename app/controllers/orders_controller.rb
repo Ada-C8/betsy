@@ -1,7 +1,12 @@
 class OrdersController < ApplicationController
   before_action :find_order, only: [:show, :edit, :update]
+  before_action :find_merchant, only: [:index]
 
   def index
+    if current_user != @merchant
+      flash[:result_text] = "You cannot view this page"
+      return redirect_to home_path
+    end
     if params[:status] == "pending"
       @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id]}).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
 
@@ -20,7 +25,6 @@ class OrdersController < ApplicationController
     else
       @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
     end
-
   end
 
   def show
@@ -83,13 +87,14 @@ class OrdersController < ApplicationController
         flash[:status] = :success
         flash[:result_text] = "You have successfully shipped your order!"
         redirect_back fallback_location: root_path
+        params[:id] = nil
       else
         flash[:status] = :failure
         flash[:result_text] = "Couldn't mark as shipped."
       end
     else
       flash[:status] = :failure
-      flash[:result_text] = "Can't ship an order that is not complete"
+      flash[:result_text] = "Shipping not allowed for this order"
       redirect_to home_path
     end
   end
@@ -106,6 +111,10 @@ class OrdersController < ApplicationController
 
   def find_order
     @order = Order.find_by(id: session[:order_id])
+  end
+
+  def find_merchant
+    @merchant = Merchant.find_by(id: params[:merchant_id])
   end
 
 end
