@@ -3,10 +3,11 @@
   <% @cart.get_quantities.each do |product, quantity| %>
     <p><%= link_to product.name, product_path(product.id) %></p>
     <p> Unit Price: <%= product.price %></p>
-    <p> quantity: <%= quantity %>
+    <p> Quantity: <%= quantity %>
     <p><%= link_to "Remove Product", orders_product_path, method: :delete, class: "button" %></p>
   <% end %>
 
+  <span><%= @cart.products.price %></span>
   <p><%= link_to "Checkout", billing_form_path, class: "button" %></p>
   <% else %>
     <p>Your shopping cart is empty.</p> <%# need to figure this out--currently, the index view is a work-around %>
