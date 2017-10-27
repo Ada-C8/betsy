@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
     if session[:merchant]
       merchant_id = session[:merchant]['id']
       @orders = Merchant.find(merchant_id).orders
+      @orders = @orders.sort.reverse
     end
   end
 
