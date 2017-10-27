@@ -19,7 +19,7 @@
   <span class="order-info">
   </br>
   <li><em>Order Subtotal</em>: <%= @order.order_total %> </li>
-  <li><em>Order Placed</em>: <%= @order.updated_at %> </li>
+  <li><em>Order Placed</em>: <%= @order.updated_at.strftime("%B %d, %Y") %> </li>
   <li><em>Order Status</em>: <%= @order.status %> </li>
   </span>
 

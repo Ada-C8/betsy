@@ -20,6 +20,7 @@
 
   <section class="info-card">
     <section class="merchant">
+<<<<<<< HEAD
       <section class="order-details">
         <ul>
           <li><em>Order ID</em>: <%= link_to orders.id, indi_order_path(orders.id.to_i) %></li>
@@ -39,6 +40,22 @@
     <% end %>
 
   <section class="view-buttons revenue">
+      <span><em>Order ID: <%= link_to orders.id, indi_order_path(orders.id.to_i) %></em></span>
+      <span><em><%= orders.status %></em></span>
+      <span><em><%= orders.created_at.strftime("%B %d, %Y") %></em></span>
+      <span><em><%= link_to orders.product_name, product_path(orders.product_id.to_i) %></em></span>
+      <span><em>Product Price: <%= orders.product_price.to_f %></em></span>
+      <% @total += orders.product_price.to_f %>
+      <% @total_revenue += @total %>
+      <span><em>Order Total: <%= @total %></em></span>
+      <%= link_to ship_order_path(orders.id.to_i), method: :patch do %>
+        <span class="button">Mark Shipped</span>
+      <% end %>
+    </section>
+    </section>
+  <% end %>
+
+  <section class="revenue">
       <% if params[:status] %>
     <span>Total Revenue for <%= params[:status].capitalize %> Orders: <%= @total_revenue %></span>
   <% else %>

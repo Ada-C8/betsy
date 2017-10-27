@@ -39,6 +39,7 @@ class OrdersController < ApplicationController
 
   def create
     create_order
+    render :show
     #see application controller
   end
 
@@ -71,8 +72,14 @@ class OrdersController < ApplicationController
           session[:order_id] = nil
           redirect_to order_confirm_order_path(@order.id)
         else
+
+          # flash[:result_text] = "All fields are required to complete your order."
+          error = "Please correct the following fields: "
+          @order.errors.messages.each do |field, message|
+            error << "- #{field.capitalize} "
+          end
           flash[:status] = :failure
-          flash[:result_text] = "All fields are required to complete your order."
+          flash[:result_text] = error
           render :edit, status: :bad_request
         end
       end
