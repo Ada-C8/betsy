@@ -15,9 +15,9 @@
     <th>
       Number in Stock
     </th>
-    <th>
+    <!-- <th>
       Merchant
-    </th>
+    </th> -->
     <th>
       Add to Cart
     </th>
@@ -40,9 +40,9 @@
     <td>
       <%= product.stock %>
     </td>
-    <td>
-      <%= product.merchant.username %>
-    </td>
+    <!-- <td>
+      <%#= product.merchant.username %>
+    </td> -->
     <td>
       <%#= link_to "Direct Link to Purchase?", "#" %>
       <%= link_to "Add to cart", add_to_cart_path(product.id), :class=>"button", method: :post %>

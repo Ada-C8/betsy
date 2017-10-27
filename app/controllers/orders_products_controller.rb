@@ -18,7 +18,7 @@ class OrdersProductsController < ApplicationController
   def update
   end
 
-  def destroy
+  def destroy_all
     #remove all products tied to a particular order number
     #change status to cancelled in orders_controller
 
@@ -28,13 +28,18 @@ class OrdersProductsController < ApplicationController
       # product.order_products.destroy
 
       order = Order.find_or_create_cart(session[:order_id])
-      product = Product.find_by(id: params[:id])
-      array_orderproducts = product.order_products
-      array_orderproducts.each do |op|
-        if op.order.id == session[:order_id]
-          op.destroy
-        end
-      end
+      order_products = OrderProduct.where(id: params[:ids].split(","))
+      order_products.destroy_all
+
+
+      # array_orderproducts = product.order_products
+      # array_orderproducts.each do |op|
+      #   if op.product.id == product.id
+      #     op.destroy
+      #     break
+      #   end
+      # end
+      redirect_to order_path(session[:order_id])
   end
 
 end
