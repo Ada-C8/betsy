@@ -18,40 +18,28 @@
   <% @merch_orders.to_a.each do |orders| %>
   <% @total = 0.00 %>
 
-  <section class="info-card">
-    <section class="merchant">
-<<<<<<< HEAD
-      <section class="order-details">
-        <ul>
-          <li><em>Order ID</em>: <%= link_to orders.id, indi_order_path(orders.id.to_i) %></li>
-          <li><em><%= orders.status %></em></li>
-          <li><em><%= link_to orders.product_name, product_path(orders.product_id.to_i) %></em></li>
-          <li><%= orders.product_price.to_f %></li>
-          <% @total += orders.product_price.to_f %>
-          <% @total_revenue += @total %>
-        </ul>
-        <%= link_to ship_order_path(orders.id.to_i), method: :patch do %>
-          <span class="button">Mark Shipped</span>
-        <% end %>
-        <%= link_to orders.id, indi_order_path(orders.id.to_i) do %>
-          <span class="button">View Order</span>
-        <% end %>
-      </section>
-    <% end %>
+  <section class="order-details">
+    <ul>
 
-  <section class="view-buttons revenue">
-      <span><em>Order ID: <%= link_to orders.id, indi_order_path(orders.id.to_i) %></em></span>
-      <span><em><%= orders.status %></em></span>
-      <span><em><%= orders.created_at.strftime("%B %d, %Y") %></em></span>
-      <span><em><%= link_to orders.product_name, product_path(orders.product_id.to_i) %></em></span>
-      <span><em>Product Price: <%= orders.product_price.to_f %></em></span>
+
+      <li><em>Order ID: <%= link_to orders.id, indi_order_path(orders.id.to_i) %></em></li>
+      <li><em><%= orders.status %></em></li>
+      <li><em><%= orders.created_at.strftime("%B %d, %Y") %></em></li>
+      <li><em><%= link_to orders.product_name, product_path(orders.product_id.to_i) %></em></li>
+      <li><em>Product Price: <%= orders.product_price.to_f %></em></li>
       <% @total += orders.product_price.to_f %>
       <% @total_revenue += @total %>
-      <span><em>Order Total: <%= @total %></em></span>
+      <li><em>Order Total: <%= @total %></em></li>
+      </ul>
+      <section class="view-buttons">
       <%= link_to ship_order_path(orders.id.to_i), method: :patch do %>
         <span class="button">Mark Shipped</span>
       <% end %>
-    </section>
+      <%= link_to indi_order_path(orders.id.to_i), method: :get do %>
+        <span class="button">View Order</span>
+      <% end %>
+      </section>
+
     </section>
   <% end %>
 
