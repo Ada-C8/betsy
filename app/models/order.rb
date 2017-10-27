@@ -17,7 +17,6 @@ class Order < ApplicationRecord
     if billing.save
       self.status = "paid"
       unless self.subtract_products # if you can't subract products, we know it fails
-        puts "!!!!!!!!!!!!!!!!!we shouldn't be here"
         return false
       end
       self.products.clear
@@ -43,6 +42,7 @@ class Order < ApplicationRecord
     items = {} # keys are the product, values are the quantity
 
     self.products.each do |product|
+
       if items.include?(product)
         items[product] += 1 # if the current product is in the cart, add 1 to its value
       else
