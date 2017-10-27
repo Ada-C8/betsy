@@ -35,14 +35,20 @@ describe ReviewsController do
       must_redirect_to product_path(Review.last.product_id)
     end
 
- it "should rerender the form if it can't create the review" do
-    proc   {
-    post product_reviews_path(products(:sad_hat).id), params: { review: {rating: nil, text_review: "Smokin.", product_id: products(:pointy_hat).id}  }
-  }.must_change 'Review.count', 0
+   it "should rerender the form if it can't create the review" do
+      proc   {
+      post product_reviews_path(products(:sad_hat).id), params: { review: {rating: nil, text_review: "Smokin.", product_id: products(:pointy_hat).id}  }
+    }.must_change 'Review.count', 0
 
-      must_respond_with :bad_request
+        must_respond_with :bad_request
+      end
+
+    it "should prevent a merchant from creating a review on its products" do
+      login(merchants(:spooky))
+      proc {
+        post product_reviews_path(products(:sad_hat).id), params: { review: {rating: 4, text_review: "buy this hat!", product_id: products(:sad_hat).id} }
+      }.must_change 'Review.count', 0
     end
-
   end
   # describe "show" do
   #   it "can show a review" do

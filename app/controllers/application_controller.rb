@@ -14,4 +14,9 @@ class ApplicationController < ActionController::Base
       flash[:result_text] = "Could not initialize pending order."
     end
   end
+
+  def current_user
+    @current_user ||= Merchant.find_by(id: session[:user_id])
+
+  end
 end
