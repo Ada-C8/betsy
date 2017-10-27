@@ -1,5 +1,4 @@
 <%= form_for @order, html: {id: "order-form"} do |f| %>
-  <% puts "Rendering form for order #{@order.inspect}" %>
   <% if session[:merchant] %>
     <%= f.hidden_field :merchant_id, value: session[:merchant]['id'] %>
   <% end %>
@@ -22,7 +21,6 @@
 
   <%= content_tag :div, class: "cvv-wrapper" do %>
     <%= f.label :cvv, "cvv" %>
-    <% puts "About to do the cvv tag, order is #{@order.inspect}" %>
     <%= f.text_field :cvv %>
   <% end %>
 
