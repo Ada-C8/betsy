@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -25,11 +25,9 @@
 
   <% if current_page?(root_path) %>
   <% else %>
-  <div class="row">
-    <header class="navigation large-12 columns">
+    <header class="navigation">
 
       <button class="logo"><%= link_to "Sourceress", home_path %></button>
-
       <section class="dropdown">
         <ul class "browse-menu">
           <button class="dropdown-button-browse">Browse</button>
@@ -59,7 +57,7 @@
           <button class="dropdown-button-browse">Merchant</button>
           <div class="dropdown-content-browse">
             <li><%= link_to "New Category", new_category_path %></li>
-            <li><%= link_to "Account Orders View", merchant_orders_path(session[:user_id]) %></li>
+            <li><%= link_to "Account View", merchant_orders_path(session[:user_id]) %></li>
             <li><%= link_to "Add Product", new_product_path %></li>
             <li><%= link_to "My Products", merchant_products_path(session[:user_id]) %></li>
           </div>
@@ -84,8 +82,6 @@
       </section>
 
     </header>
-  </div>
-
   <% end %>
 
 

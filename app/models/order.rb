@@ -32,8 +32,12 @@ class Order < ApplicationRecord
   end
 
   def last_four
-    cc_last = self.card_number.slice(10..-1)
+    if self.status == "complete" || self.status == "shipped"
+    cc_last = self.card_number.to_s.slice(12..-1)
     return cc_last
+  else
+    return "Order not Complete"
+    end
   end
 
 end

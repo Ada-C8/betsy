@@ -196,32 +196,23 @@ describe OrdersController do
     end
 
     it "does not allow changes to an order with the status of shipped" do
-      #
-      # order_data = {
-      #   order: {
-      #     email: "buyer@email.com",
-      #     address: "100 Witchy Way",
-      #     city: "Seattle",
-      #     state: "Washington",
-      #     name: "Gale",
-      #     card_number: 1234123412341234,
-      #     card_exp: "Sun, 1 Oct 2017",
-      #     card_cvv: 546,
-      #     zip_code: "98122",
-      #     status: "shipped"
-      #   }
-      # }
-      #
-      # #store the order id so that when session is set back to nil, I can retrieve it
-      # order = Order.find(@order.id)
-      # #this update should succeed
-      # patch order_path(@order.id), params: order_data
-      # #Verify that the order's current status is shipped
-      # order.status.must_equal "shipped"
-      # #this update should not succeed now that status is shipped
-      # patch order_path(order.id), params: order_data
-      #
-      # must_redirect_to home_path
+      #can't initialize a session with an order that has the shipped status
+    end
+  end
+  describe "#shipped" do
+
+    setup { session_setup }
+
+    before do
+      @order = Order.find_by(id: session[:order_id])
+    end
+
+    it "Allow the merchant to change an order's status from complete to shipped" do
+      #can't initialize a session with an order that has the shipped status
+    end
+    it "Doesn't allow the merchant to change an order's status to shipped FROM pending" do
+      patch ship_order_path(@order.id)
+      must_redirect_to home_path
     end
   end
 end

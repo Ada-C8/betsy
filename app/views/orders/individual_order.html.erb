@@ -1,10 +1,23 @@
-<h3>Order from <%= @order.name %></h3>
+<span class="index-banner">
+<% if @order.status == "pending" %>
+  No order info yet.
+<% elsif @order.status == "complete" || @order.status == "shipped" %>
+  Order from <%= @order.name %>
+<% else %>
+  Individual Order Page
+<% end %>
+</span>
+
+
+
+
+
 <section>
-  <span><em><%= @order.id %></em></span>
-  <span><em><%= @order.name %></em></span>
-  <span><em><%= @order.email %></em></span>
-  <span><em><%= @order.address %></em></span>
-  <span><em><%= @order.zip_code %></em></span>
-  <span><em><%= @order.last_four %></em></span>
-  <span><em><%= @order.card_exp %></em></span>
+  <span><em>ID: <%= @order.id %></em></span>
+  <span><em>Name: <%= @order.name %></em></span>
+  <span><em>Email: <%= @order.email %></em></span>
+  <span><em>Address: <%= @order.address %></em></span>
+  <span><em>Zip Code: <%= @order.zip_code %></em></span>
+  <span><em>Last four digits of credit card: <%= @order.last_four %></em></span>
+  <span><em>Card Expiration: <%= @order.card_exp %></em></span>
 </section>

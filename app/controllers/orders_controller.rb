@@ -94,12 +94,12 @@ class OrdersController < ApplicationController
     else
       flash[:status] = :failure
       flash[:result_text] = "Can't ship an order that is not complete"
-      must_redirect_to home_path
+      redirect_to home_path
     end
   end
 
   def individual_order
-    find_order
+    @order = Order.find_by(id: params[:id])
   end
 
   private
