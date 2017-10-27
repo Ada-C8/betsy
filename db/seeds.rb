@@ -74,3 +74,24 @@ end
 
 puts "Added #{Product.count} product records"
 puts "#{product_failures.length} products failed to save"
+
+# reviews
+
+REVIEW_FILE = Rails.root.join('db', 'seed_data', 'reviews.csv')
+puts "Loading raw product data from #{REVIEW_FILE}"
+product_failures = []
+CSV.foreach(REVIEW_FILE, :headers => true) do |row|
+  review = Review.new
+  review.product_id = row['product_id']
+  review.rating = row['rating']
+  review.reviewtext = row["reviewtext"]
+
+  puts "Created review: #{review.inspect}"
+  successful = review.save
+  if !successful
+    review_failures << review
+  end
+end
+
+puts "Added #{Product.count} product records"
+puts "#{product_failures.length} products failed to save"
