@@ -17,9 +17,7 @@ class SessionsController < ApplicationController
       flash[:status] = :failure
       flash[:message] = "Could not create new user."
     end
-
     redirect_to root_path
-    # raise
   end
 
   def logout
