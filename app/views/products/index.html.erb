@@ -40,7 +40,7 @@
       <%= product.stock %>
     </td>
     <td>
-      <%= product.category_id %>
+      <%= product.category.category_name %>
     </td>
     <td>
       <%= link_to "Review", new_product_review_path(product.id) %>
