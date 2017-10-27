@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   post '/logout', to: 'sessions#logout', as: 'logout'
   post '/add_to_cart/:id', to: 'orders#add_to_cart', as: 'add_to_cart'
   get '/billing_form', to: 'orders#billing_form'
-  post '/show_order/:id', to: 'orders#submit', as: 'show_order'
+  post '/order/complete', to: 'orders#submit', as: 'complete_order'
 end
