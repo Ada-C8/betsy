@@ -192,3 +192,36 @@ section.product-info {
   font-weight: bold;
   margin-bottom: 1rem;
 }
+
+/////////////////
+// NEW PRODUCT //
+/////////////////
+
+.product-form {
+  float: none;
+  margin: auto;
+}
+
+.prod-form-item {
+  display: inline-block;
+}
+
+@media print, screen and (min-width: 40em) {
+  input.prod-form-item, textarea.prod-form-item {
+    width: 70%;
+  }
+}
+
+@media print, screen and (min-width: 64em) {
+  input.prod-form-item, textarea.prod-form-item {
+    width: 75%;
+  }
+  label.prod-form-item {
+    // text-align: right;
+  }
+}
+
+.product-form-holder {
+  float: none;
+  margin: auto;
+}
