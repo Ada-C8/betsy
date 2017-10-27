@@ -1,0 +1,109 @@
+<section class="product-show row full-width">
+  <figure class="column small-12 medium-12 large-6 text-center">
+    <a href="<%= product_path(@product.id)%>"><%= product_photo(@product) %></a>
+  </figure>
+
+  <article class="column small-12 medium-12 large-6">
+    <div>
+      <h2><%= @product.name %></h2>
+      <% if @product.status == "retired" %>
+        <h4>Retired product</h4>
+      <% end %>
+        <% if @product.reviews.count > 0 %>
+          <div class="dynamic-star">
+            <span class="dynamic-star overlay" style="<%= "width: #{@product.average_rating / 5.0 * 100}%" %>" >
+              <span>&#x2605</span><span>&#x2605</span><span>&#x2605</span><span>&#x2605</span><span>&#x2605</span>
+            </span>
+            <div class="dynamic-star underlay" >
+              <span>&#x2605</span><span>&#x2605</span><span>&#x2605</span><span>&#x2605</span><span>&#x2605</span>
+            </div>
+          </div>
+        <% end %>
+        <div class="float-right">
+          <% if @merchant == @product.merchant %>
+            <%= link_to "Edit Product", edit_product_path(@product.id), class: :button %>
+          <% else %>
+            <%= link_to "Add to cart", add_order_item_path(session[:order_id], @product.id), method: :patch, class: :button %>
+          <% end %>
+        </div>
+    </div>
+    <% if @product.status == "retired" %>
+      <h4 class="heading">Retired product</h4>
+    <% end %>
+
+    <h3>List Price: <%= number_to_currency(@product.price) %></h3>
+    <% if @product.quantity <= 5 %>
+      <p>Limited - Only <%= @product.quantity %> left in stock </p>
+    <% end %>
+    <p>Ships from and sold by: <%= link_to(@product.merchant.username, products_path(:merchant => @product.merchant.id)) %> </p>
+
+    <h3>Description:</h3>
+    <p><%= product_description(@product) %></p>
+    <% if @product.categories != nil %>
+      <span><strong>Categories: </strong></span>
+      <% count = 0 %>
+      <% @product.categories.each do |category| %>
+        <% count += 1 %>
+        <% if count < @product.categories.length %>
+          <span><%= link_to(category, products_path(:category => category)) %>, </span>
+        <% else %>
+          <span><%= link_to(category, products_path(:category => category)) %></span>
+        <% end %>
+      <% end %>
+    <% end %>
+  </article>
+</section>
+
+<hr />
+<section class="product-show row full-width">
+  <article class="column small-12 medium-12 large-6">
+        <h3>Average Rating:</h3>
+        <% if @product.reviews.count > 0 %>
+          <div class="dynamic-star">
+            <span class="dynamic-star overlay" style="<%= "width: #{@product.average_rating / 5.0 * 100}%" %>" >
+              <span>&#x2605</span><span>&#x2605</span><span>&#x2605</span><span>&#x2605</span><span>&#x2605</span>
+            </span>
+            <div class="dynamic-star underlay" >
+              <span>&#x2605</span><span>&#x2605</span><span>&#x2605</span><span>&#x2605</span><span>&#x2605</span>
+            </div>
+          </div>
+          <span>
+            <%= @product.average_rating %>
+          </span>
+        <% else %>
+          <p>No rating yet.</p>
+        <% end %>
+        <% if @merchant != @product.merchant %>
+          <span class="space"></span>
+          <span class="review"><%= link_to("Leave a review", new_review_path(@product.id), method: :get, class: "button") %></span>
+        <% end %>
+
+    <section>
+      <h3>Reviews: </h3>
+      <% if @product.reviews.count < 1  %>
+        <p>Be the first to review this item</p>
+      <% else %>
+        <ul>
+          <% @product.reviews.each do |review| %>
+          <section class="bottom-space">
+            <li>
+              <% review.rating.times do %>
+                <span class="checked star">&#x2605</span>
+              <% end %>
+              <% (5 - review.rating).times do %>
+                <span class="unchecked star">&#x2605</span>
+              <% end %>
+              <span class="space"></span>
+              <strong><%=review.title%></strong>
+              <li class="smaller">On: <%=review.created_at%></li>
+            </li>
+            <li><%=review.review_text%></li>
+          </section>
+
+          <% end %>
+        </ul>
+      <% end %>
+    </section>
+  </article>
+
+</section>
