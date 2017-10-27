@@ -1,8 +1,12 @@
 spooky:
+  provider: github
+  uid: 11234
   username: Spooky Books
   email: mailing@email.com
 
 ghosty:
+  provider: github
+  uid: 334455
   username: Ghost Artifacts
   email: letters@webmail.com
 

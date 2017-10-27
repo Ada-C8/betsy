@@ -9,6 +9,7 @@ gem 'awesome_print'
 gem "paperclip", "~> 5.0.0"
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'simplecov'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
@@ -45,6 +46,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'dotenv-rails'
   gem 'simplecov'
+  gem 'pry-rails'
 end
 
 group :development do
@@ -63,7 +65,7 @@ gem 'jquery-turbolinks'
 gem 'foundation-rails', '6.4.1.2'
 group :development do
   gem 'better_errors'
-  gem 'pry-rails'
+
   gem 'binding_of_caller'
 end
 

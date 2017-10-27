@@ -1,7 +1,12 @@
 class OrdersController < ApplicationController
   before_action :find_order, only: [:show, :edit, :update]
+  before_action :find_merchant, only: [:index]
 
   def index
+    if current_user != @merchant
+      flash[:result_text] = "You cannot view this page"
+      return redirect_to home_path
+    end
     if params[:status] == "pending"
       @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id]}).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
 
@@ -20,7 +25,6 @@ class OrdersController < ApplicationController
     else
       @merch_orders = Order.joins(:products).where({ "products.merchant_id" => session[:user_id] }).select("orders.*", "products.name as product_name", "products.price as product_price", "products.id as product_id")
     end
-
   end
 
   def show
@@ -96,7 +100,7 @@ class OrdersController < ApplicationController
   end
 
   def individual_order
-    find_order
+    @order = Order.find_by(id: params[:id])
   end
 
   private
@@ -107,6 +111,10 @@ class OrdersController < ApplicationController
 
   def find_order
     @order = Order.find_by(id: session[:order_id])
+  end
+
+  def find_merchant
+    @merchant = Merchant.find_by(id: params[:merchant_id])
   end
 
 end
