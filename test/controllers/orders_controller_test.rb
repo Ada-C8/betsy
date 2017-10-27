@@ -38,7 +38,7 @@ describe OrdersController do
   # def submit
   #   # billing = Billing.find_by(id:session[:order_id])
   #   @order = Order.find_by(id:session[:order_id], status: "pending")
-  #   @order.subtract_product
+  #   @order.subtract_products
   #
   #   @billing = Billing.new(billing_params)
   #

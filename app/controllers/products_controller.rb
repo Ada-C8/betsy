@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :show, :destroy]
 
   def main
+    puts session[:order_id]
     render template: "products/main"
   end
 
