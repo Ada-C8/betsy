@@ -124,7 +124,16 @@ header nav { text-align: right; }
 main.main section:first-of-type {
   padding: 1.5% 5% 6%;
 }
+
 main.main section.hero { padding: 0; }
+
+.no-pad {
+  padding: 0 !important;
+}
+
+.some-pad {
+  padding: 0 1rem !important;
+}
 
 /*--------------- mini thumbnails ---------------*/
 div.mini-img {
