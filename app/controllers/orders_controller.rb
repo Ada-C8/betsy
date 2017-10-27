@@ -90,7 +90,7 @@ class OrdersController < ApplicationController
       end
     else
       flash[:status] = :failure
-      flash[:result_text] = "Can't ship an order that is not complete"
+      flash[:result_text] = "Shipping not allowed for this order"
       redirect_to home_path
     end
   end
