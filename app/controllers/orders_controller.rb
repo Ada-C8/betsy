@@ -80,6 +80,7 @@ class OrdersController < ApplicationController
         render :show, status: :bad_request
       else
         @order.status = "cancelled"
+        @order.increment_products
         @order.save
         flash[:status] = :success
         flash[:message] = "Successfully cancelled the order"

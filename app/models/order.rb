@@ -34,6 +34,15 @@ class Order < ApplicationRecord
     end
   end
 
+  def increment_products
+    order_products.each do |order_product|
+      quantity = order_product.quantity
+      product = Product.find(order_product.product_id)
+      product.quantity += quantity
+      product.save
+    end
+  end
+
   def order_status
     result = order_products.all? do |order_product|
       order_product.status == "shipped"

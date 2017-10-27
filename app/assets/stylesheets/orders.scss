@@ -68,7 +68,19 @@ p.od-btn a.ls-btn {
 
 //------------- ORDER #SHOW ----------------
 
+div.odetails-top {
+  margin: 2% 0 3%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 div.odetails-products table thead tr th,
 div.odetails-products table tbody tr td {
   text-align: center;
+}
+div.odetails-products table tbody tr td:nth-of-type(2) {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }

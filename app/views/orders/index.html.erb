@@ -16,6 +16,8 @@
             <p class="o-date"><%= order.created_at.strftime("%B %d, %Y") %></p>
             <p class="o-title">TOTAL</p>
             <p class="o-total">$ <%= sprintf('%.2f', order.total) %></p>
+            <p class="o-title">STATUS</p>
+            <p class="o-total"><%= order.status.capitalize %></p>
             <p class="o-title">ORDER #<%= order.id %></p>
             <p class="od-btn"><%= link_to "Order Details", order_path(order.id), class: 'ls-btn'%></p>
           </div>
