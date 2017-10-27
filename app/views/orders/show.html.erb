@@ -7,7 +7,7 @@
     <p><%= link_to "Remove Product", orders_product_path, method: :delete, class: "button" %></p>
   <% end %>
 
-  <span><%= @cart.products.price %></span>
+  <!-- <span><%= @cart.products.price %></span> -->
   <p><%= link_to "Checkout", billing_form_path, class: "button" %></p>
   <% else %>
     <p>Your shopping cart is empty.</p> <%# need to figure this out--currently, the index view is a work-around %>

@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="medium-6 large-5 columns">
+<div style="background-color:rgba(0,0,0,0.7);"><div class="row">
+  <div class="medium-6 large-5 columns"  style="color:white;">
     <h3><%= @product.name %><%# sold by who? %> <small>
       <% if session[:merchant_id] %>
         <%= link_to "Edit", edit_product_path %>
@@ -32,7 +32,7 @@
   </div>
 </div>
 <!-- reviews -->
-<div class="column row">
+<div class="column row" style="color:white;">
   <h3>Reviews</h3>
   <h4>Average Rating:
     <!-- this logic needs to go somewhere else -->
@@ -52,6 +52,7 @@
       <% end %>
     </div>
   </div>
+</div>
 </div>
 
 <!-- REVISIT
