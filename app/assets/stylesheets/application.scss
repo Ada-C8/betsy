@@ -383,7 +383,7 @@ header {
 }
 
 .order-details {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .line-item {
@@ -404,6 +404,11 @@ header {
 .change-amount {
   float: right;
   display: inline-block;
+}
+
+.revenue {
+  font-size: 1.5rem;
+  padding: 1em;
 }
 
 // merchant views
