@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
 
     # result = order.products << product # (the has_many declaration creates some cool ruby magic methods like this)
     # order.save
-    if order_product.save
+    if order.save
       # order.order_products.sum(:quantity)
       flash[:status]  = :success
       flash[:message] = "Successfully added item to cart"
