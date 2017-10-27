@@ -16,7 +16,7 @@
         <span class= "index-image"><%= link_to image_tag("http://www.visitbuffaloniagara.com/content/uploads/sv-event-images/434cfb09-bb34-449b-ac6c-d400b6a53f1d.jpg"), product_path(product.id) %></span>
       <% end %>
       <span><em><%= link_to product.name.upcase, product_path(product.id) %></em></span>
-      <span><em><%= product.price %></em></span>
+      <span><%= product.price %></span>
       <% if product.merchant.id == session[:user_id] %>
         <span><em><%= link_to "Edit this Product", edit_product_path(product.id)%></em></span>
       <% end %>

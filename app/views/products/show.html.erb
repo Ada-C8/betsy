@@ -1,6 +1,9 @@
-<section class="row show">
+<section class="show">
 
-  <div class="show-image">
+<div class="image-details-combo">
+
+<div class="row">
+    <div class="show-image small-12 large-5 columns">
     <% if @product.photo.file? %>
       <%= image_tag @product.photo.url %>
     <% else %>
@@ -8,20 +11,23 @@
     <% end %>
   </div>
 
-  <div class="show-details small-12 large-6 columns">
+    <div class="show-details small-12 large-6 columns">
     <p><em><%= @product.name.upcase %></em> by </p>
     <p>
       <%= link_to @product.merchant.username, merchant_path(@product.merchant.id) %></p>
-    <% if @product.description != "" %>
-      <p>Description: <%= @product.description %></p>
+    <% if @product.description != nil %>
+      <p><em>Description</em>: <%= @product.description %></p>
     <% end %>
       <br /><p>$<%= @product.price %></p>
-      <p>Average Rating: <%= @product.average_rating %></p>
-      <p>Categories: <% @product.categories.each do |category| %>
-       <%= link_to category.name , category_path(category.id) %>
+      <p><em>Average Rating</em>: <%= @product.average_rating %></p>
+      <% if @product.categories.count > 0 %>
+      <p><em>Categories</em>: <% @product.categories.each do |category| %>
+        <% end %>
+
+       <em><%= link_to category.name , category_path(category.id) %></em>
        <% end %> </p>
       <% if @product.quantity_avail > 0 %>
-      <p>In Stock</p>
+      <p><em>In Stock</em></p>
       <% if @product.quantity_avail <= 5 %>
       <p>Only <%= @product.quantity_avail%> left!</p>
       <% end %>
@@ -46,8 +52,12 @@
       <% end %>
     </div>
   </section>
+</div>
+</div>
 
-  <div class="show-reviews">
+
+<div class="row">
+  <div class="show-reviews small-12 columns">
     <div class="index-banner">Reviews</div>
     <% if @product.reviews.count == 0 %>
     <div class="index-banner">This Product has not Been Reviewed</div>
@@ -62,4 +72,5 @@
       <% end %>
     <% end %>
   </div>
+</div>
 </section>

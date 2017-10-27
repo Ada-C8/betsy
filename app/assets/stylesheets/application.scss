@@ -40,6 +40,10 @@ a, a:visited {
   color: inherit;
 }
 
+a:hover {
+  color: grey;
+}
+
 /*flash message styling*/
 .flash, .status {
   border-radius: 5px;
@@ -66,12 +70,16 @@ header {
     background-size: cover;*/
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 480px) {
     html {
       background-color: black;
     }
 
     #stars, #stars2, #stars3 {
+      display: none
+    }
+
+    .logo {
       display: none
     }
 
@@ -116,9 +124,8 @@ header {
   transition: all .2s ease-in-out;
 }
 
-.dropdown-button-browse:hover, .dropdown-button-cart:hover, .dropdown-button-login:hover, .logo:hover {
+.dropdown-button-browse:hover, .dropdown-button-cart:hover, .dropdown-button-login:hover, .logo a:hover {
   transform: scale(1.15);
-  color: grey;
 }
 
 .dropdown-content-browse, .dropdown-content-cart, .dropdown-content-login {
@@ -140,7 +147,9 @@ header {
 .dropdown-content-browse a, .dropdown-content-cart, .dropdown-content-login a {
   padding: 12px 16px;
   text-decoration: none;
+  width: 8em;
   display: block;
+  transition: all .1s ease-in;
 }
 
 .dropdown-content-browse a:hover, .dropdown-content-merchant a:hover, .dropdown-content-cart, .dropdown-content-login a {
@@ -205,6 +214,11 @@ header {
   padding-bottom: 1rem;
 }
 
+.merchant .index-image {
+  height: 195px;
+  width: 260px;
+}
+
 .index-image:hover {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
@@ -216,8 +230,12 @@ header {
   height: 400px;
   width: 275px;
   overflow: hidden;
-  text-align: center;
   transition: all .2s ease-in;
+  font-size: 1.5rem;
+}
+
+.info-card .merchant {
+  font-size: 1rem;
 }
 
 .info-card:hover {
@@ -247,7 +265,13 @@ header {
   width: 100%;
 }
 
+.image-details-combo {
+  display: inline-block;
+  width: 100%;
+}
+
 .show-details {
+  margin-top: 2rem;
   margin-left: 5rem;
 }
 

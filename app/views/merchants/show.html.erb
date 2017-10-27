@@ -9,10 +9,8 @@
   <section class="info-card">
     <section class="product">
       <span class="index-image"><%= link_to image_tag("http://www.dailypublic.com/sites/default/files/2015/Oct/buffalo-Niagara-Heritage-Village.jpg"), product_path(product.id) %></span>
-      <span><em>Product</em>: <%= link_to product.name, product_path(product.id) %></span>
-      <span><em>Average Rating</em>: <%= product.average_rating %></span>
-      <span><em>Price</em>: <%= product.price %></span>
-      <span><em>Quantity Available</em>: <%= product.quantity_avail %></span>
+      <span><em><%= link_to product.name.upcase, product_path(product.id) %></em></span>
+      <span><%= product.price %></span>
     </section>
   </section>
   <% end %>
