@@ -1,11 +1,11 @@
 <%# will almost never *actually* use the through-table because rails will provide the tools for you--exists to connect the two tables only %>
 <% if @cart.products.any? %> <%# @cart.products = nice method rails gives us because it knows the relationship (a cart has many products) is there %>
-  <% @cart.order_products.each do |op| %>
-    <% product = op.product %>
+  <% @cart.get_quantities.each do |product, quantity| %>
     <p><%= link_to product.name, product_path(product.id) %></p>
     <p> Unit Price: <%= product.price %></p>
-    <p> quantity: <%= op.quantity %>
-    <p><%= link_to "Remove Product", orders_product_path(op.id), method: :delete, class: "button" %></p>
+    <p> quantity: <%= quantity %>
+      <!-- .pluck(:id) is equivalent to .map {|op| op.id} except it works in the database instead of rails show view -->
+    <p><%= link_to "Remove Product", destroy_all_path(ids: @cart.order_products.where(product_id: product.id).pluck(:id).join(",")), method: :delete, class: "button" %></p>
   <% end %>
 
   <p><%= link_to "Checkout", billing_form_path, class: "button" %></p>

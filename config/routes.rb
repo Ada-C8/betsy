@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :orders
   resources :orders_products
 
+  delete '/orders_products/', to: 'orders_products#destroy_all', as: 'destroy_all'
+
   get '/auth/:provider/callback', to: 'sessions#login', as: 'auth_callback'
   post '/logout', to: 'sessions#logout', as: 'logout'
   post '/add_to_cart/:id', to: 'orders#add_to_cart', as: 'add_to_cart'
