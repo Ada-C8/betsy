@@ -9,19 +9,6 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.new
   end
 
-  def create
-    @merchant = Merchant.new(username: params[:merchant][:username], email: params[:merchant][:email])
-    if @merchant.save
-      flash[:status] = :success
-      flash[:result_text] = "Successfully created new merchant!"
-      redirect_to merchant_path(@merchant.id)
-    else
-      flash.now[:status] = :failure
-      flash[:result_text] = "Could not create new merchant."
-      render :new
-    end
-  end
-
   def show
     if @merchant == nil
       flash[:status] = :failure
@@ -51,6 +38,7 @@ class MerchantsController < ApplicationController
   end
 
   def destroy
+    find_merchant
     redirect_to root_path
   end
 

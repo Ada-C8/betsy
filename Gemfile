@@ -9,6 +9,7 @@ gem 'awesome_print'
 gem "paperclip", "~> 5.0.0"
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'simplecov'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
