@@ -3,13 +3,19 @@ module ApplicationHelper
   def money(float, small = false)
     if small
       length = float.to_s.length
-      if length > 9
-        return "$%.1fm" % (float / 1000000)
-      elsif length > 6
-        return "$%.1fk" % (float / 1000)
+      if length > 12
+        return "$%.1f<small>b</small>".html_safe % (float / 1000000000)
+      elsif length > 11
+        return "<small>$%.1fm</small>".html_safe % (float / 1000000)
+      elsif length > 9
+        return "$%.1f<small>m</small>".html_safe % (float / 1000000)
+      elsif length > 8
+        return "<small>$%.1fk</small>".html_safe % (float / 1000)
+      elsif length > 4
+        return "$%.1f<small>k</small>".html_safe % (float / 1000)
       end
     end
-      return "$%.2f" % float
+    return "$%.2f" % float
   end
 
   def days_ago(date)

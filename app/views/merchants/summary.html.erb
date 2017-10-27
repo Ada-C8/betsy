@@ -50,7 +50,8 @@
           <div class="card-title">
             <h3>Total Revenue</h3>
           </div>
-          <em class="profile-huge total-revenue"><%= money(@user.total_revenue, true) %></em>
+          <em class="profile-huge total-revenue"><%= money(123456.99, true) %></em>
+          <!-- <em class="profile-huge total-revenue"><%= money(@user.total_revenue, true) %></em> -->
           <%= link_to "Income Details", self_revenue_path, class: 'button profile-button' %>
         </div>
       </div>
