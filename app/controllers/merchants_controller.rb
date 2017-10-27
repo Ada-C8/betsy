@@ -15,15 +15,9 @@ class MerchantsController < ApplicationController
     auth_hash = request.env['omniauth.auth']
     merchant = Merchant.find_by(oauth_uid: auth_hash['uid'], oauth_provider: auth_hash['provider'])
 
-    if merchant
-      flash[:status] = :success
-      flash[:result_text] = "Successfully logged in "
-    else
+    unless merchant
       merchant = Merchant.by_auth_hash(auth_hash)
-      if merchant.save
-        flash[:status] = :success
-        flash[:result_text] = "Successfully created new merchant "
-      else
+      unless merchant.save
         flash.now[:status] = :failure
         flash.now[:result_text] = "Not logged in"
         flash.now[:messages] = merchant.errors.messages
