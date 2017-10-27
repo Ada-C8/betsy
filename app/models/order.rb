@@ -3,7 +3,7 @@ class Order < ApplicationRecord
   has_many :products, through: :order_products
   has_many :merchants, through: :products
 
-# class methods instead of instance methods (like in ctrl)
+  # class methods instead of instance methods (like in ctrl)
   # self.start_new_order is a class method
   def self.start_new_order
     order = Order.new
@@ -12,13 +12,18 @@ class Order < ApplicationRecord
     return order
   end
 
-  # def submit
-  #   something.transaction
-  #   1. subtract_product
-  #   2. status change from pending to paid
-  #   3. clear cart
-  #
-  # end
+  def submit(billing_params)
+    billing = Billing.new(billing_params)
+    if billing.save
+      self.status = "paid"
+      self.subtract_products
+      self.products.clear
+    end
+    #   something.transaction
+    #   2. status change from pending to paid
+    #   1. subtract_products
+    #   3. clear cart
+  end
 
   # def pending_to_paid
   #   self.status = "paid"
@@ -29,44 +34,28 @@ class Order < ApplicationRecord
   # end
 
   def get_quantities
-    items = {}
+    items = {} # keys are the product, values are the quantity
 
-    self.order_products.each do | item |
-      if items.include?(item.product)
-        items[item.product] += 1
+    self.products.each do |product|
+      if items.include?(product)
+        items[product] += 1
       else
-        items[item.product] = 1
+        items[product] = 1
       end
     end
     return items
   end
 
-  def quantity_of(product)
-    quantity = 0
-    self.order_products.each do |op|
-      if op.product_id == product.id
-        quantity += 1
-      end
-    end
-    return quantity
-  end
-
-
-  # subtract_product is an instance method
+  # subtract_products is an instance method
   # self inside this method is calling `self` on an instance of order
-  def subtract_product
+  def subtract_products
     Order.transaction do
-      # self is redundant but does not break anything
-      self.order_products.each do |op|
-        quantity = op.quantity
-        op.product.stock -= quantity
-        op.product.save!
+      self.get_quantities.each do |product, quantity|
+        product.quantity -= quantity
+        product.save!
       end
-
-
-      return true #update saved to database and we are done
-      # return nil # this method does not return anything, it only updates the product database.
     end
+    return true
   rescue StandardError # something failed when updating the database
     return false # explicitly returning false instead of an exception
   end

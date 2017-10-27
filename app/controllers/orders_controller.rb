@@ -22,7 +22,6 @@ class OrdersController < ApplicationController
       flash.now[:details] = order.products.errors.messages
     end
     redirect_to product_path(product)
-    # raise
   end
 
   # def remove_from_cart
@@ -51,22 +50,10 @@ class OrdersController < ApplicationController
   end
 
   def submit
-    # billing = Billing.find_by(id:session[:order_id])
     @order = Order.find_by(id:session[:order_id], status: "pending")
-    @order.subtract_product
+    @order.submit(billing_params)
 
-    @billing = Billing.new(billing_params)
-
-    if @billing.save
-      @order.status = "paid"
-      flash[:status]  = :success
-      flash[:message] = "Successfully submitted your order"
-      session[:order_id] = nil
-    else
-      flash.now[:status] = :failure
-      flash.now[:message] = "Failed submit your order"
-    end
-    render :show_order
+    redirect_to order_path(@order.id)
   end
 
   def destroy
