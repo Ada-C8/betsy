@@ -1,14 +1,18 @@
 <section class="order-confirm">
-  <h2 class="page-title">Order confirmation</h2>
+  <h2 class="page-title">
+    <%= image_tag("018-potful.png", class:'tiny-img')  %> Order confirmation
+  </h2>
 
-  <p>Thanks for your purchase!</p>
-  <div class="oconfirm-summary">
-    <ul>
-      <li>Order Number: #<%= @order.id %></li>
-      <li>Total: <%= @order.total %></li>
-      <li>Date: <%= @order.created_at.strftime("%B %d, %Y") %></li>
-      <li>Status: <%= @order.status.capitalize %></li>
-    </ul>
+  <div class="oconfirm-wrapper">
+    <p>Thanks for your purchase!</p>
+    <div class="oconfirm-summary">
+      <ul class="oconfirm-list">
+        <li><span class="bold-data">Order Number</span>: #<%= @order.id %></li>
+        <li><span class="bold-data">Total</span>: $ <%= @order.total %></li>
+        <li><span class="bold-data">Date</span>: <%= @order.created_at.strftime("%B %d, %Y") %></li>
+        <li><span class="bold-data">Status</span>: <%= @order.status.capitalize %></li>
+      </ul>
+    </div>
   </div>
 
   <h3>Order details</h3>
@@ -25,7 +29,9 @@
             <td><%= order_product.quantity %></td>
             <td>
               <div class="mini-img">
-                <img src="<%= order_product.product.image_url %>" alt="">
+                <%= link_to product_path(order_product.product) do %>
+                  <img src= "<%= order_product.product.image_url %>">
+                <% end %>
               </div>
               <div class="odetail-info">
                 <p><%= link_to order_product.product.name, product_path(id:order_product.product.id) %></p>

@@ -11,7 +11,8 @@
 
 //------------- ORDER #INDEX ----------------
 section.order-index,
-section.order-show {
+section.order-show,
+section.order-confirm {
   padding: 2% 5% 8%;
 }
 h3.no-orders {
@@ -67,7 +68,6 @@ p.od-btn a.ls-btn {
 }
 
 //------------- ORDER #SHOW ----------------
-
 div.odetails-top {
   width: 95%;
   margin: 2% auto 3%;
@@ -87,4 +87,12 @@ div.odetails-products table tbody tr td:nth-of-type(2) {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+//------------- ORDER #CONFIRM ----------------
+div.oconfirm-wrapper { margin: 2% 0; }
+div.oconfirm-summary ul.oconfirm-list {  list-style-type: none; }
+span.bold-data {
+  font-weight: 600;
+  width: 30%;
 }
