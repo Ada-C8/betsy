@@ -10,7 +10,10 @@
 }
 
 //------------- ORDER #INDEX ----------------
-section.order-index { padding: 2% 5%; }
+section.order-index,
+section.order-show {
+  padding: 2% 5%;
+}
 h3.no-orders {
   font-family: 'Josefin Sans', sans-serif;
   margin: 1% 0;
@@ -52,7 +55,7 @@ h4.oitem-name {
   font-style: normal;
   color: #4F3640;
 }
-span.oitem-qty { margin-left: 5%; }
+span.oitem-qty { margin-left: 10%; }
 p.od-btn a.ls-btn {
   display: block;
   width: 100%;
@@ -61,4 +64,11 @@ p.od-btn a.ls-btn {
   padding: 4% 2%;
   background: #4F3640;
   color: #fefefe;
+}
+
+//------------- ORDER #SHOW ----------------
+
+div.odetails-products table thead tr th,
+div.odetails-products table tbody tr td {
+  text-align: center;
 }

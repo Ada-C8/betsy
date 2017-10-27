@@ -64,6 +64,32 @@ class OrdersController < ApplicationController
     end
   end
 
+  def confirmation
+    find_order_by_params_id
+    confirm_object_ownership(@order, @order.merchant_id)
+  end
+
+  def cancel
+    find_order_by_params_id
+    if @order
+      if @order.order_products.any? {
+        |op| op.status == "shipped"
+      }
+        flash[:status] = :failure
+        flash[:message] = "Cannot cancel an order if one of the products has been shipped"
+        render :show, status: :bad_request
+      else
+        @order.status = "cancelled"
+        @order.save
+        flash[:status] = :success
+        flash[:message] = "Successfully cancelled the order"
+        redirect_to order_path(@order)
+      end
+    else
+      return head :not_found
+    end
+  end
+
   private
 
   def order_params
