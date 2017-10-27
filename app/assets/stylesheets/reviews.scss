@@ -13,18 +13,17 @@
 }
 
 .button.change_review {
-  background-color: #FEFEFE;
+  background-color: #7F4F62;
   border: .5px solid grey;
   border-radius: 1rem;
-  color: #91BEC9;
-  font: #4F3640;
+}
+
+.button.change_review:hover{
+  background-color: #DBC2CF;
 }
 
 .button.change_review a {
-  color: #7F4F62;
-}
-.button.change_review a:hover {
-  color: #16262E;
+  color: white;
 }
 
 .review_info {
@@ -42,6 +41,7 @@
 .button.add_review_button {
   background-color: #4F3640;
   margin-left: 30%;
+  border-radius: 0.5em;
 }
 
 .button.add_review_button a, .button.submit_review a  {
@@ -50,10 +50,16 @@
 
 .button.cart-btn {
   background-color: #4F3640;
+  border-radius: 0.5em;
+}
+
+.button.cart-btn:hover,.button.add_review_button:hover,.button.submit_review:hover{
+  background-color: #DBC2CF;
 }
 
 .button.submit_review {
-  background-color: #3C7A89;
+  background-color: #4F3640;
+  border-radius: 0.5em;
 }
 
 .stars {
@@ -64,8 +70,6 @@
 padding-left: 15%;
 }
 //////////////****Review form****/////////////
-
-
 
 .row.align_center {
   text-align: center;

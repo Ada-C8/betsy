@@ -37,4 +37,7 @@ Rails.application.routes.draw do
   get '/:id/retire', to: 'products#retire', as: 'retire_product'
 
   get '/confirmation/:id', to: 'orders#confirmation', as: 'confirmation'
+
+  # Order cancel
+  get '/:id/cancel', to: 'orders#cancel', as: 'cancel'
 end
