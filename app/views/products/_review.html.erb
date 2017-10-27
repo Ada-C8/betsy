@@ -6,7 +6,7 @@
       <%else%>
         <span>Guest </span>
       <%end%>
-      <span> Rating:
+      <span class="rating_review"> Rating:
         <span class="stars">
           <%= Review.get_rating_stars(review.rating) %>
         </span>
@@ -17,8 +17,8 @@
   </div>
 
   <% if session[:merchant] && session[:merchant]['id'] == review.merchant_id%>
-    <div class="hollow button"> <%= link_to "Edit", edit_review_path(review.id) %></div>
-    <div class="hollow button"> <%= link_to "Delete", review_path(review.id), method: :delete, data: { confirm: "Are you sure?" }%></div>
+    <div class="button change_review"> <%= link_to "Edit", edit_review_path(review.id) %></div>
+    <div class="button change_review"> <%= link_to "Delete", review_path(review.id), method: :delete, data: { confirm: "Are you sure?" }%></div>
   <% end %>
 
 </section>
