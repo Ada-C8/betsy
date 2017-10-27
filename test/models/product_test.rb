@@ -124,13 +124,6 @@ describe Product do
       product.remove_one_from_stock.must_equal false
     end
 
-    it "will not remove one if product is retired" do
-      product = products(:available)
-
-      proc {
-        product.remove_one_from_stock
-      }.wont_change "product.quantity_avail"
-    end
   end
   describe "#add_one_to_stock" do
     it "should change product.quantity_avail" do
