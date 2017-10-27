@@ -28,8 +28,8 @@
               </p>
             </div>
             <div class="large-5 medium-12 small-12 columns end">
-              <%= f.submit "Update Item", class: 'button teal-btn small-5 columns' %>
-              <%= link_to "Remove From Cart", order_product_path(order_product.id), method: :delete, data: { confirm: "Are you sure?" }, class: "button teal-btn delete-button small-7 columns" %>
+              <%= f.submit "Update Item", class: 'button burg-btn small-5 columns' %>
+              <%= link_to "Remove From Cart", order_product_path(order_product.id), method: :delete, data: { confirm: "Are you sure?" }, class: "button burg-btn delete-button small-7 columns" %>
             </div>
           </span>
 
@@ -42,7 +42,7 @@
     <div class="small-12 medium-3 columns cart-total">
       <p class="small-12 columns"><big>Cart Total: <%= money(total(@products)) %></big></p>
 
-      <%= link_to "Checkout Cart", new_order_path, class: 'button teal-btn small-12 columns' %>
+      <%= link_to "Checkout Cart", new_order_path, class: 'button burg-btn small-12 columns' %>
     </div>
   <% else %>
   <p>

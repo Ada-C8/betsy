@@ -11,7 +11,7 @@
             <h3>Shopping Cart</h3>
           </div>
           <em class="profile-huge current-products"><%= session[:cart].count %></em>
-          <%= link_to "Go To Cart", shopping_cart_path, class: 'button profile-button' %>
+          <%= link_to "Go To Cart", shopping_cart_path, class: 'button burg-btn profile-button' %>
         </div>
       </div>
 
@@ -21,7 +21,7 @@
             <h3>Currently Selling</h3>
           </div>
           <em class="profile-huge current-products"><%= @user.active_products.count %></em>
-          <%= link_to "Inventory Management", self_inventory_path, class: 'button profile-button' %>
+          <%= link_to "Inventory Management", self_inventory_path, class: 'button burg-btn profile-button' %>
         </div>
       </div>
 
@@ -31,7 +31,7 @@
             <h3>Pending Orders</h3>
           </div>
           <em class="profile-huge pending-orders <%= @user.pending_orders.count == 0 ? "summary-zero" : "summary-urgent" %>"><%= @user.pending_orders.count %></em>
-          <%= link_to "Pending Orders", self_pending_path, class: 'button profile-button' %>
+          <%= link_to "Pending Orders", self_pending_path, class: 'button burg-btn profile-button' %>
         </div>
       </div>
 
@@ -41,7 +41,7 @@
             <h3>Purchased Orders</h3>
           </div>
           <em class="profile-huge total-revenue"><%= @user.orders.count %></em>
-          <%= link_to "Past Orders", orders_path, class: 'button profile-button' %>
+          <%= link_to "Past Orders", orders_path, class: 'button burg-btn profile-button' %>
         </div>
       </div>
 
@@ -51,7 +51,7 @@
             <h3>Total Revenue</h3>
           </div>
           <em class="profile-huge total-revenue"><%= money(@user.total_revenue, true) %></em>
-          <%= link_to "Income Details", self_revenue_path, class: 'button profile-button' %>
+          <%= link_to "Income Details", self_revenue_path, class: 'button burg-btn profile-button' %>
         </div>
       </div>
 
@@ -61,7 +61,7 @@
             <h3>Completed Orders</h3>
           </div>
           <em class="profile-huge shipped-orders"><%= @user.shipped_orders.count %></em>
-          <%= link_to "Completed Orders", self_completed_path, class: 'button profile-button' %>
+          <%= link_to "Completed Orders", self_completed_path, class: 'button burg-btn profile-button' %>
         </div>
       </div>
 

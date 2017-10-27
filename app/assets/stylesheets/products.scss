@@ -85,6 +85,10 @@ section.product-info {
   float: none;
 }
 
+.product-index {
+  border-top: 1px solid $grey;
+}
+
 .product-info .row {
   margin: 1rem auto;
 }
@@ -121,6 +125,13 @@ section.product-info {
 
 .show-product {
   height: 20rem;
+}
+
+@media print, screen and (min-width: 40em) {
+  .product-index {
+    border-top: 0;
+    border-left: 1px solid $grey;
+  }
 }
 
 
