@@ -45,6 +45,12 @@
       <!-- ==========log in=========== -->
       <ul class="menu">
         <li>
+          <% if session[:order_id]%>
+            <%= link_to "My Orders", orders_path, class: "hollow link-hover button" %>
+          <% end %>
+        </li>
+        &nbsp;
+        <li>
           <% if session[:order_id] == nil %>
             <%= link_to "Cart", orders_path, class: "hollow link-hover button" %>
           <% else %>
