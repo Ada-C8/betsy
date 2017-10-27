@@ -1,0 +1,34 @@
+// Place all the styles related to the Categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+/*****************/
+/* FLASH  */
+/*****************/
+
+.flash {
+  font-weight: normal;
+  font-size: 1em;
+  background-color: #EFEDED;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.flash p {
+  margin-bottom: 30px;
+  padding-top: 3%;
+
+}
+
+.flash ul li {
+  padding-left: 3%;
+}
+
+.flash div {
+  padding-left: 3%
+}
+
+.error {
+  color: red;
+}

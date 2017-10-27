@@ -1,0 +1,62 @@
+<section class="row">
+  <h3 class="order-id">Order <%= "#{@order.id}: Merchant #{@merchant.name}" %></h2>
+  <div class="total-earned">
+    <h4>Total earned: <%= number_to_currency @order.calculate_total %></h4>
+  </div>
+  <div class="order-articles">
+    <article class="small-12 large-6 column">
+      <h4 class="go-left">Customer billing info</h4>
+      <% if @order.billing %>
+        <p><strong>Name :</strong> <%= @order.billing.cc_name %></p>
+        <p><strong>Email :</strong> <%= @order.billing.email %></p>
+        <p><strong>Address :</strong> <%= @order.billing.address%></p>
+        <p><strong>Credit Card # :</strong> Visa</strong> ending in <%= last_4(@order.billing.cc_number)%></p>
+        <p><strong>Expiration date :</strong> <%= readable_date(@order.billing.cc_exp) %></p>
+      <% else %>
+        <p>
+          No customer info: order has not been purchased yet.
+        </p>
+      <% end %>
+    </article>
+    <article class="small-12 large-6 column">
+      <h4 class="go-left"> Your products in this order </h4>
+
+      <table class="producs-in-o">
+        <thead class="color">
+          <tr>
+            <th>
+              Product
+            </th>
+            <th>
+              Product price
+            </th>
+            <th>
+              Quantity
+            </th>
+            <th>
+              Total cost
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_items.each do |item| %>
+          <tr>
+            <td>
+              <%= link_to item.product.name, product_path(item.product), class: "order-show-a" %>
+            </td>
+            <td>
+              <%= number_to_currency item.product.price %>
+            </td>
+            <td>
+              <%= item.quantity %>
+            </td>
+            <td>
+              <%= number_to_currency unit_cost(item) %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </article>
+</section>

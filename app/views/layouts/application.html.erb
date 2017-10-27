@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Vine&Bloom" %></title>
+
+    <%= stylesheet_link_tag "application", "https://fonts.googleapis.com/css?family=Comfortaa|Dancing+Script|Lobster+Two|Marck+Script|Poiret+One|Satisfy" %>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <body>
+        <header class="page-header">
+
+        <!-- HERO SECTION -->
+
+        <section class="hero">
+          <h1>
+            <%= link_to "Vine & Bloom", root_path %>
+          </h1>
+
+        </section>
+
+        <!-- NAVIGATION -->
+          <nav class="top-bar nowrap">
+            <!-- "row" -->
+            <div class="top-bar-left row-button-group">
+            <!-- "large-8 small-12 columns button-group"> -->
+              <ul class="menu">
+                <li>
+              <%= link_to "View All Products", products_path, class: "button" %>
+                </li>
+                <li>
+                <%= render partial: 'layouts/categorydropdown' %>
+                </li>
+                <li>
+              <%= render partial: 'layouts/merchantdropdown' %>
+              </li>
+              </ul>
+            </div>
+
+
+            <div class="top-bar-right row-button-group">
+            <!-- "float-right"> -->
+              <ul class="menu">
+              <% if session[:merchant_id] %>
+
+                  <li>
+                    <%= link_to "Add a New Product", new_product_path, class: "button" %>
+                  </li>
+                  <li>
+                    <%= link_to "My Account", merchant_path(session[:merchant_id]), class: "button"%>
+                  </li>
+                  <% if session[:order_id] != nil %>
+                  <li>
+                    <%= link_to "View cart", order_current_path, class: "button" %>
+                  </li>
+                  <% end %>
+                  <li>
+                  <%= link_to "Log out", logout_path, class: "button" %>
+                  </li>
+              <% else %>
+                <% if session[:order_id] %>
+                  <li><%= link_to "View cart", order_current_path, class: "button" %>
+                  </li>
+                <% end %>
+                  <li>
+                    <%= link_to "SignUp or Log in", '/auth/github', class: "button" %>
+                  </li>
+              <% end %>
+            </ul>
+            </div>
+          </nav>
+        </header>
+        <%# NOTE: replaced the incomplete flash section with a complete flash section TV%>
+        <main class="row">
+          <% if flash[:message] %>
+          <section class="row flash">
+            <div>
+              <% if flash[:status] == :failure %>
+                <p class="error">
+              <% else %>
+                <p>
+              <% end %>
+                <%= flash[:message] %>
+              </p>
+              <% if flash[:details] %>
+              <ul>
+                <% flash[:details].each do |field, problems| %>
+                  <% problems.each do |problem| %>
+                  <li>
+                    <strong><%=field %>:</strong>
+                    <%= problem %>
+                  </li>
+                  <% end %>
+                <%end %>
+              </ul>
+              <% end %>
+            </div>
+          </section>
+          <% end %>
+          <%= yield %>
+        </main>
+      <footer>
+      </footer>
+      </body>
+  </body>
+</html>
