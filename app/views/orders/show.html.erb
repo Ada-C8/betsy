@@ -1,9 +1,9 @@
 <%# will almost never *actually* use the through-table because rails will provide the tools for you--exists to connect the two tables only %>
 <% if @cart.products.any? %> <%# @cart.products = nice method rails gives us because it knows the relationship (a cart has many products) is there %>
-  <% @cart.products.each do |product| %>
-    <p><%= product.name %> | <%= link_to "Delete", product_path(product), :data => {:confirm => "You sure?", :method => "delete"} %></p>
+  <% @cart.get_quantities.each do |product, quantity| %>
+    <p><%= product.name %></p>
     <p> Unit Price: <%= product.price %></p>
-    <p>We have <%= product.stock %> in stock</p>
+    <p> quantity: <%= quantity %>
     <p><%= link_to "Remove Product", orders_product_path, method: :delete, class: "button" %></p>
   <% end %>
 
