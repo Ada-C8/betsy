@@ -9,28 +9,27 @@
     <ul>
       <% product_array.uniq.each do |product| %>
       <li class="line-item">
-        <span class="product-info"><%= link_to product.name, product_path(product.id) %> : <%= product.price %> Quantity: <%= product_array.count(product) %> Subtotal: <%= product_array.count(product) *  product.price %></span>
+        <span class="product-info"><%= link_to product.name.upcase, product_path(product.id) %> <em>Quantity</em>: <%= product_array.count(product) %> <em>Subtotal</em>: <%= product_array.count(product) *  product.price %></span>
 
         <span class="change-amount">
           <%= link_to add_product_path(product), method: :patch do %>
-            <span class="button">+1</span>
+          <span class="button">+1</span>
           <% end %>
           <%= link_to remove_product_path(product), method: :patch  do %>
-            <span class="button">-1</span>
+          <span class="button">-1</span>
           <% end %>
-      </li>
-      <% end %>
+        </li>
+        <% end %>
 
-      <li>Order Subtotal: <%= @order.order_total %> </li>
-    </ul>
-  </section>
-
-
-  <%= link_to products_path do %>
+        <li>Order Subtotal: <%= @order.order_total %> </li>
+      </ul>
+    </section>
+    
+    <%= link_to products_path do %>
     <span class="button">Keep Shopping!</span>
-  <% end %>
-  <%= link_to edit_order_path(@order.id) do %>
+    <% end %>
+    <%= link_to edit_order_path(@order.id) do %>
     <span class="button">Checkout</span>
-  <% end %>
+    <% end %>
 
-</section>
+  </section>

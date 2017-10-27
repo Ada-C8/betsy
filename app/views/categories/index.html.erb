@@ -1,18 +1,18 @@
 <section class="all-categories">
   <span class="index-banner">
-  <% if @categories.count == 0 %>
+    <% if @categories.count == 0 %>
     Yikes! No categories meet those parameters.
-  <% else %>
+    <% else %>
     Categories
-  <% end %>
+    <% end %>
   </span>
 
   <% @categories.each do |category| %>
   <section class="info-card">
     <section class="category">
-      <span class="index-image"><%= link_to image_tag("http://www.dailypublic.com/sites/default/files/2015/Oct/buffalo-Niagara-Heritage-Village.jpg"), category_path(category.id) %></span>
+      <span class="index-image"><%= link_to image_tag("http://www.dailypublic.com/sites/default/files/2015/Oct/buffalo-Niagara-Heritage-Village.jpg"), category_path(category.id), alt: "A category image placeholder" %></span>
       <span class="category-name"><em><%= link_to category.name.upcase, category_path(category.id), alt: "Link to category products"%></em></span>
     </section>
-    </section>
+  </section>
   <% end %>
 </section>

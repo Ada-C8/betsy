@@ -1,30 +1,23 @@
 <section class="order">
+  <% @order = Order.find_by(id: params[:id]) %>
+  <span class="index-banner">Order # <%= @order.id %> Confirmed</span>
+  <% product_array = @order.products.to_a %>
 
-<% @order = Order.find_by(id: params[:id]) %>
+  <section class="order-details">
+    <ul>
+      <% product_array.uniq.each do |product| %>
+      <li class="line-item">
+        <span class="product-info"><%= link_to product.name, product_path(product.id) %> : <%= product.price %> Quantity: <%= product_array.count(product) %> Subtotal: <%= product_array.count(product) *  product.price %> </span>
+      </li>
+      <% end %>
 
-<span class="index-banner">Order # <%= @order.id %> Confirmed</span>
-
-
-<% product_array = @order.products.to_a %>
-
-<section class="order-details">
-
-<ul>
-  <% product_array.uniq.each do |product| %>
-  <li class="line-item">
-  <span class="product-info"><%= link_to product.name, product_path(product.id) %> : <%= product.price %> Quantity: <%= product_array.count(product) %> Subtotal: <%= product_array.count(product) *  product.price %> </span>
-  </li>
-  <% end %>
-
-  <span class="order-info">
-  </br>
-  <li><em>Order Subtotal</em>: <%= @order.order_total %> </li>
-  <li><em>Order Placed</em>: <%= @order.updated_at.strftime("%B %d, %Y") %> </li>
-  <li><em>Order Status</em>: <%= @order.status %> </li>
-  </span>
-
-
-</ul>
-</section>
+      <span class="order-info">
+      </br>
+      <li><em>Order Subtotal</em>: <%= @order.order_total %> </li>
+      <li><em>Order Placed</em>: <%= @order.updated_at.strftime("%B %d, %Y") %> </li>
+      <li><em>Order Status</em>: <%= @order.status %> </li>
+      </span>
+    </ul>
+  </section>
 
 </section>
