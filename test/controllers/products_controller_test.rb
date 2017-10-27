@@ -20,6 +20,7 @@ describe ProductsController do
       get products_path
       must_respond_with :success
     end
+
   end
 
   describe "new" do
@@ -33,9 +34,19 @@ describe ProductsController do
     let(:merchant) { merchants(:ada) }
 
     it "creates a new product" do
+      merchant = merchants(:ada)
+      login(merchant)
       proc   {
-        post products_path, params: { product: { name: "eyeballs", quantity_avail: 4, price: 9.99}}
+        post products_path, params: { product: { name: "eyeballs", quantity_avail: 4, price: 9.99}, merchant_id: merchant.id}
       }.must_change 'Product.count', 1
+    end
+
+    it "fails when missing params" do
+      merchant = merchants(:ada)
+      login(merchant)
+      proc   {
+        post products_path, params: { product: { name: "", quantity_avail: 4, price: 9.99}, merchant_id: merchant.id}
+      }.must_change 'Product.count', 0
     end
   end
 
@@ -58,11 +69,6 @@ describe ProductsController do
       must_respond_with :success
     end
 
-    it "will not edit bogus product" do
-      fake = Product.last.id + 1
-      get edit_product_path(fake)
-      must_respond_with :not_found
-    end
   end
 
   describe "#add_product_to_cart" do
@@ -99,9 +105,10 @@ describe ProductsController do
       patch add_product_path(product.id)
       patch add_product_path(product.id)
 
-      #do not re-load the fixture: it's fixed, so it will never chaaaaange!
+
       Product.find(products(:pointy_hat).id).quantity_avail.must_equal 3
     end
+
   end
 
   describe "remove_product_from_cart" do
@@ -147,9 +154,25 @@ describe ProductsController do
   end
 
 
-  # describe "update" do
-  #   #This wasn't in the controller actions.  Do we want an edit method?
-  # end
+  describe "update" do
+    let(:merchant) { merchants(:ada) }
+    it "update an existant product" do
+      merchant = merchants(:ada)
+      login(merchant)
+      product = Product.find(products(:invisible_hat).id)
+      product_data = {
+        product: {
+          name: product.name + "more text"
+        }
+      }
+
+      patch product_path(product), params: product_data
+      must_redirect_to merchant_products_path(session[:user_id])
+
+
+      Product.find(product.id).name.must_equal product_data[:product][:name]
+    end
+  end
 
   describe "delete" do
     it "should successfully delete product" do

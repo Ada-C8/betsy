@@ -76,7 +76,7 @@ class OrdersController < ApplicationController
   end
 
   def shipped
-    find_order
+    @order = Order.find_by(id: params[:id])
     if @order.status == "complete"
       @order.status = "shipped"
       if @order.save

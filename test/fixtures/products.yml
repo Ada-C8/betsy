@@ -45,3 +45,9 @@ available:
   quantity_avail: 3
   merchant: spooky
   available: "Retired"
+
+invisible_hat:
+  name: "Magic Beans"
+  price: 3.00
+  quantity_avail: 5
+  merchant: ada
