@@ -9,7 +9,8 @@
         <h3>Order information</h3>
         <p>Ordered on <%= @order.created_at.strftime("%B %d, %Y") %></p>
         <p>Order #<%= @order.id %></p>
-        <%= link_to "Cancel Order", cancel_path(@order), class: 'button teal-btn medium-12 columns ship-btn' %>
+        <p>Status: <%= @order.status.capitalize %></p>
+        <%= link_to "Cancel Order", cancel_path(@order), class: 'button burg-btn' %>
       </div>
 
       <div class="odetails-summary">
@@ -48,9 +49,9 @@
     <div class="odetails-products">
       <table>
         <thead>
-          <th>Quantity</th>
-          <th>Item</th>
-          <th>Total</th>
+          <th width="10%">Quantity</th>
+          <th width="80%">Item</th>
+          <th width="10%">Total</th>
         </thead>
         <tbody>
           <% @order.order_products.each do |order_product| %>

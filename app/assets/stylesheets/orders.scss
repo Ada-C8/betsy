@@ -12,7 +12,7 @@
 //------------- ORDER #INDEX ----------------
 section.order-index,
 section.order-show {
-  padding: 2% 5%;
+  padding: 2% 5% 8%;
 }
 h3.no-orders {
   font-family: 'Josefin Sans', sans-serif;
@@ -69,12 +69,16 @@ p.od-btn a.ls-btn {
 //------------- ORDER #SHOW ----------------
 
 div.odetails-top {
-  margin: 2% 0 3%;
+  width: 95%;
+  margin: 2% auto 3%;
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
 }
-
+div.odetails-heading { width: 40%; }
+div.odetails-summary { width: 40%; }
+span.fa-stack {
+  margin-right: 2%;
+}
 div.odetails-products table thead tr th,
 div.odetails-products table tbody tr td {
   text-align: center;

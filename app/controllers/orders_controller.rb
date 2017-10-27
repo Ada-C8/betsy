@@ -79,8 +79,8 @@ class OrdersController < ApplicationController
         flash[:message] = "Cannot cancel an order if one of the products has been shipped"
         render :show, status: :bad_request
       else
-        @order.status = "cancelled"
         @order.increment_products
+        @order.status = "cancelled"
         @order.save
         flash[:status] = :success
         flash[:message] = "Successfully cancelled the order"
