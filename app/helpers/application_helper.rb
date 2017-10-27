@@ -11,8 +11,10 @@ module ApplicationHelper
         return "$%.1f<small>m</small>".html_safe % (float / 1000000)
       elsif length > 8
         return "<small>$%.1fk</small>".html_safe % (float / 1000)
-      elsif length > 4
+      elsif length > 6
         return "$%.1f<small>k</small>".html_safe % (float / 1000)
+      elsif length > 5
+        return "$%.1i".html_safe % (float)
       end
     end
     return "$%.2f" % float
