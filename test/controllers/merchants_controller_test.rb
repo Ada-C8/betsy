@@ -38,63 +38,63 @@ describe MerchantsController do
     end
   end
 
-  describe "edit" do
-    it "succeeds for an existing merchant" do
-      get edit_merchant_path(Merchant.first)
-      must_respond_with :success
-    end
-
-    it "returns an error for a non-existant ID" do
-      # no_merchant_id = Merchant.last.id + 1
-      get edit_merchant_path(100)
-      must_respond_with :failure
-    end
-  end
-
-  describe "update" do
-    it "succeeds for valid data and an existing ID" do
-      merchant = Merchant.first
-      merchant_data = {
-        merchant: {
-          email: merchant.email + " addition"
-        }
-      }
-
-      patch merchant_path(merchant), params: merchant_data
-      must_redirect_to merchant_path(merchant)
-
-      Merchant.find(merchant.id).email.must_equal merchant_data[:merchant][:email]
-    end
-
-    it "renders the form for bad data" do
-      merchant = Merchant.first
-      merchant_data = {
-        merchant: {
-          email: ""
-        }
-      }
-
-      patch merchant_path(merchant), params: merchant_data
-      must_respond_with :success
-
-      Merchant.find(merchant.id).email.must_equal merchant.email
-    end
-  end
-
-  describe "destroy" do
-    it "succeeds for an existing id" do
-      # merchant_id = Merchant.first.id
-      #
-      # delete merchant_path(merchant_id)
-      # must_redirect_to root_path
-
-      delete merchant_path(merchants(:ghosty).id)
-      must_respond_with :redirect
-      must_redirect_to root_path
-
-      Merchant.find_by(id: merchants(:ghosty)).must_be_nil
-    end
-  end
+  # describe "edit" do
+  #   it "succeeds for an existing merchant" do
+  #     get edit_merchant_path(Merchant.first)
+  #     must_respond_with :success
+  #   end
+  #
+  #   it "returns an error for a non-existant ID" do
+  #     # no_merchant_id = Merchant.last.id + 1
+  #     get edit_merchant_path(100)
+  #     must_respond_with :failure
+  #   end
+  # end
+  #
+  # describe "update" do
+  #   it "succeeds for valid data and an existing ID" do
+  #     merchant = Merchant.first
+  #     merchant_data = {
+  #       merchant: {
+  #         email: merchant.email + " addition"
+  #       }
+  #     }
+  #
+  #     patch merchant_path(merchant), params: merchant_data
+  #     must_redirect_to merchant_path(merchant)
+  #
+  #     Merchant.find(merchant.id).email.must_equal merchant_data[:merchant][:email]
+  #   end
+  #
+  #   it "renders the form for bad data" do
+  #     merchant = Merchant.first
+  #     merchant_data = {
+  #       merchant: {
+  #         email: ""
+  #       }
+  #     }
+  #
+  #     patch merchant_path(merchant), params: merchant_data
+  #     must_respond_with :success
+  #
+  #     Merchant.find(merchant.id).email.must_equal merchant.email
+  #   end
+  # end
+  #
+  # describe "destroy" do
+  #   it "succeeds for an existing id" do
+  #     # merchant_id = Merchant.first.id
+  #     #
+  #     # delete merchant_path(merchant_id)
+  #     # must_redirect_to root_path
+  #
+  #     delete merchant_path(merchants(:ghosty).id)
+  #     must_respond_with :redirect
+  #     must_redirect_to root_path
+  #
+  #     Merchant.find_by(id: merchants(:ghosty)).must_be_nil
+  #   end
+  # end
 
   describe "when authenticated" do
     let(:merchant) { merchants(:ada) }

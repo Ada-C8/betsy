@@ -17,30 +17,30 @@ class MerchantsController < ApplicationController
     end
   end
 
-  def edit
-    unless @merchant
-      flash[:status] = :failure
-      flash[:result_text] = "That merchant could not be found."
-    end
-  end
+  # def edit
+  #   unless @merchant
+  #     flash[:status] = :failure
+  #     flash[:result_text] = "That merchant could not be found."
+  #   end
+  # end
 
-  def update
-    redirect_to merchants_path unless @merchant
-    redirect_to root_path unless @merchant
+  # def update
+  #   redirect_to merchants_path unless @merchant
+  #   redirect_to root_path unless @merchant
+  #
+  #   if @merchant.update_attributes merchant_params
+  #     flash[:status] = :success
+  #     flash[:result_text] = "Successfully updated merchant details!"
+  #     redirect_to merchant_path(@merchant.id)
+  #   else
+  #     render :edit
+  #   end
+  # end
 
-    if @merchant.update_attributes merchant_params
-      flash[:status] = :success
-      flash[:result_text] = "Successfully updated merchant details!"
-      redirect_to merchant_path(@merchant.id)
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    find_merchant
-    redirect_to root_path
-  end
+  # def destroy
+  #   find_merchant
+  #   redirect_to root_path
+  # end
 
   private
   def merchant_params
