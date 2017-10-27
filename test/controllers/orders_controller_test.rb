@@ -4,10 +4,23 @@ describe OrdersController do
 
   describe "show" do
     it "return success when given a valid order id" do
-      order_id = Order.first.id
-      get order_path(order_id)
-      must_respond_with :success
+      merchant = merchants(:fake_user)
+      order = orders(:one)
+      setup { login(merchant) }
+
+      session[:order_id].must_equal order.id
+
+      # order_id = Order.first.id
+      # get order_path(order_id)
+      # must_respond_with :success
     end #valid
+
+    it "gives not_found for a bogus order id" do
+      bogus_order_id = Order.last.id + 1
+
+      get order_path(bogus_order_id)
+      must_respond_with :not_found
+    end # invalid id
 
     #will create  new cart if doesn't find one
     # it "returns not found when given an invalid product id" do
@@ -33,7 +46,7 @@ describe OrdersController do
 
     it "will return failure if order was not submitted" do
     end
-  end 
+  end
 
   # def submit
   #   # billing = Billing.find_by(id:session[:order_id])
