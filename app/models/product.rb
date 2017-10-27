@@ -10,7 +10,7 @@ class Product < ApplicationRecord
   validates :quantity, presence: true, numericality: {greater_than_or_equal_to: 0}
 
   def self.most_popular
-    @products = Product.all.sort_by { |prod| -prod.orders.count }[0...6]
+    @products = Product.where.not(quantity: 0).sort_by { |prod| -prod.orders.count }[0...6]
   end
 
   def add_categories_by_params(params)
