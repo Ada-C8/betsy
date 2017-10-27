@@ -7,7 +7,6 @@ class OrdersController < ApplicationController
     if session[:merchant]
       merchant_id = session[:merchant]['id']
       @orders = Merchant.find(merchant_id).orders
-      @orders = @orders.sort.reverse
     end
   end
 
@@ -70,7 +69,7 @@ class OrdersController < ApplicationController
       find_order_by_params_id
       confirm_object_ownership(@order, @order.merchant_id)
     else
-      return redirect_to products_path
+      return redirect_to products_path 
     end
   end
 
