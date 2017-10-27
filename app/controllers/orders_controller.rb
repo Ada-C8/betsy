@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
       flash.now[:message] = "Failed to add item to cart"
       flash.now[:details] = order.products.errors.messages
     end
-    redirect_to product_path(product)
+    redirect_to order_path
   end
 
   # def remove_from_cart
@@ -55,7 +55,7 @@ class OrdersController < ApplicationController
     if @order.submit(billing_params)
       session[:order_id] = nil # clear the session id
     end
-    
+
     redirect_to root_path
   end
 
