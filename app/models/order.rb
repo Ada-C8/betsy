@@ -16,13 +16,19 @@ class Order < ApplicationRecord
     billing = Billing.new(billing_params)
     if billing.save
       self.status = "paid"
-      self.subtract_products
+      unless self.subtract_products # if you can't subract products, we know it fails
+        puts "!!!!!!!!!!!!!!!!!we shouldn't be here"
+        return false
+      end
       self.products.clear
+      self.save # officially changes status to "paid"
+      return true
     end
     #   something.transaction
     #   2. status change from pending to paid
     #   1. subtract_products
     #   3. clear cart
+    return false
   end
 
   # def pending_to_paid
@@ -51,12 +57,14 @@ class Order < ApplicationRecord
   def subtract_products
     Order.transaction do
       self.get_quantities.each do |product, quantity|
-        product.quantity -= quantity
-        product.save!
+        product.stock -= quantity
+        product.save
       end
     end
     return true
-  rescue StandardError # something failed when updating the database
+  rescue StandardError => e # something failed when updating the database
+    puts e.message
+    puts e.backtrace.inspect
     return false # explicitly returning false instead of an exception
   end
 

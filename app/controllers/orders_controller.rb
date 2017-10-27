@@ -51,9 +51,13 @@ class OrdersController < ApplicationController
 
   def submit
     @order = Order.find_by(id:session[:order_id], status: "pending")
-    @order.submit(billing_params)
+    if @order.submit(billing_params)
+      session[:order_id] = nil # clear the session id
+      puts "===================="
+      puts "===================="
+    end
 
-    redirect_to order_path(@order.id)
+    redirect_to root_path
   end
 
   def destroy
