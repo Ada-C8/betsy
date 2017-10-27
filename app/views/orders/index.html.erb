@@ -22,14 +22,14 @@
     <ul>
 
 
-      <li><em>Order ID: <%= link_to orders.id, indi_order_path(orders.id.to_i) %></em></li>
+      <li><em>Order ID</em>: <%= link_to orders.id, indi_order_path(orders.id.to_i) %></li>
       <li><em><%= orders.status %></em></li>
-      <li><em><%= orders.created_at.strftime("%B %d, %Y") %></em></li>
+      <li><%= orders.created_at.strftime("%B %d, %Y") %></li>
       <li><em><%= link_to orders.product_name, product_path(orders.product_id.to_i) %></em></li>
-      <li><em>Product Price: <%= orders.product_price.to_f %></em></li>
+      <li><em><%= orders.product_price.to_f %></li>
       <% @total += orders.product_price.to_f %>
       <% @total_revenue += @total %>
-      <li><em>Order Total: <%= @total %></em></li>
+      <li><em>Order Total</em>: <%= @total %></li>
       </ul>
       <section class="view-buttons">
       <%= link_to ship_order_path(orders.id.to_i), method: :patch do %>
