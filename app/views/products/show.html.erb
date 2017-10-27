@@ -14,7 +14,16 @@
     Available: <%= @product.stock %></p>
     <div class="row">
       <div class="small-9 columns">
-        <%= link_to "Add to cart", add_to_cart_path(@product.id), :class=>"button", method: :post %>
+        <% if @product.stock == 0 %>
+          <button>Out of Stock</buttton>
+        <% else %>
+          <!-- <%= link_to "Add to cart", add_to_cart_path(@product.id), :class=>"button", method: :post %> -->
+          <%= form_for @product, url: add_to_cart_path(@product.id) do |f| %>
+            <%= f.text_field :stock %>
+            <%= f.submit %>
+          <% end %>
+
+        <% end %>
         <%= link_to "Review Product", new_product_review_path(@product.id), :class=>"button" %>
       </div>
     </div>
