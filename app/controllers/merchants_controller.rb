@@ -7,20 +7,6 @@ class MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
-  def new
-    @merchant = Merchant.new
-  end
-
-  def create
-    @merchant = Merchant.new(merchant_params)
-
-    if save_and_flash(@merchant)
-      redirect_to merchants_path
-    else
-      render :new, status: :bad_request
-    end
-  end
-
   def show
     @merchant = Merchant.find_by(id: params[:id])
     # make sure syntax is ok
@@ -28,6 +14,21 @@ class MerchantsController < ApplicationController
     #   render: not_found
     # end
   end
+  # def new
+  #   @merchant = Merchant.new
+  # end
+  #
+  # def create
+  #   @merchant = Merchant.new(merchant_params)
+  #
+  #   if save_and_flash(@merchant)
+  #     redirect_to merchants_path
+  #   else
+  #     render :new, status: :bad_request
+  #   end
+  # end
+
+
 
   # def edit ; end
   #

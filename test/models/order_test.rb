@@ -21,6 +21,7 @@ describe Order do
 
   describe "start new order method" do
     it "can be created" do
+      start_order_count = Order.count
       Order.start_new_order
       Order.count.must_equal start_order_count + 1
     end

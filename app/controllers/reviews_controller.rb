@@ -1,27 +1,13 @@
 class ReviewsController < ApplicationController
   skip_before_action :require_login, only: [:new, :create, :show]
-  before_action :get_product, only: [:new, :create, :show]
+  before_action :set_product, only: [:new, :create, :show]
 
   # def index
   #   @reviews = @product.reviews
   # end
 
   def new
-    if !@product
-      head :not_found
-      return
-    else
       @review = @product.reviews.build
-    end
-
-    # unless @product
-    #   head :not_found
-    #   return
-    # end
-
-    #@product = Product.find(params[:product_id])
-
-
   end
 
   def create
@@ -47,9 +33,18 @@ class ReviewsController < ApplicationController
   end
 
   private
+  # def set_product
+  #   @product = Product.find_by(id: params[:id])
+  #   unless @product
+  #     head :not_found
+  #   end
+  # end
 
-  def get_product
-    @product = Product.find(params[:product_id])
+  def set_product
+    @product = Product.find_by(id: params[:product_id])
+    unless @product
+      head :not_found
+    end
   end
 
   def review_params

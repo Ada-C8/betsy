@@ -77,7 +77,7 @@ describe Billing do
       @billing.valid?.must_equal false
       @billing.errors.messages.must_include :credit_card
 
-      @billing.bill_zip = 1234567891234567
+      @billing.credit_card = 1234567891234567
       @billing.valid?.must_equal true
     end #credit card
   end #all validations
