@@ -8,6 +8,7 @@
     <p><%= link_to "Remove Product", destroy_all_path(ids: @cart.order_products.where(product_id: product.id).pluck(:id).join(",")), method: :delete, class: "button" %></p>
   <% end %>
 
+  <!-- <span><%#= @cart.products.price %></span> -->
   <p><%= link_to "Checkout", billing_form_path, class: "button" %></p>
   <% else %>
     <p>Your shopping cart is empty.</p> <%# need to figure this out--currently, the index view is a work-around %>
