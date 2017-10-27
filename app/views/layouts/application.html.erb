@@ -15,28 +15,31 @@
         <h3 class="inline-bl"><%=link_to "Satiety", root_path %> <span class="span">Home-Cooked Meals on Demand</span></h3>
       </section>
       <!-- ========browse by========= -->
-      <section class="align-nav">
-        <div class="dropdown">
-          <span class="span-align">Categories</span>
-          <div class="dropdown-content">
-            <p><%= link_to "All Categories", categories_path %></p>
-            <p><%= link_to "Add Categories", new_category_path %></p>
-          </div>
-        </div>
-
-        <div class="dropdown">
-          <span class="span-align">Merchants</span>
-          <div class="dropdown-content">
-            <p><%= link_to "All Merchants", merchants_path %></p>
-          </div>
-        </div>
-
+      <section class="align-nav small-6 columns">
         <div class="dropdown">
           <span class="span-align">Products</span>
           <div class="dropdown-content">
-            <p><%= link_to "All Categories", products_path %></p>
-            <p><%= link_to "Add Categories", new_product_path %></p>
+            <p><%= link_to "All Products", products_path %></p>
+            <p><%= link_to "Add New Product", new_product_path %></p>
           </div>
+        </div>
+
+        <div class="dropdown">
+          <span class="span-align">Categories</span>
+          <div class="dropdown-content">
+            <p><%= link_to "Appetizers", category_path(1) %></p>
+            <p><%= link_to "Breakfast", category_path(2) %></p>
+            <p><%= link_to "Lunch", category_path(3) %></p>
+            <p><%= link_to "Dinner", category_path(4) %></p>
+            <p><%= link_to "Desserts", category_path(5) %></p>
+            <p><%= link_to "Drinks", category_path(6) %></p>
+            <p><%= link_to "All Categories", categories_path  %></p>
+            <p><%= link_to "Add New Category", new_category_path %></p>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <span class="span-align"><%= link_to "Merchants", merchants_path %></span>
         </div>
       </section>
       <!-- ==========log in=========== -->
