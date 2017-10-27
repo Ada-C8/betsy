@@ -12,36 +12,33 @@
     <section class="logo-nav">
       <!-- ===========logo=========== -->
       <section>
-        <h3 class="inline-bl">Satiety <span class="span">Home-Cooked Meals on Demand</span></h3>
+        <h3 class="inline-bl"><%=link_to "Satiety", root_path %> <span class="span">Home-Cooked Meals on Demand</span></h3>
       </section>
       <!-- ========browse by========= -->
-      <!--
       <section class="align-nav">
         <div class="dropdown">
           <span class="span-align">Categories</span>
           <div class="dropdown-content">
-            <p><%= link_to "All Categories", new_category_path %></p>
-            <p><%= link_to "Add Categories", categories_path %></p>
+            <p><%= link_to "All Categories", categories_path %></p>
+            <p><%= link_to "Add Categories", new_category_path %></p>
           </div>
         </div>
 
         <div class="dropdown">
           <span class="span-align">Merchants</span>
           <div class="dropdown-content">
-            <p><%= link_to "All Categories", new_category_path %></p>
-            <p><%= link_to "Add Categories", categories_path %></p>
+            <p><%= link_to "All Merchants", merchants_path %></p>
           </div>
         </div>
 
         <div class="dropdown">
           <span class="span-align">Products</span>
           <div class="dropdown-content">
-            <p><%= link_to "All Categories", new_category_path %></p>
-            <p><%= link_to "Add Categories", categories_path %></p>
+            <p><%= link_to "All Categories", products_path %></p>
+            <p><%= link_to "Add Categories", new_product_path %></p>
           </div>
         </div>
       </section>
-      -->
       <!-- ==========log in=========== -->
       <ul class="menu">
         <li>
@@ -66,6 +63,7 @@
 <!-- ============================ -->
 <!-- =============MAIN=========== -->
     <main>
+      <%= render partial: 'layouts/message' %>
     </main>
 
     <%= yield %>
