@@ -81,3 +81,16 @@ input.shopping-cart-form {
   display: inline-block;
   width: 50%;
 }
+
+.view-cart {
+  float: none;
+  margin: auto;
+}
+
+.cart-info .button:first-child {
+  border-right: 1px solid #efefef;
+}
+
+.view-cart .product-img.product-thumbnail {
+  margin: .5rem 0 .5rem 1rem;
+}

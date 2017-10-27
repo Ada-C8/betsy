@@ -8,6 +8,7 @@ $pink: #DBC2CF;
 $grey: #A7AAB9;
 $gray: #A7AAB9;
 $teal: #3C7A89;
+$ltteal: #91BEC9;
 $navy: #16262E;
 $burgundy: #4F3640;
 $ltburgundy: #7F4F62;
@@ -178,13 +179,13 @@ section.product-info {
 }
 
 .category-menu li a {
-  color: $ltburgundy;
+  color: $grey;
   display: inline-block;
   text-indent: -.5rem;
 }
 
 .category-menu li a:hover {
-  color: $burgundy;
+  color: $ltteal;
 }
 
 .view-all {
