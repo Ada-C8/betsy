@@ -41,8 +41,6 @@ $burgundy: #4F3640;
 }
 
 .profile-button {
-  background-color: $teal;
-  border: 2px solid #fefefe;
   border-radius: 2rem;
   display: block;
   margin: auto;
@@ -172,10 +170,10 @@ input.inventory-form {
   margin: 0;
 }
 
-.teal-btn {
-  background-color: $teal;
+.burg-btn {
+  background-color: $burgundy;
 }
 
-.teal-btn:hover {
+.burg-btn:hover {
   background-color: $pink;
 }
