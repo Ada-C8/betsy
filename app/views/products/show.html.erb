@@ -14,7 +14,7 @@
       <%= form_tag do %>
       <%= label_tag :quantity, "Quantity:", class: 'small-6 columns' %>
       <%= select_tag :quantity, options_for_select((1..@product.quantity)), class: 'small-6 columns' %>
-      <%= submit_tag "Add to Cart", class: 'hollow button cart-btn' %>
+      <%= submit_tag "Add to Cart", class: 'button cart-btn' %>
       <% end %>
     </div>
   </div>
@@ -47,7 +47,7 @@
         <span class="stars"><%= Review.get_rating_stars(rating) %></span>
       </h4>
     <% end %>
-    <span class="hollow button magenta_buttons"><%= link_to new_product_review_path(@product.id) do %>
+    <span class="button add_review_button"><%= link_to new_product_review_path(@product.id) do %>
       <i class="fa fa-comments-o"></i>
       Add Review
     <span>
