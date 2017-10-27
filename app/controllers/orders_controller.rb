@@ -12,6 +12,10 @@ class OrdersController < ApplicationController
 
     order_product = OrderProduct.new(product: product, order: order, quantity: params[:quantity])
 
+    order_product.quantity.times do
+      order.products << product
+    end
+
     # result = order.products << product # (the has_many declaration creates some cool ruby magic methods like this)
     # order.save
     if order_product.save
