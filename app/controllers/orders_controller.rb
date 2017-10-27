@@ -10,9 +10,11 @@ class OrdersController < ApplicationController
     session[:order_id] = order.id # the session's order_id will be reset to the current order.id (was either nil or existed already--"unless")
     product = Product.find_by(id: params[:id]) # find the product from the URL param
 
-    result = order.products << product # (the has_many declaration creates some cool ruby magic methods like this)
+    order_product = OrderProduct.new(product: product, order: order, quantity: params[:quantity])
+
+    # result = order.products << product # (the has_many declaration creates some cool ruby magic methods like this)
     # order.save
-    if result
+    if order_product.save
       # order.order_products.sum(:quantity)
       flash[:status]  = :success
       flash[:message] = "Successfully added item to cart"
