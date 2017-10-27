@@ -20,13 +20,37 @@ class Order < ApplicationRecord
   #
   # end
 
-  def pending_to_paid
-    self.status = "paid"
+
+
+
+  # def pending_to_paid
+  #   self.status = "paid"
+  # end
+  #
+  # def clear_cart
+  #
+  # end
+
+  def get_ordered_products
+    hash = {}
+
+    # check if product is in hash
+    # => if not, set to 1
+    # => if yes, add 1
+
+    return hash
   end
 
-  def clear_cart
-
+  def quantity_of(product)
+    quantity = 0
+    self.order_products.each do |op|
+      if op.product_id == product.id
+        quantity += 1
+      end
+    end
+    return quantity
   end
+
 
   # subtract_product is an instance method
   # self inside this method is calling `self` on an instance of order
