@@ -1,0 +1,24 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quantity: 1
+  product: tricycle
+  status: ""
+
+two:
+  quantity: 1
+  product: tripod
+  order: order4
+  status: ""
+
+three:
+  quantity: 1
+  product: tricycle
+  order: order4
+  status: ""
+
+four:
+  quantity: 1
+  product: tricycle
+  order: order1
+  status: ""

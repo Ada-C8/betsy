@@ -1,0 +1,122 @@
+<section class="name-wrap">
+  <h2><%= @merchant.username %>'s Page</h2>
+
+  <div>
+    <%= link_to "Back to Merchants List", merchants_path, class: "button" %>
+    <% if @merchant.id == session[:merchant_id] %>
+    <%# link_to "Edit", edit_merchant_path(@merchant.id), class: "button" %>
+    <%= link_to "Add Product", new_product_path, class: "button" %>
+    <%# link_to "Delete", merchant_path(@merchant.id), method: :delete, data: { confirm: "Are you sure?" }, class: "alert button" %>
+    <%end %>
+  </div>
+</section>
+
+<!-- line -->
+<h3 class='category-name'>Products</h3>
+<section class="wrappy">
+
+<table class='products-table'>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Inventory</th>
+      <%if session[:merchant_id] == @merchant.id %>
+      <th>Update Inventory</th>
+      <th>Edit Product</th>
+      <th>Retire Product</th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @merchant.products.each do |product| %>
+    <tr>
+      <td><p><%= link_to product.name, product_path(product.id) %></p></td>
+      <td>$<%= '%.2f' % product.price %></td>
+      <td><%= product.inventory %></td>
+      <%if session[:merchant_id] == @merchant.id %>
+      <td>
+        <% if product.retired %>
+        <span>--Retired--</span>
+        <% else %>
+        <span>
+          <%= form_for product do |f| %>
+
+          <%= f.text_field :inventory%>
+
+          <%= submit_tag "Update inventory", class: "button" %>
+          <% end %>
+        </span>
+        <% end %>
+      </td>
+      <td><%= link_to "Edit Info", edit_product_path(product), class: "button" %></td>
+      <td><%= link_to product.retired ? "Unretire Product" : "Retire Product", retire_product_path(product), method: :patch, class: "button" %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<% if @merchant.id == session[:merchant_id] %>
+
+<h3 class='merchant-heading'>Orders</h3>
+
+<ul id='total_boxes'>
+  <li class='total_box'>
+    <h6>Total Revenue</h6>
+    <p>
+      <% if @complete_orders.empty? %>
+        No money made yet!
+      <% else %>
+        $<%='%.2f' % @merchant.total_revenue('complete')%>
+      <% end %>
+    </p>
+  </li>
+
+  <li class='total_box'>
+    <h6>Total Completed Orders</h6>
+    <p>
+      <%=@complete_orders.count%>
+    </p>
+    <%= link_to "See Completed Orders", merchant_path(@merchant, status: "complete"), class:"button" %>
+  </li>
+
+  <li class='total_box'>
+    <h6>Waiting Revenue</h6>
+    <p>
+      <% if @paid_orders.empty? %>
+        No orders waiting!
+      <% else %>
+        $<%='%.2f' % @merchant.total_revenue('paid')%>
+      <% end %>
+    </p>
+  </li>
+
+  <li class='total_box'>
+    <h6>Waiting Orders</h6>
+    <p>
+      <%=@paid_orders.count%>
+    </p>
+      <%= link_to "See Orders Waiting Fulfillment", merchant_path(@merchant, status: "paid"), class:"button" %>
+  </li>
+</ul>
+
+<!-- <div class="order_list">
+  <h4>Waiting to be fulfilled:</h4>
+  <%# render partial: "show_orders", locals: {input_orders: @paid_orders} %>
+</div> -->
+
+
+<% if @filtered_orders %>
+<div class="order_list">
+  <h4><%= @title %></h4>
+  <%= render partial: "show_orders", locals: {input_orders: @filtered_orders} %>
+</div>
+<% end %>
+
+
+
+<% end %>
+</section>
