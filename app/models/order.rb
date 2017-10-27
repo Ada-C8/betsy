@@ -17,7 +17,6 @@ class Order < ApplicationRecord
     if billing.save
       self.status = "paid"
       unless self.subtract_products # if you can't subract products, we know it fails
-        puts "!!!!!!!!!!!!!!!!!we shouldn't be here"
         return false
       end
       self.products.clear
