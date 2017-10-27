@@ -13,14 +13,14 @@ class ProductsController < ApplicationController
       else
         @products = @merchant.products.where(available: "Available")
       end
-    elsif
-      params[:review_id]
-      @products = Review.where(product_id: params[:category_id])
-      if @products == nil
-        flash[:status] = :failure
-        flash[:result_text] = "Products for that review ID could not be found"
-        redirect_to products_path, status: :not_found
-      end
+    # elsif
+    #   params[:review_id]
+    #   @products = Review.where(product_id: params[:category_id])
+    #   if @products == nil
+    #     flash[:status] = :failure
+    #     flash[:result_text] = "Products for that review ID could not be found"
+    #     redirect_to products_path, status: :not_found
+    #   end
     elsif
       params[:category_id]
       @category = Category.find_by(id: params[:category_id])

@@ -67,8 +67,16 @@ header {
 }
 
 @media screen and (max-width: 1000px) {
+    html {
+      background-color: black;
+    }
+
+    #stars, #stars2, #stars3 {
+      display: none
+    }
+
     .dropdown ul {
-        display: none;
+        // display: none;
     }
 }
 

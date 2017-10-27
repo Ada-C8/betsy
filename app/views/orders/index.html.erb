@@ -11,7 +11,8 @@
   <% end %>
   </span>
   <% @number_of_orders = @merch_orders.to_a.uniq {|o| o.id} %>
-  <p><%= @number_of_orders.length %> TOTAL ORDERS </p>
+  <p>TOTAL ORDERS: <%= @number_of_orders.length %></p>
+
 
   <% @total_revenue = 0.00 %>
   <% @merch_orders.to_a.each do |orders| %>
@@ -28,7 +29,7 @@
       <% @total_revenue += @total %>
       <span><em>Order Total: <%= @total %></em></span>
       <%= link_to ship_order_path(orders.id.to_i), method: :patch do %>
-        <span class="button" id="shipped-button">Mark Product as Shipped</span>
+        <span class="button">Mark Shipped</span>
       <% end %>
     </section>
     </section>
