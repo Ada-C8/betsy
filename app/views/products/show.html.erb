@@ -22,9 +22,8 @@
           <p><em>Average Rating</em>: <%= @product.average_rating %></p>
           <% if @product.categories.count > 0 %>
           <p><em>Categories</em>: <% @product.categories.each do |category| %>
+                <em><%= link_to category.name, category_path(category.id) %></em>
             <% end %>
-
-            <em><%= link_to category.name , category_path(category.id) %></em>
             <% end %> </p>
             <% if @product.quantity_avail > 0 %>
             <p><em>In Stock</em></p>
