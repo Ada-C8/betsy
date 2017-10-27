@@ -200,6 +200,7 @@ section.product-info {
 .product-form {
   float: none;
   margin: auto;
+  padding: 1rem;
 }
 
 .prod-form-item {
@@ -219,9 +220,4 @@ section.product-info {
   label.prod-form-item {
     // text-align: right;
   }
-}
-
-.product-form-holder {
-  float: none;
-  margin: auto;
 }

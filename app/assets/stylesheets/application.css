@@ -123,3 +123,25 @@ div.mini-img a img {
   filter: grayscale(100%);
 }
 div.mini-img:hover a img { filter: grayscale(0%); }
+
+/*------------------ errors ------------------*/
+
+.errors {
+  border: 2px solid #A7AAB9;
+  border-radius: 1rem;
+  float: none;
+  margin: 1rem auto;
+  padding: 1rem 4rem;
+}
+
+.errors li {
+  line-height: 1;
+}
+
+.failure {
+  color: #7F4F62;
+}
+
+.success {
+  color: #91BEC9;
+}
