@@ -99,6 +99,24 @@ nav.top-nav ul li {
 nav.top-nav ul li a { color: #fefefe; }
 
 
+.nav-text {
+  display: none;
+}
+
+.nav-icon {
+  font-size: 1.5rem;
+}
+
+@media print, screen and (min-width: 40em) {
+  .nav-text {
+    display: inline-block;
+  }
+
+  .nav-icon {
+    font-size: 1rem;
+  }
+}
+
 .row { max-width: 100%; }
 header nav { text-align: right; }
 .right { float: right; }
