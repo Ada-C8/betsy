@@ -12,6 +12,11 @@ class Order < ApplicationRecord
     return order
   end
 
+  def remove_from_cart
+    order = Order.find_or_create_cart(session[:order_id]) # find or create a cart (in order.rb)
+
+  end
+
   def submit(billing_params)
     billing = Billing.new(billing_params)
     if billing.save
