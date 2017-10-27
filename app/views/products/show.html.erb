@@ -19,13 +19,14 @@
 <!-- reviews -->
 <div class="column row">
   <h3>Reviews</h3>
-  <h4>Average Rating: <%= @product.average_rating %></h4>
+  <h4>Average Rating: <%= @product.average_rating.round(2) %> / 5 Hearts</h4>
   <div class="media-object stack-for-small">
     <div class="media-object-section">
       <% reviews = @product.reviews.to_a %>
       <!-- what does .to_a do? -->
       <% reviews.each do |review| %>
-        <h5><%= review.rating %></h5>
+        <h5><%= review.rating %> Hearts Warmed
+        <small>on <%= review.created_at.strftime("%B %d, %Y") %></small></h5>
         <p><%= review.reviewtext %></p>
       <% end %>
     </div>
