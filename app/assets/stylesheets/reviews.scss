@@ -4,41 +4,56 @@
 
 ///////***Partial view***////////////
 
-.first_line_info h6{
+.first_line_info h6 {
   display: inline-block;
 }
-.change{
-  background-color: white;
-  border: .5px solid black;
-  border-radius: 1rem;
-  color: inherit;
-}
-.review_info{
+// .change {
+//   background-color: white;
+//   border: .5px solid black;
+//   border-radius: 1rem;
+//   color: inherit;
+// }
+.review_info {
   padding-left: 10%;
   background-color: white;
   border: .5px solid black;
   border-radius: 1rem;
   color: black;
+  margin-bottom: 20px;
 }
 
+.magenta_buttons{
+  color: #4F3640;
+}
+.stars {
+  color: gold;
+}
+
+.review_date {
+padding-left: 15%;
+}
 //////////////****Review form****/////////////
 
-// .description{
-//   margin-top: 10rem;
-//   // float: left;
-//   // clear: right;
-// }
-// .text_command{
-//   margin-top: 5rem;
-//   padding-left: 10%;
-// }
-// .rating .text_command{
-//   display: inline-block;
-//   margin-top: 7%;
-//   // padding-right: 15%;
-//
-//   width: 60%;
-// }
+.new_review {
+  margin-top: 30px;
+  max-width: 600px;
+
+  h4 {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .description {
+    margin-top: 20px;
+  }
+}
+
+.rating {
+  display: inline-block;
+  position: relative;
+  top: 8px;
+  left: -10px;
+}
 
 .rating:not(:checked) > input {
     position:absolute;

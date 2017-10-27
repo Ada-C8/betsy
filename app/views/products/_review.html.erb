@@ -2,32 +2,23 @@
   <div class="review row">
     <div class = "first_line_info">
       <%if review.merchant%>
-        <h6><%= review.merchant.username%>: </h6>
+        <span><%= review.merchant.username%>: </span>
       <%else%>
-        <h6>Guest: </h6>
+        <span>Guest </span>
       <%end%>
-      <h6> Rating:
-        <%  rating = review.rating %>
-        <% if rating <= 1 %>
-          ⭑⭒⭒⭒⭒
-        <% elsif rating <= 2 %>
-          ⭑⭑⭒⭒⭒
-        <% elsif rating <= 3 %>
-          ⭑⭑⭑⭒⭒
-        <% elsif rating <= 4 %>
-          ⭑⭑⭑⭑⭒
-        <% else %>
-          ⭑⭑⭑⭑⭑
-        <% end %>
-      </h6>
-      <h6> <%= review.updated_at.strftime("%b %d, %Y") %> </h6>
+      <span> Rating:
+        <span class="stars">
+          <%= Review.get_rating_stars(review.rating) %>
+        </span>
+      </span>
+      <span class="review_date"> <%= review.updated_at.strftime("%b %d, %Y") %> </span>
     </div>
-    <h6> <%= review.description %> </h6>
+    <p> <%= review.description %> </p>
   </div>
 
   <% if session[:merchant] && session[:merchant]['id'] == review.merchant_id%>
-    <div class="button change"> <%= link_to "Edit", edit_review_path(review.id) %></div>
-    <div class="button change"> <%= link_to "Delete", review_path(review.id), method: :delete, data: { confirm: "Are you sure?" }%></div>
+    <div class="hollow button"> <%= link_to "Edit", edit_review_path(review.id) %></div>
+    <div class="hollow button"> <%= link_to "Delete", review_path(review.id), method: :delete, data: { confirm: "Are you sure?" }%></div>
   <% end %>
 
 </section>

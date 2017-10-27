@@ -14,7 +14,7 @@
       <%= form_tag do %>
       <%= label_tag :quantity, "Quantity:", class: 'small-6 columns' %>
       <%= select_tag :quantity, options_for_select((1..@product.quantity)), class: 'small-6 columns' %>
-      <%= submit_tag "Add to Cart", class: 'button cart-btn' %>
+      <%= submit_tag "Add to Cart", class: 'hollow button cart-btn' %>
       <% end %>
     </div>
   </div>
@@ -40,27 +40,22 @@
   </div>
 
   <div class="row reviews">
-    <%= link_to new_product_review_path(@product.id) do %>
-    <i class="fa fa-comments-o"></i>
-    Add Review
-    <%#= link_to "Add review", new_product_review_path(@product.id) %>
+
+    <% unless @product.reviews.empty?%>
+      <h4 class="columns small-6">Average Review:
+        <% rating = @product.reviews.average(:rating) %>
+        <span class="stars"><%= Review.get_rating_stars(rating) %></span>
+      </h4>
     <% end %>
-    <h4>Average Review:
-       <% rating = @product.reviews.average(:rating) %>
-       <% if rating %>
-         <% if rating <= 1 %>
-           ⭑⭒⭒⭒⭒
-         <% elsif rating <= 2 %>
-           ⭑⭑⭒⭒⭒
-         <% elsif rating <= 3 %>
-           ⭑⭑⭑⭒⭒
-         <% elsif rating <= 4 %>
-           ⭑⭑⭑⭑⭒
-         <% else %>
-           ⭑⭑⭑⭑⭑
-         <% end %>
-        <% end %>
-    </h4>
+    <span class="hollow button magenta_buttons"><%= link_to new_product_review_path(@product.id) do %>
+      <i class="fa fa-comments-o"></i>
+      Add Review
+    <span>
+    <% end %>
+  </div>
+
+  <div class="row reviews">
+
     <% @product.reviews.each do |review| %>
       <%= render partial: 'review', locals: {review: review} %>
     <% end %>
