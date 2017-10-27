@@ -20,9 +20,6 @@ class Order < ApplicationRecord
   #
   # end
 
-
-
-
   # def pending_to_paid
   #   self.status = "paid"
   # end
@@ -31,14 +28,17 @@ class Order < ApplicationRecord
   #
   # end
 
-  def get_ordered_products
-    hash = {}
+  def get_quantities
+    items = {}
 
-    # check if product is in hash
-    # => if not, set to 1
-    # => if yes, add 1
-
-    return hash
+    self.order_products.each do | item |
+      if items.include?(item.product)
+        items[item.product] += 1
+      else
+        items[item.product] = 1
+      end
+    end
+    return items
   end
 
   def quantity_of(product)
