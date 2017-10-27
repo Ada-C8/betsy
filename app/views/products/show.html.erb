@@ -7,7 +7,7 @@
 <p>price: <%= @product.price %></p>
 <p>stock: <%= @product.stock %></p>
 
-<p>photo: <%= @product.photo_URL %></p>
+<p>photo: <%= image_tag(@product.photo_URL) %></p>
 
 <%# TODO :: point to proper product id, right now pointing to product/1 %>
 <%= link_to "Add to cart", add_to_cart_path(@product.id), :class=>"button", method: :post %>
