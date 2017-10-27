@@ -47,7 +47,7 @@ describe Order do
     end
   end
 
-  describe "subtract_product" do
+  describe "subtract_products" do
     it "returns true when the database is updated" do
       product1 = products(:fake_product1)
       product2 = products(:fake_product2)
@@ -66,8 +66,8 @@ describe Order do
 
 
 
-      order.subtract_product.must_equal true
-      # use reload when the database has changed and the local variable goes stale e.g. subtract_product updates the database and product1 was not updated.
+      order.subtract_products.must_equal true
+      # use reload when the database has changed and the local variable goes stale e.g. subtract_products updates the database and product1 was not updated.
       expected_stock = product1.stock - op1.quantity
       product1.reload
       product1.stock.must_equal expected_stock
@@ -92,7 +92,7 @@ describe Order do
       op2.order = order
       op2.save!
 
-      order.subtract_product.must_equal false
+      order.subtract_products.must_equal false
 
       expected_stock = product1.stock
       product1.reload
