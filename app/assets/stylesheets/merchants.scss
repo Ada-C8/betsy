@@ -87,21 +87,30 @@ table.revenue {
 // INVENTORY //
 ///////////////
 
+.inventory-tracker {
+  border: 1px solid $grey;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: -1px;
+  padding: 0;
+}
+
 .inventory-info > div {
-  margin: 2rem 0;
+  // margin: 2rem 0;
   overflow-x: hidden;
   white-space: nowrap;
 }
 
 label.inventory-form {
   display: inline-block;
-  text-align: right;
+  margin-top: .35rem;
+  padding-left: 0;
   width: 30%;
 }
 
 input.inventory-form {
   display: inline-block;
-  width: 50%;
+  float: right;
 }
 
 .new-product-button {
@@ -110,6 +119,32 @@ input.inventory-form {
 
 .product-list h4 small {
   color: $teal;
+}
+
+@media print, screen and (min-width: 40em) {
+  input.inventory-form {
+    width: 70%;
+  }
+}
+
+@media print, screen and (min-width: 64em) {
+  input.inventory-form {
+    width: 65%;
+  }
+  label.inventory-form {
+    text-align: right;
+  }
+  .inventory-info > div {
+    margin: 2rem 0;
+  }
+}
+
+.inv-item {
+  padding: .25rem;
+}
+
+.spacer {
+  margin-top: 5rem;
 }
 
 /////////////////
@@ -134,6 +169,13 @@ input.inventory-form {
 }
 
 .button.ship-btn {
-  background-color: $teal;
   margin: 0;
+}
+
+.teal-btn {
+  background-color: $teal;
+}
+
+.teal-btn:hover {
+  background-color: $pink;
 }
