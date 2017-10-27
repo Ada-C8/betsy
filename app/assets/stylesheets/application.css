@@ -64,7 +64,10 @@ header.header {
   background: #3C7A89;
   padding: 1% 0;
 }
-h1.main-heading { margin: 0 0 0 1%; }
+h1.main-heading {
+   margin: 0 0 0 1%;
+   white-space: nowrap;
+}
 h1.main-heading a { color: #fefefe; }
 main.main {
   padding: 0;
@@ -101,13 +104,14 @@ nav.top-nav ul li a { color: #fefefe; }
 
 .nav-text {
   display: none;
+  white-space: nowrap;
 }
 
 .nav-icon {
   font-size: 1.5rem;
 }
 
-@media print, screen and (min-width: 40em) {
+@media print, screen and (min-width: 42em) {
   .nav-text {
     display: inline-block;
   }
