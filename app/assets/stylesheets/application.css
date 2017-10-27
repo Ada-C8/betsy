@@ -82,3 +82,13 @@ nav li {
 .span-align {
   min-width: 160px;
 }
+
+.column h5 {
+  color: white;
+}
+
+.column p {
+  font-weight: bold;
+  color: white;
+  /*background-color:rgba(0,0,0,0.5);*/
+}
