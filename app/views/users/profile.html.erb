@@ -1,0 +1,82 @@
+<h1>Welcome, <%=@user.username%></h1>
+<p>
+
+</p>
+
+<ul class="top-links">
+  <li>Not <%=@user.username%>? <%=link_to "Log out!", logout_path%></li>
+  <li><%= link_to "Manage your Orders", order_fulfillment_path%></li>
+  <li><%= link_to "Create a New Product", new_product_path %></li>
+</ul>
+
+<section class="profile-section">
+  <table class="table">
+    <thead class="table-head">
+      <tr>
+        <th>Name</th>
+        <th>Photo</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Amount in Stock</th>
+        <th>Edit</th>
+        <th>Add Inventory</th>
+        <th>Reduce Inventory</th>
+        <th>Currently Available</th>
+        <th>Product Visibility</th>
+      </tr>
+    </thead>
+    <% @user.products.order(:id).each do |product| %>
+    <tbody>
+      <tr>
+        <td><%= link_to product.name, product_path(product.id)%></td>
+        <td><li><img class="th small-6 large-3" src=<%=product.product_photo%> alt="product photo"></li></td>
+        <td><li><%= product.price %></li></td>
+        <td><li><%= product.description %></li></td>
+        <td><li><%=product.items.where(purchase_status: false).count%></li></td>
+        <td><li><%= link_to "Edit this Product", edit_product_path(product.id), class:"button"%></li></td>
+        <td><li><%= button_to "Add Inventory", create_item_path(product.id), method: :post, class:"button"%></li></td>
+        <td><li><%= button_to "Reduce Inventory", destroy_item_path(product.id), method: :delete, class: "button" %></li></td>
+        <td><li><strong><%= product.visibility %></strong></li></td>
+        <td><li><%= button_to "Change Product Visibility", change_visibility_path(product.id), class:"button"%></li></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<section class=“profile-section”>
+  <h3>Your Past Purchases</h3>
+  <% if @user.has_past_orders? %>
+    <table class=“table”>
+      <thead class=“table-head”>
+        <tr>
+          <th>Order</th>
+          <th>Product</th>
+          <th>Photo</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Order Status</th>
+        </tr>
+      </thead>
+      <% @user.orders.where(order_status: "paid").where(order_status: "canceled").where(order_status: "shipped").each do |order| %>
+      <tbody>
+
+        <% order.order_products.each do |order_product| %>
+          <tr>
+            <td><li>Order #<%= order.id %></li></td>
+            <td><li><%= link_to order_product.product.name, product_path(order_product.product.id)%></td>
+              <td><li><img class=“th small-6 large-3” src=<%=order_product.product.product_photo%> alt=“product photo”></li></td>
+              <td><li><%= order_product.product.price %></li></td>
+              <td><li><%= order_product.quantity %></li></td>
+              <td><li><%= order_product.order.order_status %></li></td>
+          </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>
+      You do not have any past orders. Get shopping!
+    </p>
+  <% end%>
+</section>

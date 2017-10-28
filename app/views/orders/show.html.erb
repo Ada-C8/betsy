@@ -1,0 +1,64 @@
+
+<section>
+  <% if @cart.order_products.length == 0 %>
+  <%= "Get to shopping! Your cart is empty!" %>
+  <% else %>
+
+
+
+  <section class="profile-section">
+    <h2 class="order-title">Your Order</h2>
+
+    <table class="table">
+      <thead class="table-head">
+        <tr>
+          <th>Product</th>
+          <th>Unit Cost</th>
+          <th>Quantity</th>
+          <th>Product Subtotal</th>
+          <th>Update Quantity</th>
+          <th>Delete Item</th>
+        </tr>
+      </thead>
+      <% @cart.order_products.each do |entry| %>
+      <tbody>
+        <tr>
+          <td><%= entry.product.name %></td>
+          <td><%= readable_money(entry.product.price.round(2)) %></td>
+          <td><%= entry.quantity %></td>
+          <td><%=readable_money(entry.subtotal.round(2)) %></td>
+          <td><%= form_for entry, url: order_product_path(entry.id), method: :patch do |f|  %>
+            <%# f.label :quantity %>
+            <%= f.text_field :quantity %>
+            <%= f.submit "Update Quantity", class:"button"%>
+          <% end %>
+        </td>
+        <td><%= link_to "Delete Item", order_product_path(entry.id), method: :delete, data: {confirm: "Are you sure you want to remove #{entry.product.name} from cart?"}, class:"button" %></td>
+
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <ul class="totals">
+      <li>Subtotal: <%= readable_money(@cart.sub_total.round(2)) %></li>
+      <li>Tax: <%= readable_money(@cart.tax_amount.round(2)) %></li>
+      <li>Total: <%= readable_money(@cart.taxed_total.round(2)) %></li>
+    </ul>
+
+    <li>
+      <%# if session[:user_id] %>
+      <%# @user = User.find_by(id: session[:user_id]) %>
+        <%#if @user.billing_datum_id %>
+          <!-- USER: <%#= @user.username %>
+          Billing Datum ID <%#= @user.billing_datum_id %> -->
+          <%#= link_to("Proceed to Checkout", edit_billing_datum_path(@user.billing_datum_id), class:'button') %>
+          <%# end %>
+      <%#elsif @pending_order.billing_datum_id %>
+        <%#= link_to("Proceed to checkout", edit_billing_datum_path(@pending_order.billing_datum_id), class:"button")%>
+      <%#else%>
+        <%= link_to "Proceed to Checkout", new_billing_datum_path, class: 'button' %>
+      <%#end %>
+    <%end%>
+    </li>
+  </section>

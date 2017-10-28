@@ -1,0 +1,206 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+//= require foundation_and_overrides
+
+ *= require foundation_and_overrides
+
+ */
+
+body, h1, h2, h3, h4, h5, footer {
+  // font-family: 'Slabo 27px', serif;
+  font-family: 'Muli', sans-serif;
+
+}
+
+body {
+    width: 100%;
+    height: calc(100vh - 200px);
+    background-repeat: no-repeat;
+    // opacity: 0.2;
+
+  }
+
+
+//Nav--------------------------------------
+nav {
+  background: #3f6172;
+  text-transform: uppercase;
+  width: auto;
+  height: 200px;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+
+}
+
+nav ul,
+nav li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  float: left;
+}
+
+nav li a {
+  display: block;
+  min-width: 140px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  text-decoration: none;
+  color:black;
+}
+
+/*Dropdown*/
+.menu_item a:hover{
+  background: #8c4511;
+}
+
+nav li:hover ul a {
+  height: 40px;
+  line-height: 40px;
+}
+
+nav li ul li {
+  display: block;
+  float: none;
+  background: none;
+}
+
+/*Display on hover*/
+nav ul li a:hover + .hidden,
+.hidden:hover {
+  display: block;
+}
+
+/*Hides the drop down links*/
+nav li ul {
+  display: none;
+}
+
+
+
+//NAV-----ADDED---------------------------------
+
+.right {
+  margin-top: 5px;
+  float: right;
+}
+
+
+.right ul li a:hover {
+  background-color: transparent;
+  color: black;
+  border: solid 1px;
+  border-radius: 15px;
+}
+
+.left {
+  font-size: 3em;
+  height: 200px;
+}
+
+
+.left:hover
+{
+  -webkit-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  transform: scale(1.03);
+}
+
+
+.left a{
+  // width: 40%;
+  font-size: 4em;
+  text-align: center;
+  margin-left: 2%;
+  line-height: 1;
+  color:white;
+}
+
+.button {
+  color: black;
+  background: none;
+}
+
+.button:hover {
+  color: black;
+}
+
+// CHECKBOXES--------------------------------------------
+
+
+input[type="checkbox"] {
+  // display: none;
+}
+
+input[type="checkbox"]:checked ~ #menu {
+  display: block;
+}
+
+
+// PROFILE & CART------------------------------
+
+.background {
+  width: 100%;
+  height: calc(100vh - 200px);
+  background-image: image-url('purple.jpg');
+  background-repeat: no-repeat;
+}
+
+
+.top-links {
+  margin-left: 5%;
+  margin-bottom: 2%;
+}
+
+.profile-section {
+  display: inline-block;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.button:hover {
+  color: black;
+  background: none;
+  background-color: transparent;
+  border: solid 1px;
+  border-radius: 15px;
+}
+
+tbody:nth-child(even) {
+   background-color: white;
+ }
+
+tbody:nth-child(odd) {
+  background-color: #ebebeb;
+}
+
+.table th,
+.table td {
+  text-align: center;
+}
+
+.order-title {
+  // margin-left: 5%;
+}
+
+.totals {
+  float: right;
+  // margin-right: 5%;
+}

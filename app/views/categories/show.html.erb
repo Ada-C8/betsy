@@ -1,0 +1,9 @@
+<h1>Shop by Category</h1>
+
+<h2><%=@category.name%></h2>
+
+<% @category.products.show_available.each do |product| %>
+  <ul>
+    <li><%= (link_to product.name,product_path(product.id)) %></li>
+  </ul>
+<% end %>
