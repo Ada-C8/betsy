@@ -1,0 +1,42 @@
+<main class="row margin-zero min-width no-bg">
+  <section class="align-center">
+
+    <header class="bg bottom-margin">
+      <h2 class="more-padding"><%= @category.name %></h2>
+    </header>
+<div id="products-index">
+    <% if @products.any? %>
+
+      <% @products.each do |product| %>
+
+        <div class="product-block text-center small-12 large-4 columns  end">
+
+          <%= link_to image_tag(product.photo_url), product_path(product) %>
+          <p class="product-name"><strong><%= product.name %></strong></p>
+          <p><%= number_to_currency product.price %></p>
+
+        <% if product.inventory <1 %>
+        <span id="available">  <%= "This product is not available in stock right now" %></span>
+          <% else %>
+          <%= form_for @order_item do |f| %>
+            <%= f.hidden_field :product_id, value: product.id %>
+              <%= f.select :quantity, 1..product.inventory %>
+
+              <%= f.submit "Add to cart" %>
+              <% end %>
+            <% end %>
+
+
+
+        </div>
+
+      <% end %>
+
+    <% else %>
+
+        <h1>These are not the products you are looking for...</h1>
+
+    <% end %>
+</body>
+  </section>
+</main>

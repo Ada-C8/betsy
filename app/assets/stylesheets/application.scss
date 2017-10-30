@@ -1,0 +1,389 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require foundation_and_overrides
+
+ */
+// @import url('http://fonts.googleapis.com/css?family=Didact+Gothic');
+
+@import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
+
+// @import font-url('//fonts.googleapis.com/css?family=Asar|Open+Sans');
+
+@font-face {font-family:"STARWARS";src:font-url("STARWARS.eot?") format("eot"),font-url("STARWARS.woff") format("woff"),font-url("STARWARS.ttf") format("truetype"),font-url("STARWARS.svg#STARWARS") format("svg");font-weight:normal;font-style:normal;}
+
+// @font-face {font-family: 'Bungee Inline';src:font-url("BungeeInline-Regular.eot?") format("eot"), font-url("BungeeInline-Regular.woff") format("woff"), font-url("BungeeInline-Regular.ttf") format("truetype"), font-url("BungeeInline-Regular.svg#BungeeInline-Regular") format("svg");font-weight:normal;font-style:normal;}
+/******************************************************
+                STYLING ACROSS ALL PAGES
+*******************************************************/
+
+body, html {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+}
+
+body {
+  background-image: image-url('ep_naturalblack.png');
+  color: #F6F6F6;
+}
+
+header a {
+  color: white;
+}
+
+.more-margin {
+  margin: 50px;
+}
+
+.padding {
+  padding: 5px;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.margin-zero {
+  margin: 0;
+}
+
+.min-width {
+  min-width: 100%
+}
+
+a.button {
+  background-color: #020b56;
+  color: #ffdf00;;
+  font-family: 'Bungee Inline', cursive;
+
+}
+
+input {
+  // background-color: #FEDD32;
+  background-color: #020b56;
+  // color: black;
+  // font-family: "STARWARS"
+  color: #ffdf00;
+  font-family: 'Bungee Inline', cursive;
+  padding: 12px;
+  border: none;
+}
+input:hover {
+  background-color: #14679e;
+  color: #fefefe;
+}
+
+
+/* *****************************************************
+                            NAV
+****************************************************** */
+
+.top-bar ul, .top-bar {
+  background-color: black;
+}
+
+.navimg {
+  max-width: 35px;
+  max-height: 25px;
+}
+
+header a {
+  color: #ffdf00;
+  font-family: 'Bungee Inline', cursive;
+}
+
+div.top-bar-left ul.menu li.padding a.nav-link {
+  color: #ffdf00;
+  font-family: 'Bungee Inline', cursive;
+}
+
+/* *****************************************************
+                    DROP DOWN MISC
+****************************************************** */
+
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  // position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #282828;
+  min-width: 130px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.inside-dropdown {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover { background-color: #003366 }
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.margin-top {
+  margin-top: 8px;
+  margin-right: 10px;
+}
+
+// div.nav-menu {
+//  width: 60%;
+//  display: flex;
+//  justify-content: center;
+//  align-content: center;
+// }
+// div.nav-menu ul {
+//   overflow: hidden;
+//   display: flex;
+//   justify-content: center;
+//   align-content: center;
+//   width: 60%;
+// }
+// div.nav-menu ul li {
+//   margin: 1% 0 0 20%;
+//   width: 45%;
+//   text-align: center;
+// }
+// .jedi-content,
+// .driver-content {
+//   display: none;
+//   position: absolute;
+//   min-width: 180px;
+//   background: #fafafa;
+//   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+//   z-index: 1;
+// }
+// .jedi-dropdown a,
+// .driver-dropdown a {
+//   padding: 14px 20px;
+//   text-decoration: none;
+//   display: block;
+//   text-align: left;
+// }
+// .drop-title i { margin-left: 2%; color: #666; }
+// .jedi-content a i,
+// .driver-content a i { margin-right: 10%; }
+// .jedi-content a:hover,
+// .driver-content a:hover { background: #ccc; }
+// .jedi-dropdown:hover .passenger-content { display: block; }
+// .driver-dropdown:hover .driver-content { display: block; }
+
+
+
+/* *****************************************************
+HERO
+****************************************************** */
+
+// .hero {
+//   // TODO: Make this height reactive with media breaks
+//   background-image: image-url('hero.jpg');
+//   background-size: cover;
+//   height: 300px;
+//   text-align: center;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//
+//   .hero-section-text a{
+//     color: white;
+//     text-shadow: 1px 1px 2px black;
+//   }
+// }
+
+.hero h1 {
+  padding-top: 125px;
+  font-family: 'STARWARS';
+  font-size: 5em;
+}
+
+
+.hero {
+  // TODO: Make this height reactive with media breaks
+  background-image: image-url('hero.jpg');
+  background-size: cover;
+  height: 350px;
+  text-align: center;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  .hero-section-text a {
+    color: white;
+    text-shadow: 1px 1px 2px black;
+  }
+}
+
+
+/******************************************************
+                          FLASH
+*******************************************************/
+
+
+.row.status.success {
+  font-family: "arial-black";
+  border-radius: 5px;
+  background-color: #202b82;
+  padding: 20px 25px;
+  font-size: 1em;
+  min-width: 100%;
+}
+
+.row.status.failure {
+  font-family: "arial-black";
+  border-radius: 5px;
+  background-color: #a80609;
+  padding: 20px 25px;
+  font-size: 1em;
+  min-width: 100%;
+}
+
+.no-bg-color {
+  background-color: transparent;
+}
+// TODO: would the below code be the same as above and help clean things up?
+// .row.status{
+//   .success {
+//   border-radius: 5px;
+//   background-color: lightblue;
+//   padding: 20px 25px;
+//   font-size: 1em;
+//   min-width: 100%;
+//   }
+//   .failure {
+//     border-radius: 5px;
+//     background-color: pink;
+//     padding: 20px 25px;
+//     font-size: 1em;
+//     min-width: 100%;
+//   }
+// }
+/******************************************************
+                    INDEX/ROOT
+*******************************************************/
+
+h1 {
+  padding: 50px;
+}
+
+.force-index h2 {
+  padding: 30px;
+}
+.force-index {
+  background: image-url('ep_naturalblack.png');
+}
+
+
+/******************************************************
+                      MAIN
+*******************************************************/
+
+////////CART////////////
+
+.cart-heading {
+  margin-top: 20px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.cart-name {
+  font-size: 1.5em;
+  padding-top: 15px;
+}
+
+.checkout {
+  padding-bottom: 40px;
+  padding-top: 20px;
+}
+
+.cart-image img {
+  width: 60%;
+  padding-bottom: 20px;
+  padding-left: 80px;
+}
+
+select {
+  width: 40%;
+  // margin-left: 50px;
+}
+
+input {
+  margin-left: 10px;
+}
+
+.text-block {
+  padding-top: 40px;
+}
+
+.button-large{
+  color: #CA4C3D;
+}
+
+hr {
+  opacity: .5;
+}
+
+.button {
+  font-size: 1em;
+}
+/******************************************************
+                        OPENING
+*******************************************************/
+
+/******************************************************
+                          FOOTER
+*******************************************************/
+
+
+.footer-margin {
+  margin-top: 100px;
+  padding: 20px;
+}
+
+// footer p {
+//   opacity: .6;
+//   margin-bottom: 0;
+//   // background-color: #282828;
+//   padding-top: 20px;
+// }
+
+/******************************************************
+                          TABLES
+*******************************************************/
+table {
+  width: 80%;
+}
+
+.mini{
+    width: 100px;
+  }
+
+  .orderindex{
+    max-width: 90px;
+    max-height: 70px;
+  }

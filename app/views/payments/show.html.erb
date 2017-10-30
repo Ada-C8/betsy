@@ -1,0 +1,23 @@
+<main>
+  <h2>Shipping Information </h2>
+  <hr />
+
+  <table align="center" class="hover">
+    <tbody>
+      <tr class="row large-up-1">
+        <th>Name</td>
+        <th>Email</td>
+        <th>Mailing Address</th>
+        <th>Last four of Credit Card</th>
+        <th>Credit Card Expiration</th>
+      </tr>
+        <tr class="row large-up-1">
+          <td><%= @payment.name %></td>
+          <td><%= @payment.email %></td>
+          <td><%= @payment.mailing_address %></td>
+          <td><%= @payment.cc_number.split(//).last(4).join %></td>
+          <td><%= @payment.cc_expiration %></td>
+        </tr>
+    </tbody>
+  </table>
+</main>

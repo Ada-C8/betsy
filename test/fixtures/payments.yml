@@ -1,0 +1,34 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+payment_one:
+  name: blue origin
+  email: blue_origin@gmail.com
+  mailing_address: Kent all the way
+  cc_name: Jeff Bezos
+  cc_expiration: 2018-10-01
+  cc_number: 123456789012345
+  cc_ccv: 876
+  billing_zip: 12345
+  order_id: first_order
+
+payment_two:
+  name: chewie
+  email: MyString
+  mailing_address: chewbacca@uber.com
+  cc_name: Chewie
+  cc_expiration: 2019-09-01
+  cc_number: 09876543210987
+  cc_ccv: 345
+  billing_zip: 56789
+  order_id: second_order
+
+payment_three:
+  name: Yoda
+  email: Yoda@jedi.com
+  mailing_address: Yoda's hut
+  cc_name: Yoda
+  cc_expiration: 2020-09-01
+  cc_number: 09876543210981
+  cc_ccv: 345
+  billing_zip: 56789
+  order_id: third_order

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title><%= content_for?(:title) ? yield(:title) : "StarMart" %></title>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon_red.png'%>
+</head>
+
+<body>
+
+  <%###############  CATEGORIES NAVIGATION #################### %>
+
+  <%# Need to utilize %>
+    <header>
+      <div class="top-bar" id="responsive-menu">
+        <div class="top-bar-left">
+          <ul class="menu">
+            <% category = Category.where(id: 1..7) %>
+            <% if category %>
+              <% category.each do |category| %>
+                <li class="padding">
+                  <%= link_to products_categories_path(category) do %>
+                  <%= category.name %>
+                  <% end %>
+                </li>
+              <% end %>
+            <% end %>
+
+            <div class="dropdown">
+              <li class="padding"><a>Misc</a></li>
+              <div class="dropdown-content">
+                <% misc = Category.where(id: 6..Category.last.id) %>
+                <% if misc %>
+                  <% misc.each do |cat| %>
+                    <%= link_to cat.name, products_categories_path(cat) %>
+                  <% end %>
+                <% end %>
+              </div>
+              </li>
+            </div>
+
+          </ul>
+        </div>
+
+    <%###############  LOGIN NAVIGATION #################### %>
+
+        <div class="top-bar-right">
+          <ul class="menu">
+            <% if @login_merchant %>
+
+            <div class="dropdown">
+              <li class="padding"><a><%= @login_merchant.username %>&nbsp;<%= image_tag 'red-five.png', class: "navimg" %></a></li>
+              <div class="dropdown-content">
+                <%= link_to "Dashboard", merchant_path(@login_merchant)%>
+                <%= link_to "Manage Orders", merchant_orders_path(@login_merchant) %>
+                <%= link_to "Manage Products", merchant_products_path(@login_merchant) %>
+              </div>
+            </div>
+
+            <li class="padding">
+              <%= link_to "Log Out", logout_path, method: :get %>
+            </li>
+
+          <% else %>
+            <li class="padding">
+              <%= link_to "Log In", github_path, class: "float-right" %>
+            </li>
+          <% end %>
+          <li class="padding">
+            <%= link_to "Cart", cart_path, class: "float-left no-bg-color" %>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </header>
+
+  <%###############  HERO HEADER #################### %>
+
+
+  <section class="hero">
+    <div class="hero-section-text">
+      <%= link_to root_path do %>
+        <h1>STARMART</h1>
+      <% end %>
+    </div>
+  </section>
+
+
+  <%###############  FLASH MESSAGES #################### %>
+
+  <section class="row status <%= flash[:status] %>">
+
+    <% if  flash[:status] == :failure %>
+      <%= "A problem occurred: #{flash[:message]}" %>
+      <% if flash[:details] %>
+        <ul>
+         <% flash[:details].each do |errors_array| %>
+            <% errors_array[1].each do |error| %>
+              <li>  <%= error %> </li>
+            <% end %>
+          <% end %>
+        <% end %>
+        </ul>
+      <% else %>
+        <%= flash[:message] %>
+      <% end %>
+
+
+  </section>
+
+  <%###############  MAIN CONTENT #################### %>
+
+    <%= yield %>
+
+  <%###############  STAR WARS OPENING  #################### %>
+
+  <%# TODO: ADD THE STAR WARS THEME HERE IF TIME
+
+
+
+  <%###############  FOOTER #################### %>
+
+
+  <footer class="align-center bg footer-margin min-width">
+
+    <p>
+      &copy; Lucasfilm Ltd. All Rights Reserved
+    </p>
+  </footer>
+
+</body>
+</html>

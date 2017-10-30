@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+first_product:
+  name: $LABEL
+  price: 3
+  description: $LABEL
+  inventory: 1
+  photo_url: http://placecage.com
+  current: true
+  merchant: first_merchant
+
+second_product:
+  name: $LABEL
+  price: 1
+  description: $LABEL
+  inventory: 1
+  photo_url: http://placecage.com
+  current: true
+  merchant: first_merchant
+
+third_product:
+  name: CHOCOLATE
+  price: 5
+  description: $LABEL
+  inventory: 3
+  photo_url: http://placecage.com
+  current: true
+  merchant: second_merchant
+
+fourth_product:
+  name: CHOCOLATE
+  price: 5
+  description: $LABEL
+  inventory: 3
+  photo_url: http://placecage.com
+  current: true
+  merchant: grace

@@ -1,0 +1,20 @@
+
+review_one:
+  review: This is the first review for my second product
+  rating: 1
+  product: second_product
+
+review_two:
+  review: This is the first review for my first product
+  rating: 3
+  product: first_product
+
+review_three:
+  review: This is the second review for my first product
+  rating: 3
+  product: first_product
+
+review_four:
+  review: This is the third review for my first product
+  rating: 4
+  product: first_product
