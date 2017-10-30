@@ -1,0 +1,58 @@
+
+<h1>Your Cart</h1>
+<section class="wrappy">
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Cost</th>
+      <th>Edit</th>
+      <th>Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_products.each do |op| %>
+      <tr>
+        <td><%= link_to op.product.name, product_path(op.product) %></td>
+        <td><%= op.quantity %></td>
+        <td><%= readable_price(op.subtotal) %></td>
+        <td>
+          <div class= 'input-button'>
+            <%= form_tag order_product_path(op.id, product_id: op.product_id), method: :patch do %>
+
+            <%= text_field_tag :quantity, "", class:'field' %>
+
+            <%= submit_tag "Update Quantity", class: "button" %>
+            <% end %>
+          </div>
+        </td>
+        <td><%= link_to "Delete from cart", order_product_path(op.id), method: :delete, class:'button',
+        data: { confirm: 'Are you sure?' }%></td>
+      </tr>
+    <% end %>
+      <tr>
+        <td></td>
+        <td><strong>Total:</strong></td>
+        <td><%= readable_price(@order.order_total) %></td>
+        <td></td>
+        <td></td>
+      </tr>
+  </tbody>
+</table>
+
+<h3>Grand Total: <%= readable_price(@order.order_products.sum(&:subtotal)) %></h3>
+
+
+<p><%= link_to "Proceed to Checkout", checkout_path(@order.id), class: "button buy" %></p>
+
+<p>Order <%= @order.id %></p>
+<p>Status: <%= @order.status %></p>
+
+<p><%= link_to "Delete Order and start over!", order_path(@order.id), method: :delete,
+data: { confirm: 'Are you sure?' }, class: "button" %></p>
+
+<!-- <p><%= link_to "Back to All Orders", orders_path, class:'button'%></p> -->
+
+</section>
