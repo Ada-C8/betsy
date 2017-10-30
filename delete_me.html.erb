@@ -1,0 +1,72 @@
+<h2> Shop All Items</h2>
+
+<section class = "all-products">
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Product name
+        </th>
+        <th>
+          Category
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Price
+        </th>
+        <th>
+          Available Quantity
+        </th>
+        <th>
+
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @products.each do |product| %>
+        <td>
+          <%= link_to "#{product.name}", product_path(product.id)%>
+        </td>
+        <td>
+          <%= print_categories(product) %>
+        </td>
+        <td>
+          <%= product.description %>
+        </td>
+        <td>
+          <%= product.price %>
+        </td>
+        <td>
+          <%= product.quantity %>
+        </td>
+        <td>
+          <%= image_tag product.photo(:thumb) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+
+  </table>
+</section>
+
+
+
+
+<ul class="nav site-nav">
+  <li class=flyout>
+    <a>Your Account <small>&#9660</small></a>
+    <!-- Flyout -->
+    <ul class="flyout-content nav stacked">
+      <li>
+        <%= link_to("Account Dashboard", user_account_path(@login_user.id)%>
+      </li>
+      <li><%= link_to "Add Product to Sell", new_product_path, alt: "link to add product for merchant", class: "button" %>
+      </li>
+      <li><%= link_to "Add New Category", new_category_path, alt: "link to add category for merchant", class: "button" %>
+      </li>
+    </ul>
+  </ul>
+</ul>

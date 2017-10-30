@@ -1,0 +1,78 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#order-fulfillment-content {
+  max-height: 75vh;
+  overflow: scroll;
+  background-color: rgba(255,255,255,0.9);
+
+}
+
+#order-fulfillment-content h2 {
+  padding: 5px;
+}
+
+
+#user-orders, #summaries {
+  display: block;
+  max-width: 75vw;
+  margin: 0px auto;
+  padding: 5px;
+}
+
+#summaries {
+  text-align: center;
+}
+
+#user-orders {
+  border-top: black solid 1px;
+  margin-top: 10px;
+}
+
+#user-orders a {
+  text-decoration: underline;
+  text-decoration-style: solid;
+}
+
+#user-orders.button a {
+  color: snow;
+}
+
+.orders-summary, .revenue-summary {
+  margin: 0px auto;
+  text-align: left;
+  max-width: 30vw;
+  display: inline-block;
+  border: black solid .5px;
+  padding: 10px;
+}
+
+.orders-summary {
+  margin-left: 20px;
+}
+
+#summaries h3 {
+  padding-left: 10px;
+}
+
+#summaries ul {
+  width: 100%;
+  background-color: transparent;
+  text-align: left;
+}
+
+#summaries li {
+  color: black;
+}
+
+#user-orders h3 {
+  text-align: center;
+}
+
+h6 {
+  font-size: 1.2rem;
+}
+
+h5 {
+  font-size: 1.8rem;
+}

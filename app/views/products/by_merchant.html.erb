@@ -1,0 +1,19 @@
+<h1> Products by Merchant</h1>
+
+<% @products_by_merchant.each do |merchant, products| %>
+
+<h2><%= merchant.titleize %></h2>
+<% if products.blank? %>
+<h3>There are no products to display!</h3>
+<% else %>
+<% products.each do |product| %>
+<div class="items">
+  <h3><small><%= link_to "#{product.name}", product_path(product.id)%></small></h3>
+  <%= image_tag product.photo(:medium) %>
+  <p><%= product.description %></p>
+  <p>$<%= sprintf('%.2f', product.price) %></p>
+</div>
+<% end %>
+<% end %>
+
+<% end %>

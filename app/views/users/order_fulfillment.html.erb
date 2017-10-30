@@ -1,0 +1,103 @@
+<section id = "order-fulfillment-content">
+  <h2><%= "#{@user.name}'s Order Fulfillment Page" %></h2>
+
+  <%statuses = ["paid", "incomplete", "complete"]%>
+
+  <article id = "summaries">
+    <section class = "revenue-summary">
+      <h4>Revenue Summary:</h4>
+      <ul>
+        <% statuses.each do |status|%>
+        <h6>
+          <%= "#{status}".capitalize %> orders:  <%="$#{sprintf('%.2f', @user.total_revenue_by_status(status))}"%>
+        </h6>
+        <%end %>
+      </ul>
+      <h5><strong>Total Revenue:</strong> <%="$#{sprintf('%.2f', @user.total_revenue)}"%></h5>
+    </section>
+
+    <section class = "orders-summary">
+      <h4>Order Summary:</h4>
+      <ul>
+        <% statuses.each do |status|%>
+        <h6>
+          <%= "#{status}".capitalize %> orders:  <%="#{(Order.by_status(status, @user.user_orders)).count} orders"%>
+        </h6>
+        <%end %>
+
+      </ul>
+      <h5><strong>Total Orders:</strong> <%="#{(@user.user_orders).count}"%></h5>
+    </section>
+
+  </article>
+
+  <article id = "user-orders">
+    <h3>My Orders</h3>
+    <section class="fulfillment">
+      <%@user.user_orders.each do |order|%>
+      <span>
+        <h4>
+          <%= link_to "Order #{order.id}", user_order_path(@user.id, order.id)%>
+        </h4>
+      </span>
+          <span>
+            Order Date: <%= order.created_at.strftime(" %B/%d/%Y") %>
+          </span>
+          <span>
+              Status: <%= order.status %>
+          </span>
+        <%order.order_items.each do |item|%>
+        <table>
+          <% if @user.order_items.include?(item) %>
+          <tr>
+            <th>
+              Order Item ID
+            </th>
+            <th>
+              Order Item Product
+            </th>
+            <th>
+              Order Item Price
+            </th>
+            <th>
+              Order Item Quantity
+            </th>
+            <th>
+              Subtotal
+            </th>
+            <th>
+              Item Shipping Status
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <%= item.id%>
+            </td>
+            <td>
+              <%= link_to "#{item.product.name}", product_path(item.product.id)%>
+            </td>
+            <td>
+              <%= "$#{sprintf('%.2f', item.product.price)}" %>
+            </td>
+            <td>
+              <%= item.quantity%>
+            </td>
+            <td>
+              <%= "$#{sprintf('%.2f', (item.quantity * item.product.price))}" %>
+            </td>
+            <td>
+              <% if item.shipped == "not shipped" %>
+              <%= link_to("Mark As Shipped", item_shipped_path(item.id), method: :patch, class: "button")%>
+              <% else %>
+              <%= "Shipped on: #{Date.current}" %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+          <% end %>
+        </table>
+      <%end%>
+    </section>
+  </article>
+
+</section>

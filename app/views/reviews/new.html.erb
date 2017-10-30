@@ -1,0 +1,6 @@
+<h1>Add New Review for <%= Product.find_by_id(params[:product_id]).name %></h1>
+<ul class="new-review">
+
+
+<%= render partial: "form" %>
+</ul>

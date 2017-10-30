@@ -1,0 +1,456 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+//= require foundation_and_overrides
+//= require_tree .
+//= require_self
+ */
+
+ #glitzy {
+   font-family: 'Bungee Shade', cursive;
+ }
+/*------------------------------------*\
+    $NAV
+\*------------------------------------*/
+
+.nav{
+    list-style:none;
+    margin-left:0;
+    float:left;
+}
+    .nav > li,
+        .nav > li > a{
+            display:inline-block;
+           *display:inline;
+            zoom:1;
+            font-family: 'Raleway';
+        }
+
+    .stacked > li{
+        display:list-item;
+    }
+        .stacked > li > a{
+            display:block;
+    }
+
+/*------------------------------------*\
+    $FLYOUT
+\*------------------------------------*/
+
+.flyout,
+.flyout-alt{
+    position:relative;
+}
+    .flyout-content{
+        /* Position the flyouts off-screen. This is typically better than `display:none;`. */
+        position: absolute;
+        top:100%;
+        left:-99999px;
+        height:0;
+        overflow:hidden;
+        z-index: 100;
+    }
+    .flyout:hover > .flyout-content{
+      left:0;
+    }
+
+    .flyout:hover > .flyout-content,
+    .flyout-alt:hover > .flyout-content{
+        /* Give the flyouts their height back once they come into view. */
+        height:auto;
+        overflow:visible;
+    }
+.site-nav{
+    font-size:1em;
+    font-family:sans-serif;
+}
+        .site-nav a{
+            line-height:1;
+            padding:1em;
+            background-color: #405b7a;
+            color:#fff;
+            white-space:nowrap;
+        }
+.site-nav .flyout:hover > a /* [1] */,
+.site-nav .flyout-alt:hover > a /* [1] */,
+.site-nav a:hover{
+    color: white;
+    background-color:#d469e5;
+
+}
+.site-nav a,
+.site-nav .flyout-content{
+    border: none;
+    background: #16ad57;
+}
+.site-nav > li > a{
+    border: none;
+}
+/*------------------------------------*\
+    END DROPDOWN
+\*------------------------------------*/
+
+ .edit_order {
+  display: block;
+  box-sizing: border-box;
+  width: 50%;
+  margin: 0 0 1rem;
+  padding: 0.5rem;
+  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #0a0a0a;
+
+  .inputs {
+    opacity: 0.7;
+  }
+
+  input {
+    font-weight: 300;
+  }
+
+  label{
+    font-weight: 800;
+    color: black ;
+    text-shadow: 4px 1px 6px white ;
+    font-family: 'Playfair Display';
+  }
+}
+
+$primary-font: 'Raleway', sans-serif;
+$secondary-font:'Raleway', serif;
+
+
+$pink: #d469e5;
+$secondary-color: #405b7a;
+$light-gray: #EEEEEE;
+$dark-gray: #424242;
+$gold: #FF5722;
+
+$default-border: 2px solid;
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Leckerli+One');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Bungee+Shade');
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:700');
+
+.cart {
+  display: inline-block;
+  height: 4em;
+  padding-bottom: 35px;
+}
+body, h1, h2 {
+  font-family: $primary-font;
+}
+
+body, h3, h4, h5 {
+  font-family: $secondary-font;
+}
+
+small {
+  font-family: 'Leckerli One', cursive;
+  text-shadow: 0 0 4px $pink;
+  color: white;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: bold;
+}
+
+ body small {
+   color: white;
+ }
+
+ a, h3 {
+   color: black;
+ }
+
+ a:hover {
+   color: $pink;
+ }
+
+.button {
+  background-color: #405b7a;
+  display: inline-block;
+  height: 3em;
+  margin: 2px;
+  font-weight: bold;
+
+  &:hover {
+    background-color: $pink;
+  }
+}
+.featured-item {
+  font-family: 'Leckerli One';
+  color: #233a75;
+  text-shadow: 6px 6px 10px snow;
+}
+.main-content {
+  padding-left: 20px;
+  padding-right: 20px;
+  max-height: 80vh;
+  overflow: scroll;
+  ul{
+    background-color: #405b7a;
+    opacity: 0.8;
+    max-width: 500px;
+    height: 130px;
+    overflow: scroll;
+    border-radius: 15px;
+    padding: 5px;
+    text-decoration: none;
+  }li{
+    color: white;
+    font-weight: bold;
+  }
+  h3{
+    font-family: $primary-font;
+    color: black;
+    text-shadow: 6px 6px 20px snow;
+  }
+
+
+
+  .new-product {
+    height: 650px;
+    max-width: 800px;
+    opacity: 0.9;
+    padding:20px;
+    label, input {
+      font-weight: bold;
+    }
+    .checkbox{
+      display: inline-table;
+      margin:10px;
+      text-align: center;
+    }
+    .button{
+      background-color: green;
+    }
+  }
+
+
+.new-review{
+  height:500px;
+  overflow: scroll;
+  max-width: 600px;
+  opacity: 0.9;
+.button{
+  background-color: green;
+}
+}
+
+  .revenue {
+    height:200px;
+    max-width: 600px;
+  }
+  .user-order {
+    display:inline-block;
+    background-color: #405b7a;
+    padding:20px;
+    color: white;
+    opacity:0.9;
+    margin-top: 30px;
+    margin-bottom: 10px;
+
+    strong{
+      font-family: 'Playfair Display';
+      font-size: 1.2em;
+    }
+  }
+  .bottom-buttons{
+    display: table-cell;
+  }
+}
+
+.cart-page li {
+  list-style-type: none;
+  text-align: left;
+  margin: 5px;
+  font-weight: bold;
+  color: white;
+  h4{
+    font-family: 'Leckerli One';
+    font-weight: lighter;
+    color: $pink;
+  }
+}
+
+
+
+.cart-page ul {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #405b7a;
+  background-color: #405b7a;
+  max-width: 450px;
+  border-radius: 15px 50px 30px;
+  height: 500px;
+  overflow: scroll;
+  padding-left: 25px;
+}
+
+ .page-header {
+   max-width: 100%;
+   padding: 25px 20px 10px 20px;
+   border-bottom: black 1px dotted;
+   h2 {
+     text-align: center;
+     margin: 25px auto 40px auto;
+     a {
+       color: $gold;
+       padding-right: 25px;
+       margin-right: 15px;
+       border-right: white 2px solid;
+     }
+     small  {
+       color: white;
+     }
+   }
+   p {
+     margin-bottom: 5px;
+   }
+ }
+
+ .top-ten {
+   h3 {
+     border-bottom: $default-border;
+     border-bottom-color: $secondary-color;
+   }
+ }
+
+ section.spotlight > div {
+   padding: 0 2rem 2rem 2rem;
+ }
+
+ .root-hr {
+   margin: 0px auto 75px auto;
+   color: $light-gray;
+ }
+
+main {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.thank-you {
+  text-align: center;
+}
+
+// products main table index
+
+.all-products  section table {
+  background-color: #405b7a;
+
+}
+
+.medium-image  img {
+  display: block;
+  padding: 10px;
+}
+
+.items {
+  width: 400px;
+  height: 400px;
+  margin: 20px;
+  border: 3px solid #0c0c0c;
+  display: inline-table;
+  text-align: center;
+  padding: 10px;
+  background-color: #405b7a;
+  opacity: 0.9;
+  color: snow;
+  max-height: 30vh;
+  overflow: scroll;
+
+}
+
+.items a {
+  text-decoration: none;
+  color: white;
+}
+
+.items img {
+    width: 70%;
+    max-height: 230px;
+}
+
+.items img:hover {
+  -webkit-filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.8));
+}
+
+.home-pg {
+  background-color: rgba(254,245,242, 0.8);
+  padding: 10px;
+  max-width: 500px;
+  border-radius: 15px;
+  border-style: solid;
+  outline: none;
+  // border-color: #9ecaed;
+  border-color: white;
+  border-color: #FEF5F2;
+  box-shadow: 0 0 10px #9ecaed;
+  // box-shadow: 0 0 10px #FFFFFF;
+  box-shadow: 0px 0px 20px #9ecaed;
+    filter:progid:DXImageTransform.Microsoft.Glow(Color=black,Strength=20);
+  text-align: center;
+}
+
+.home-pg h2, h3, .featured-item, .shop-now {
+  color: #34495e;
+  animation: fade 2s;
+}
+
+.home p {
+  font-weight: bolder;
+  font-size: 4em;
+  padding-left: 20px;
+  animation: fade 2s
+}
+
+.shop-now {
+  font-weight: bolder;
+  font-size: 2em;
+  padding-top: 15px;
+}
+
+.home-pg article {
+  padding: 10px;
+}
+
+.home-banner {
+  // background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px 40px;
+  // border-top-style: solid;
+  // border-top-color: white;
+  // border-bottom-style: solid;
+  // border-bottom-color: white;
+  // margin-top: 34em;
+
+}
+
+.main-content h1, h2 {
+  padding-left: 20px;
+  color: #34495e;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

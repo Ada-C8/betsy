@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rating: 5
+  text_review: MyText
+  product: soap
+
+two:
+  rating: 1
+  text_review: MyText
+  product: soap
+
+guest_review:
+  rating: 5
+  text_review: MyText
+  product: shoes
+
+candy2_review:
+  rating: 5
+  text_review: MyText
+  product: candy2

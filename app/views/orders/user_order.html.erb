@@ -1,0 +1,14 @@
+<section class="user-order">
+  <p><strong>Order ID:</strong>  <%="#{@user_order.id}"%></p>
+  <p><strong>Customer name:</strong> <%="#{@user_order.customer_name}"%></p>
+  <p><strong>Customer Email:</strong> <%="#{@user_order.email}"%></p>
+  <p><strong>Mailing address:</strong> <%="#{@user_order.mailing_address}"%>, <%="#{@user_order.zipcode}"%></p>
+  <p><strong>CC : </strong><%="#{@user_order.cc_number.gsub!(/.(?=....)/, '*')}"%></p>
+  <p><strong>CC Exp :</strong> <%="#{@user_order.cc_expiration_date}"%></p>
+  <p><strong>ORDER STATUS :</strong> <%="#{@user_order.status}"%></p>
+</section>
+
+<section class="bottom-buttons">
+  <%= link_to "Back", order_fulfillment_path(@user.id), class: "button" %>
+  <%= link_to "Home", root_path, class: "button" %>
+</section>

@@ -1,0 +1,4 @@
+id,name,email,merchant_status,uid,provider
+999,Nina Hintz,hintz@ada.com,true,999999,github
+1000,Florence Fisher,fisher@ada.com,true,999998,github
+1001,Glitzy Team, glitzy@ada.com,true,999997,github

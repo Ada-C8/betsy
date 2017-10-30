@@ -1,0 +1,32 @@
+<h1>Your Merchant Account</h1>
+
+<h2>Your Products</h2>
+<table>
+  <thead>
+    <tr>
+      <th>
+        Product Picture
+      </th>
+      <th>Product Name</th>
+      <th>Date Added</th>
+      <th>Product Category</th>
+      <th>Status</th>
+      <th>Edit Product</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @login_user.products.each do |product| %>
+    <tr>
+      <td>
+      <%= image_tag product.photo(:thumb) %>
+      </td>
+      <td><%= link_to "#{product.name}", product_path(product.id) %></td>
+      <td><%= (product.created_at).strftime('%b %m, %Y') %></td>
+      <td> <%= print_categories(product) %>
+      </td>
+      <td><%= product.stock == "In Stock" ? "In Stock" : "Out of Stock" %></td>
+      <td><%= link_to "Edit Product", edit_product_path(product.id), alt: "link to edit product page", class: "button" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

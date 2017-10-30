@@ -1,0 +1,10 @@
+<h1>Please Select Quantity </h1>
+
+<section>
+  <%= form_for [@product, @order_item], :url => url_for(:controller => 'order_items', :action => 'create') do |f| %>
+
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity, min: 1, max: @product.quantity%>
+    <%= f.submit "Add to Order", class: "button" %>
+  <% end %>
+</section>

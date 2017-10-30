@@ -1,0 +1,46 @@
+<h2>All Reviews</h2>
+<section class = "all-reviews">
+  <table>
+    <thead>
+      <tr>
+        <th>
+          ID
+        </th>
+        <th>
+          Product
+        </th>
+        <th>
+          Rating
+        </th>
+        <th>
+          User
+        </th>
+        <th>
+          Review Text
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @reviews.each do |review| %>
+        <td>
+          <%= link_to "#{review.id}", review_path(review.id)%>
+        </td>
+        <td>
+          <%= link_to "#{review.product.name}", product_path(review.product.id) %>
+        </td>
+        <td>
+          <%= review.rating %>
+        </td>
+        <td>
+          REVIEW'S USER NAME
+        </td>
+        <td>
+          <%= review.text_review %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+
+  </table>
+</section>

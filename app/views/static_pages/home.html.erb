@@ -1,0 +1,13 @@
+<div class="home-banner">
+  <section class="home-pg">
+    <h2>✦ Featured Products ✦</h2>
+    <article>
+      <% @showcase.each do |item| %>
+        <h2 class="featured-item"><%= link_to("#{item.name}", product_path(item.id), class: "featured-item") %></h2>
+        <p class="shop-now-item"><%= item.description %></p>
+      <% end %>
+    </article>
+
+    <p class="shop-now">Shop Now While Supplies Last!</p>
+  </section>
+</div>

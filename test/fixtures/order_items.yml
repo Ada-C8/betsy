@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+orderitem1:
+  quantity: 1
+  product: chocolate
+  order: pending_order
+
+orderitem2:
+  quantity: 2
+  product: soap
+  order: paid_order
+
+orderitem3:
+  quantity: 1
+  product: scarves
+  order: paid_order
+
+orderitem4:
+  quantity: 2
+  product: candy2
+  order: paid_order

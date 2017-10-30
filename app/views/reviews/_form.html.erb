@@ -1,0 +1,18 @@
+<section>
+  <%= form_for [@product, @review] do |f| %>
+
+    <strong><%= f.label :rating %></strong>
+    1 <%= f.radio_button(:rating, 1, :required => true) %>
+    2 <%= f.radio_button(:rating, 2)%>
+    3 <%= f.radio_button(:rating, 3)%>
+    4 <%= f.radio_button(:rating, 4)%>
+    5 <%= f.radio_button(:rating, 5)%>
+
+    <p>
+      <strong><%= f.label :text_review %></strong>
+      <%= f.text_area :text_review, size: '50x10' %>
+    </p>
+
+    <%= f.submit class: "button" %>
+  <% end %>
+</section>

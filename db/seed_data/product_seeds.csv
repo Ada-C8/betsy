@@ -1,0 +1,15 @@
+category,name,price,quantity,user_id,stock,description
+food,Franz Chocolates,199.99,30,999,In Stock,An Obama family favorite.
+food,Countdown to Ecstasy,500.00,5,999,In Stock,A guaranteed trip to flavor town.
+food,Pretzel Logic,100.00,10,999,In Stock,Pretzels that temporarily make you smarter
+food,Snickers,150.00,100,999,In Stock,The classic
+cosmetics,Polygraph Perfume,1000.00,3,1000,In Stock,Spritz this for the Truth.
+cosmetics,Luxe Lipstick,150.00,10,1000,In Stock,The most luxurious feeling and looking lipstick on the market.
+cosmetics,Bashful Blush,100.00,20,1000,In Stock,For a light and charming flush of color.
+cosmetics,Eyeluring Eyeliner,120.00,10,1000,In Stock,Make eyes and catch eyes.
+cosmetics,Flawless Foundation,180.00,15,1000,In Stock, For flawless skin
+clothing,The Perfect Tee,100.00,80,1001,In Stock,Basic tee that looks flattering on everybody.
+clothing,Blazing Bolo,500.00,3,1001,In Stock,Bolos that give the illusion that they are on fire.
+clothing,Never-Stretch Leggings,300.00,18,1001,In Stock,Leggings that will never lose their shape.
+clothing,Perfect Pants,700.00,20,1001,In Stock,Pants that look flattering on everybody.
+clothing,Punchy Poncho,550.00,3,1001,In Stock,The punchiest poncho to add oomph to any outfit.

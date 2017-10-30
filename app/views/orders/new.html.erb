@@ -1,0 +1,35 @@
+
+<%= form_for @order do |f| %>
+
+  <%= f.label :customer_name %>
+  <%= f.text_field :customer_name, :placeholder => "Full name as it appears on card" %>
+
+  <%= f.label :email %>
+  <%= f.text_field :email, :placeholder => "Email address" %>
+
+  <%= f.label :mailing_address %>
+  <%= f.text_field :mailing_address, :placeholder => "Shipping address" %>
+
+  <%= f.label :zipcode %>
+  <%= f.text_field :zipcode, :placeholder => "ZIP Code" %>
+
+  <%= f.label :cc_number %>
+  <%= f.text_field :cc_number, :placeholder => "Credit card number" %>
+
+  <%= f.label :cc_expiration_date %>
+  <%= f.text_field :cc_expiration_date, :placeholder => "****"%>
+
+  <%= f.label :cc_cvv %>
+  <%= f.text_field :cc_cvv, :placeholder => "3 or 4 digit number" %>
+
+  <%= f.submit "Place Order" %>
+
+<% end %>
+
+<button class="button">
+  <%= link_to "Home", root_path %>
+</button>
+
+<button class="button">
+  <%= link_to "Cancel", products_path %>
+</button>

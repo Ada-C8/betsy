@@ -1,0 +1,21 @@
+
+<h2>Review Details</h2>
+
+<ul>
+  <li>
+    Product: <%=@review.product.name%>
+  </li>
+  <li>
+    Rating: <%=@review.rating%> stars
+  </li>
+  <li>
+   <%= @review.text_review%>
+  </li>
+
+</ul>
+
+<section>
+  <%= link_to("Edit Review", edit_review_path(@review.id), class: "button") %>
+  <%= link_to("Delete Review", review_path(@review.id), method: :delete, class: "button") %>
+  <%= link_to("Back to Product", product_path(@review.product.id), class: "button") %>
+</section>

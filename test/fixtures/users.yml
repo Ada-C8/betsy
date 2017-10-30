@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+amy:
+  name: Amy Lee
+  email: amy@ada.com
+  provider: github
+  uid: 1
+
+tanja:
+  name: Tanja Stroble
+  email: tanja@ada.com
+  provider: github
+  uid: 2
+
+bubbles:
+  name: Bubbles
+  email: bubbles@powerpuff.com
+  uid: 9
+  provider: github
+
+buttercup:
+  name: buttercup
+  email: buttercup@powerpuff.com
+  uid: 10
+  provider: github
+
+je:
+  name: Jan E
+  email: je@ada.com
+  uid: 11
+  provider: github

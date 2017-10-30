@@ -1,0 +1,26 @@
+<% if  @order.order_items.empty? %>
+<h1> Your Cart is empty!</h1>
+<p><%= link_to "Click Here to Browse Products", products_path, class: "button"%></p>
+
+<% else %>
+<h1> Your Cart </h1>
+<section class="cart-page">
+<ul>
+  <% @order.order_items.each do |item| %>
+  <li>
+   <h4><%= item.product.name %></h4>
+  </li>
+  <li>
+    Price: $<%= sprintf('%.2f', item.product.price) %>
+  </li>
+  <li>
+    Quantity: <%= item.quantity %> |
+    <% if  @order.status == "incomplete"%>
+    <%= link_to("Adjust", edit_order_item_path(item.id)) %> |
+    <%= link_to("Remove", order_item_path(item.id), method: :delete, data: {confirm: "Are you sure you would like to remove this item from your cart?"}) %>
+    <% end %>
+  <% end %>
+</ul>
+<%= @order.order_items.count > 0 ? link_to("Proceed to Payment", edit_order_path(@order.id), class: "button") : link_to("Shop All Items", products_path) %>
+</section>
+<% end %>

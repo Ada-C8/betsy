@@ -1,0 +1,52 @@
+<% if @product %>
+  <section id = "show-page-content">
+    <section class = "show-product-view">
+      <article class="medium-image"><%= image_tag @product.photo(:medium) %></article>
+      <section class ="product-info">
+        <h2><%= @product.name %></h2>
+        <section>
+          <ul id = "product-details">
+            <li>
+              Category: <% @product.categories.each do |category| %>
+              <%= category.name.capitalize %>
+              <% end %>
+            </li>
+            <li>
+              Description: <%=@product.description%>
+            </li>
+            <li>
+              Price: $<%=sprintf('%.2f', @product.price)%>
+            </li>
+            <li>
+              Available Quantity: <%=@product.quantity%>
+            </li>
+          </ul>
+        </section>
+        <%= link_to("Add to Order", new_product_order_item_path(@product.id), :class => "button") %>
+      </section>
+    </section>
+
+    <section class = "show-product-review">
+      <h3>Reviews:</h3><span></span>
+      <p><strong>Average Rating: </strong><%= "#{@product.avg_rating.round(1)} stars" %> </p>
+      <section id = "reviews">
+
+        <% @product.reviews.each do |review| %>
+        <ul id = "show-review">
+          <li>
+            Rating: <%= review.rating %>
+          </li>
+          <li>
+            <%= review.text_review %>
+          </li>
+        </ul>
+        <% end %>
+      </section>
+
+      <%= link_to("Add a Review", new_product_review_path(@product.id), :class => "button") %>
+    </section>
+    <% else %>
+    <h2>404 placeholder</h2>
+    <% end%>
+
+  </section>
