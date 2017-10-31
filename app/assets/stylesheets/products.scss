@@ -1,0 +1,209 @@
+@import '_colors';
+
+/*---------------------- GENERAL ----------------------------*/
+
+.product {
+  text-align: left;
+  display: inline-block;
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 0.75em;
+}
+
+.product:hover {
+  transition: opacity 0.3s ease;
+  opacity: 0.7;
+}
+
+.product img {
+  width: 100%;
+}
+
+.product p {
+  margin: 0;
+}
+
+.product p:nth-child(2) {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 7px 0 0;
+  letter-spacing: 0.03em;
+}
+
+/*---------------------- ROOT & INDEX ----------------------------*/
+
+.all_products, .root-products {
+  text-align: center;
+}
+
+.all_products {
+  border-bottom: 1px solid rgba($black, 0.3);
+}
+
+.all_products h5 {
+  letter-spacing: 0.05em;
+}
+
+.categories, .categories ul, .nickname {
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  line-height: 1.8em;
+}
+
+.promo {
+  background-color: #bf022a;
+  background: image-url(promo);
+  background-size: cover;
+  background-position: 50% 10%;
+  text-align: left;
+  padding: 8em 3em;
+}
+
+.promo h2, .promo small, .promo h4, .promo .button {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 0;
+}
+
+.promo h2 {
+  margin-top: 20px;
+  line-height: 0.9em;
+}
+
+.promo small {
+  font-size: 0.7em;
+  letter-spacing: 0.8em;
+}
+
+.small-promo {
+background: image-url(smoke);
+background-size: cover;
+margin: 60px 0;
+text-align: center;
+padding: 20px 0;
+box-shadow: 0 0 10px $black;
+}
+
+.small-promo img {
+  margin: 10px 0 15px 0;
+  margin-bottom: 15px;
+}
+
+.small-promo .button {
+  margin: 0;
+  background: rgba($white, 0.1);
+}
+
+.small-promo .button:hover {
+  background: rgba($white, 0.1);
+}
+
+@media screen and (min-width: 600px) {
+
+  .root-products {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .root-products .product {
+    width: auto;
+    max-width: 220px;
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .product {
+    width: 48%;
+    min-width: 200px;
+    max-width: 300px;
+  }
+}
+
+/*---------------------- SHOW PAGES ----------------------------*/
+
+.product-show h3, .description, .rating article {
+  border-bottom: 1px solid rgba($white, 0.1);
+}
+
+.description, .rating-average, .rating article {
+  margin: 1em 0;
+  padding: 1em 0;
+}
+
+.rating-average {
+  margin-top: 3em;
+}
+
+.product-show h3{
+  font-size: 1.5em;
+  text-transform: uppercase;
+  padding-bottom: 0.5em;
+}
+
+.product-show .button {
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+.image-show img {
+  width: 100%;
+  max-width: 400px;
+}
+
+.image-show {
+  text-align: center;
+}
+
+#shipping {
+  line-height: 1em;
+  color: rgba($white, 0.5);
+}
+
+.description {
+  border-top: 1px solid rgba($white, 0.1);
+}
+
+.rating-average h4, .rating h4 {
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.nickname {
+  color: rgba($white, 0.3);
+  margin-top: -8px;
+}
+
+.rating p:last-child {
+  text-align: center;
+}
+
+// .paginate {
+//   list-style-type: none;
+//   margin: 0;
+//   padding: 0;
+// }
+
+.pagination a {
+  display: inline-block;
+  color: rgba(243, 243, 243, 0.8);
+}
+
+.pagination a:hover {
+  color: rgba(243, 243, 243, 0.6);
+  background: none;
+}
+
+.pagination .current {
+  background: $bloodred;
+}
+
+.paginate {
+  text-align: center;
+  margin-top: 1em;
+}

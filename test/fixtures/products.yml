@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: sheet
+  price: 9.99
+  user: one
+  stock: 16
+  description: MyText
+  image: smoke
+  active: false
+
+two:
+  name: cat
+  price: 9.99
+  user: two
+  stock: 3
+  description: MyText
+  image: tombstone
+  active: false
+
+valid_product:
+  name: shoe
+  price: 10.01
+  image: tombstone
+
+three:
+  name: tomb
+  price: 9.99
+  user: two
+  stock: 100
+  description: MyText
+  image: smoke
+  active: false

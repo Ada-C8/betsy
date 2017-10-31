@@ -1,0 +1,454 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+* vendor/assets/stylesheets directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+* files in this directory. Styles in this file should be added after the last require_* statement.
+* It is generally better to create a new file per style scope.
+*
+*= require_tree .
+*= require_self
+*= require foundation_and_overrides
+*= require font-awesome
+
+*/
+@import '_colors';
+
+
+/*---------------------- GENERAL ----------------------------*/
+
+body {
+  background: $charcoal;
+  font-family: 'Open Sans', sans-serif;
+  color: $white;
+}
+
+a {
+  color: rgba($white, 0.8);
+}
+
+a:hover {
+  color: rgba($white, 0.6);
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h5 {
+  letter-spacing: 0.03em;
+  padding: 0.7em 0 1em;
+  border-bottom: 1px solid rgba($black, 0.3);
+  background: image-url(symbol) top center no-repeat;
+}
+
+.row {
+  max-width: 100%;
+}
+
+section {
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 10px auto;
+}
+
+/*---------------------- HEADER ----------------------------*/
+
+.top_header {
+  padding-top: 10px;
+  background: linear-gradient(rgba($black, 0.3), $charcoal);
+}
+
+.top_header a {
+  color: $white;
+}
+
+.logo {
+  background: image-url(bat1) top center no-repeat;
+  background-size: contain;
+  text-align: center;
+  font-family: 'Creepster', cursive;
+  letter-spacing: 0.1em;
+  padding: 35px 0 45px;
+  font-size: 2em;
+}
+
+.logo:hover {
+  background: image-url(bat2) top center no-repeat;
+  background-size: contain;
+}
+
+/*---------------------- NAV ----------------------------*/
+
+nav {
+  height: 35px;
+  font-size: 0.75em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba($black, 0.1);
+}
+
+.top_header nav a, .top_header nav li a {
+  margin-right: 5px;
+}
+
+nav ul {
+  list-style-type:none;
+  margin:0;
+  padding:0;
+  position: absolute;
+}
+
+nav li {
+  display:inline-block;
+  float: left;
+  margin-right: 1px;
+}
+
+nav li a {
+  display:block;
+  text-align: center;
+  padding: 0 10px;
+  height: 30px;
+  line-height: 30px;
+}
+
+/*Hover state for top level links*/
+nav li:hover a, nav li:hover ul a:hover {
+  color: rgba($white, 0.8);
+}
+
+nav li:hover ul a {
+  background: darken($charcoal, 2%);
+  color: $white;
+  height: 40px;
+  line-height: 40px;
+  position: relative;
+  z-index: 999;
+}
+
+#search {
+  border-radius: 25px;
+  width: 120px;
+  transition: all .5s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#search:focus {
+   width: 200px;
+   background: rgba($bloodred, 1);
+   border-width: 0;
+}
+
+.search-bar {
+  margin-right: 30px;
+}
+
+.search-bar input::placeholder {
+  transform: rotate(-30deg);
+  transform-origin: left center;
+  font-weight: bold;
+}
+
+/*----- Hide dropdown links -----*/
+nav li ul, .no_display_full, nav input[type=checkbox] {
+  display: none;
+  -webkit-appearance: none;
+}
+
+nav li ul li {
+  display: block;
+  float: none;
+}
+
+nav li ul li a {
+  width: auto;
+  min-width: 100px;
+  padding: 0 20px;
+}
+
+
+/*----- Dropdown on hover -----*/
+nav ul li a:hover + .hidden, .hidden:hover, nav input[type=checkbox]:checked ~ #menu {
+  display: block;
+}
+
+.show-menu {
+  text-decoration: none;
+  text-align: left;
+  padding: 0 5px;
+  display: none;
+}
+
+nav .fa {
+  font-size: 2em;
+  color: $white;
+  padding: 0 5px;
+}
+
+
+/*----- Responsive Styles -----*/
+
+@media screen and (max-width : 639px){
+  nav {
+    margin-top: -40px;
+  }
+
+  nav ul li a:hover + .hidden, .hidden:hover, .display_full, nav ul {
+  	display: none;
+  }
+
+	nav ul {
+		position: static;
+    background: $charcoal;
+    position: relative;
+    z-index: 999;
+	}
+
+	nav li{
+    border-bottom: 1px solid rgba($white,0.1);
+    background: $charcoal;
+    padding: 0 15px;
+	}
+
+  nav li:hover a {
+    background: rgba($black, 0);
+  }
+
+  .top_header nav a, .no_display_full {
+    text-align: left;
+    display: block;
+  }
+
+  .top_header span a {
+    padding-left: 0;
+  }
+
+	nav ul li, nav li a {
+		width: 100%;
+	}
+
+  nav li a {
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
+  }
+
+	.show-menu {
+		display:inline-block;
+	}
+
+  #search {
+    position: relative;
+    width: 100%;
+    top: 0;
+    right: 0;
+  }
+
+  #search:focus {
+     width: 100%;
+  }
+
+  .promo p, .promo small:first-child, .promo .button {
+    display: none;
+  }
+
+  .promo {
+    min-height: 300px;
+  }
+
+  input#search {
+    margin: 0;
+  }
+}
+
+/*---------------------- MAIN ----------------------------*/
+
+main {
+  min-height: 50vh;
+}
+
+main h1 {
+  font-size: 1.2em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1em;
+}
+
+/*---------------------- FLASH ----------------------------*/
+.status {
+  margin: 10px auto 10px;
+  text-align: center;
+  background: rgba($white,0.01);
+  border-bottom: 0.5px solid rgba($bloodred, 0.7);
+  border-top: 0.5px solid rgba($bloodred, 0.7);
+  color:$bloodred;
+  position: relative;
+  padding: 8px 0 0;
+}
+
+.status h3 {
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+/*---------------------- FOOTER ----------------------------*/
+
+footer {
+  padding: 100px 30px 5px;
+  background: image-url("smoke.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-size: 0.65em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba($white, 0.5);
+  position: relative;
+  z-index: 1;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 50px;
+    left: 0;
+    background-image: linear-gradient($charcoal 30%,rgba($charcoal, 0));
+    opacity: 1;
+    z-index: -1;
+  }
+}
+
+footer ul li {
+  line-height: 2.4em;
+}
+
+.social-links {
+  text-align: center;
+  font-size: 2.2em;
+}
+
+.social-links i {
+  padding: 4px;
+}
+
+#copyright, h1 {
+  text-align: center;
+}
+
+footer footer {
+  margin-top: 30px;
+  padding-top: 1em;
+  border-top: 0.2px solid rgba($white, 0.3);
+  background-image: none;
+
+  &:before {
+    background-image: none;
+  }
+}
+
+.subscribe {
+  margin: 1em;
+  vertical-align: middle;
+}
+
+.subscribe input[type="text"]{
+  display: inline;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  width: 60%;
+  height: 2.8em;
+  margin: 0;
+  font-size: 1em;
+  background: rgba($black, 0);
+}
+
+.subscribe input[type="submit"] {
+  display: inline;
+  margin: 0;
+}
+
+.subscribe form input[type="text"] {
+  border-radius: 0;
+  border-bottom: 1px solid rgba($white, 0.4);
+}
+
+.subscribe form {
+  text-align: center;
+}
+/*---------------------- FORMS ----------------------------*/
+
+.forms {
+  margin: 0 auto;
+  max-width: 650px;
+}
+
+[type='text']:focus, [type='number']:focus, [type='collection-select']:focus,
+textarea:focus, select:focus {
+  background: rgba($white, 0.15);
+  box-shadow: 0 0 15px $black;
+  border-color: rgba($bloodred, 0.5);
+  color: $white;
+}
+
+form input[type="text"], textarea, select, form input[type="submit"], form input[type="number"] {
+  border-radius: 5px;
+  border-width: 0;
+  display: block;
+  color: $white;
+}
+
+form label, form input[type="submit"]{
+  text-transform: uppercase;
+}
+
+form label {
+  color: rgba($white, 0.6);
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+
+form input[type="text"], textarea, select, form input[type="number"]{
+  background: rgba($white, 0.05);
+}
+
+form input[type="submit"], .button {
+  background: $black;
+  color: $white;
+  margin: 3em auto 0;
+  padding: 15px;
+  font-size: 0.7em;
+  letter-spacing: 0.15em;
+  opacity: 0.5;
+}
+
+form input[type="submit"]:hover, .button:hover, .button:focus {
+  background: $black;
+  color: $white;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  box-sizing: 0 0 0 $black;
+}
+
+/*---------------------- BUTTON ----------------------------*/
+
+.button {
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.button:focus{outline-style: none;}

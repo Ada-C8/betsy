@@ -1,0 +1,132 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import '_colors';
+
+.merchant-show, td, th {
+  text-align: center;
+}
+
+.merchant-show p {
+  margin: 0;
+}
+
+.merchant-show h4 {
+  margin-top: 2em;
+}
+
+table{
+  border-width: 0;
+}
+
+thead {
+  background: rgba($black, 0.8);
+  border-width: 0;
+  color: $white;
+}
+
+tbody {
+  border-width: 0;
+  background: rgba($black, 0.5);
+}
+
+tbody tr:nth-child(even) {
+    border-bottom: 0;
+    background: rgba($black, 0.3);
+}
+
+td:first-child, th:first-child {
+  padding: 20px 0 20px 20px;
+  text-align: left;
+}
+
+@media screen and (max-width: 640px) {
+
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    display: block;
+  }
+
+  table tr:nth-child(odd) {
+    background: rgba($white, 0.03);
+  }
+
+  td:first-child, th:first-child {
+    padding:0.625rem 0.625rem 0.625rem;
+  }
+
+  table td, td:first-child {
+    border-bottom: 1px solid rgba($white, 0.1);
+    display: block;
+    font-size: .8em;
+    text-align: right;
+    padding-right: 10px;
+  }
+
+  table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-left: 10px;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+// ----- Shipping ------
+
+.shipping table {
+  width: 50%;
+  margin: 2.5em auto 3em auto;
+}
+
+.shipping td {
+  text-align: left;
+}
+
+.shipping li {
+  list-style-type: square;
+}
+
+.shipping header, thead td, thead th, .merchant {
+  text-align: center;
+}
+
+// ----- User index ------
+
+.merchant h1 {
+  margin-bottom: 2em;
+}
+
+// ------- About --------
+.about {
+  margin: 0 auto;
+}
+
+#intro {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: justify;
+  margin-bottom: 50px;
+}

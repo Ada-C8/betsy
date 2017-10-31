@@ -1,0 +1,68 @@
+<section class = "row product-show container">
+  <article class = "column small-12 medium-6 image-show">
+    <%= image_tag @product.image, alt:@product.name, class:"product" unless @product.image.blank? %>
+  </article>
+
+  <article class = "column small-12 medium-6">
+    <h3><%=@product.name%></h3>
+    <small><%=stock(@product.stock)%></small>
+    <h4><%=format_price(@product.price)%></h4>
+    <small><%= link_to @product.user.username, user_products_path(@product.user)%></small>
+
+    <%= form_for @order_product do |f| %>
+        <%= f.label :quantity %>
+        <%= f.select :quantity, options_for_select(1..10)%>
+        <%= f.submit "Add to Treat Bag", class: "button" %>
+      <% end %>
+
+    <p id="shipping"><small><strong>Free Shipping & Returns</strong><br>Orders Over $100</small></p>
+    <p class = "description">
+      <small>DESCRIPTION: </small><%= @product.description %>
+    </p>
+    <p class="categories">
+      <% if @product.categories.map {|c| c.id } == [] %>
+        <p>This product current has no categories</p>
+      <% else %>
+        <%= link_to @product.categories[0].name, category_products_path(@product.categories[0].id) %>
+        <% num = @product.categories.length - 1 ; (1..num).each do |c| %>
+          , <%= link_to @product.categories[c].name, category_products_path(@product.categories[c].id) %>
+        <% end %>
+      <% end %>
+    </p>
+  </article>
+</section>
+
+<section class = "row rating-average container">
+  <h4>Ratings Summary</h4>
+  <p>
+    <%= average_rating(@product.reviews) %>
+  </p>
+</section>
+
+<section class = "row rating container">
+  <h4>Reviews</h4>
+  <% if @product.reviews.empty? %>
+  <p>
+    Be the first ghost to review!
+  </p>
+  <%else %>
+  <ul>
+    <% @product.reviews.each do |review| %>
+    <article>
+    <li>
+      <% review.rating.times do%>
+      <%= "🎃"  %>
+      <% end %>
+    </li>
+    <p>
+      <%= review.body %>
+    </p>
+    <section class="nickname float-right">
+      <p><%= review.nickname %> <%= review.location %></p>
+    </section>
+    </article>
+    <%end %>
+  </ul>
+  <% end %>
+  <p><%=link_to "review now!", new_product_review_path(@product.id), class: 'button' %></p>
+</section>
