@@ -1,0 +1,20 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+op_one:
+  quantity: 1
+  product: fake_product1
+  order: one
+
+op_two:
+  quantity: 1
+  product: fake_product2
+  order: one
+
+op_three:
+  quantity: 2
+  product: fake_product2
+
+op_four:
+  quantity: 1
+  order_id: 1
+  product_id: 1 

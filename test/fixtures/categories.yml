@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+
+cat_one:
+  id: 1
+  category_name: Dinner
+
+cat_two:
+  id: 2
+  category_name: Breakfast
+
+cat_three:
+  id: 20
+  category_name: Empty

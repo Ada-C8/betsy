@@ -1,0 +1,50 @@
+<h2>Products</h2>
+
+<%= link_to "Add Product", new_product_path,  :class=>"button"  %>
+<table>
+
+  <tr>
+    <th>
+      Name
+    </th>
+    <th>
+      Description
+    </th>
+    <th>
+      Price
+    </th>
+    <th>
+      Number in Stock
+    </th>
+    <th>
+      Category
+    </th>
+    <th>
+      Review
+    </th>
+  </tr>
+
+
+  <% @products.each do |product| %>
+  <tr>
+    <td>
+      <%= link_to product.name, product_path(product.id) %>
+    </td>
+    <td>
+      <%= product.description %>
+    </td>
+    <td>
+      <%= product.price %>
+    </td>
+    <td>
+      <%= product.stock %>
+    </td>
+    <td>
+      <%= product.category.category_name %>
+    </td>
+    <td>
+      <%= link_to "Review", new_product_review_path(product.id) %>
+    </td>
+    <% end %>
+  </tr>
+</table>

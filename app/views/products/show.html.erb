@@ -1,0 +1,64 @@
+<div style="background-color:rgba(0,0,0,0.7);"><div class="row">
+  <div class="medium-6 large-5 columns"  style="color:white;">
+    <h3><%= @product.name %><%# sold by who? %> <small>
+      <% if session[:merchant_id] %>
+        <%= link_to "Edit", edit_product_path %>
+      <% end %> |
+      <% if session[:merchant_id] %>
+        <%= link_to "Delete", product_path(@product), method: :delete %> <!-- double check -->
+      <% end %>
+    </small></h3>
+    <p><%= @product.description %><br />
+    Only: $<%= @product.price %>.00</p>
+  <!-- hella faking the price here -->
+    Available: <%= @product.stock %></p>
+    <div class="row">
+      <div class="small-9 columns">
+        <% if @product.stock == 0 %>
+          <button>Out of Stock</buttton>
+        <% else %>
+          <!-- <%= link_to "Add to cart", add_to_cart_path(@product.id), :class=>"button", method: :post %> -->
+          <%= form_tag add_to_cart_path(@product.id) do %>
+            <%= number_field_tag "quantity", 1 %>
+            <%= submit_tag("Add to cart", class: "button") %>
+          <% end %>
+        <% end %>
+        <%= link_to "Review Product", new_product_review_path(@product.id), :class=>"button" %>
+      </div>
+    </div>
+  </div>
+  <div class="medium-6 columns">
+    <img class="thumbnail" src="http://placehold.it/650x350">
+  </div>
+</div>
+<!-- reviews -->
+<div class="column row" style="color:white;">
+  <h3>Reviews</h3>
+  <h4>Average Rating:
+    <!-- this logic needs to go somewhere else -->
+    <% if @product.average_rating == nil %>
+      0
+    <% else %>
+      <%= @product.average_rating.round(2) %>
+    <% end %> / 5 Hearts</h4>
+  <div class="media-object">
+    <div class="media-object-section">
+      <% reviews = @product.reviews.to_a %>
+      <!-- what does .to_a do? -->
+      <% reviews.each do |review| %>
+        <h5><%= review.rating %> Hearts Warmed
+        <small>on <%= review.created_at.strftime("%B %d, %Y") %></small></h5>
+        <p><%= review.reviewtext %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- REVISIT
+<%= form_tag(add_to_cart_path(@product.id), method: "post") do %>
+  <%= label_tag("Quantity:") %>
+  <%=  text_field_tag(:q) %>
+  <%= submit_tag ("Submit"), :class=>"button"  %>
+<% end %>
+-->

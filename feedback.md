@@ -10,10 +10,10 @@
 | Heroku instance is online |   |
 |  **General** |   |
 | Nested routes follow RESTful conventions |   |
-| oAuth used for User authentication  |   |
+| oAuth used for Merchant authentication  |   |
 | Functionality restricted based on user roles  |   |
 | Products can be added and removed from cart |   |
-| Users can view past orders |   |
+| Merchants can view past orders |   |
 | Merchants can add, edit and view their products |   |
 | Errors are reported to the user  |   |
 | **Order Functionality** |   |

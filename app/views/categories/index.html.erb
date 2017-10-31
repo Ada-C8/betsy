@@ -1,0 +1,39 @@
+
+
+<h1>Browse our Categories</h1>
+
+
+
+  <ul>
+    <li><%#= link_to category.category_name, category %></li>
+  </ul>
+
+
+
+  <%= link_to "Add Category", new_category_path, :class=>"button"  %>
+  <table>
+    <tr>
+      <th>
+        Category
+      </th>
+      <th>
+        Edit Category
+      </th>
+      <th>
+        Delete Category
+      </th>
+    </tr>
+    <% @categories.each do |category| %>
+    <tr>
+      <td>
+        <%= link_to category.category_name, category %>
+      </td>
+      <td>
+        <%= link_to "Edit Category", edit_category_path(category.id), :class=>"button" %>
+      </td>
+      <td>
+        <%= link_to "Delete Category", category_path(category), method: :delete, :class=>"button" %>
+      </td>
+      <% end %>
+    </tr>
+  </table>

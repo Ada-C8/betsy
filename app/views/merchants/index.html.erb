@@ -1,0 +1,16 @@
+<h2>Merchants</h2>
+<table>
+
+  <tr>
+    <th>
+      Name
+    </th>
+  </tr>
+  <% @merchants.each do |merchant| %>
+  <tr>
+    <td>
+      <%= merchant.username %>
+    </td>
+  </tr>
+  <% end %>
+</table>

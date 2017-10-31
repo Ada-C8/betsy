@@ -1,0 +1,14 @@
+
+<h1>Reviewing: <%= @product.name%></h1>
+
+<%= form_for [@product,@review] do |f| %>
+  <%= f.label "Rating: Five is Best!" %>
+
+  <%= f.select :rating, [5, 4, 3, 2, 1] %>
+
+  <%= f.label "Review: Limit 500 Characters" %>
+  <%= f.text_field :reviewtext %>
+
+  <%= f.submit "Submit Review", class: "button"  %>
+
+<% end %>

@@ -1,0 +1,187 @@
+require "test_helper"
+require 'pry'
+
+
+describe CategoriesController do
+
+  describe "index" do
+    it "gets a list of categories" do
+      get categories_path
+      must_respond_with :success
+    end #gets list of categories
+
+    it "returns a success status when no categories" do
+      Category.destroy_all
+      get categories_path
+      must_respond_with :success
+    end #no categories
+  end #index tests
+
+  describe "show" do
+    it "should get show" do
+      get category_path(categories(:cat_one).id)
+      must_respond_with :success
+    end #get show
+
+    it "return success when given a valid category id" do
+      category_id = Category.first.id
+      get category_path(category_id)
+      must_respond_with :success
+    end #return success
+
+    it "returns not found when given an invalid product id" do
+      category_id = Category.last.id + 1
+      get category_path(category_id)
+      must_respond_with :not_found
+    end #return not found
+  end #return show
+
+### Guest user restrictions
+
+#things guess users can/cannot do
+describe "Guest user access" do
+  it "can access the index" do
+    get categories_path
+    must_respond_with :success
+  end #index
+
+  it "can access show page" do
+    category_id = Category.first.id
+    get category_path(category_id)
+    must_respond_with :success
+  end
+
+  it "cannot access new" do
+    get new_category_path
+    must_redirect_to root_path
+    flash[:message].must_equal "You must be logged in to do that!"
+  end #new
+
+  it "cannot access edit" do
+    category_id = Category.first.id
+    get edit_category_path(category_id)
+    must_redirect_to root_path
+    flash[:message].must_equal "You must be logged in to do that!"
+  end
+
+  it "cannot access destroy" do
+    category_id = Category.first.id
+    delete category_path(category_id)
+    must_redirect_to root_path
+    flash[:message].must_equal "You must be logged in to do that!"
+  end
+end #guest users
+
+
+#### Logged in users only
+  describe "Logged in users" do
+    before do
+      login(merchants(:fake_user))
+    end #login
+
+  describe "new" do
+    it "returns a success status" do
+      get new_category_path
+      must_respond_with :success
+    end #return success
+  end #new tests
+
+  describe "create" do
+    it "creates a valid category when data is valid" do
+
+      category_data = {
+        category: {
+          category_name: "abcdefg"
+        }
+      }
+
+      start_category_count = Category.count
+      Category.new(category_data[:category]).must_be :valid?
+
+      post categories_path, params: category_data
+
+      must_respond_with :redirect
+      must_redirect_to categories_path
+
+      Category.count.must_equal start_category_count + 1
+
+    end #valid data test
+
+
+    it "will not create a new category when data is invalid" do
+      invalid_category_data = {
+        category: {
+          category_name: ""
+        }
+      }
+      start_category_count = Category.count
+
+      Category.new(invalid_category_data[:category]).wont_be :valid?
+
+      post categories_path, params: invalid_category_data
+      must_respond_with :bad_request
+
+      Category.count.must_equal start_category_count
+    end #invalid data test
+  end #create tests
+
+
+  describe "edit" do
+    it "returns success when given a valid category id" do
+      get edit_category_path(categories(:cat_one).id)
+      must_respond_with :success
+    end #success for edit
+
+    it "returns not found when given an invalid cateogry id" do
+      invalid_category_id = Category.last.id + 1
+      get edit_category_path(invalid_category_id)
+      must_respond_with :not_found
+    end #not found when not found
+  end #all edit tests
+
+  describe "update" do
+    it "returns success if category id is valid and change is valid" do
+      category = Category.first
+      category_data = {
+        category: {
+          category_name: "Test"
+        }
+      }
+      category.update_attributes(category_data[:category])
+      category.must_be :valid?
+      patch category_path(category), params: category_data
+    end #return success on valid change
+
+    it "returns not found if the work id is invalid" do
+      category_id = Category.last.id + 1
+      get category_path(category_id)
+      must_respond_with :not_found
+    end #returns not found if work is invalid
+  end #update tests
+
+  describe "destroy" do
+    it "destroys the category when given a valid ID and that category is empty and redirects to categories path" do
+      category_id = Category.last.id
+      delete category_path(category_id)
+
+      must_respond_with :redirect
+      must_redirect_to categories_path
+      Category.find_by(id: category_id).must_be_nil
+    end #successful destroy
+
+    it "returns not_found when given an invalid ID" do
+      invalid_category_id = Category.last.id + 1
+      start_category_count = Category.count
+      delete category_path(invalid_category_id)
+      must_respond_with :not_found
+      Category.count.must_equal start_category_count
+    end #invalid id destroy
+
+    it "will not destroy a category that contains products." do
+      category_id = Category.first.id
+      delete category_path(category_id)
+      must_respond_with :bad_request
+    end
+  end #destroy tests
+end #logged in user tests
+end #all tests
