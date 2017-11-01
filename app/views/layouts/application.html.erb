@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <header>
+      <div class="page-header">
+        <div class="row">
+          <%= link_to image_tag('birdsy.png'), root_path %>
+          <%= link_to image_tag('cart-icon.png'), order_items_path, class: "float-right" %>
+        </div>
+      </div>
+
+      <nav class="row nav">
+        <%= link_to "all products", products_path, class: "button" %>
+        <div class="dropdown">
+          <p class="button">shop by merchant</p>
+          <div class="dropdown-content">
+            <% Merchant.all.each do |merchant| %>
+              <%= link_to merchant.username, products_merchant_path(merchant.id), class: "button" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="dropdown">
+          <p class="button">shop by category</p>
+          <div class="dropdown-content">
+            <% Category.all.each do |category| %>
+              <%= link_to category.name, products_category_path(category.id), class: "button" %>
+            <% end %>
+          </div>
+        </div>
+        <% if session[:merchant_id] &&  Merchant.find_by(id: session[:merchant_id]) %>
+          <div class="float-right">
+          <%= link_to " #{Merchant.find(session[:merchant_id]).username}'s account",merchant_path(session[:merchant_id]),class:"button"  %>
+          <%= link_to "log out", logout_path, class: "button" %></div>
+        <% else %>
+          <%= link_to "login", '/auth/github', class: "button float-right" %>
+        <% end %>
+      </nav>
+    </header>
+
+    <main>
+      <% if !flash.empty? %>
+        <section class="row flash">
+          <% if flash[:message].present? %>
+          <p><%= flash[:message] %></p>
+          <% end %>
+          <% if flash[:messages].present? %>
+            <ul>
+              <% flash[:messages].each do |field, problems| %>
+                <% problems.each do |problem| %>
+                <li><strong>
+                  <%= field %>:
+                </strong>
+                <%= problem %>
+                </li>
+                <% end %>
+            <% end %>
+            </ul>
+          <% end %>
+        </section>
+      <% end %>
+
+
+      <%= yield %>
+    </main>
+
+    <footer>
+      <p>&copy; 2017, The Big Bird, Inc.</p>
+    </footer>
+
+
+  </body>
+</html>
