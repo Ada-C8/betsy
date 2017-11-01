@@ -1,0 +1,334 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require foundation_and_overrides
+ *= require_self
+
+ */
+
+
+/* FLASH NOTIFICATIONS */
+
+/** {
+  border: 1px solid black;
+}*/
+
+ul {
+  list-style-type: none;
+}
+
+body{
+  color: #2E4434;
+  position: relative;
+  background-color: #f3fbef;
+}
+
+body, h1, h2, h3, h4, h5, h6, div, article, section, p, span, .button {
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  color: #426421;
+}
+
+a:hover {
+  color: #2E4434;
+}
+
+select {
+  border-radius: 10px;
+  height: 40px;
+  -webkit-appearance: none;
+}
+
+.mini-heading a {
+  color: black;
+  text-shadow: 1px 2px 	#7Da50f;
+}
+
+.mini-heading a:hover{
+  color: #006400;
+}
+
+.mini-heading{
+  color: black;
+  text-shadow: 1px 2px 	#7Da50f;
+}
+
+#nav-container {
+  margin-top: 0;
+  padding-top: 10px;
+  background-color: #86967D;
+  min-width: 100%;
+  box-shadow: 0 2px 2px gray;
+}
+
+.nav-bar {
+  color: #F3FBEF;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.dark-accent {
+  color: #2E4434;
+}
+
+.nav-bar small {
+  color: #F3FBEF;
+  font-size: 0.6em;
+}
+
+.nav-bar a {
+  color: #F3FBEF;
+}
+
+.nav-bar a:hover {
+  color: #426421;
+}
+
+.nav-bar h3 {
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+@media (max-width: 639px) {
+  .logo {
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hide-small {
+    display: none;
+  }
+}
+
+.inline-list li {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.row {
+  width: 100%;
+}
+
+.page-header {
+  margin-bottom: 30px;
+  margin-top: 10px;
+  max-width: 95%;
+  left: 0;
+  top: 0;
+}
+
+.bg {
+  background-color: brown;
+  opacity: 0.4;
+}
+
+.content {
+  width: 100%
+}
+
+.full-width {
+  width: 100%;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.half-width {
+  width: 100%;
+  max-width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.filter {
+  width: 80%;
+}
+
+.nomar {
+  margin: 0;
+}
+
+.filter .button {
+  position: relative;
+  top: 22px;
+}
+
+.review .button {
+  position: relative;
+  top: 8px;
+}
+
+.flash {
+  border: 1px solid;
+  border-radius: 3px;
+  margin: auto;
+  margin-bottom: 10px;
+  max-width: 80%;
+  min-height: 50px;
+  font-size: 1.1rem;
+  display: none;
+}
+
+.success {
+  background-color: #DFF0D8;
+  background-color: #D1EDC0;
+  border-color: #D9ECCC;
+  color: #4C7D45;
+  display: block;
+}
+
+.error {
+  background-color: #F2DEDE;
+  border-color: #DDB5B5;
+  color: #AB4B4A;
+  color: #D38865;
+  background-color: #EFD2C6;
+  display: block;
+}
+
+.flash p {
+  margin-left: 10px;
+  margin-bottom: 0px;
+  line-height: 50px;
+}
+
+.flash .error-messages {
+  margin-left: 50px;
+  padding-bottom: 10px;
+}
+
+.float-right {
+  float: right;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  font-size: 0.4em;
+  position: absolute;
+  background-color: #86967D;
+  min-width: 170px;
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.cart {
+  padding-left: 10px;
+}
+
+.space {
+  display: inline-block;
+  width: 0.385em;
+}
+
+
+.button {
+color: #F3FBEF;
+background-color: #426421;
+border-radius: 8px;
+  }
+
+.button:hover {
+  background-color: #2E4434;
+}
+
+.button:focus {
+  background-color: #2E4434;
+}
+
+/***********star ratings for reviews********************/
+.dynamic-star {
+  color: #fcfcfc;
+  display: inline-block;
+  height: 25px;
+  line-height: 25px;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  text-shadow: 0 1px 1.5px gray;
+  unicode-bidi: bidi-override;
+  width: 80px;
+}
+
+.overlay {
+  color: black;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.underlay {
+  color: #fcfcfc;
+  display: block;
+  padding: 0;
+  z-index: 0;
+}
+
+.star {
+  float: left;
+  text-shadow: 0 1px 1.5px gray;
+}
+
+.checked {
+  color: black;
+}
+
+.unchecked {
+  color: #fcfcfc;
+}
+
+.rating-labels {
+  display: inline-block;
+  transform: rotateY(180deg);
+}
+
+.rating-labels input[type="radio"] {
+  display: none;
+}
+.rating-labels input[type="radio"]:checked ~ label::before {
+  color: #2E4434;
+}
+
+.rating-labels label {
+  display: inline-block;
+}
+
+.rating-labels label::before {
+  color: white;
+  content: "\2605";
+  text-shadow: 0 1px 1.5px #2E4434;
+}
+
+.rating-labels label:hover::before {
+  color: #86967D;
+}
+
+.rating-labels label:hover ~ label::before {
+  color: #86967D;
+
+}
