@@ -4,12 +4,12 @@ Congratulations! You're submitting your assignment! These comprehension question
 ## Comprehension Questions
 | Question | Answer    |
 | :------------- | :------------- |
-| How did your team break up the work to be done? |    |
-| How did your team utilize git to collaborate? |    |
-| What did your group do to try to keep your code DRY while many people collaborated on it?  |    |
-| What was a technical challenge that you faced as a group?  |    |
-| What was a team/personal challenge that you faced as a group?  |    |
-| What could your team have done better?  |    |
-| What was your application's ERD? (include a link) |    |
-| What is your Trello URL? |        |
-| What is the Heroku URL of your deployed application? |        |
+| How did your team break up the work to be done? | We started with assigning people to Trello cards.  the models and controllers for testing and creating the methods. We set up the tasks in waves on Trello and as we completed the tasks, we moved on to different tasks in the waves. |
+| How did your team utilize git to collaborate? | We used to git to work on different branches based on features and tests. We then did a collaborative merge, pull, push after each day's stand up. |
+| What did your group do to try to keep your code DRY while many people collaborated on it?  | We tried switching focus areas, such as products and orders, when we started our testing, that way we were reviewing other team member's models and controllers and would essentially proof each other's code to DRY it up. We also used before actions and custom methods that helped us dry the code up. |
+| What was a technical challenge that you faced as a group?  |  Deploying to Heroku. We had trouble logging in with git and with our database. We reviewed the Heroku logs and StackOverflow to determine the solutions. |
+| What was a team/personal challenge that you faced as a group?  |  We think we did a good job overall with ask and guess culture. It was a challenge having a group member out for 2 days, but as a group, we feel we communicated well over Slack to move forward with the project. |
+| What could your team have done better?  | Deployed earlier to work out those issues.  |
+| What was your application's ERD? (include a link) | We will Slack the photos of the ERD. We did it on the white board as opposed to electronically. |
+| What is your Trello URL? | https://trello.com/b/d42fqbbE/whythehexnots  |
+| What is the Heroku URL of your deployed application? | http://sourceress.herokuapp.com/  |

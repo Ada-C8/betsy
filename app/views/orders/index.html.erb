@@ -1,0 +1,87 @@
+<section class="order">
+
+<section class="all-merchant-orders" >
+  <span class="index-banner">
+  <% if @merch_orders == nil %>
+    No orders yet.
+  <% elsif params[:status] %>
+    Your <%= params[:status].capitalize %> Merchant Orders
+  <% else %>
+    All Merchant Orders
+  <% end %>
+  </span>
+  <% @number_of_orders = @merch_orders.to_a.uniq {|o| o.id} %>
+  <p>TOTAL ORDERS: <%= @number_of_orders.length %></p>
+
+
+  <% @total_revenue = 0.00 %>
+  <% @merch_orders.to_a.each do |orders| %>
+  <% @total = 0.00 %>
+
+  <section class="order-details">
+    <ul>
+
+
+      <li><em>Order ID</em>: <%= link_to orders.id, indi_order_path(orders.id.to_i) %></li>
+      <li><em><%= orders.status %></em></li>
+      <li><%= orders.created_at.strftime("%B %d, %Y") %></li>
+      <li><em><%= link_to orders.product_name, product_path(orders.product_id.to_i) %></em></li>
+      <li><em><%= orders.product_price.to_f %></li>
+      <% @total += orders.product_price.to_f %>
+      <% @total_revenue += @total %>
+      <li><em>Order Total</em>: <%= @total %></li>
+      </ul>
+      <section class="view-buttons">
+      <%= link_to ship_order_path(orders.id.to_i), method: :patch do %>
+        <span class="button">Mark Shipped</span>
+      <% end %>
+      <%= link_to indi_order_path(orders.id.to_i), method: :get do %>
+        <span class="button">View Order</span>
+      <% end %>
+      </section>
+
+    </section>
+  <% end %>
+
+  <section class="revenue">
+      <% if params[:status] %>
+    <span>Total Revenue for <%= params[:status].capitalize %> Orders: <%= @total_revenue %></span>
+  <% else %>
+    <span>Total Revenue for All Orders: <%= @total_revenue %></span>
+  <% end %>
+</section>
+
+
+
+
+<!-- <section class="view-buttons">
+  <span class="button"><%= link_to "Show Pending Orders", merchant_orders_path(params[:merchant_id].to_i, :status => "pending")%></span>
+
+  <span class="button"><%= link_to "Show Complete Orders", merchant_orders_path(params[:merchant_id].to_i, :status => "complete")%></span>
+
+  <span class="button"><%= link_to "Show Shipped Orders", merchant_orders_path(params[:merchant_id].to_i, :status => "shipped")%></span>
+
+  <span class="button"><%= link_to "Show All Orders", merchant_orders_path(params[:merchant_id].to_i)%></span>
+</section> -->
+
+<section class="view-buttons">
+
+<%= link_to merchant_orders_path(params[:merchant_id].to_i, :status => "pending") do%>
+<span class="button">Show Pending Orders</span>
+<% end %>
+
+<%= link_to merchant_orders_path(params[:merchant_id].to_i, :status => "complete") do%>
+<span class="button">Show Complete Orders</span>
+<% end %>
+
+<%= link_to merchant_orders_path(params[:merchant_id].to_i, :status => "shipped") do%>
+<span class="button">Show Shipped Orders</span>
+<% end %>
+
+<%= link_to merchant_orders_path(params[:merchant_id].to_i) do%>
+<span class="button">Show All Orders</span>
+<% end %>
+</section>
+
+</section>
+</section>

@@ -1,0 +1,26 @@
+<section class="all-products">
+  <span class="index-banner">
+    <% if @products.count == 0 %>
+    Yikes! No products meet those parameters.
+    <% else %>
+    Product Gallery
+    <% end %>
+  </span>
+
+  <% @products.each do |product| %>
+  <section class="info-card">
+    <section class="product">
+      <% if product.photo.file? %>
+      <span class= "index-image"><%= link_to image_tag(product.photo.url), product_path(product.id) %></span>
+      <% else %>
+      <span class= "index-image"><%= link_to image_tag("http://www.visitbuffaloniagara.com/content/uploads/sv-event-images/434cfb09-bb34-449b-ac6c-d400b6a53f1d.jpg"), product_path(product.id), alt: "A product image placeholder" %></span>
+      <% end %>
+      <span><em><%= link_to product.name.upcase, product_path(product.id) %></em></span>
+      <span><%= product.price %></span>
+      <% if product.merchant.id == session[:user_id] %>
+      <span><em><%= link_to "Edit this Product", edit_product_path(product.id)%></em></span>
+      <% end %>
+    </section>
+  </section>
+  <% end %>
+</section>

@@ -1,0 +1,75 @@
+<section class="show">
+
+  <div class="image-details-combo">
+
+    <div class="row">
+      <div class="show-image small-12 large-5 columns">
+        <% if @product.photo.file? %>
+        <%= image_tag @product.photo.url %>
+        <% else %>
+        <img class="small-12 large-6 columns" src="https://ak6.picdn.net/shutterstock/videos/17347006/thumb/3.jpg?i10c=img.resize(height:160)", alt: "A product image placeholder" />
+        <% end %>
+      </div>
+
+      <div class="show-details small-12 large-6 columns">
+        <p><em><%= @product.name.upcase %></em> by </p>
+        <p>
+          <%= link_to @product.merchant.username, merchant_path(@product.merchant.id) %></p>
+          <% if @product.description != nil %>
+          <p><em>Description</em>: <%= @product.description %></p>
+          <% end %>
+          <br /><p>$<%= @product.price %></p>
+          <p><em>Average Rating</em>: <%= @product.average_rating %></p>
+          <% if @product.categories.count > 0 %>
+          <p><em>Categories</em>: <% @product.categories.each do |category| %>
+                <em><%= link_to category.name, category_path(category.id) %></em>
+            <% end %>
+            <% end %> </p>
+            <% if @product.quantity_avail > 0 %>
+            <p><em>In Stock</em></p>
+            <% if @product.quantity_avail <= 5 %>
+            <p>Only <%= @product.quantity_avail%> left!</p>
+            <% end %>
+            <% else %>
+            <p>Out of Stock</p>
+            <% end %>
+            <% if @product.quantity_avail == 0 %>
+
+            <span class="button"><%= link_to "Not available: Keep Shopping!", products_path, method: :get %></span>
+            <% elsif session[:order_id] == nil && @product.quantity_avail > 0 %>
+            <%= link_to add_product_path(@product), method: :patch do %>
+            <span class="button">Add to Cart</span>
+            <% end %>
+            <% elsif @product.quantity_avail > 0 %>
+            <%= link_to add_product_path(@product), method: :patch do%>
+            <span class="button">Add to Cart</span>
+            <% end %>
+            <% end %>
+
+            <%= link_to new_product_review_path(@product.id) do %>
+            <span class="button">Leave a Review</span>
+            <% end %>
+          </div>
+        </section>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="show-reviews small-12 columns">
+        <div class="index-banner">Reviews</div>
+        <% if @product.reviews.count == 0 %>
+        <div class="index-banner">This Product has not Been Reviewed</div>
+        <% else %>
+        <% @product.reviews.each do |review| %>
+        <div class="row one-review">
+          <span class="small-12 columns">
+            <p><em>Rating: </em><%= review.rating %></p>
+            <p><%= review.text_review %></p>
+          </span>
+        </div>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  </section>

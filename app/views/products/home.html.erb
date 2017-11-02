@@ -1,0 +1,75 @@
+<section class="home">
+  <span class="index-banner">
+    Featured Product
+  </span>
+  <div class="scrolling-image">
+    <div id="slider">
+      <!-- <a href="#" class="control_next">>></a>
+      <a href="#" class="control_prev"><</a> -->
+      <ul>
+        <li><%= link_to image_tag("http://mediad.publicbroadcasting.net/p/wvpn/files/styles/x_large/public/201704/IMG_0688.jpg"), product_path(12)  %> </li>
+        <li><%= link_to image_tag("http://i.telegraph.co.uk/multimedia/archive/02834/smog-skyscrapers_2834586k.jpg"), product_path(9), alt: "Spooky smog and skyscrapers." %> </li>
+        <li><%= link_to image_tag("https://www.epicurus.com/beverages/wp-content/uploads/2012/10/smokking-cauldron.jpg"), product_path(4), alt: "Poison punch"%> </li>
+        <li><%= link_to image_tag("https://cosmos-magazine.imgix.net/file/spina/photo/10994/170407_Frogs_Full.jpg?fit=clip&w=835"), product_path(6), alt: "Toads" %> </li>
+      </ul>
+    </div>
+
+    <div class="slider_option">
+      <input type="checkbox" id="checkbox" value="on">
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <script type="text/javascript">
+  jQuery(document).ready(function ($) {
+
+    $("#checkbox").attr("checked", true);
+
+
+    if ( $('#checkbox').is(':checked')){
+      setInterval(function () {
+        moveRight();
+      }, 3000);
+    }
+
+    var slideCount = $('#slider ul li').length;
+    var slideWidth = $('#slider ul li').width();
+    var slideHeight = $('#slider ul li').height();
+    var sliderUlWidth = slideCount * slideWidth;
+
+    $('#slider').css({ width: slideWidth, height: slideHeight });
+
+    $('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+
+    $('#slider ul li:last-child').prependTo('#slider ul');
+
+    function moveLeft() {
+      $('#slider ul').animate({
+        left: + slideWidth
+      }, 200, function () {
+        $('#slider ul li:last-child').prependTo('#slider ul');
+        $('#slider ul').css('left', '');
+      });
+    };
+
+    function moveRight() {
+      $('#slider ul').animate({
+        left: - slideWidth
+      }, 200, function () {
+        $('#slider ul li:first-child').appendTo('#slider ul');
+        $('#slider ul').css('left', '');
+      });
+    };
+
+    $('a.control_prev').click(function () {
+      moveLeft();
+    });
+
+    $('a.control_next').click(function () {
+      moveRight();
+    });
+
+  });  </script>
+
+</section>

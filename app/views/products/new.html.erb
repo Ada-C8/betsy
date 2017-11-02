@@ -1,0 +1,22 @@
+<%= form_for @product, url: products_path, :html => { :multipart => true } do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :price %>
+  <%= f.text_field :price %>
+
+  <%= f.label :quantity_available %>
+  <%= f.text_field :quantity_avail %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.label :product_category %>
+  <%= f.select :categories, options_for_select(Category.all.collect{ |c| c.name}), { :prompt => "SELECT UP TO 5 CATEGORIES"}, { :multiple => true, :size => 5 } %>
+
+
+  <%= f.label :upload_product_photo %>
+  <%= f.file_field :photo %>
+
+  <%= f.submit %>
+<% end %>

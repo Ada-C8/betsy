@@ -1,0 +1,17 @@
+<section class="show-merchant">
+
+  <span class="index-banner">
+    Welcome to <em><%= @merchant.username.upcase %></em>
+    <br/><span class="email"><%= @merchant.email %></span>
+  </span>
+
+  <% @merchant.products.where(available: "Available").each do |product| %>
+  <section class="info-card">
+    <section class="product">
+      <span class="index-image"><%= link_to image_tag("http://www.dailypublic.com/sites/default/files/2015/Oct/buffalo-Niagara-Heritage-Village.jpg"), product_path(product.id), alt: "A product image placeholder" %></span>
+      <span><em><%= link_to product.name.upcase, product_path(product.id) %></em></span>
+      <span><%= product.price %></span>
+    </section>
+  </section>
+  <% end %>
+</section>
