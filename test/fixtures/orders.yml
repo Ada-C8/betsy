@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+
+two:
+  user: two
+
+three:
+  user: three
+
+four:
+  user: four
+
+five:
+  user: three

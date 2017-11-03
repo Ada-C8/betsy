@@ -1,0 +1,47 @@
+<section class="row">
+  <section class="column large-12">
+    <h1>Billing Information</h1>
+    <%= form_for @billing, url: order_billings_path do |f| %>
+
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+
+    <%= f.label :street1 %>
+    <%= f.text_field :street1 %>
+
+    <%= f.label :street2 %>
+    <%= f.text_field :street2 %>
+
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+
+    <%= f.label "State / Province" %>
+    <%= f.text_field :state_prov %>
+
+    <%= f.label "Zip Code" %>
+    <%= f.text_field :zip %>
+
+    <%= f.label :country %>
+    <%= f.text_field :country %>
+
+    <%= f.label "Credit Card Number" %>
+    <%= f.text_field :ccnum %>
+
+    <%= f.label :cvv %>
+    <%= f.text_field :cvv %>
+
+    <%= f.label "Expires: month" %>
+    <%= f.text_field :ccmonth %>
+
+    <%= f.label "Expires: year" %>
+    <%= f.text_field :ccyear %>
+
+    <%= f.submit "Complete Checkout", class: "button" %>
+
+    <% end %>
+  </section>
+
+</section>

@@ -1,0 +1,37 @@
+<section id="index-product-list" class="row">
+  <div class="large-12 columns">
+    <h1>Foodsie Products</h1>
+  </div>
+
+  <% @products.each do |product| %>
+
+  <div class="large-4 medium-6 small-12 columns end" id="product-container">
+    <article class="product">
+      <% if product.photo_url && (uri?(product.photo_url) || asset_exist?(product.photo_url)) %>
+      <div class="row">
+        <%= image_tag product.photo_url, alt: product.name, class: "thumbnail product-photo" %>
+      </div>
+      <% end %>
+      <h3><%= link_to(product.name, product_path(product.id)) %></h3>
+      <p>Price: <%= readable_price(product.price) %></p>
+      <p>Seller: <%= link_to product.merchant.username, merchant_products_path(product.merchant) %></p>
+      <% @rating = product.average_rating == nil ? "unrated" : product.average_rating %>
+      <p>
+        Avg Rating: <%= @rating %>
+      </p>
+      <p class="categories-buttons">
+        Categories:
+        <% product.categories.each do |category| %>
+        <%= link_to category.name, category_products_path(category.name) %>
+        <% end %>
+      </p>
+
+
+    </article>
+  </div>
+
+  <% end %>
+
+
+
+</section>

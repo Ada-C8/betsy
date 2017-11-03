@@ -1,0 +1,33 @@
+<section class="row">
+  <h1 class= "column small-12 medium-3"><%= "Order #{@order.id}" %></h1>
+  <h4 class= "column small-12 medium-9">Placed: <%= @order.order_items[0].updated_at.strftime('%B %d, %Y') %></h2>
+</section>
+
+<section class="row">
+  <section class="column small-12 medium-9">
+    <table>
+      <tr>
+        <th>Status</th>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+
+      <% @order.order_items.each do |item| %>
+      <% if item.product.merchant == @merchant %>
+      <tr>
+        <td><%= item.status %></td>
+        <td><%= link_to item.product.name, product_path(item.product) %></td>
+        <td><%= item.quantity %></td>
+        <td><%= number_to_currency(item.price) %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    </table>
+  </section>
+
+  <section class="column small-12 medium-3 billing-info">
+    <%= display_address(@order) if @order && @order.billing %>
+    <%= display_cc(@order) if @order && @order.billing %>
+  </section>
+</section>

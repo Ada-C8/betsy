@@ -1,0 +1,42 @@
+
+<% if items && items != [] %>
+  <% @type = items[0].status %>
+  <section class="<%= @type %>">
+    <h3><%= @type.capitalize %> </h3>
+
+    <table class="table <%= @type %>">
+      <thead>
+        <tr>
+          <th class="col-num">No.</th>
+          <th class="col-wide">Product</th>
+          <th>Ordered</th>
+          <th class="col-num">Qty</th>
+          <th>Subtotal</th>
+          <th class="col-wide">Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% items.each do |item| %>
+        <tr>
+          <td><%= link_to item.order_id, merchant_order_path(merchant_id: @merchant.id, order_id: item.order_id) %></td>
+          <td><%= link_to item.product.name, product_path(item.product) %></td>
+          <td><%= readable_date(item.created_at) %></td>
+          <td><%= item.quantity %></td>
+          <td><%= number_to_currency(item.price) %></td>
+          <td>
+            <%= form_tag(change_status_path(item.id), method: :patch) do %>
+              <%= select_tag :status, options_for_select(["pending", "paid", "complete", "canceled"], item.status) %>
+              <%= submit_tag "Change Status" %>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+        <tr>
+          <td colspan="4"><strong><%= message %></strong></td>
+          <td><%= number_to_currency(@merchant.revenue(state)) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+<% end %>
