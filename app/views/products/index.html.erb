@@ -1,0 +1,67 @@
+
+<%# form_tag("/category", method: "get") do %>
+    <%# label_tag(:category_id, "Find Product by Category:") %>
+    <%# collection_select(:category, :id, Category.all, :id, :name) %>
+    <%# submit_tag("GO") %>
+<%# end %>
+
+  <% if @merchant != nil %>
+    <h3> <%= @merchant.name%>'s plants </h3>
+  <% elsif @category != nil %>
+    <h3> <%= @category.name%></h3>
+  <% else %>
+    <h3> All plants </h3>
+  <% end %>
+  <div class="list-products row small-up-1 medium-up-4 large-up-6">
+    <% if @products == nil %>
+    <h4> Sorry, there are not yet any products listed. </h4>
+    <%else%>
+    <% @products.each do |product| %>
+        <% if product.visible%>
+      <div class="column">
+        <ul>
+          <li>
+        <%= link_to image_tag(product.image_url), product_path(product.id)%>
+          </li>
+          <li> <%= product.name %> $<%=product.price%>
+          </li>
+          </ul>
+      </div>
+        <%end%>
+      <%end%>
+    <%end%>
+</div>
+
+<div>
+  <% if session[:merchant_id] %>
+    <% if @merchant %>
+      <% if session[:merchant_id] == @merchant.id %>
+    <table>
+      <h3> Inactive Products </h3>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Description</th>
+          <th>Merchant Name</th>
+          <th>Inventory</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @invisible_products.each do |product| %>
+        <tr>
+          <td><%= link_to product.name, product_path(product.id) %></td>
+          <td><%= product.description %></td>
+          <td><%= link_to product.merchant.name, merchant_path(product.merchant) %></td>
+          <td><%= product.inventory %></td>
+          <td><%= number_to_currency product.price %></td>
+        </tr>
+        <%end%>
+      <%end%>
+    <%end%>
+  <%end%>
+
+
+    </tbody>
+  </table>
+</div>

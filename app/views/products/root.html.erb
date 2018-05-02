@@ -1,0 +1,27 @@
+
+
+<main class = "row">
+  <section class = "row">
+
+    <% if Product.all == [] %>
+    <%= "Products Coming Soon!" %>
+    <%else%>
+
+    <div class="list-products row small-up-1 medium-up-4 large-up-6">
+    <% Product.all.each do |product| %>
+        <% if product.visible%>
+      <div class="column">
+        <ul>
+          <li>
+        <%= link_to image_tag(product.image_url), products_path(product.id)%>
+          </li>
+        </ul>
+          <!-- <li> <%= product.name %> $<%=product.price%> -->
+          <!-- </li> -->
+      </div>
+        <%end%>
+      <%end%>
+    </div>
+    <% end %>
+    </section>
+</main>

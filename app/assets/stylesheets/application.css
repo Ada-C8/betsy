@@ -1,0 +1,212 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require foundation_and_overrides
+
+ */
+
+*/************
+font-family: 'Dancing Script', cursive;
+font-family: 'Comfortaa', cursive;
+font-family: 'Poiret One', cursive;
+font-family: 'Satisfy', cursive;
+font-family: 'Lobster Two', cursive;
+font-family: 'Marck Script', cursive;
+*/
+*/*****************************************
+GENERAL
+******************************************* */
+
+
+
+ul {
+  list-style-type: none;
+}
+
+.list-products img {
+  height: 150px;
+  width: 300px;
+  max-width: 100%;
+}
+
+h1 {
+  text-align: left;
+  color: white;
+
+}
+
+h3 {
+  color: rgb(129,143,42);
+  font-family: 'Comfortaa', sans-serif;
+}
+
+.list-products a {
+  max-height: 50px;
+}
+
+header.page-header.row {
+  background-color: black;
+  width: 100%;
+}
+
+h3, h4 {
+  font-family: 'Comfortaa', sans-serif;
+}
+
+td, th {
+  /*font-family: 'Poiret One', sans-serif;*/
+  font-style: bold;
+}
+
+th {
+  font-size: 1.15em;
+}
+.button {
+  font-weight: bold;
+  }
+
+
+*/*****************************************
+HERO
+******************************************* */
+
+.hero {
+  background: url("http://rforchids.com/wp-content/uploads/2011/11/slide3-resized.png")
+  no-repeat;
+  background-size: cover;
+  height: 200px;
+  width: 100%;
+  background-color: black;
+  margin: 0;
+  color: white;
+  box-sizing: content-box;
+  padding: 1% 5% 2% 5%
+  /*width: 100%;*/
+}
+
+
+.hero a {
+  color: white;
+  font-family: 'Dancing Script', cursive;
+}
+
+.hero a:hover {
+  color: rgb(129,143,42);
+}
+
+
+
+
+*/*****************************************
+NAVIGATION
+******************************************* */
+
+.top-bar {
+background-color: black;
+margin-bottom: 50px;
+}
+
+nav.top-bar ul {
+  background-color: black;
+  /*width: 100%;*/
+  margin: 0;
+  /*margin-bottom: 50px;*/
+  /*padding: 0 3% 0 3%*/
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 14pt;
+  /*font-weight: bold;*/
+}
+
+div.top-bar-left {
+  padding-left: 1%
+}
+div.top-bar-right {
+  float: right;
+  width: 40%;
+  display: inline-block;
+  /*padding-right: 1%;*/
+  /*padding-left: 5%;*/
+}
+
+.nowrap {
+  width: 100%;
+  margin: 0;
+  margin-bottom: 50px;
+  box-sizing: content-box;
+  padding: 0.5% 5% 0.5% 5%
+}
+
+
+.menu .button{
+  display: inline-block;
+  float: right;
+  margin-right: 2px;
+  border-color: none;
+  background-color: black;
+  border-radius: 5px;
+}
+
+.menu .button:hover {
+  background-color: rgb(129,143,42);
+}
+
+*/***********
+DROP DOWN Boxes are .form
+**************/
+
+.form select {
+  width: 200px;
+  margin-right: 5px;
+  display: inline-block;
+  font-size: 12pt;
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+.form select:hover {
+  background-color: rgb(129,143,42);
+}
+
+.form {
+  background-color: black;
+}
+
+.form input {
+  background-color: black;
+  border-radius: 40%;
+  color: white;
+  font-weight: bold;
+}
+
+.form input:hover {
+  color: rgb(129,143,42);
+}
+
+.ul .menu {
+  background-color: black;
+  justify-content: center;
+}
+
+a.button {
+  border-bottom: none;
+}
+
+
+*/*****************************************
+footer
+******************************************* */
+footer {
+  margin-bottom: 100px;
+}

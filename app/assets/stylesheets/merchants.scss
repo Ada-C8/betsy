@@ -1,0 +1,88 @@
+// Place all the styles related to the merchants controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* light green rgb(201,242,108)
+dark purple rgb(44,9,81)
+bright purple rgb(126,39,190)
+moss green rgb(129,143,42)
+very light purple accent: rgb(243,231,241)
+*/
+
+/*****************/
+/* Account page  */
+/*****************/
+body {
+  font-family: 'Comfortaa', sans-serif;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.order-show h3 {
+  color: black;
+  float: left;
+  width: 50%;
+  margin-left: 0;
+  padding: 0;
+
+}
+
+.order-show h4 {
+  color: rgb(129,143,42);
+}
+
+
+#orders-filtered {
+  max-width: 96%;
+  margin-left: 2%;
+  background-color: red;
+
+}
+
+.orders-by-status th {
+  background-color: black;
+  color: white;
+}
+
+.orders-by-status {
+  text-align: left;
+  max-width: 90%;
+  margin: 0 50%;
+}
+
+.revenue th {
+  background-color: black ;
+  color: white;
+}
+
+.button {
+  background-color: black;
+  border-radius: 5px;
+}
+
+.button:hover {
+  background-color: rgb(129,143,42);
+}
+
+.merchant-background {
+  background-color: rgb(243,231,241);
+  padding: 2%;
+
+}
+
+.total-revenue {
+  display: inline-block;
+  float: right;
+  margin: 0;
+  padding: 0
+
+}
+
+// .merchant-nav {
+//   display: inline-block;
+//   float: right;
+//
+//
+// }
