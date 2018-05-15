@@ -4,7 +4,7 @@ Lore Store is a full stack Ruby on Rails web app developed by [@anemonekey](http
 ### See the live website [here](http://lorestore.herokuapp.com/).
 
 
-*Original assignment text below. *
+Original assignment text below.
 
 ---
 
