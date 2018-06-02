@@ -1,0 +1,23 @@
+<section class="page-holder no-pad">
+  <nav class='small-12 medium-3 large-2 columns category-menu'>
+    <h4>Categories</h4>
+    <ul>
+      <li class='view-all'>
+        <%= link_to "View All Products", category_products_path('all') %>
+      </li>
+      <% @categories.each do |category| %>
+      <li class="small-6 medium-12 columns category">
+        <%= link_to category.name.capitalize, category_products_path(category.id) %>
+      </li>
+      <% end %>
+    </ul>
+  </nav>
+
+  <section class='small-12 medium-9 large-10 product-index columns some-pad end'>
+    <h2 class="page-title">
+      <%= image_tag("007-castle.png", class:'tiny-img')  %> <%= @title %>
+    </h2>
+
+    <%= render partial: "product-list", locals: {products: @products} %>
+  </section>
+</section>

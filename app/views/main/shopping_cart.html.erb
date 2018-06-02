@@ -1,0 +1,54 @@
+<section class="view-cart small-10 columns">
+  <h2 class="page-title">
+    <%= image_tag("014-coffin.png", class:'tiny-img')  %> Shopping Cart
+  </h2>
+
+  <% if @products %>
+    <% @products.each do |order_product|%>
+      <%= form_for order_product do |f| %>
+        <div class="row">
+
+          <span class="small-12 medium-12 large-2 columns product-img cart-img product-thumbnail" <%= (raw "style=\"background-image: url('#{order_product.product.image_url}');\"") unless (order_product.product.image_url.nil? || order_product.product.image_url.empty?) %> > </span>
+          <span class="small-12 medium-12 large-10 columns cart-info">
+            <div class="top-row row">
+              <div class= "product-list small-12 columns">
+                <h4><%= order_product.product.name %></h4>
+              </div>
+            </div>
+            <div class="large-2 medium-4 small-12 columns">
+              <p class="cart-text">Price:
+                <strong><%= money(order_product.product.price) %></strong>
+              </p>
+            </div>
+            <div class="large-3 medium-4 small-12 columns">
+              <%= f.label :quantity, "Quantity:", class: 'shopping-cart-form' %>
+              <%= f.text_field :quantity, class: 'shopping-cart-form' %>
+            </div>
+            <div class="large-2 medium-4 small-12 columns">
+              <p class="cart-text">Total:
+                <strong><%= money(order_product.total) %></strong>
+              </p>
+            </div>
+            <div class="large-5 medium-12 small-12 columns end">
+              <%= f.submit "Update Item", class: 'button burg-btn small-5 columns' %>
+              <%= link_to "Remove From Cart", order_product_path(order_product.id), method: :delete, data: { confirm: "Are you sure?" }, class: "button burg-btn delete-button small-7 columns" %>
+            </div>
+          </span>
+
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% unless @products.nil? || @products.empty? %>
+    <div class="small-12 medium-3 columns cart-total">
+      <p class="small-12 columns"><big>Cart Total: <%= money(total(@products)) %></big></p>
+
+      <%= link_to "Checkout Cart", new_order_path, class: 'button burg-btn small-12 columns' %>
+    </div>
+  <% else %>
+  <p>
+    Your cart is empty!! 👻
+  </p>
+  <% end %>
+</section>

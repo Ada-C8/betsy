@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+order:
+  cust_name: Mermaid
+  merchant_id: :ada
+  cust_cc: 12345
+  cust_cc_exp: 11/22
+  cvv: 111
+  zip_code: 32444
+  cust_addr: Sea World
+  cust_email: forkhair@mermaid.com
+  status: pending
+
+other_order:
+  cust_name: Demon
+  merchant_id: :grace
+  cust_cc: 5432314
+  cust_cc_exp: 66/66
+  cvv: 111
+  zip_code: 32444
+  cust_addr: Fire World
+  cust_email: flameshair@mermaid.com
+  status: pending
+
+guest_order:
+  cust_name: Gaston
+  cust_cc: 1234098756
+  cust_cc_exp: 12/48
+  cvv: 324
+  zip_code: 56123
+  cust_addr: A small provincial town
+  cust_email: gaston@beautybeast.com
+  status: pending

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "LoreStore" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body class="row">
+    <header class="small-12 columns header">
+      <section class="row">
+        <h1 class="small-12 medium-4 columns main-heading">
+          <%= image_tag("008-spellbook.png", class:'tiny-img') %> <%= link_to "LoreStore", root_path %>
+        </h1>
+        <nav class="small-12 medium-8 columns top-nav">
+          <ul>
+            <li>
+              <%= link_to products_path, :class => 'nav-button' do %>
+                <span class="nav-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <br />
+                <span class="nav-text">
+                  Products
+                </span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to shopping_cart_path, :class => 'nav-button' do %>
+                <span class="nav-icon">
+                  <i class="fa fa-shopping-cart"></i>
+                </span>
+                <br />
+                <span class="nav-text">
+                  Cart
+                </span>
+              <% end %>
+            </li>
+            <% if session[:merchant] %>
+              <li>
+                <%= link_to new_product_path, class: 'nav-button' do %>
+                  <span class="nav-icon">
+                    <i class="fa fa-usd"></i>
+                  </span>
+                  <br />
+                  <span class="nav-text">
+                    Sell
+                  </span>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to self_summary_path, :class => 'nav-button' do %>
+                  <span class="nav-icon">
+                    <i class="fa fa-user"></i>
+                  </span>
+                  <br />
+                  <span class="nav-text">
+                    Account
+                  </span>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to logout_path, :class => 'nav-button' do %>
+                  <span class="nav-icon">
+                    <i class="fa fa-sign-out"></i>
+                  </span>
+                  <br />
+                  <span class="nav-text">
+                    Sign Out
+                  </span>
+                <% end %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to '/auth/github', :class => 'nav-button' do %>
+                  <span class="nav-icon">
+                    <i class="fa fa-sign-in"></i>
+                  </span>
+                  <br />
+                  <span class="nav-text">
+                    Sign In
+                  </span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
+      </section>
+    </header>
+    <%= render partial: 'layouts/error-messages' if flash[:status] %>
+    <main class="small-12 columns main">
+      <%= yield %>
+    </main>
+    <footer class="small-12 columns footer">
+      <p>Copyright &copy; 2017 LoreStore</p>
+    </footer>
+  </body>
+</html>

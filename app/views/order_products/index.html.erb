@@ -1,0 +1,42 @@
+<section class="sold-items">
+  <h2 class="page-title">
+    <%= image_tag("028-heart.png", class:'tiny-img')  %> Sold Items
+  </h2>
+
+  <% @order_products.each do |op| %>
+  <div class="order-product row">
+
+    <span class="medium-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{op.product.image_url}');\"") unless (op.product.image_url.nil? || op.product.image_url.empty?) %> > </span>
+    <span class="medium-10 columns info">
+
+      <div class="row">
+        <h4 class="medium-3 columns"><%= op.product.name %></h4>
+        <h4 class="medium-3 columns"><small>Quantity: </small><%= op.quantity %></h4>
+        <h4 class="medium-3 columns"><small>Price: </small><%= money(op.product.price) %></h4>
+        <h4 class="medium-3 columns"><small>Total: </small><%= money(op.total) %></h4>
+      </div>
+
+      <div class="row">
+        <div class="row medium-9 columns">
+
+          <p class="medium-10 columns">
+            Customer: <%= op.order.cust_name %>
+          </p>
+          <p class="medium-10 columns end">
+            <%= op.order.cust_addr %>
+          </p>
+        </div>
+
+        <span class="medium-3 columns shipping">
+          <% if op.status == 'shipped' %>
+          <a class='button ship-btn completed medium-12 columns'>Completed</a>
+          <% else %>
+          <%= link_to "Mark Shipped", root_path, class: 'button medium-12 columns ship-btn' %>
+          <% end %>
+        </span>
+      </div>
+    </span>
+
+  </div>
+  <% end %>
+</section>

@@ -1,3 +1,13 @@
+# Lore Store
+Lore Store is a full stack Ruby on Rails web app developed by [@anemonekey](https://github.com/anemonekey), [@Guribot](https://github.com/Guribot), [@oxenran](https://github.com/oxenran), and [@sairagula](https://github.com/sairagula) for Ada Developers Academy Cohort 8. It utilizes PostgreSQL relational databases and Oauth user verification.
+
+### See the live website [here](http://lorestore.herokuapp.com/).
+
+
+Original assignment text below.
+
+---
+
 # bEtsy
 [b]Etsy will be an online store where a wide variety of products can be listed and sold by any user. In this project we will focus on reinforcing the major components of Rails, Model Validation, as well as introducing some more complex logic such as user authentication.
 

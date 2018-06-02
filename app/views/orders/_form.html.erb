@@ -1,0 +1,45 @@
+<%= form_for @order, html: {id: "order-form"} do |f| %>
+  <% if session[:merchant] %>
+    <%= f.hidden_field :merchant_id, value: session[:merchant]['id'] %>
+  <% end %>
+  <%= f.hidden_field :status, value: "pending" %>
+
+  <%= content_tag :div, class: "name-wrapper form-row row" do %>
+    <%= f.label :cust_name, "Name", class: "prod-form-item large-3 medium-3 small-12 columns" %>
+    <%= f.text_field :cust_name  , class: "prod-form-item large-3 medium-3 small-12 columns" %>
+  <% end %>
+
+  <%= content_tag :div, class: "cc-wrapper form-row row" do %>
+    <%= f.label :cust_cc, "Credit Card Number" , class: "prod-form-item large-3 medium-3 small-12 columns" %>
+    <%= f.text_field :cust_cc , class: "prod-form-item large-3 medium-3 small-12 columns" %>
+  <% end %>
+
+  <%= content_tag :div, class: "ccexp-wrapper form-row row" do %>
+    <%= f.label :cust_cc_exp, "Expiration Date" , class: "prod-form-item large-3 medium-3 small-12 columns" %>
+    <%= f.text_field :cust_cc_exp , class: "prod-form-item large-3 medium-3 small-12 columns" %>
+  <% end %>
+
+  <%= content_tag :div, class: "cvv-wrapper form-row row" do %>
+    <%= f.label :cvv, "cvv" , class: "prod-form-item large-3 medium-3 small-12 columns" %>
+    <%= f.text_field :cvv , class: "prod-form-item large-3 medium-3 small-12 columns" %>
+  <% end %>
+
+  <%= content_tag :div, class: "addr-wrapper form-row row" do %>
+    <%= f.label :cust_addr, "Address" , class: "prod-form-item large-3 medium-3 small-12 columns" %>
+    <%= f.text_field :cust_addr , class: "prod-form-item large-3 medium-3 small-12 columns" %>
+  <% end %>
+
+  <%= content_tag :div, class: "zip-wrapper form-row row" do %>
+    <%= f.label :zip_code, "Zip Code" , class: "prod-form-item large-3 medium-3 small-12 columns" %>
+    <%= f.text_field :zip_code , class: "prod-form-item large-3 medium-3 small-12 columns" %>
+  <% end %>
+
+  <%= content_tag :div, class: "email-wrapper form-row row" do %>
+    <%= f.label :cust_email, "Email" , class: "prod-form-item large-3 medium-3 small-12 columns" %>
+    <%= f.text_field :cust_email , class: "prod-form-item large-3 medium-3 small-12 columns" %>
+  <% end %>
+
+  <%= content_tag :div, class: "submit-wrapper form-row row  align-center" do %>
+    <%= f.submit button_text, class: "button burg-btn medium-6 small-12 columns product-form" %>
+  <% end %>
+<% end %>

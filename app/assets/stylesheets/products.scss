@@ -1,0 +1,234 @@
+// Place all the styles related to the products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+// Palette:
+$pink: #DBC2CF;
+$grey: #A7AAB9;
+$gray: #A7AAB9;
+$teal: #3C7A89;
+$ltteal: #91BEC9;
+$navy: #16262E;
+$burgundy: #4F3640;
+$ltburgundy: #7F4F62;
+
+
+////////////////////
+// PRODUCTS LIST: //
+////////////////////
+
+nav ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+.product {
+  height: 17rem;
+  margin: .25rem;
+  padding: 0;
+  padding-top: 1.25rem;
+  text-align: center;
+  width: 16rem;
+}
+
+.product:hover {
+  color: #3C7A89;
+}
+
+.product a {
+  color: inherit;
+}
+
+.product:last-of-type {
+  float: left !important;
+}
+
+.product p {
+  margin-bottom: 0;
+}
+
+.product-list .product-img {
+  height: 15rem;
+  margin: auto auto .25rem auto;
+  width: 15rem;
+}
+
+.product-img {
+  background-image: url(http://via.placeholder.com/320x320);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: auto;
+  // margin: 0;
+  overflow: hidden;
+}
+
+
+@media print, screen and (min-width: 64em) {
+  .product {
+    height: 19rem;
+    margin: 0;
+    padding: 0;
+    padding-top: 1.25rem;
+    text-align: center;
+    width: 19rem;
+  }
+}
+
+////////////////////
+// PRODUCTS PAGE: //
+////////////////////
+
+section.product-info {
+  margin: auto;
+  float: none;
+}
+
+.product-index {
+  border-top: 1px solid $grey;
+}
+
+.product-info .row {
+  margin: 1rem auto;
+}
+
+.product-info .product-img {
+  height: 20rem;
+  width: 20rem;
+}
+
+.product-details {
+  padding: 2rem;
+}
+
+.product-details p, .product-details label {
+  font-size: 1.25rem;
+}
+
+.product-details label {
+  display: inline;
+  padding-left: 0;
+}
+
+.product-details select {
+  display: inline;
+  // width: 30%;
+}
+
+.product-details .cart-btn {
+  display: block;
+  font-size: 1.5rem;
+  margin: auto;
+  padding: 1rem 2rem;
+}
+
+.show-product {
+  height: 20rem;
+}
+
+@media print, screen and (min-width: 40em) {
+  .product-index {
+    border-top: 0;
+    border-left: 1px solid $grey;
+  }
+}
+
+
+//////////////////////
+// CATEGORIES LIST: //
+//////////////////////
+
+.prod-cats {
+  list-style: none;
+}
+
+.prod-cats ul {
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
+.prod-cats li {
+  background-color: white;
+  border: 2px solid #9FA2B2;
+  border-radius: 2rem;
+  color: #9FA2B2;
+}
+
+.prod-cats a {
+  color: inherit;
+}
+
+.prod-cats li:hover {
+  background-color: white;
+  border-color: #DBC2CF;
+  color: #DBC2CF;
+}
+
+.prod-cats li:hover a {
+  color: inherit;
+}
+
+.prod-cats .add-categories {
+  background-color: #DBC2CF;
+  color: white;
+}
+
+.prod-cats .add-categories:hover {
+  background-color: #4F3640;
+  border-color: #9FA2B2;
+  color: white;
+}
+
+//////////////////////
+// CATEGORY SIDEBAR //
+//////////////////////
+
+.category-menu {
+  padding-top: 1rem;
+  // min-width: 7.5rem;
+}
+
+.category-menu li a {
+  color: $grey;
+  display: inline-block;
+  text-indent: -.5rem;
+}
+
+.category-menu li a:hover {
+  color: $ltteal;
+}
+
+.view-all {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/////////////////
+// NEW PRODUCT //
+/////////////////
+
+.product-form {
+  float: none;
+  margin: auto;
+  padding: 1rem;
+}
+
+.prod-form-item {
+  display: inline-block;
+}
+
+@media print, screen and (min-width: 40em) {
+  input.prod-form-item, textarea.prod-form-item {
+    width: 70%;
+  }
+}
+
+@media print, screen and (min-width: 64em) {
+  input.prod-form-item, textarea.prod-form-item {
+    width: 75%;
+  }
+  label.prod-form-item {
+    // text-align: right;
+  }
+}

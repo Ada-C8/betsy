@@ -1,0 +1,74 @@
+<section class="page-holder">
+  <h2 class="page-title">
+    <%= image_tag("029-ghost.png", class:'tiny-img')  %> Welcome, <%= @user.username %>!
+  </h2>
+
+  <section class="small-10 columns profile end">
+
+    <section class="row">
+
+      <div class="product-list small-12 medium-6 large-4 columns">
+        <div class="profile-card">
+          <div class="card-title">
+            <h3>Shopping Cart</h3>
+          </div>
+          <em class="profile-huge current-products"><%= session[:cart].count %></em>
+          <%= link_to "Go To Cart", shopping_cart_path, class: 'button burg-btn profile-button' %>
+        </div>
+      </div>
+
+      <div class="product-list small-12 medium-6 large-4 columns">
+        <div class="profile-card">
+          <div class="card-title">
+            <h3>Currently Selling</h3>
+          </div>
+          <em class="profile-huge current-products"><%= @user.active_products.count %></em>
+          <%= link_to "Inventory Management", self_inventory_path, class: 'button burg-btn profile-button' %>
+        </div>
+      </div>
+
+      <div class="product-list small-12 medium-6 large-4 columns">
+        <div class="order-list profile-card">
+          <div class="card-title">
+            <h3>Pending Orders</h3>
+          </div>
+          <em class="profile-huge pending-orders <%= @user.pending_orders.count == 0 ? "summary-zero" : "summary-urgent" %>"><%= @user.pending_orders.count %></em>
+          <%= link_to "Pending Orders", self_pending_path, class: 'button burg-btn profile-button' %>
+        </div>
+      </div>
+
+      <div class="product-list small-12 medium-6 large-4 columns">
+        <div class=" profile-card">
+          <div class="card-title">
+            <h3>Purchase History</h3>
+          </div>
+          <em class="profile-huge total-revenue"><%= @user.orders.count %></em>
+          <%= link_to "Past Orders", orders_path, class: 'button burg-btn profile-button' %>
+        </div>
+      </div>
+
+      <div class="product-list small-12 medium-6 large-4 columns">
+        <div class=" profile-card">
+          <div class="card-title">
+            <h3>Total Revenue</h3>
+          </div>
+          <em class="profile-huge total-revenue"><%= money(@user.total_revenue, true) %></em>
+          <%= link_to "Income Details", self_revenue_path, class: 'button burg-btn profile-button' %>
+        </div>
+      </div>
+
+      <div class="product-list small-12 medium-6 large-4 columns end">
+        <div class="order-list profile-card">
+          <div class="card-title">
+            <h3>Completed Orders</h3>
+          </div>
+          <em class="profile-huge shipped-orders"><%= @user.shipped_orders.count %></em>
+          <%= link_to "Completed Orders", self_completed_path, class: 'button burg-btn profile-button' %>
+        </div>
+      </div>
+
+    </section>
+
+
+  </section>
+</section>

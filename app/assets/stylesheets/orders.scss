@@ -1,0 +1,93 @@
+// Place all the styles related to the orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+//------------- ICON IMGS ----------------
+.tiny-img {
+  margin-left: 0 1% 0 2%;
+  width: 48px;
+  height: 48px;
+}
+
+//------------- ORDER #INDEX ----------------
+h3.no-orders {
+  font-family: 'Josefin Sans', sans-serif;
+  margin: 1% 0;
+}
+h2.page-title { font-size: 2.5em; }
+section.order-index article {
+  width: 100%;
+  margin-top: 2%;
+  padding: 2% 2% 1%;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  background: #fefefe;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+div.o-details { width: 25%; }
+p.o-title {
+  color: #999;
+  font-size: 0.8em;
+  line-height: 0.5;
+}
+div.o-products {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+}
+div.oitem-wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: none;
+  justify-content: flex-start;
+  align-items: center;
+}
+div.olist-wrapper { width: 70%; }
+h4.oitem-name {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  color: #4F3640;
+}
+span.oitem-qty { margin-left: 10%; }
+p.od-btn a.ls-btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 4% 2%;
+  background: #4F3640;
+  color: #fefefe;
+}
+
+//------------- ORDER #SHOW ----------------
+div.odetails-top {
+  width: 95%;
+  margin: 2% auto 3%;
+  display: flex;
+  align-items: flex-start;
+}
+div.odetails-heading { width: 40%; }
+div.odetails-summary { width: 40%; }
+span.fa-stack {
+  margin-right: 2%;
+}
+div.odetails-products table thead tr th,
+div.odetails-products table tbody tr td {
+  text-align: center;
+}
+div.odetails-products table tbody tr td:nth-of-type(2) {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+//------------- ORDER #CONFIRM ----------------
+div.oconfirm-wrapper { margin: 2% 0; }
+div.oconfirm-summary ul.oconfirm-list {  list-style-type: none; }
+span.bold-data {
+  font-weight: 600;
+  width: 30%;
+}

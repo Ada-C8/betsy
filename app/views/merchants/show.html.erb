@@ -1,0 +1,11 @@
+<section class="merchant-show">
+  <h2 class="page-title">
+    <%= image_tag("016-skull.png", class:'tiny-img')  %> <%=@merchant.username%>
+  </h2>
+  <a href="mailto:<%=@merchant.email%>">Contact Merchant</a>
+  <h3>Products</h3>
+
+  <main class=' product-list small-10 columns'>
+  <%= render partial: "list-merchant-products", locals: {products: @merchant.products} %>
+  </main>
+</section>

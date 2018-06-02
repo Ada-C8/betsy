@@ -1,0 +1,63 @@
+<section class="small-10 columns product-info">
+  <div class="row">
+      <div class="small-12 medium-5 columns product-img" <%= (raw "style=\"background-image: url('#{@product.image_url}');\"") unless (@product.image_url.nil? || @product.image_url.empty?) %> >
+      </div>
+    <div class="small-12 medium-6 columns product-details end">
+      <h3>
+        <%= @product.name %>
+        <%= (link_to "Edit", edit_product_path(@product.id), class: 'right button readable') if @own_product %>
+      </h3>
+      <p> From seller
+        <%= link_to @product.merchant.username, merchant_path(@product.merchant_id) %>
+      </p>
+      <p><%= money(@product.price) %></p>
+      <%= form_tag do %>
+      <%= label_tag :quantity, "Quantity:", class: 'small-6 columns' %>
+      <%= select_tag :quantity, options_for_select((1..@product.quantity)), class: 'small-6 columns' %>
+      <%= submit_tag "Add to Cart", class: 'button cart-btn' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row description">
+    <h4>Description:</h4>
+    <p>
+      <%= @product.description %>
+    </p>
+  </div>
+  <div class="row prod-cats">
+    <ul>
+      <% @product.categories.each do |category| %>
+        <li class="button">
+          <%= link_to category.name.capitalize, category_products_path(category.id) %>
+        </li>
+      <% end %>
+      <% if @own_product %>
+        <li class="button add-categories">
+          <%= link_to "Add Categories", add_categories_path(@product.id) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="row reviews">
+
+    <% unless @product.reviews.empty?%>
+      <h4 class="columns small-6">Average Review:
+        <% rating = @product.reviews.average(:rating) %>
+        <span class="stars"><%= Review.get_rating_stars(rating) %></span>
+      </h4>
+    <% end %>
+    <span class="button add_review_button"><%= link_to new_product_review_path(@product.id) do %>
+      <i class="fa fa-comments-o"></i>
+      Add Review
+    <span>
+    <% end %>
+  </div>
+
+  <div class="row reviews">
+
+    <% @product.reviews.each do |review| %>
+      <%= render partial: 'review', locals: {review: review} %>
+    <% end %>
+  </div>
+</section>

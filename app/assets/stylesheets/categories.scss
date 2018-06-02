@@ -1,0 +1,71 @@
+// Place all the styles related to the categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Palette:
+$pink: #DBC2CF;
+$grey: #A7AAB9;
+$gray: #A7AAB9;
+$teal: #3C7A89;
+$ltteal: #91BEC9;
+$navy: #16262E;
+$burgundy: #4F3640;
+$ltburgundy: #7F4F62;
+
+////////////////////
+// ADD CATEGORIES //
+////////////////////
+
+.add-cats-holder {
+  padding-top: 3rem;
+}
+
+.check-with-label:checked + .label-for-check {
+  font-weight: bold;
+}
+
+.check-with-label:checked + .form-item {
+  background-color: $pink;
+}
+
+.check-with-label:checked + .form-item:hover {
+  background-color: $ltteal;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.add-category {
+  display: inline-block !important;
+}
+
+.add-category[type="text"], .add-category[type="submit"] {
+  width: 45%;
+  margin: 0;
+}
+
+.center {
+  text-align: center;
+}
+
+.cat-form {
+  border: 1px solid grey;
+  padding: 1rem;
+}
+
+.cat-btn {
+  margin-top: 1rem !important;
+}
+
+label.form-item {
+  background-color: #eee;
+  border: 1px solid $grey;
+  display: block !important;
+  margin-top: -1px;
+}
+
+
+.form-item:hover {
+  background-color: $ltteal;
+}

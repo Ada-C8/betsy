@@ -1,0 +1,56 @@
+<section class="order-index">
+  <h2 class="page-title">
+    <%= image_tag("001-zombie.png", class:'tiny-img')  %> Order history
+  </h2>
+
+  <% if @orders == nil %>
+    <h3 class="no-orders"> You haven't purchased anything yet!</h3>
+
+  <% else %>
+    <% @orders.each do |order| %>
+      <article>
+
+        <div class="media-object stack-for-small o-details">
+          <div class="media-object-section">
+            <p class="o-title">ORDER PLACED</p>
+            <p class="o-date"><%= order.created_at.strftime("%B %d, %Y") %></p>
+            <p class="o-title">TOTAL</p>
+            <p class="o-total">$ <%= sprintf('%.2f', order.total) %></p>
+            <p class="o-title">STATUS</p>
+            <p class="o-total"><%= order.status.capitalize %></p>
+            <p class="o-title">ORDER #<%= order.id %></p>
+            <p class="od-btn"><%= link_to "Order Details", order_path(order.id), class: 'button burg-btn'%></p>
+          </div>
+        </div>
+
+        <div class="media-object stack-for-small o-products">
+          <% order.order_products.each do | order_product | %>
+            <div class="oitem-wrapper">
+              <div class="thumbnail mini-img">
+                <%= link_to product_path(order_product.product) do %>
+                  <img src= "<%= order_product.product.image_url %>">
+                <% end %>
+              </div>
+              <div class="olist-wrapper">
+                <h4 class="oitem-name">
+                  <%= order_product.product.name %>
+                </h4>
+                <p>
+                  <span class="oitem-price">
+                    Price: $ <%= sprintf('%.2f', order_product.product.price) %>
+                  </span>
+                  <span class="oitem-qty">
+                    Quantity: <%= order_product.quantity %>
+                  </span>
+                </p>
+                <p class="oitem-stotal">
+                  Subtotal: $ <%= sprintf('%.2f', order_product.total) %>
+                </p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </article>
+    <% end %>
+  <% end %>
+</section>

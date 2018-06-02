@@ -1,0 +1,48 @@
+<section class="order-confirm">
+  <h2 class="page-title">
+    <%= image_tag("018-potful.png", class:'tiny-img')  %> Order confirmation
+  </h2>
+
+  <div class="oconfirm-wrapper">
+    <p>Thanks for your purchase!</p>
+    <div class="oconfirm-summary">
+      <ul class="oconfirm-list">
+        <li><span class="bold-data">Order Number</span>: #<%= @order.id %></li>
+        <li><span class="bold-data">Total</span>: $ <%= @order.total %></li>
+        <li><span class="bold-data">Date</span>: <%= @order.created_at.strftime("%B %d, %Y") %></li>
+        <li><span class="bold-data">Status</span>: <%= @order.status.capitalize %></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Order details</h3>
+  <div class="odetails-products">
+    <table>
+      <thead>
+        <th>Quantity</th>
+        <th>Item</th>
+        <th>Total</th>
+      </thead>
+      <tbody>
+        <% @order.order_products.each do |order_product| %>
+          <tr>
+            <td><%= order_product.quantity %></td>
+            <td>
+              <div class="mini-img">
+                <%= link_to product_path(order_product.product) do %>
+                  <img src= "<%= order_product.product.image_url %>">
+                <% end %>
+              </div>
+              <div class="odetail-info">
+                <p><%= link_to order_product.product.name, product_path(id:order_product.product.id) %></p>
+                <p>Sold by <%= order_product.product.merchant.username %></p>
+                <p>$ <%= sprintf('%.2f', order_product.product.price) %></p>
+              </div>
+            </td>
+            <td>$ <%= sprintf('%.2f', order_product.total) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

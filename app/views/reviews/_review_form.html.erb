@@ -1,0 +1,24 @@
+<div class = "row align_center">
+  <div class=" column">
+    <%= form_for @review do |f| %>
+
+    <h5 class = "text_command"> Please rate the product: </h5>
+    <fieldset class="rating">
+      <%= f.radio_button(:rating, "5") %> <%= f.label(:rating.to_s + "_5") %>
+      <%= f.radio_button(:rating, "4") %> <%= f.label(:rating.to_s + "_4") %>
+      <%= f.radio_button(:rating, "3") %> <%= f.label(:rating.to_s + "_3") %>
+      <%= f.radio_button(:rating, "2") %> <%= f.label(:rating.to_s + "_2") %>
+      <%= f.radio_button(:rating, "1") %> <%= f.label(:rating.to_s + "_1") %>
+    </fieldset>
+
+    <fieldset class="description">
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+    </fieldset>
+    <%= f.hidden_field :product_id, value: @review.product_id %>
+
+    <%= f.submit button, class: 'button submit_review' %>
+
+    <% end %></span>
+  </div>
+</div>

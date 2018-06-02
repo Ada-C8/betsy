@@ -1,0 +1,87 @@
+<section class="order-show">
+  <h2 class="page-title">
+    <%= image_tag("025-grave.png", class:'tiny-img')  %> Order details
+  </h2>
+
+  <article>
+    <div class="odetails-top">
+      <div class="odetails-heading">
+        <h3>Order information</h3>
+        <p>Ordered on <%= @order.created_at.strftime("%B %d, %Y") %></p>
+        <p>Order #<%= @order.id %></p>
+        <p>Status: <%= @order.status.capitalize %></p>
+        <%= link_to "Cancel Order", cancel_path(@order), class: 'button burg-btn' %>
+      </div>
+
+      <div class="odetails-summary">
+        <h3>Payment by</h3>
+        <p>
+          <span class="fa-stack">
+            <i class="fa fa-circle-thin fa-stack-2x"></i>
+            <i class="fa fa-user fa-stack-1x"></i>
+          </span>
+          <%= @order.cust_name %>
+        </p>
+        <p>
+          <span class="fa-stack">
+            <i class="fa fa-circle-thin fa-stack-2x"></i>
+            <i class="fa fa-envelope fa-stack-1x"></i>
+          </span>
+          <%= @order.cust_email %>
+        </p>
+        <p>
+          <span class="fa-stack">
+            <i class="fa fa-circle-thin fa-stack-2x"></i>
+            <i class="fa fa-map-marker fa-stack-1x"></i>
+          </span>
+          <%= @order.cust_addr %>
+        </p>
+        <p>
+          <span class="fa-stack">
+            <i class="fa fa-circle-thin fa-stack-2x"></i>
+            <i class="fa fa-credit-card fa-stack-1x"></i>
+          </span>
+          ****<%= @order.cust_cc.last(4) %> (expires <%= @order.cust_cc_exp %>)
+        </p>
+      </div>
+    </div>
+
+    <div class="odetails-products">
+      <table>
+        <thead>
+          <th width="10%">Quantity</th>
+          <th width="80%">Item</th>
+          <th width="10%">Total</th>
+        </thead>
+        <tbody>
+          <% @order.order_products.each do |order_product| %>
+            <tr>
+              <td><%= order_product.quantity %></td>
+              <td>
+                <div class="mini-img">
+                  <%= link_to product_path(order_product.product) do %>
+                    <img src= "<%= order_product.product.image_url %>">
+                  <% end %>
+                </div>
+                <div class="odetail-info">
+                  <p>
+                    <%= link_to order_product.product.name, product_path(id:order_product.product.id) %>
+                  </p>
+                  <p>
+                    Sold by <%= order_product.product.merchant.username %>
+                  </p>
+                  <p>
+                    $ <%= sprintf('%.2f', order_product.product.price) %>
+                  </p>
+                </div>
+              </td>
+              <td>
+                $ <%= sprintf('%.2f', order_product.total) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </article>
+</section>

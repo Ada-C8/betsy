@@ -1,0 +1,78 @@
+<section class="page-holder">
+  <h2 class="page-title">
+    <%= image_tag("003-pumpkin.png", class:'tiny-img')  %> Inventory Management
+  </h2>
+  <h3>Active Products</h3>
+  <% if @products.empty? %>
+    <div class="no-products">
+      <h4>You are not currently selling any items!</h4>
+    </div>
+
+  <% else %>
+    <section >
+      <% @products.each do |product| %>
+        <%= form_for product do |f| %>
+          <div class="inventory-tracker row small-11 columns">
+
+            <span class=" large-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{product.image_url}');\"") unless (product.image_url.nil? || product.image_url.empty?) %> > </span>
+            <span class="large-10 columns inventory-info">
+              <div class= "product-list large-3 columns">
+                <h4><%= product.name %></h4>
+              </div>
+              <div class="medium-6 large-3 columns inv-item">
+                <%= f.label :price, class: 'inventory-form medium-6 large-6 columns' %>
+                <%= f.text_field :price, class: 'inventory-form medium-6 large-6' %>
+              </div>
+              <div class="medium-6 large-3 columns inv-item">
+                <%= f.label :quantity, class: 'inventory-form medium-6 large-6 columns' %>
+                <%= f.text_field :quantity, class: 'inventory-form medium-6 large-6 columns' %>
+              </div>
+              <div class="medium-12 large-3 columns inv-item end">
+                <%= f.submit "Update", class: 'button burg-btn small-12 medium-6 columns' %>
+                <%= link_to "Retire", retire_product_path(product.id), class: 'button burg-btn small-12 medium-5 columns' %>
+              </div>
+            </span>
+
+          </div>
+        <% end %>
+      <% end %>
+    </section>
+  <% end %>
+
+  <%= link_to "Sell A New Product", new_product_path, class: 'button new-product-button' %>
+
+  <% unless @inactive_products.empty? %>
+    <section >
+      <h3>Inactive Products</h3>
+      <% @inactive_products.each do |product| %>
+        <%= form_for product do |f| %>
+          <div class="inventory-tracker row small-11 columns">
+
+            <span class=" small-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{product.image_url}');\"") unless (product.image_url.nil? || product.image_url.empty?) %> > </span>
+            <span class="small-10 columns inventory-info">
+              <div class= "product-list small-3 columns">
+                <h4><%= product.name %></h4>
+              </div>
+              <div class="small-3 columns">
+                <%= f.label :price, class: 'inventory-form' %>
+                <%= f.text_field :price, class: 'inventory-form' %>
+              </div>
+              <div class="small-3 columns">
+                <%= f.label :quantity, class: 'inventory-form' %>
+                <%= f.text_field :quantity, class: 'inventory-form' %>
+              </div>
+              <div class="small-3 columns">
+                <%= f.submit "Update", class: 'button burg-btn' %>
+              </div>
+            </span>
+
+          </div>
+        <% end %>
+      <% end %>
+    </section>
+  <% end %>
+
+  <div class="spacer">
+
+  </div>
+</section>

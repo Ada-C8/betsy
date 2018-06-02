@@ -1,0 +1,14 @@
+<section class="errors <%= flash[:status] if flash[:status] %> small-10 columns">
+  <h5 class="readable <%= flash[:status] if flash[:status] %>"><%= flash[:message] if flash[:message] %></h5>
+  <% if flash[:details] %>
+    <ul>
+      <% flash[:details].each do |category, errors| %>
+        <% errors.each do |error| %>
+          <li>
+            <%= category.to_s.capitalize %> - <%= error %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

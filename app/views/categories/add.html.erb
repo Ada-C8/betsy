@@ -1,0 +1,47 @@
+<section class="page-holder product-info">
+  <div class="row add-cats-holder">
+    <div class="small-12 medium-6 columns">
+      <div class="product-img" style="background-image: url('<%= @product.image_url %>');">
+      </div>
+    </div>
+    <div class="small-12 medium-6 columns">
+      <h3>Categories</h3>
+
+      <div class="cat-form">
+      <p>
+        <em>Select all that apply:</em>
+      </p>
+      <%= form_tag add_categories_path, :method => :post, id: @product.id do %>
+        <% @categories.each do |category| %>
+          <% unless @product.categories.include? category %>
+            <span>
+              <% cat_name = "category_#{category.name}" %>
+              <%= check_box_tag cat_name, category.id, false, class: "check-with-label" %>
+              <%= label_tag cat_name, category.name, class: "label-for-check form-item" %>
+            </span>
+          <% end %>
+        <% end %>
+        <div class="center">
+          <%= submit_tag "Add Selected", class: 'button center burg-btn cat-btn' %>
+        </div>
+        <% end %>
+      </div>
+
+      <div class="row cat-form">
+        <%= form_tag categories_path, :method => :post do %>
+        <p class="small-12 medium-3 columns add-category">
+          <em>New category:</em>
+        </p>
+        <div class="small-12 medium-9 columns">
+
+          <%= text_field_tag :category_name, "", class: "add-category" %>
+          <%= hidden_field_tag :product_id, @product.id, class: "add-category" %>
+
+          <%= submit_tag "Create", class: "add-category button burg-btn" %>
+        </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</section>

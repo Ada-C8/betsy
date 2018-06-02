@@ -1,0 +1,179 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require foundation_and_overrides
+
+ */
+
+/* ------ import URLS ------*/
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('https://fonts.googleapis.com/css?family=Astloch:700|Josefin+Sans:400,600');
+
+
+* {
+  /*border: 1px solid lawngreen;*/
+}
+
+
+/* ------ UNIVERSAL STYLES ------ */
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+html, body { height: 100%; }
+body {
+  width: 100%;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+}
+
+.readable {
+  font-family: 'Josefin Sans', sans-serif;
+  font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #16262E;
+  font-family: 'Astloch', cursive;
+  font-weight: 700;
+}
+
+.page-holder {
+  margin: auto;
+  width: 95%;
+}
+
+.align-center {
+  text-align: center;
+}
+
+/*--------------- header ---------------*/
+header.header {
+  background: #3C7A89;
+  padding: 1% 0;
+}
+h1.main-heading {
+   margin: 0 0 0 1%;
+   white-space: nowrap;
+}
+h1.main-heading a { color: #fefefe; }
+main.main {
+  padding: 0;
+  flex: 1 0 auto;
+}
+footer.footer {
+  color: #fcfcfc;
+  background: #16262E;
+  text-align: center;
+  padding: 3% 6% 2%;
+}
+
+/*--------------- navigation ---------------*/
+header.header section {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+nav.top-nav ul {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+}
+nav.top-nav ul li {
+  width: 15%;
+  text-align: center;
+}
+nav.top-nav ul li a { color: #fefefe; }
+.nav-text {
+  display: none;
+  white-space: nowrap;
+}
+.nav-icon {
+  font-size: 1.5rem;
+}
+@media print, screen and (min-width: 42em) {
+  .nav-text {
+    display: inline-block;
+  }
+  .nav-icon {
+    font-size: 1rem;
+  }
+}
+
+.row { max-width: 100%; }
+header nav { text-align: right; }
+.right { float: right; }
+
+/*--------------- main ---------------*/
+main.main section:first-of-type {
+  padding: 1.5% 5% 6%;
+}
+
+main.main section.hero { padding: 0; }
+
+.no-pad {
+  padding: 0 !important;
+}
+
+.some-pad {
+  padding: 0 1rem !important;
+}
+
+/*--------------- mini thumbnails ---------------*/
+div.mini-img {
+  width: 150px;
+  height: 150px;
+  margin: 1% 4% 2%;
+}
+div.mini-img a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div.mini-img a img {
+  max-width: 100%;
+  max-height: 100%;
+  filter: grayscale(100%);
+}
+div.mini-img:hover a img { filter: grayscale(0%); }
+
+/*------------------ errors ------------------*/
+
+.errors {
+  border: 2px solid #A7AAB9;
+  border-radius: 1rem;
+  float: none;
+  margin: 1rem auto;
+  padding: 1rem 4rem;
+}
+
+.errors li {
+  line-height: 1;
+}
+
+.failure {
+  color: #7F4F62;
+}
+
+.success {
+  color: #91BEC9;
+}

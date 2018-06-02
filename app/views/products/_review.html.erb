@@ -1,0 +1,24 @@
+<section class="review_info">
+  <div class="review row">
+    <div class = "first_line_info">
+      <%if review.merchant%>
+        <span><%= review.merchant.username%>: </span>
+      <%else%>
+        <span>Guest </span>
+      <%end%>
+      <span class="rating_review"> Rating:
+        <span class="stars">
+          <%= Review.get_rating_stars(review.rating) %>
+        </span>
+      </span>
+      <span class="review_date"> <%= review.updated_at.strftime("%b %d, %Y") %> </span>
+    </div>
+    <p> <%= review.description %> </p>
+  </div>
+
+  <% if session[:merchant] && session[:merchant]['id'] == review.merchant_id%>
+    <div class="button change_review"> <%= link_to "Edit", edit_review_path(review.id) %></div>
+    <div class="button change_review"> <%= link_to "Delete", review_path(review.id), method: :delete, data: { confirm: "Are you sure?" }%></div>
+  <% end %>
+
+</section>

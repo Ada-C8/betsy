@@ -1,0 +1,69 @@
+<section class="page-holder">
+  <h2 class="page-title">
+    <%= image_tag("030-brain.png", class:'tiny-img')  %> Earnings Details
+  </h2>
+  <h3 class="readable">Total Revenue to Date: <strong class="revenue-total"><%= money(@user.total_revenue) %></strong></h3>
+
+  <table class="small-10 columns revenue">
+    <thead>
+      <tr>
+        <th>
+          Order Category
+        </th>
+        <th>
+          # Orders
+        </th>
+        <th>
+          Average Income per Order
+        </th>
+        <th>
+          Total Income
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Completed
+        </td>
+        <td>
+          <%= @completed.count %>
+        </td>
+        <td>
+          <%= money(@completed_average) %>
+        </td>
+        <td>
+          <%= money(@completed.sum{|order| order.total}) %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Total
+        </td>
+        <td>
+          <%= @all.count %>
+        </td>
+        <td>
+          <%= money(@all_average) %>
+        </td>
+        <td>
+          <%= money(@all.sum{|order| order.total}) %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Pending
+        </td>
+        <td>
+          <%= @pending.count %>
+        </td>
+        <td>
+          <%= money(@pending_average) %>
+        </td>
+        <td>
+          <%= money(@pending.sum{|order| order.total}) %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

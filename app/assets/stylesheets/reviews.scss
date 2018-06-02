@@ -1,0 +1,140 @@
+// Place all the styles related to the reviews controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+///////***Partial view***////////////
+
+.first_line_info h6 {
+  display: inline-block;
+}
+
+.first_line_info {
+  color: #4F3640;
+}
+
+.button.change_review {
+  background-color: #7F4F62;
+  border: .5px solid grey;
+  border-radius: 1rem;
+}
+
+.button.change_review:hover{
+  background-color: #DBC2CF;
+}
+
+.button.change_review a {
+  color: white;
+}
+
+.review_info {
+  padding-left: 10%;
+  border: .5px solid grey;
+  border-radius: 1rem;
+  border-color: #9FA2B2;
+  color: grey;
+  margin-bottom: 20px;
+}
+
+.rating_review {
+  padding-left: 30%;
+}
+.button.add_review_button {
+  background-color: #4F3640;
+  margin-left: 30%;
+  border-radius: 0.5em;
+}
+
+.button.add_review_button a, .button.submit_review a  {
+  color: white;
+}
+
+.button.cart-btn {
+  background-color: #4F3640;
+  border-radius: 0.5em;
+}
+
+.button.cart-btn:hover,.button.add_review_button:hover,.button.submit_review:hover{
+  background-color: #DBC2CF;
+}
+
+.button.submit_review {
+  background-color: #4F3640;
+  border-radius: 0.5em;
+}
+
+.stars {
+  color: gold;
+}
+
+.review_date {
+padding-left: 15%;
+}
+//////////////****Review form****/////////////
+
+.row.align_center {
+  text-align: center;
+  margin-top: 30px;
+
+  .description {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: 320px;
+  }
+}
+
+.rating {
+  display: inline-block;
+  position: relative;
+  top: 8px;
+  left: -10px;
+}
+
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:1.2em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #f70;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}

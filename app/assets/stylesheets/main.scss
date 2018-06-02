@@ -1,0 +1,96 @@
+// Place all the styles related to the Main controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// @keyframes fadeIn {
+//   0% {opacity: 0;}
+//   100% {opacity: 1;}
+// }
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.hero {
+  background-image: url('http://3.bp.blogspot.com/-Z23LsR1pXhE/VN7uK5CR9yI/AAAAAAAAAOk/N_CksAB4Cbw/s1600/Dark%2BMagic%2BFloating%2BAway%2BFrom%2BCreepy%2BForest.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 45rem;
+  text-align: center;
+  width: 100%;
+}
+.hero-text {
+  font-family: 'Josefin Sans', sans-serif;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.hero-text h1, .hero-text h2 {
+  color: #fefefe;
+}
+
+h1 span.hero-lorestore {
+  font-family: 'Astloch', cursive;
+  font-size: 3em;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+h1.hero-title, h2.hero-subtitle { font-family: 'Josefin Sans', sans-serif; }
+h1.hero-title {
+  font-size: 2.5em;
+  margin-top: 10%;
+}
+h2.hero-subtitle {
+  font-size: 1.8em;
+  margin-top: 5%;
+}
+
+//////////
+// CART //
+//////////
+
+
+.shopping-cart-info > div {
+  margin: 2rem 0;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+.cart-text {
+  line-height: 2;
+}
+
+label.shopping-cart-form {
+  display: inline;
+  text-align: right;
+  width: 40%;
+}
+
+input.shopping-cart-form {
+  display: inline-block;
+  width: 50%;
+}
+
+.view-cart {
+  float: none;
+  margin: auto;
+}
+
+.cart-info .button:first-child {
+  border-right: 1px solid #efefef;
+}
+
+.view-cart .product-img.product-thumbnail {
+  margin: .5rem 0 .5rem 1rem;
+}

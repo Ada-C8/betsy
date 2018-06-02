@@ -1,0 +1,179 @@
+// Place all the styles related to the merchants controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Palette:
+$pink: #DBC2CF;
+$grey: #A7AAB9;
+$gray: #A7AAB9;
+$teal: #3C7A89;
+$navy: #16262E;
+$burgundy: #4F3640;
+
+
+/////////////
+// PROFILE //
+/////////////
+
+.profile {
+  float: none !important;
+  margin: auto;
+}
+
+.profile-card {
+  // background-color: $teal;
+  border: 2px solid $teal;
+  border-radius: 2rem;
+  // box-shadow: 3px 2px 0 $navy;
+  color: $navy;
+  text-align: center;
+  padding: 2rem 0;
+  margin: 1rem auto;
+  min-width: 15.5rem;
+}
+
+.profile-huge {
+  font-size: 5rem;
+}
+
+.card-title {
+  height: 4rem;
+}
+
+.profile-button {
+  border-radius: 2rem;
+  display: block;
+  margin: auto;
+  min-width: 12rem;
+  width: 80%;
+}
+
+.profile-button:hover {
+  background-color: $pink;
+}
+
+.summary-empty {
+  color: grey;
+}
+
+.summary-urgent {
+  color: lightcoral;
+}
+
+
+// @media print, screen and (min-width: 40em) {
+//   .profile-card {
+//     min-height: 15.5rem;
+//   }
+// }
+
+
+/////////////
+// REVENUE //
+/////////////
+
+table.revenue {
+  margin: auto;
+  float: none !important;
+}
+
+.revenue-total {
+  color: $teal;
+}
+
+///////////////
+// INVENTORY //
+///////////////
+
+.inventory-tracker {
+  border: 1px solid $grey;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: -1px;
+  padding: 0;
+}
+
+.inventory-info > div {
+  // margin: 2rem 0;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+label.inventory-form {
+  display: inline-block;
+  margin-top: .35rem;
+  padding-left: 0;
+  width: 30%;
+}
+
+input.inventory-form {
+  display: inline-block;
+  float: right;
+}
+
+.new-product-button {
+  margin: 3rem 0;
+}
+
+.product-list h4 small {
+  color: $teal;
+}
+
+@media print, screen and (min-width: 40em) {
+  input.inventory-form {
+    width: 70%;
+  }
+}
+
+@media print, screen and (min-width: 64em) {
+  input.inventory-form {
+    width: 65%;
+  }
+  label.inventory-form {
+    text-align: right;
+  }
+  .inventory-info > div {
+    margin: 2rem 0;
+  }
+}
+
+.inv-item {
+  padding: .25rem;
+}
+
+.spacer {
+  margin-top: 5rem;
+}
+
+/////////////////
+// ORDER PAGES //
+/////////////////
+
+.order-tracker {
+  border: 1px solid $grey;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: -1px;
+  padding: 1rem 0;
+}
+
+.order-tracker span {
+  margin: 0;
+}
+
+.ord-name {
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+.button.ship-btn {
+  margin: 0;
+}
+
+.burg-btn {
+  background-color: $burgundy;
+}
+
+.burg-btn:hover {
+  background-color: $pink;
+}

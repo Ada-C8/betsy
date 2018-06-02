@@ -1,0 +1,49 @@
+<section class="page-holder">
+  <h2 class="page-title">
+    <%= image_tag("004-torch.png", class:'tiny-img')  %> Pending Orders
+  </h2>
+
+  <% if @order_products.empty? %>
+    <div class="no-orders">
+      <h4>You have no pending orders at this time!</h4>
+    </div>
+  <% else %>
+    <% @order_products.each do |op| %>
+      <div class="order-tracker row small-11 columns">
+
+        <span class="large-2 columns product-img product-thumbnail" <%= (raw "style=\"background-image: url('#{op.product.image_url}');\"") unless (op.product.image_url.nil? || op.product.image_url.empty?) %> > </span>
+        <span class="large-10 columns info">
+
+          <div class="product-list row">
+            <h4 class="large-3 medium-6 columns ord-name"><%= link_to op.product.name, product_path(op.product.id) %></h4>
+            <h4 class="large-3 medium-6 columns"><small>Quantity: </small><i class="readable"><%= op.quantity %></i></h4>
+            <h4 class="large-3 medium-6 columns"><small>Price: </small><i class="readable"><%= money(op.product.price) %></i></h4>
+            <h4 class="large-3 medium-6 columns"><small>Total: </small><i class="readable"><%= money(op.total) %></i></h4>
+          </div>
+
+          <div class="row">
+            <div class="row large-12 columns">
+
+              <p class="large-4 medium-4 columns">
+                <strong>Customer:</strong> <%= op.order.cust_name %>
+              </p>
+              <p class="large-4 medium-4 columns">
+                <strong>Order Placed:</strong> <%= op.order.created_at.strftime('%B %d, %Y') %>
+              </p>
+              <p class="large-4 medium-4 columns">
+                <strong>Order Status:</strong> Pending
+              </p>
+
+              <p class="large-8 columns end">
+                <%= op.order.cust_addr %>
+              </p>
+              <span class="large-3 columns shipping end">
+                <%= link_to "Mark Shipped", mark_shipped_path(op.id), class: 'button burg-btn medium-12 columns ship-btn' %>
+              </span>
+            </div>
+          </div>
+        </span>
+      </div>
+    <% end %>
+  <% end %>
+</section>

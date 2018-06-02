@@ -1,0 +1,19 @@
+<section class="product-list row">
+  <% if products.count == 0 %>
+
+  <p>This merchant has no products.</p>
+  <% else %>
+  <%  products.each do |product| %>
+      <div class=" product-list product small-12 medium-6 large-3 columns">
+        <%= link_to product_path(product.id) do %>
+        <div class="product-img"
+             <%= (raw "style=\"background-image: url('#{product.image_url}');\"") unless (product.image_url.nil? || product.image_url.empty?) %>
+             ></div>
+        <p>
+          <%= product.name %>
+        </p>
+        <% end %>
+      </div>
+  <% end %>
+  <% end %>
+</section>
